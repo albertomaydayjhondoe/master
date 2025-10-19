@@ -121,6 +121,11 @@ When leaving dummy mode you must:
 3. Ensure environment variables for GoLogin, proxies and Appium are set.
 4. Run the full integration smoke tests.
 
+Shortcut: you can implement a production class elsewhere and point the factory
+to it using environment variables: e.g. `YOLO_SCREENSHOT_IMPL=ml_core.models.my_impl.YoloScreenshotDetector`.
+Use `scripts/import_by_path.py` to resolve dotted paths. A helper script
+`scripts/scaffold_prod_factories.py` is provided to create template factory files.
+
 ## Common Patterns
 
 1. **ML-Driven Actions**

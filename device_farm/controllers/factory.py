@@ -1,12 +1,20 @@
 from typing import Any
-from config.app_settings import is_dummy_mode
+from config.app_settings import get_env
+from scripts.import_by_path import import_by_path
 
-if is_dummy_mode():
+
+def get_adb_controller(*args, **kwargs) -> Any:
+    """Return an ADB controller implementation.
+
+    The environment variable `ADB_CONTROLLER_IMPL` may contain a dotted path to
+    a class to import (e.g. `device_farm.controllers.adb_real.ADBController`).
+    If not set, use the dummy ADB controller.
+    """
+    dotted = get_env("ADB_CONTROLLER_IMPL")
+    if dotted:
+        Impl = import_by_path(dotted)
+        return Impl(*args, **kwargs)
+
     from .adb_controller import ADBController as ADBControllerDummy
 
-
-    def get_adb_controller(*args, **kwargs) -> Any:
-        return ADBControllerDummy(*args, **kwargs)
-else:
-    def get_adb_controller(*args, **kwargs) -> Any:
-        raise RuntimeError("Production ADBController factory not implemented")
+    return ADBControllerDummy(*args, **kwargs)

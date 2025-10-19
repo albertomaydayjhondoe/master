@@ -58,3 +58,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 	- `ml_decision_engine.json`
 - `orchestration/scripts/workflow_validator.py` to validate workflow JSON
 - Unit tests for the validator in `tests/unit/test_workflow_validator.py`
+
+### [0.1.6] - 2025-10-19
+
+### Added
+- `scripts/import_by_path.py` - helper to import classes via dotted path
+- `scripts/scaffold_prod_factories.py` - scaffolding to generate production factory templates
+- Factories updated to support dotted-path overrides via environment variables
+	(e.g. `YOLO_SCREENSHOT_IMPL`, `ADB_CONTROLLER_IMPL`) so migrating out of
+	dummy mode can be done by implementing classes and setting env vars.

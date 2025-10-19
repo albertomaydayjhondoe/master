@@ -63,6 +63,10 @@ docker compose -f docker/docker-compose.yml up --build
 1. Implementa las ramas de producción en las fábricas:
 	- `ml_core/models/factory.py`
 	- `device_farm/controllers/factory.py`
+	Alternativamente, puedes implementar una clase de producción y apuntar a ella
+	con una variable de entorno (`YOLO_SCREENSHOT_IMPL`, `ADB_CONTROLLER_IMPL`,
+	etc.). El helper `scripts/import_by_path.py` permite importar por ruta puntuada.
+	Usa `scripts/scaffold_prod_factories.py` para generar plantillas de fábrica.
 2. Provee pesos y configuración real en `config/ml/model_config.yaml`.
 3. Asegura credenciales y variables de entorno necesarias (GoLogin, proxies, Appium).
 4. Ejecuta los tests de integración y smoke tests.
