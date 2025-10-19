@@ -1,0 +1,18 @@
+# Example YOLO training dataset configuration
+
+path: /app/data/datasets/tiktok_ui  # Dataset root
+train: train/images  # Train images
+val: val/images  # Val images
+test: test/images  # Test images (optional)
+
+# Classes for TikTok UI elements
+names:
+  0: like_button
+  1: follow_button
+  2: comment_button
+  3: video_player
+  4: profile_icon
+  5: share_button
+  6: text_overlay
+  7: thumbnail
+  8: user_avatar
