@@ -19,3 +19,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 	- Affinity calculator with simulated engagement metrics
 - Basic API security with dummy key authentication
 - CORS middleware configuration
+
+### [0.1.2] - 2025-10-19
+
+### Added
+- Model integration stubs under `ml_core/models/`:
+	- `YoloScreenshotDetector` (dummy)
+	- `YoloVideoDetector` (dummy)
+	- `AffinityModel` (dummy)
+	- `AnomalyDetector` (dummy)
+- Updated `screenshot_analysis` endpoint to use the `YoloScreenshotDetector` wrapper

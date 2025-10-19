@@ -1,38 +1,28 @@
-from fastapi import APIRouter, File, UploadFile, Depends
+from fastapi import APIRouter, File, UploadFile
 from typing import Dict, Any
-import random
 import time
+
+from ml_core.models import YoloScreenshotDetector
 
 router = APIRouter()
 
-# Dummy responses for screenshot analysis
-DUMMY_ELEMENTS = [
-    "like_button",
-    "follow_button",
-    "comment_button",
-    "video_player",
-    "profile_icon"
-]
+# Instantiate a dummy detector (production should configure model paths)
+_detector = YoloScreenshotDetector()
+
 
 @router.post("/analyze_screenshot", response_model=Dict[str, Any])
-async def analyze_screenshot(
-    file: UploadFile = File(...)
-) -> Dict[str, Any]:
-    # Simulate processing time
-    time.sleep(0.5)
-    
+async def analyze_screenshot(file: UploadFile = File(...)) -> Dict[str, Any]:
+    # Read file bytes and forward to the detector
+    image_bytes = await file.read()
+
+    # Simulate a short processing delay
+    time.sleep(0.2)
+
+    detections = _detector.detect(image_bytes)
+
     return {
-        "detected_elements": [
-            {
-                "type": random.choice(DUMMY_ELEMENTS),
-                "confidence": round(random.uniform(0.85, 0.99), 2),
-                "coordinates": {
-                    "x": random.randint(100, 900),
-                    "y": random.randint(100, 1800)
-                }
-            } for _ in range(random.randint(3, 6))
-        ],
-        "processing_time": round(random.uniform(0.1, 0.8), 2),
+        "detected_elements": detections,
+        "processing_time": round(0.2 + len(detections) * 0.05, 2),
         "screen_state": "normal",
-        "recommendation": "safe_to_interact"
+        "recommendation": "safe_to_interact",
     }
