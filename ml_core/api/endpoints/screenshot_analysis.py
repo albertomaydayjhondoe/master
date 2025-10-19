@@ -2,12 +2,12 @@ from fastapi import APIRouter, File, UploadFile
 from typing import Dict, Any
 import time
 
-from ml_core.models import YoloScreenshotDetector
+from ml_core.models.factory import get_yolo_screenshot_detector
 
 router = APIRouter()
 
-# Instantiate a dummy detector (production should configure model paths)
-_detector = YoloScreenshotDetector()
+# Instantiate detector from factory (dummy by default)
+_detector = get_yolo_screenshot_detector()
 
 
 @router.post("/analyze_screenshot", response_model=Dict[str, Any])

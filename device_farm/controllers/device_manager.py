@@ -1,12 +1,13 @@
 from typing import Dict, Any, List
-from .adb_controller import ADBController
+from .factory import get_adb_controller
 import threading
 import time
 
 
 class DeviceManager:
     def __init__(self):
-        self.adb = ADBController()
+        # Use factory to obtain an ADB controller (dummy or production)
+        self.adb = get_adb_controller()
         self._lock = threading.Lock()
 
     def list(self) -> List[Dict[str, Any]]:

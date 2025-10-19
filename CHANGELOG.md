@@ -37,3 +37,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 	- `adb_controller.py` (simulated device actions)
 	- `device_manager.py` (orchestration shim)
 - Unit test for device manager in `tests/unit/test_device_manager.py`
+
+### [0.1.4] - 2025-10-19
+
+### Added
+- `config/app_settings.py` - central switch for `DUMMY_MODE`
+- Factories:
+	- `ml_core/models/factory.py` (model implementation factory)
+	- `device_farm/controllers/factory.py` (ADB controller factory)
+- `screenshot_analysis` and `device_manager` updated to use factories so the
+	repo runs fully in dummy mode by default. To exit dummy mode implement the
+	production branches in the factories and set `DUMMY_MODE=false`.

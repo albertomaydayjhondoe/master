@@ -95,6 +95,32 @@ python -m pytest tests/e2e/
 - `monitoring/health/account_health.py` - Account monitoring
 - `config/ml/model_config.yaml` - ML configuration
 
+## Dummy mode
+
+This repository contains a full "dummy" mode to allow local development and
+integration testing without requiring GPUs, Appium devices, GoLogin accounts or
+paid proxies. The mode is enabled by default via the environment variable
+`DUMMY_MODE=true` (see `config/app_settings.py`).
+
+How it works:
+- Factories under `ml_core/models/factory.py` and
+   `device_farm/controllers/factory.py` return dummy implementations when
+   `DUMMY_MODE` is enabled. To switch to production implementations, set
+   `DUMMY_MODE=false` and implement the production branches in the factory
+   modules.
+
+Examples:
+- `YoloScreenshotDetector` (dummy) in `ml_core/models/yolo_screenshot.py`.
+- `ADBController` (dummy) in `device_farm/controllers/adb_controller.py`.
+
+When leaving dummy mode you must:
+1. Implement production factories in `ml_core/models/factory.py` and
+    `device_farm/controllers/factory.py` (or add adapter modules that the
+    factories import).
+2. Provide model files and weights (update `config/ml/model_config.yaml`).
+3. Ensure environment variables for GoLogin, proxies and Appium are set.
+4. Run the full integration smoke tests.
+
 ## Common Patterns
 
 1. **ML-Driven Actions**
