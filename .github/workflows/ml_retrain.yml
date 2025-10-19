@@ -1,0 +1,17 @@
+name: ML Retraining Pipeline
+
+on:
+  schedule:
+    - cron: '0 3 * * 0'  # Every Sunday at 3 AM
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  retrain-models:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      # Additional steps will be added as we develop the ML retraining pipeline

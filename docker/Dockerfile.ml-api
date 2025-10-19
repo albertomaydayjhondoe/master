@@ -1,0 +1,25 @@
+FROM nvidia/cuda:12.0.0-base-ubuntu22.04
+
+WORKDIR /app
+
+# System dependencies
+RUN apt-get update && apt-get install -y \
+    python3.11 \
+    python3-pip \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Python dependencies
+COPY requirements.txt requirements-ml.txt ./
+RUN pip3 install --no-cache-dir -r requirements.txt -r requirements-ml.txt
+
+# Application code
+COPY ml_core /app/ml_core
+COPY config /app/config
+
+# Create necessary directories
+RUN mkdir -p /app/data/models/production \
+    /app/data/models/checkpoints \
+    /app/data/datasets
+
+CMD ["uvicorn", "ml_core.api.main:app", "--host", "0.0.0.0", "--port", "8000"]
