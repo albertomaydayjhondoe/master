@@ -29,3 +29,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 	- `AffinityModel` (dummy)
 	- `AnomalyDetector` (dummy)
 - Updated `screenshot_analysis` endpoint to use the `YoloScreenshotDetector` wrapper
+
+### [0.1.3] - 2025-10-19
+
+### Added
+- Device Farm dummy controllers under `device_farm/controllers/`:
+	- `adb_controller.py` (simulated device actions)
+	- `device_manager.py` (orchestration shim)
+- Unit test for device manager in `tests/unit/test_device_manager.py`
