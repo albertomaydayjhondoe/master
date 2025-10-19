@@ -48,3 +48,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `screenshot_analysis` and `device_manager` updated to use factories so the
 	repo runs fully in dummy mode by default. To exit dummy mode implement the
 	production branches in the factories and set `DUMMY_MODE=false`.
+
+### [0.1.5] - 2025-10-19
+
+### Added
+- n8n workflow stubs under `orchestration/n8n_workflows/`:
+	- `main_orchestrator.json`
+	- `device_farm_trigger.json`
+	- `ml_decision_engine.json`
+- `orchestration/scripts/workflow_validator.py` to validate workflow JSON
+- Unit tests for the validator in `tests/unit/test_workflow_validator.py`
