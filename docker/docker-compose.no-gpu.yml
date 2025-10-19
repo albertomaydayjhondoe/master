@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  ml_api:
+    build:
+      context: ./
+      dockerfile: docker/Dockerfile.ml-api
+    environment:
+      - DUMMY_MODE=true
+      - FASTAPI_HOST=0.0.0.0
+      - FASTAPI_PORT=8080
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
