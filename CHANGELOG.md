@@ -67,3 +67,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Factories updated to support dotted-path overrides via environment variables
 	(e.g. `YOLO_SCREENSHOT_IMPL`, `ADB_CONTROLLER_IMPL`) so migrating out of
 	dummy mode can be done by implementing classes and setting env vars.
+
+### [0.1.7] - 2025-10-19
+
+### Added
+- Monitoring & alerting (dummy):
+	- `monitoring/metrics/scraper.py` (ML, Device Farm, Workflows)
+	- `monitoring/alerts/alert_manager.py` (in-memory alert manager)
+	- `monitoring/alerts/discord_notifier.py` (dummy notifier)
+	- `monitoring/health/account_health.py` (example health checks that raise alerts)
+	- Unit test `tests/unit/test_alerts.py`
