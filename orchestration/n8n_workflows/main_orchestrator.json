@@ -1,0 +1,9 @@
+{
+  "name": "main_orchestrator",
+  "description": "Coordinates publishing and engagement decisions",
+  "nodes": [
+    {"id": "1", "type": "trigger", "name": "schedule", "params": {"cron": "0 6 * * *"}},
+    {"id": "2", "type": "http_request", "name": "ask_ml", "params": {"path": "/predict_posting_time"}},
+    {"id": "3", "type": "workflow", "name": "publish_workflow", "params": {"target": "device_farm_trigger"}}
+  ]
+}

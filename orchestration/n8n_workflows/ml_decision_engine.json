@@ -1,0 +1,7 @@
+{
+  "name": "ml_decision_engine",
+  "nodes": [
+    {"id": "1", "type": "http_request", "name": "call_ml_api", "params": {"path": "/calculate_affinity"}},
+    {"id": "2", "type": "set", "name": "format_actions", "params": {}}
+  ]
+}

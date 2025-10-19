@@ -1,0 +1,7 @@
+{
+  "name": "device_farm_trigger",
+  "nodes": [
+    {"id": "1", "type": "webhook", "name": "trigger"},
+    {"id": "2", "type": "script", "name": "dispatch_to_devices", "params": {}}
+  ]
+}
