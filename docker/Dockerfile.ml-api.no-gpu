@@ -1,0 +1,19 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    gcc \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements-dummy.txt ./
+RUN pip install --no-cache-dir -r requirements-dummy.txt
+
+# Copy application
+COPY . /app
+
+EXPOSE 8080
+
+CMD ["./start.sh"]

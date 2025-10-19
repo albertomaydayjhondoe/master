@@ -2,8 +2,8 @@ version: '3.8'
 services:
   ml_api:
     build:
-      context: ./
-      dockerfile: docker/Dockerfile.ml-api
+      context: ../
+      dockerfile: docker/Dockerfile.ml-api.no-gpu
     environment:
       - DUMMY_MODE=true
       - FASTAPI_HOST=0.0.0.0

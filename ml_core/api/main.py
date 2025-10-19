@@ -50,3 +50,9 @@ async def root():
         "version": "0.1.0",
         "mode": "dummy"
     }
+
+
+@app.get("/health")
+async def health():
+    """Simple health endpoint used by docker healthchecks and orchestration."""
+    return {"status": "healthy"}
