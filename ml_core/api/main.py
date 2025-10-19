@@ -7,12 +7,48 @@ api_key_header = APIKeyHeader(name="X-API-Key")
 
 app = FastAPI(
     title="TikTok Viral ML System",
-    description="ML-powered system for TikTok automation (Dummy Version)",
-    version="0.1.0"
+    description="""
+    Sistema de automatización TikTok basado en ML.
+    
+    Este sistema proporciona endpoints para:
+    - Análisis de screenshots mediante YOLO
+    - Detección de anomalías y shadowbans
+    - Predicción de mejores momentos para publicar
+    - Cálculo de afinidad entre cuentas
+    
+    Ver documentación detallada en docs/api_integration.md
+    """,
+    version="0.1.0",
+    docs_url="/docs",
+    redoc_url="/redoc",
+    openapi_tags=[
+        {"name": "Screenshot Analysis", "description": "Endpoints para analizar screenshots"},
+        {"name": "Anomaly Detection", "description": "Endpoints para detectar anomalías"},
+        {"name": "Posting Time", "description": "Endpoints para predecir momentos óptimos"},
+        {"name": "Affinity", "description": "Endpoints para calcular afinidad"}
+    ]
 )
 
 # Dummy API key for development
 DUMMY_API_KEY = "dummy_development_key"
+
+# Schema para respuesta de error
+class ErrorResponse(BaseModel):
+    error: str
+    message: str
+    details: Optional[Dict[str, Any]] = None
+    
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "error": "invalid_request",
+                "message": "Missing required field: account_id",
+                "details": {
+                    "field": "account_id",
+                    "code": "missing_field"
+                }
+            }
+        }
 
 # CORS configuration
 app.add_middleware(
