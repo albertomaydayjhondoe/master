@@ -1,0 +1,23 @@
+{
+    "ml_core": {
+        "anomaly_rate": {
+            "high": 0.15,
+            "medium": 0.10,
+            "low": 0.05
+        }
+    },
+    "device_farm": {
+        "failed_actions_rate": {
+            "high": 0.03,
+            "medium": 0.02,
+            "low": 0.01
+        }
+    },
+    "workflows": {
+        "last_run_failures": {
+            "high": 2,
+            "medium": 1,
+            "low": 0
+        }
+    }
+}

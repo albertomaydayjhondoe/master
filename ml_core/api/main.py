@@ -1,6 +1,8 @@
 from fastapi import FastAPI, Depends, HTTPException, Security
 from fastapi.security.api_key import APIKeyHeader
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from typing import Dict, Any, Optional
 import os
 
 api_key_header = APIKeyHeader(name="X-API-Key")
@@ -72,12 +74,14 @@ from ml_core.api.endpoints import (
     posting_predictor,
     affinity_calculator
 )
+from ml_core.meta_automation.api import endpoints as meta_endpoints
 
 # Include routers
 app.include_router(screenshot_analysis.router, prefix="/api/v1", tags=["Screenshot Analysis"])
 app.include_router(anomaly_detection.router, prefix="/api/v1", tags=["Anomaly Detection"])
 app.include_router(posting_predictor.router, prefix="/api/v1", tags=["Posting Time"])
 app.include_router(affinity_calculator.router, prefix="/api/v1", tags=["Affinity"])
+app.include_router(meta_endpoints.router, tags=["Meta Marketing Automation"])
 
 @app.get("/")
 async def root():
