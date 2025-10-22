@@ -198,7 +198,7 @@ class DatabaseConnection:
     
     def __init__(self, database_url: str):
         self.database_url = database_url
-        self.pool: Optional[asyncpg.Pool] = None
+        self.pool: Optional[Any] = None
     
     async def connect(self):
         """Initialize connection pool"""
