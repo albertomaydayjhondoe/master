@@ -43,8 +43,8 @@ if DUMMY_MODE:
                 print(f"🎭 Execute script: {script[:50]}...")
                 return True
             
-            def set_page_load_timeout(self, timeout): pass
-            def implicitly_wait(self, timeout): pass
+            def set_page_load_timeout(self, timeout): logger.error(f"Error: {e}")
+            def implicitly_wait(self, timeout): logger.error(f"Error: {e}")
     
     class DummyElement:
         def __init__(self):
@@ -113,10 +113,10 @@ if DUMMY_MODE:
             self.experimental[name] = value
     
     class TimeoutException(Exception): 
-        pass
+        logger.error(f"Error: {e}")
     
     class WebDriverException(Exception): 
-        pass
+        logger.error(f"Error: {e}")
 
 else:
     # Production imports (will be used when DUMMY_MODE=false)
@@ -127,6 +127,10 @@ else:
 # Database imports with dummy fallback
 try:
     from database.models import DatabaseConnection, Exchange, ExchangeStatus
+
+
+__all__ = ['webdriver', 'Chrome', 'get', 'quit', 'find_element', 'find_elements', 'execute_script', 'set_page_load_timeout', 'implicitly_wait', 'DummyElement', 'click', 'send_keys', 'clear', 'is_displayed', 'is_enabled', 'get_attribute', 'By', 'WebDriverWait', 'until', 'EC', 'presence_of_element_located', 'element_to_be_clickable', 'Keys', 'Options', 'add_argument', 'add_experimental_option', 'TimeoutException', 'WebDriverException', 'DatabaseConnection', 'update_exchange', 'execute_command', 'get_exchange_by_id', 'Exchange', 'ExchangeStatus', 'GoLoginAPI', 'get_available_profiles', 'start_profile', 'stop_profile', 'get_profile_health', 'YouTubeExecutor', 'session', 'start_session', 'stop_session', 'select_best_profile', 'execute_exchange_terms', 'navigate_to_video', 'close_popups', 'watch_video', 'like_video', 'subscribe_to_channel', 'comment_on_video', 'generate_comment', 'update_profile_stats', 'get_channel_url_from_video', 'YouTubeExecutorService', 'start', 'stop', 'queue_exchange_execution', 'process_execution_queue', 'execute_exchange', 'notify_execution_complete']
+
 except ImportError:
     print("🎭 Using dummy database models")
     
@@ -478,7 +482,7 @@ class YouTubeExecutor:
                         if element.is_displayed() and element.is_enabled():
                             element.click()
                             await asyncio.sleep(0.5)
-                except:
+                except Exception as e:
                     continue
                     
         except Exception as e:
@@ -621,8 +625,8 @@ class YouTubeExecutor:
                 if confirm_button.is_displayed():
                     confirm_button.click()
                     await asyncio.sleep(1)
-            except:
-                pass
+            except Exception as e:
+                logger.error(f"Error: {e}")
             
             logger.info("✅ Successfully subscribed to channel")
             return True
@@ -679,7 +683,7 @@ class YouTubeExecutor:
                     text_input = self.driver.find_element(By.CSS_SELECTOR, selector)
                     if text_input.is_displayed():
                         break
-                except:
+                except Exception as e:
                     continue
             
             if not text_input:
@@ -707,7 +711,7 @@ class YouTubeExecutor:
                     submit_button = self.driver.find_element(By.CSS_SELECTOR, selector)
                     if submit_button.is_enabled():
                         break
-                except:
+                except Exception as e:
                     continue
             
             if not submit_button:
@@ -861,4 +865,4 @@ class YouTubeExecutorService:
         """Notify that execution is complete (to be called by conversation handler)"""
         # This will be integrated with the conversation handler
         # to send notifications to contacts
-        pass
+        logger.error(f"Error: {e}")

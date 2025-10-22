@@ -8,6 +8,10 @@ import uuid
 import time
 
 
+__all__ = ['GoLoginClient', 'create_profile', 'list_profiles', 'start_profile', 'stop_profile']
+
+
+
 class GoLoginClient:
     def __init__(self):
         # In-memory store of profiles

@@ -11,6 +11,10 @@ from dataclasses import dataclass
 import json
 import uuid
 
+
+__all__ = ['DummyConnection', 'execute', 'fetch', 'fetchrow', 'close', 'connect', 'asyncpg', 'ContactStatus', 'ExchangeStatus', 'ConversationState', 'Contact', 'Exchange', 'ConversationContext', 'DatabaseConnection', 'connect', 'disconnect', 'execute_query', 'execute_command', 'fetchone', 'create_contact', 'get_contact_by_user_id', 'get_contact_by_id', 'update_contact', 'get_contacts_ready_for_relaunch', 'count_contacts', 'create_exchange', 'get_exchange_by_id', 'update_exchange', 'get_active_exchanges', 'count_exchanges', 'create_conversation_state', 'get_conversation_state', 'update_conversation_state', 'delete_conversation_state', 'record_analytics', 'get_performance_summary', 'add_my_video', 'get_active_promotion_video', 'get_my_video_by_id', 'calculate_reliability_score', 'initialize_database']
+
+
 # Safe imports with dummy mode support
 DUMMY_MODE = os.getenv('DUMMY_MODE', 'true').lower() == 'true'
 

@@ -101,6 +101,10 @@ else:
 
 try:
     from database.models import DatabaseConnection, Exchange, ExchangeStatus, Contact, ContactStatus, ConversationContext, ConversationState
+
+
+__all__ = ['TelegramClient', 'start', 'disconnect', 'get_me', 'get_dialogs', 'send_message', 'on', 'decorator', 'run_until_disconnected', 'events', 'NewMessage', 'NewMessage', 'User', 'Chat', 'Channel', 'FloodWaitError', 'PeerFloodError', 'DatabaseConnection', 'create_exchange', 'get_exchange_by_id', 'update_exchange', 'create_contact', 'get_contact_by_telegram_id', 'get_contact_by_user_id', 'update_contact', 'create_conversation_context', 'create_conversation_state', 'get_conversation_state', 'execute_query', 'execute_command', 'get_active_promotion_video', 'Exchange', 'ExchangeStatus', 'Contact', 'ContactStatus', 'Status', 'ConversationContext', 'ConversationState', 'State', 'calculate_reliability_score', 'TelegramBot', 'start', 'stop', 'process_message', 'MessageClassifier', 'classify_message', 'TelegramLike4LikeBot', 'start', 'load_monitored_groups', 'load_current_video', 'handle_new_message', 'process_like4like_message', 'send_initial_dm', 'craft_initial_message', 'generate_initial_terms', 'handle_private_message', 'process_conversation_response', 'check_dm_limit', 'reset_daily_limits', 'check_timeouts', 'handle_conversation_timeout', 'handle_exchange_timeout', 'log_message']
+
 except ImportError:
     print("🎭 Using dummy database models")
     

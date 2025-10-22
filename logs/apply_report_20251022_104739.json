@@ -1,0 +1,1678 @@
+{
+  "timestamp": "2025-10-22T10:47:39.058721",
+  "project_root": "/workspaces/master",
+  "branch": "apply",
+  "phases_completed": 5,
+  "results": {
+    "rama_wake": {
+      "success": true,
+      "services_expected": 3,
+      "output_lines": 15,
+      "errors": "2025-10-22 10:47:09,092 - __main__ - INFO - \ud83c\udf05 Starting Universal Dummy System Awakening...\n2025-10-22 10:47:09,092 - __main__ - INFO - \ud83d\udcc1 Project root: /workspaces/master\n2025-10-22 10:47:09,092 - __main__ - INFO - \ud83c\udf3f Active branches: rama\n2025-10-22 10:47:09,093 - __main__ - INFO - \u2699\ufe0f Mode: services\n2025-10-22 10:47:09,093 - __main__ - INFO - \ud83d\udccb Phase 1: Infrastructure Setup\n2025-10-22 10:47:09,093 - __main__ - INFO - \u2705 Directory structure created\n2025-10-22 10:47:09,093 - __main__ - INFO - \ud83d\udcdd Generating environment files for all branches...\n2025-10-22 10:47:09,093 - __main__ - INFO - \u2705 Generated global .env file\n2025-10-22 10:47:09,093 - __main__ - INFO - \u2705 Generated .env.rama file\n2025-10-22 10:47:09,094 - __main__ - INFO - \u2705 Generated .env.meta file\n2025-10-22 10:47:09,094 - __main__ - INFO - \u2705 Generated .env.tele file\n2025-10-22 10:47:09,094 - __main__ - INFO - \u2705 All environment files generated\n2025-10-22 10:47:09,094 - __main__ - INFO - \ud83d\udccb Phase 2: Database Simulation\n2025-10-22 10:47:09,094 - __main__ - INFO - \ud83d\uddc4\ufe0f Creating mock cloud databases...\n2025-10-22 10:47:09,096 - __main__ - INFO - \u2705 Created mock PostgreSQL: postgresql\n2025-10-22 10:47:09,096 - __main__ - INFO - \u2705 Created mock MongoDB: mongodb\n2025-10-22 10:47:09,096 - __main__ - INFO - \u2705 Created mock Redis: redis\n2025-10-22 10:47:09,096 - __main__ - INFO - \u2705 Mock databases created\n2025-10-22 10:47:09,096 - __main__ - INFO - \ud83d\udccb Phase 3: ML Model Simulation\n2025-10-22 10:47:09,096 - __main__ - INFO - \ud83e\udd16 Setting up Ultralytics YOLO simulation...\n2025-10-22 10:47:09,097 - __main__ - INFO - \u2705 Ultralytics simulation setup complete\n2025-10-22 10:47:09,097 - __main__ - INFO - \ud83d\udccb Phase 4: Service Awakening\n2025-10-22 10:47:09,097 - __main__ - INFO - \ud83d\ude80 Waking up all project services...\n2025-10-22 10:47:09,097 - __main__ - INFO - \ud83d\udd27 Starting rama branch services...\n2025-10-22 10:47:09,098 - __main__ - INFO - \u2705 Started rama_ml_api (PID: 51754)\n2025-10-22 10:47:09,101 - __main__ - INFO - \u2705 Started rama_device_farm (PID: 51755)\n2025-10-22 10:47:09,102 - __main__ - INFO - \u2705 Started rama_monitoring (PID: 51756)\n2025-10-22 10:47:09,103 - __main__ - INFO - \ud83d\udcca Starting global monitoring...\n2025-10-22 10:47:09,108 - __main__ - INFO - \u2705 Started global monitoring (PID: 51757)\n2025-10-22 10:47:09,109 - __main__ - INFO - \u2705 All services awakened\n2025-10-22 10:47:09,109 - __main__ - INFO - \ud83d\udccb Phase 5: Health Verification\n2025-10-22 10:47:09,109 - __main__ - INFO - \ud83d\udd0d System Health Check:\n2025-10-22 10:47:09,109 - __main__ - INFO -   \u2705 Mock databases created\n2025-10-22 10:47:09,109 - __main__ - INFO -   \u2705 Mock ML models available\n2025-10-22 10:47:09,109 - __main__ - INFO -   \u2705 Environment files: 2/4\n2025-10-22 10:47:09,109 - __main__ - INFO -   \u2705 Active services: 4\n2025-10-22 10:47:09,109 - __main__ - INFO - \ud83c\udf89 Universal Dummy System is now AWAKE!\n2025-10-22 10:47:09,109 - __main__ - INFO - \n2025-10-22 10:47:09,109 - __main__ - INFO - \ud83c\udfaf SYSTEM STATUS DASHBOARD\n2025-10-22 10:47:09,109 - __main__ - INFO - ==================================================\n2025-10-22 10:47:09,109 - __main__ - INFO - \ud83d\udcc1 Project Root: /workspaces/master\n2025-10-22 10:47:09,109 - __main__ - INFO - \ud83c\udf3f Active Branches: rama\n2025-10-22 10:47:09,109 - __main__ - INFO - \u2699\ufe0f Dummy Mode: ENABLED\n2025-10-22 10:47:09,109 - __main__ - INFO - \ud83d\uddc4\ufe0f Mock Databases: ACTIVE\n2025-10-22 10:47:09,109 - __main__ - INFO - \ud83e\udd16 ML Models: SIMULATED\n2025-10-22 10:47:09,109 - __main__ - INFO - \ud83d\udce1 Services: 4 running\n2025-10-22 10:47:09,109 - __main__ - INFO - \n2025-10-22 10:47:09,109 - __main__ - INFO - \ud83d\udd17 Available Endpoints:\n2025-10-22 10:47:09,109 - __main__ - INFO -   \u2022 ML API: http://localhost:8000\n2025-10-22 10:47:09,109 - __main__ - INFO -   \u2022 API Docs: http://localhost:8000/docs\n2025-10-22 10:47:09,110 - __main__ - INFO -   \u2022 Health Check: http://localhost:8000/health\n2025-10-22 10:47:09,110 - __main__ - INFO - \n2025-10-22 10:47:09,110 - __main__ - INFO - \ud83d\udcdd Environment Files Generated:\n2025-10-22 10:47:09,110 - __main__ - INFO -   \u2022 .env (global)\n2025-10-22 10:47:09,110 - __main__ - INFO -   \u2022 .env.rama (TikTok ML)\n2025-10-22 10:47:09,110 - __main__ - INFO -   \u2022 .env.meta (Meta Ads)\n2025-10-22 10:47:09,110 - __main__ - INFO -   \u2022 .env.tele (Like4Like)\n2025-10-22 10:47:09,110 - __main__ - INFO - \n2025-10-22 10:47:09,110 - __main__ - INFO - \ud83d\uddc4\ufe0f Mock Databases Available:\n2025-10-22 10:47:09,110 - __main__ - INFO -   \u2022 PostgreSQL (SQLite mock)\n2025-10-22 10:47:09,110 - __main__ - INFO -   \u2022 MongoDB (JSON mock)\n2025-10-22 10:47:09,110 - __main__ - INFO -   \u2022 Redis (JSON mock)\n2025-10-22 10:47:09,110 - __main__ - INFO - \n2025-10-22 10:47:09,110 - __main__ - INFO - \ud83d\ude80 Next Steps:\n2025-10-22 10:47:09,110 - __main__ - INFO -   1. Customize environment variables in .env files\n2025-10-22 10:47:09,110 - __main__ - INFO -   2. Add real API keys when ready for production\n2025-10-22 10:47:09,110 - __main__ - INFO -   3. Replace mock implementations with real ones\n2025-10-22 10:47:09,110 - __main__ - INFO -   4. Use 'python awakener.py --stop' to shut down\n2025-10-22 10:47:09,110 - __main__ - INFO - \n2025-10-22 10:47:09,110 - __main__ - INFO - ==================================================\nException ignored in: <function BaseSubprocessTransport.__del__ at 0x7cf6b30eee80>\nTraceback (most recent call last):\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_subprocess.py\", line 126, in __del__\n    self.close()\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_subprocess.py\", line 104, in close\n    proto.pipe.close()\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/unix_events.py\", line 568, in close\n    self._close(None)\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/unix_events.py\", line 592, in _close\n    self._loop.call_soon(self._call_connection_lost, exc)\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_events.py\", line 792, in call_soon\n    self._check_closed()\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_events.py\", line 539, in _check_closed\n    raise RuntimeError('Event loop is closed')\nRuntimeError: Event loop is closed\nException ignored in: <function BaseSubprocessTransport.__del__ at 0x7cf6b30eee80>\nTraceback (most recent call last):\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_subprocess.py\", line 126, in __del__\n    self.close()\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_subprocess.py\", line 104, in close\n    proto.pipe.close()\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/unix_events.py\", line 568, in close\n    self._close(None)\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/unix_events.py\", line 592, in _close\n    self._loop.call_soon(self._call_connection_lost, exc)\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_events.py\", line 792, in call_soon\n    self._check_closed()\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_events.py\", line 539, in _check_closed\n    raise RuntimeError('Event loop is closed')\nRuntimeError: Event loop is closed\nException ignored in: <function BaseSubprocessTransport.__del__ at 0x7cf6b30eee80>\nTraceback (most recent call last):\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_subprocess.py\", line 126, in __del__\n    self.close()\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_subprocess.py\", line 104, in close\n    proto.pipe.close()\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/unix_events.py\", line 568, in close\n    self._close(None)\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/unix_events.py\", line 592, in _close\n    self._loop.call_soon(self._call_connection_lost, exc)\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_events.py\", line 792, in call_soon\n    self._check_closed()\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_events.py\", line 539, in _check_closed\n    raise RuntimeError('Event loop is closed')\nRuntimeError: Event loop is closed\nException ignored in: <function BaseSubprocessTransport.__del__ at 0x7cf6b30eee80>\nTraceback (most recent call last):\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_subprocess.py\", line 126, in __del__\n    self.close()\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_subprocess.py\", line 104, in close\n    proto.pipe.close()\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/unix_events.py\", line 568, in close\n    self._close(None)\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/unix_events.py\", line 592, in _close\n    self._loop.call_soon(self._call_connection_lost, exc)\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_events.py\", line 792, in call_soon\n    self._check_closed()\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_events.py\", line 539, in _check_closed\n    raise RuntimeError('Event loop is closed')\nRuntimeError: Event loop is closed\n"
+    },
+    "meta_wake": {
+      "success": true,
+      "services_expected": 2,
+      "output_lines": 15,
+      "errors": "2025-10-22 10:47:15,784 - __main__ - INFO - \ud83c\udf05 Starting Universal Dummy System Awakening...\n2025-10-22 10:47:15,784 - __main__ - INFO - \ud83d\udcc1 Project root: /workspaces/master\n2025-10-22 10:47:15,784 - __main__ - INFO - \ud83c\udf3f Active branches: meta\n2025-10-22 10:47:15,784 - __main__ - INFO - \u2699\ufe0f Mode: services\n2025-10-22 10:47:15,784 - __main__ - INFO - \ud83d\udccb Phase 1: Infrastructure Setup\n2025-10-22 10:47:15,785 - __main__ - INFO - \u2705 Directory structure created\n2025-10-22 10:47:15,785 - __main__ - INFO - \ud83d\udcdd Generating environment files for all branches...\n2025-10-22 10:47:15,785 - __main__ - INFO - \u2705 Generated global .env file\n2025-10-22 10:47:15,786 - __main__ - INFO - \u2705 Generated .env.rama file\n2025-10-22 10:47:15,787 - __main__ - INFO - \u2705 Generated .env.meta file\n2025-10-22 10:47:15,788 - __main__ - INFO - \u2705 Generated .env.tele file\n2025-10-22 10:47:15,788 - __main__ - INFO - \u2705 All environment files generated\n2025-10-22 10:47:15,788 - __main__ - INFO - \ud83d\udccb Phase 2: Database Simulation\n2025-10-22 10:47:15,788 - __main__ - INFO - \ud83d\uddc4\ufe0f Creating mock cloud databases...\n2025-10-22 10:47:15,791 - __main__ - INFO - \u2705 Created mock PostgreSQL: postgresql\n2025-10-22 10:47:15,792 - __main__ - INFO - \u2705 Created mock MongoDB: mongodb\n2025-10-22 10:47:15,792 - __main__ - INFO - \u2705 Created mock Redis: redis\n2025-10-22 10:47:15,792 - __main__ - INFO - \u2705 Mock databases created\n2025-10-22 10:47:15,792 - __main__ - INFO - \ud83d\udccb Phase 3: ML Model Simulation\n2025-10-22 10:47:15,792 - __main__ - INFO - \ud83e\udd16 Setting up Ultralytics YOLO simulation...\n2025-10-22 10:47:15,794 - __main__ - INFO - \u2705 Ultralytics simulation setup complete\n2025-10-22 10:47:15,794 - __main__ - INFO - \ud83d\udccb Phase 4: Service Awakening\n2025-10-22 10:47:15,794 - __main__ - INFO - \ud83d\ude80 Waking up all project services...\n2025-10-22 10:47:15,794 - __main__ - INFO - \ud83d\udd27 Starting meta branch services...\n2025-10-22 10:47:15,798 - __main__ - INFO - \u2705 Started meta_meta_automation (PID: 51868)\n2025-10-22 10:47:15,803 - __main__ - INFO - \u2705 Started meta_telegram_monitor (PID: 51871)\n2025-10-22 10:47:15,803 - __main__ - INFO - \ud83d\udcca Starting global monitoring...\n2025-10-22 10:47:15,804 - __main__ - INFO - \u2705 Started global monitoring (PID: 51872)\n2025-10-22 10:47:15,805 - __main__ - INFO - \u2705 All services awakened\n2025-10-22 10:47:15,805 - __main__ - INFO - \ud83d\udccb Phase 5: Health Verification\n2025-10-22 10:47:15,805 - __main__ - INFO - \ud83d\udd0d System Health Check:\n2025-10-22 10:47:15,806 - __main__ - INFO -   \u2705 Mock databases created\n2025-10-22 10:47:15,806 - __main__ - INFO -   \u2705 Mock ML models available\n2025-10-22 10:47:15,806 - __main__ - INFO -   \u2705 Environment files: 2/4\n2025-10-22 10:47:15,806 - __main__ - INFO -   \u2705 Active services: 3\n2025-10-22 10:47:15,806 - __main__ - INFO - \ud83c\udf89 Universal Dummy System is now AWAKE!\n2025-10-22 10:47:15,806 - __main__ - INFO - \n2025-10-22 10:47:15,806 - __main__ - INFO - \ud83c\udfaf SYSTEM STATUS DASHBOARD\n2025-10-22 10:47:15,807 - __main__ - INFO - ==================================================\n2025-10-22 10:47:15,807 - __main__ - INFO - \ud83d\udcc1 Project Root: /workspaces/master\n2025-10-22 10:47:15,807 - __main__ - INFO - \ud83c\udf3f Active Branches: meta\n2025-10-22 10:47:15,807 - __main__ - INFO - \u2699\ufe0f Dummy Mode: ENABLED\n2025-10-22 10:47:15,807 - __main__ - INFO - \ud83d\uddc4\ufe0f Mock Databases: ACTIVE\n2025-10-22 10:47:15,807 - __main__ - INFO - \ud83e\udd16 ML Models: SIMULATED\n2025-10-22 10:47:15,807 - __main__ - INFO - \ud83d\udce1 Services: 3 running\n2025-10-22 10:47:15,807 - __main__ - INFO - \n2025-10-22 10:47:15,807 - __main__ - INFO - \ud83d\udd17 Available Endpoints:\n2025-10-22 10:47:15,807 - __main__ - INFO -   \u2022 ML API: http://localhost:8000\n2025-10-22 10:47:15,807 - __main__ - INFO -   \u2022 API Docs: http://localhost:8000/docs\n2025-10-22 10:47:15,807 - __main__ - INFO -   \u2022 Health Check: http://localhost:8000/health\n2025-10-22 10:47:15,807 - __main__ - INFO - \n2025-10-22 10:47:15,807 - __main__ - INFO - \ud83d\udcdd Environment Files Generated:\n2025-10-22 10:47:15,807 - __main__ - INFO -   \u2022 .env (global)\n2025-10-22 10:47:15,807 - __main__ - INFO -   \u2022 .env.rama (TikTok ML)\n2025-10-22 10:47:15,807 - __main__ - INFO -   \u2022 .env.meta (Meta Ads)\n2025-10-22 10:47:15,807 - __main__ - INFO -   \u2022 .env.tele (Like4Like)\n2025-10-22 10:47:15,807 - __main__ - INFO - \n2025-10-22 10:47:15,807 - __main__ - INFO - \ud83d\uddc4\ufe0f Mock Databases Available:\n2025-10-22 10:47:15,807 - __main__ - INFO -   \u2022 PostgreSQL (SQLite mock)\n2025-10-22 10:47:15,807 - __main__ - INFO -   \u2022 MongoDB (JSON mock)\n2025-10-22 10:47:15,807 - __main__ - INFO -   \u2022 Redis (JSON mock)\n2025-10-22 10:47:15,807 - __main__ - INFO - \n2025-10-22 10:47:15,807 - __main__ - INFO - \ud83d\ude80 Next Steps:\n2025-10-22 10:47:15,807 - __main__ - INFO -   1. Customize environment variables in .env files\n2025-10-22 10:47:15,807 - __main__ - INFO -   2. Add real API keys when ready for production\n2025-10-22 10:47:15,807 - __main__ - INFO -   3. Replace mock implementations with real ones\n2025-10-22 10:47:15,807 - __main__ - INFO -   4. Use 'python awakener.py --stop' to shut down\n2025-10-22 10:47:15,814 - __main__ - INFO - \n2025-10-22 10:47:15,814 - __main__ - INFO - ==================================================\nException ignored in: <function BaseSubprocessTransport.__del__ at 0x7a6e25546e80>\nTraceback (most recent call last):\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_subprocess.py\", line 126, in __del__\n    self.close()\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_subprocess.py\", line 104, in close\n    proto.pipe.close()\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/unix_events.py\", line 568, in close\n    self._close(None)\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/unix_events.py\", line 592, in _close\n    self._loop.call_soon(self._call_connection_lost, exc)\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_events.py\", line 792, in call_soon\n    self._check_closed()\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_events.py\", line 539, in _check_closed\n    raise RuntimeError('Event loop is closed')\nRuntimeError: Event loop is closed\nException ignored in: <function BaseSubprocessTransport.__del__ at 0x7a6e25546e80>\nTraceback (most recent call last):\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_subprocess.py\", line 126, in __del__\n    self.close()\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_subprocess.py\", line 104, in close\n    proto.pipe.close()\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/unix_events.py\", line 568, in close\n    self._close(None)\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/unix_events.py\", line 592, in _close\n    self._loop.call_soon(self._call_connection_lost, exc)\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_events.py\", line 792, in call_soon\n    self._check_closed()\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_events.py\", line 539, in _check_closed\n    raise RuntimeError('Event loop is closed')\nRuntimeError: Event loop is closed\nException ignored in: <function BaseSubprocessTransport.__del__ at 0x7a6e25546e80>\nTraceback (most recent call last):\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_subprocess.py\", line 126, in __del__\n    self.close()\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_subprocess.py\", line 104, in close\n    proto.pipe.close()\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/unix_events.py\", line 568, in close\n    self._close(None)\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/unix_events.py\", line 592, in _close\n    self._loop.call_soon(self._call_connection_lost, exc)\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_events.py\", line 792, in call_soon\n    self._check_closed()\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_events.py\", line 539, in _check_closed\n    raise RuntimeError('Event loop is closed')\nRuntimeError: Event loop is closed\n"
+    },
+    "tele_wake": {
+      "success": true,
+      "services_expected": 1,
+      "output_lines": 15,
+      "errors": "2025-10-22 10:47:22,202 - __main__ - INFO - \ud83c\udf05 Starting Universal Dummy System Awakening...\n2025-10-22 10:47:22,202 - __main__ - INFO - \ud83d\udcc1 Project root: /workspaces/master\n2025-10-22 10:47:22,202 - __main__ - INFO - \ud83c\udf3f Active branches: tele\n2025-10-22 10:47:22,202 - __main__ - INFO - \u2699\ufe0f Mode: services\n2025-10-22 10:47:22,202 - __main__ - INFO - \ud83d\udccb Phase 1: Infrastructure Setup\n2025-10-22 10:47:22,203 - __main__ - INFO - \u2705 Directory structure created\n2025-10-22 10:47:22,203 - __main__ - INFO - \ud83d\udcdd Generating environment files for all branches...\n2025-10-22 10:47:22,203 - __main__ - INFO - \u2705 Generated global .env file\n2025-10-22 10:47:22,203 - __main__ - INFO - \u2705 Generated .env.rama file\n2025-10-22 10:47:22,203 - __main__ - INFO - \u2705 Generated .env.meta file\n2025-10-22 10:47:22,203 - __main__ - INFO - \u2705 Generated .env.tele file\n2025-10-22 10:47:22,203 - __main__ - INFO - \u2705 All environment files generated\n2025-10-22 10:47:22,203 - __main__ - INFO - \ud83d\udccb Phase 2: Database Simulation\n2025-10-22 10:47:22,204 - __main__ - INFO - \ud83d\uddc4\ufe0f Creating mock cloud databases...\n2025-10-22 10:47:22,205 - __main__ - INFO - \u2705 Created mock PostgreSQL: postgresql\n2025-10-22 10:47:22,205 - __main__ - INFO - \u2705 Created mock MongoDB: mongodb\n2025-10-22 10:47:22,205 - __main__ - INFO - \u2705 Created mock Redis: redis\n2025-10-22 10:47:22,206 - __main__ - INFO - \u2705 Mock databases created\n2025-10-22 10:47:22,206 - __main__ - INFO - \ud83d\udccb Phase 3: ML Model Simulation\n2025-10-22 10:47:22,206 - __main__ - INFO - \ud83e\udd16 Setting up Ultralytics YOLO simulation...\n2025-10-22 10:47:22,207 - __main__ - INFO - \u2705 Ultralytics simulation setup complete\n2025-10-22 10:47:22,207 - __main__ - INFO - \ud83d\udccb Phase 4: Service Awakening\n2025-10-22 10:47:22,207 - __main__ - INFO - \ud83d\ude80 Waking up all project services...\n2025-10-22 10:47:22,207 - __main__ - INFO - \ud83d\udd27 Starting tele branch services...\n2025-10-22 10:47:22,208 - __main__ - INFO - \u2705 Started tele_telegram_bot (PID: 51951)\n2025-10-22 10:47:22,208 - __main__ - INFO - \ud83d\udcca Starting global monitoring...\n2025-10-22 10:47:22,211 - __main__ - INFO - \u2705 Started global monitoring (PID: 51952)\n2025-10-22 10:47:22,211 - __main__ - INFO - \u2705 All services awakened\n2025-10-22 10:47:22,211 - __main__ - INFO - \ud83d\udccb Phase 5: Health Verification\n2025-10-22 10:47:22,212 - __main__ - INFO - \ud83d\udd0d System Health Check:\n2025-10-22 10:47:22,212 - __main__ - INFO -   \u2705 Mock databases created\n2025-10-22 10:47:22,212 - __main__ - INFO -   \u2705 Mock ML models available\n2025-10-22 10:47:22,212 - __main__ - INFO -   \u2705 Environment files: 2/4\n2025-10-22 10:47:22,212 - __main__ - INFO -   \u2705 Active services: 2\n2025-10-22 10:47:22,212 - __main__ - INFO - \ud83c\udf89 Universal Dummy System is now AWAKE!\n2025-10-22 10:47:22,212 - __main__ - INFO - \n2025-10-22 10:47:22,212 - __main__ - INFO - \ud83c\udfaf SYSTEM STATUS DASHBOARD\n2025-10-22 10:47:22,212 - __main__ - INFO - ==================================================\n2025-10-22 10:47:22,212 - __main__ - INFO - \ud83d\udcc1 Project Root: /workspaces/master\n2025-10-22 10:47:22,212 - __main__ - INFO - \ud83c\udf3f Active Branches: tele\n2025-10-22 10:47:22,212 - __main__ - INFO - \u2699\ufe0f Dummy Mode: ENABLED\n2025-10-22 10:47:22,212 - __main__ - INFO - \ud83d\uddc4\ufe0f Mock Databases: ACTIVE\n2025-10-22 10:47:22,212 - __main__ - INFO - \ud83e\udd16 ML Models: SIMULATED\n2025-10-22 10:47:22,212 - __main__ - INFO - \ud83d\udce1 Services: 2 running\n2025-10-22 10:47:22,212 - __main__ - INFO - \n2025-10-22 10:47:22,212 - __main__ - INFO - \ud83d\udd17 Available Endpoints:\n2025-10-22 10:47:22,212 - __main__ - INFO -   \u2022 ML API: http://localhost:8000\n2025-10-22 10:47:22,212 - __main__ - INFO -   \u2022 API Docs: http://localhost:8000/docs\n2025-10-22 10:47:22,212 - __main__ - INFO -   \u2022 Health Check: http://localhost:8000/health\n2025-10-22 10:47:22,212 - __main__ - INFO - \n2025-10-22 10:47:22,212 - __main__ - INFO - \ud83d\udcdd Environment Files Generated:\n2025-10-22 10:47:22,212 - __main__ - INFO -   \u2022 .env (global)\n2025-10-22 10:47:22,212 - __main__ - INFO -   \u2022 .env.rama (TikTok ML)\n2025-10-22 10:47:22,212 - __main__ - INFO -   \u2022 .env.meta (Meta Ads)\n2025-10-22 10:47:22,212 - __main__ - INFO -   \u2022 .env.tele (Like4Like)\n2025-10-22 10:47:22,212 - __main__ - INFO - \n2025-10-22 10:47:22,212 - __main__ - INFO - \ud83d\uddc4\ufe0f Mock Databases Available:\n2025-10-22 10:47:22,213 - __main__ - INFO -   \u2022 PostgreSQL (SQLite mock)\n2025-10-22 10:47:22,213 - __main__ - INFO -   \u2022 MongoDB (JSON mock)\n2025-10-22 10:47:22,213 - __main__ - INFO -   \u2022 Redis (JSON mock)\n2025-10-22 10:47:22,213 - __main__ - INFO - \n2025-10-22 10:47:22,213 - __main__ - INFO - \ud83d\ude80 Next Steps:\n2025-10-22 10:47:22,213 - __main__ - INFO -   1. Customize environment variables in .env files\n2025-10-22 10:47:22,213 - __main__ - INFO -   2. Add real API keys when ready for production\n2025-10-22 10:47:22,213 - __main__ - INFO -   3. Replace mock implementations with real ones\n2025-10-22 10:47:22,213 - __main__ - INFO -   4. Use 'python awakener.py --stop' to shut down\n2025-10-22 10:47:22,213 - __main__ - INFO - \n2025-10-22 10:47:22,213 - __main__ - INFO - ==================================================\nException ignored in: <function BaseSubprocessTransport.__del__ at 0x769e7225ee80>\nTraceback (most recent call last):\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_subprocess.py\", line 126, in __del__\n    self.close()\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_subprocess.py\", line 104, in close\n    proto.pipe.close()\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/unix_events.py\", line 568, in close\n    self._close(None)\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/unix_events.py\", line 592, in _close\n    self._loop.call_soon(self._call_connection_lost, exc)\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_events.py\", line 792, in call_soon\n    self._check_closed()\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_events.py\", line 539, in _check_closed\n    raise RuntimeError('Event loop is closed')\nRuntimeError: Event loop is closed\nException ignored in: <function BaseSubprocessTransport.__del__ at 0x769e7225ee80>\nTraceback (most recent call last):\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_subprocess.py\", line 126, in __del__\n    self.close()\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_subprocess.py\", line 104, in close\n    proto.pipe.close()\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/unix_events.py\", line 568, in close\n    self._close(None)\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/unix_events.py\", line 592, in _close\n    self._loop.call_soon(self._call_connection_lost, exc)\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_events.py\", line 792, in call_soon\n    self._check_closed()\n  File \"/home/codespace/.python/current/lib/python3.12/asyncio/base_events.py\", line 539, in _check_closed\n    raise RuntimeError('Event loop is closed')\nRuntimeError: Event loop is closed\n"
+    },
+    "best_practices": {
+      "files_improved": 7,
+      "improvements": [
+        "Enhanced ml_core/api/main.py",
+        "Enhanced device_farm/controllers/device_manager.py",
+        "Enhanced ml_core/models/yolo_screenshot.py",
+        "Enhanced gologin_automation/api/gologin_client.py",
+        "Enhanced telegram_automation/bot/telegram_bot.py",
+        "Enhanced telegram_automation/youtube_executor/youtube_executor.py",
+        "Enhanced telegram_automation/database/models.py"
+      ]
+    },
+    "error_handling": {
+      "files_enhanced": 1,
+      "files": [
+        "telegram_automation/youtube_executor/youtube_executor.py"
+      ]
+    },
+    "logging": {
+      "config_created": true
+    },
+    "type_hints": {
+      "analysis_complete": true,
+      "recommendation": "Use mypy for comprehensive type hint analysis"
+    },
+    "universal_wake": {
+      "success": true,
+      "output_length": 4712,
+      "services_mentioned": 0
+    },
+    "cross_branch_compatibility": {
+      ".env": {
+        "exists": true,
+        "has_dummy_mode": true,
+        "has_api_keys": false,
+        "line_count": 27
+      },
+      ".env.rama": {
+        "exists": true,
+        "has_dummy_mode": true,
+        "has_api_keys": true,
+        "line_count": 21
+      },
+      ".env.meta": {
+        "exists": false
+      },
+      ".env.tele": {
+        "exists": false
+      }
+    },
+    "error_recovery": {
+      "validation_system": true,
+      "recovery_mechanisms": [
+        "awakener stop",
+        "validation system",
+        "dummy mode fallback"
+      ]
+    },
+    "documentation": {
+      "readme_created": true,
+      "files_documented": 1
+    },
+    "cleanup": {
+      "files_cleaned": 133,
+      "patterns": [
+        "**/__pycache__",
+        "**/*.pyc",
+        "**/*.pyo",
+        "**/.pytest_cache",
+        "**/node_modules",
+        "**/.coverage"
+      ]
+    }
+  },
+  "code_quality_metrics": {
+    "python": {
+      "total_files": 1158,
+      "total_lines": 418037,
+      "files_with_docstrings": 832,
+      "files_with_type_hints": 659,
+      "files_with_logging": 196,
+      "long_files": [
+        {
+          "file": "apply_system.py",
+          "lines": 1153
+        },
+        {
+          "file": "awakener.py",
+          "lines": 694
+        },
+        {
+          "file": "config_generator.py",
+          "lines": 544
+        },
+        {
+          "file": "validate_system.py",
+          "lines": 770
+        },
+        {
+          "file": "telegram_automation/youtube_executor/youtube_executor.py",
+          "lines": 864
+        },
+        {
+          "file": "telegram_automation/bot/conversation_handler.py",
+          "lines": 653
+        },
+        {
+          "file": "telegram_automation/bot/telegram_bot.py",
+          "lines": 863
+        },
+        {
+          "file": "telegram_automation/database/models.py",
+          "lines": 605
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/typing_extensions.py",
+          "lines": 4318
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pluggy/_hooks.py",
+          "lines": 715
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pluggy/_manager.py",
+          "lines": 524
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pydantic/json_schema.py",
+          "lines": 2849
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pydantic/main.py",
+          "lines": 1815
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pydantic/color.py",
+          "lines": 605
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pydantic/types.py",
+          "lines": 3296
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pydantic/mypy.py",
+          "lines": 1375
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pydantic/type_adapter.py",
+          "lines": 796
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pydantic/functional_validators.py",
+          "lines": 894
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pydantic/config.py",
+          "lines": 1295
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pydantic/fields.py",
+          "lines": 1835
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pydantic/networks.py",
+          "lines": 1316
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/h11/_connection.py",
+          "lines": 634
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/uvicorn/main.py",
+          "lines": 597
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/uvicorn/config.py",
+          "lines": 578
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/click/shell_completion.py",
+          "lines": 668
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/click/types.py",
+          "lines": 1210
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/click/decorators.py",
+          "lines": 552
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/click/_compat.py",
+          "lines": 623
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/click/core.py",
+          "lines": 3348
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/click/utils.py",
+          "lines": 628
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/click/testing.py",
+          "lines": 578
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/click/_termui_impl.py",
+          "lines": 848
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/click/termui.py",
+          "lines": 878
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/click/parser.py",
+          "lines": 533
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/anyio/from_thread.py",
+          "lines": 501
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pydantic_core/core_schema.py",
+          "lines": 4436
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/_pytest/python.py",
+          "lines": 1844
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/_pytest/pathlib.py",
+          "lines": 805
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/_pytest/main.py",
+          "lines": 914
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/_pytest/terminal.py",
+          "lines": 1482
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/_pytest/fixtures.py",
+          "lines": 1714
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/_pytest/logging.py",
+          "lines": 921
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/_pytest/python_api.py",
+          "lines": 997
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/_pytest/cacheprovider.py",
+          "lines": 603
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/_pytest/nodes.py",
+          "lines": 784
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/_pytest/junitxml.py",
+          "lines": 701
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/_pytest/doctest.py",
+          "lines": 772
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/_pytest/capture.py",
+          "lines": 1083
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/_pytest/hookspec.py",
+          "lines": 980
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/_pytest/runner.py",
+          "lines": 552
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/_pytest/pytester.py",
+          "lines": 1790
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/_pytest/reports.py",
+          "lines": 623
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/packaging/tags.py",
+          "lines": 657
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/packaging/specifiers.py",
+          "lines": 1020
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/packaging/metadata.py",
+          "lines": 863
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/packaging/version.py",
+          "lines": 583
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/typing_inspection/typing_objects.py",
+          "lines": 608
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/typing_inspection/introspection.py",
+          "lines": 588
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/fastapi/routing.py",
+          "lines": 4363
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/fastapi/applications.py",
+          "lines": 4638
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/fastapi/param_functions.py",
+          "lines": 2361
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/fastapi/_compat.py",
+          "lines": 630
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/fastapi/params.py",
+          "lines": 778
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/asyncio_mqtt/client.py",
+          "lines": 873
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py",
+          "lines": 625
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/starlette/routing.py",
+          "lines": 863
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/starlette/testclient.py",
+          "lines": 798
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/starlette/datastructures.py",
+          "lines": 709
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/PIL/ImageFilter.py",
+          "lines": 567
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/PIL/TiffImagePlugin.py",
+          "lines": 2157
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/PIL/ImageFont.py",
+          "lines": 1243
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/PIL/JpegImagePlugin.py",
+          "lines": 862
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/PIL/ImageCms.py",
+          "lines": 1010
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/PIL/PdfParser.py",
+          "lines": 997
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/PIL/ImageOps.py",
+          "lines": 659
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/PIL/PngImagePlugin.py",
+          "lines": 1453
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/PIL/TiffTags.py",
+          "lines": 561
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/PIL/Image.py",
+          "lines": 3941
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/PIL/GifImagePlugin.py",
+          "lines": 1061
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/PIL/ImageDraw.py",
+          "lines": 1063
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/PIL/ImageFile.py",
+          "lines": 774
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/idna/idnadata.py",
+          "lines": 4310
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/idna/uts46data.py",
+          "lines": 8842
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/yaml/scanner.py",
+          "lines": 1436
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/yaml/emitter.py",
+          "lines": 1138
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/yaml/parser.py",
+          "lines": 590
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/yaml/constructor.py",
+          "lines": 749
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/httpx/_client.py",
+          "lines": 2007
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/httpx/_main.py",
+          "lines": 507
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/httpx/_urls.py",
+          "lines": 643
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/httpx/_models.py",
+          "lines": 1210
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pydantic/v1/validators.py",
+          "lines": 769
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pydantic/v1/errors.py",
+          "lines": 647
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pydantic/v1/main.py",
+          "lines": 1114
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pydantic/v1/types.py",
+          "lines": 1206
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pydantic/v1/mypy.py",
+          "lines": 950
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pydantic/v1/schema.py",
+          "lines": 1164
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pydantic/v1/fields.py",
+          "lines": 1254
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pydantic/v1/utils.py",
+          "lines": 807
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pydantic/v1/typing.py",
+          "lines": 615
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pydantic/v1/networks.py",
+          "lines": 748
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pydantic/v1/dataclasses.py",
+          "lines": 501
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pydantic/experimental/pipeline.py",
+          "lines": 655
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pydantic/_internal/_generics.py",
+          "lines": 544
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py",
+          "lines": 2868
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pydantic/_internal/_typing_extra.py",
+          "lines": 754
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pydantic/_internal/_fields.py",
+          "lines": 636
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pydantic/_internal/_validators.py",
+          "lines": 534
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pydantic/_internal/_model_construction.py",
+          "lines": 849
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pydantic/_internal/_decorators.py",
+          "lines": 859
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/h11/tests/test_connection.py",
+          "lines": 1123
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/h11/tests/test_io.py",
+          "lines": 573
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py",
+          "lines": 551
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/uvicorn/protocols/http/httptools_impl.py",
+          "lines": 602
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/anyio/_core/_sockets.py",
+          "lines": 608
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/anyio/_core/_fileio.py",
+          "lines": 604
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/anyio/_core/_synchronization.py",
+          "lines": 597
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py",
+          "lines": 2118
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/anyio/_backends/_trio.py",
+          "lines": 997
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/_pytest/config/__init__.py",
+          "lines": 1817
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/_pytest/config/argparsing.py",
+          "lines": 552
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/_pytest/mark/structures.py",
+          "lines": 619
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/_pytest/_code/code.py",
+          "lines": 1338
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/_pytest/assertion/util.py",
+          "lines": 523
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/_pytest/assertion/rewrite.py",
+          "lines": 1212
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/_pytest/_py/path.py",
+          "lines": 1476
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/httpcore/_sync/http2.py",
+          "lines": 590
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/httpcore/_async/http2.py",
+          "lines": 590
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/six.py",
+          "lines": 999
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/typing_extensions.py",
+          "lines": 3073
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_internal/exceptions.py",
+          "lines": 734
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/rich/color.py",
+          "lines": 623
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/rich/segment.py",
+          "lines": 740
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/rich/_emoji_codes.py",
+          "lines": 3611
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/rich/traceback.py",
+          "lines": 757
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/rich/box.py",
+          "lines": 518
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/rich/_win32_console.py",
+          "lines": 663
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/rich/pretty.py",
+          "lines": 995
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/rich/progress.py",
+          "lines": 1703
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/rich/text.py",
+          "lines": 1308
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/rich/table.py",
+          "lines": 1003
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/rich/syntax.py",
+          "lines": 949
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/rich/style.py",
+          "lines": 797
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/rich/console.py",
+          "lines": 2634
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/platformdirs/__init__.py",
+          "lines": 567
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/tomli/_parser.py",
+          "lines": 692
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/msgpack/fallback.py",
+          "lines": 1011
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/tenacity/__init__.py",
+          "lines": 609
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/pygments/cmdline.py",
+          "lines": 669
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/pygments/lexer.py",
+          "lines": 944
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/urllib3/connectionpool.py",
+          "lines": 1133
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/urllib3/connection.py",
+          "lines": 573
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/urllib3/poolmanager.py",
+          "lines": 538
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/urllib3/response.py",
+          "lines": 880
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/packaging/specifiers.py",
+          "lines": 803
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/packaging/version.py",
+          "lines": 505
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/requests/sessions.py",
+          "lines": 834
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/requests/cookies.py",
+          "lines": 562
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/requests/utils.py",
+          "lines": 1095
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/requests/models.py",
+          "lines": 1035
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/requests/adapters.py",
+          "lines": 539
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/distro/distro.py",
+          "lines": 1400
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/pkg_resources/__init__.py",
+          "lines": 3362
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/chardet/langhebrewmodel.py",
+          "lines": 4381
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/chardet/langbulgarianmodel.py",
+          "lines": 4650
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/chardet/langrussianmodel.py",
+          "lines": 5726
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/chardet/langturkishmodel.py",
+          "lines": 4381
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/chardet/langthaimodel.py",
+          "lines": 4381
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/chardet/johabfreq.py",
+          "lines": 2383
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/chardet/langhungarianmodel.py",
+          "lines": 4650
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/chardet/langgreekmodel.py",
+          "lines": 4398
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/chardet/mbcssm.py",
+          "lines": 662
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/distlib/util.py",
+          "lines": 1933
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/distlib/index.py",
+          "lines": 509
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/distlib/compat.py",
+          "lines": 1117
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/distlib/locators.py",
+          "lines": 1301
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/distlib/metadata.py",
+          "lines": 1077
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/distlib/database.py",
+          "lines": 1351
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/distlib/version.py",
+          "lines": 740
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/distlib/wheel.py",
+          "lines": 1083
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/pyparsing/results.py",
+          "lines": 797
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/pyparsing/core.py",
+          "lines": 6116
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/pyparsing/helpers.py",
+          "lines": 1101
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/resolvelib/resolvers.py",
+          "lines": 548
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/idna/idnadata.py",
+          "lines": 2152
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/idna/uts46data.py",
+          "lines": 8601
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/pygments/lexers/python.py",
+          "lines": 1199
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/pygments/lexers/_mapping.py",
+          "lines": 560
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/pygments/filters/__init__.py",
+          "lines": 941
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/pygments/formatters/latex.py",
+          "lines": 522
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/pygments/formatters/html.py",
+          "lines": 990
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/pygments/formatters/img.py",
+          "lines": 646
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/urllib3/packages/six.py",
+          "lines": 1077
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/urllib3/util/retry.py",
+          "lines": 621
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/urllib3/contrib/securetransport.py",
+          "lines": 922
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/urllib3/contrib/pyopenssl.py",
+          "lines": 519
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/urllib3/contrib/_securetransport/bindings.py",
+          "lines": 520
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_vendor/pyparsing/diagram/__init__.py",
+          "lines": 657
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_internal/vcs/versioncontrol.py",
+          "lines": 706
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_internal/vcs/git.py",
+          "lines": 527
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_internal/req/req_uninstall.py",
+          "lines": 651
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_internal/req/constructors.py",
+          "lines": 507
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_internal/req/req_install.py",
+          "lines": 875
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_internal/req/req_file.py",
+          "lines": 553
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_internal/utils/misc.py",
+          "lines": 736
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_internal/operations/prepare.py",
+          "lines": 744
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_internal/network/session.py",
+          "lines": 520
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_internal/network/auth.py",
+          "lines": 562
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_internal/metadata/base.py",
+          "lines": 689
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_internal/cli/req_command.py",
+          "lines": 509
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_internal/cli/cmdoptions.py",
+          "lines": 1075
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_internal/commands/install.py",
+          "lines": 779
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_internal/models/link.py",
+          "lines": 582
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_internal/index/package_finder.py",
+          "lines": 1030
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_internal/index/collector.py",
+          "lines": 506
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_internal/operations/install/wheel.py",
+          "lines": 741
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_internal/resolution/legacy/resolver.py",
+          "lines": 601
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/factory.py",
+          "lines": 731
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/candidates.py",
+          "lines": 556
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/packaging/licenses/_spdx.py",
+          "lines": 760
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/paho/mqtt/client.py",
+          "lines": 5005
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/fastapi/security/oauth2.py",
+          "lines": 639
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/fastapi/openapi/utils.py",
+          "lines": 531
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/fastapi/openapi/models.py",
+          "lines": 612
+        },
+        {
+          "file": "venv/lib/python3.12/site-packages/fastapi/dependencies/utils.py",
+          "lines": 811
+        }
+      ],
+      "files_without_docstrings": [
+        "dummy_monitor.py",
+        "setup.py",
+        "orchestration/scripts/workflow_validator.py",
+        "ml_core/api/endpoints/affinity_calculator.py",
+        "ml_core/api/endpoints/posting_predictor.py",
+        "ml_core/api/endpoints/anomaly_detection.py",
+        "ml_core/api/endpoints/screenshot_analysis.py",
+        "venv/lib/python3.12/site-packages/py.py",
+        "venv/lib/python3.12/site-packages/pluggy/__init__.py",
+        "venv/lib/python3.12/site-packages/pluggy/_version.py",
+        "venv/lib/python3.12/site-packages/pydantic/__init__.py",
+        "venv/lib/python3.12/site-packages/sniffio/_version.py",
+        "venv/lib/python3.12/site-packages/h11/_writers.py",
+        "venv/lib/python3.12/site-packages/h11/__init__.py",
+        "venv/lib/python3.12/site-packages/h11/_abnf.py",
+        "venv/lib/python3.12/site-packages/h11/_state.py",
+        "venv/lib/python3.12/site-packages/h11/_readers.py",
+        "venv/lib/python3.12/site-packages/h11/_version.py",
+        "venv/lib/python3.12/site-packages/_yaml/__init__.py",
+        "venv/lib/python3.12/site-packages/uvicorn/__init__.py",
+        "venv/lib/python3.12/site-packages/uvicorn/main.py",
+        "venv/lib/python3.12/site-packages/uvicorn/__main__.py",
+        "venv/lib/python3.12/site-packages/uvicorn/importer.py",
+        "venv/lib/python3.12/site-packages/uvicorn/config.py",
+        "venv/lib/python3.12/site-packages/click/_textwrap.py",
+        "venv/lib/python3.12/site-packages/click/_winconsole.py",
+        "venv/lib/python3.12/site-packages/anyio/__init__.py",
+        "venv/lib/python3.12/site-packages/anyio/pytest_plugin.py",
+        "venv/lib/python3.12/site-packages/_pytest/__init__.py",
+        "venv/lib/python3.12/site-packages/_pytest/setupplan.py",
+        "venv/lib/python3.12/site-packages/_pytest/stepwise.py",
+        "venv/lib/python3.12/site-packages/_pytest/setuponly.py",
+        "venv/lib/python3.12/site-packages/_pytest/python_path.py",
+        "venv/lib/python3.12/site-packages/_pytest/_version.py",
+        "venv/lib/python3.12/site-packages/httpcore/_ssl.py",
+        "venv/lib/python3.12/site-packages/httpcore/__init__.py",
+        "venv/lib/python3.12/site-packages/httpcore/_exceptions.py",
+        "venv/lib/python3.12/site-packages/httpcore/_trace.py",
+        "venv/lib/python3.12/site-packages/pip/__main__.py",
+        "venv/lib/python3.12/site-packages/packaging/__init__.py",
+        "venv/lib/python3.12/site-packages/packaging/_structures.py",
+        "venv/lib/python3.12/site-packages/typing_inspection/__init__.py",
+        "venv/lib/python3.12/site-packages/iniconfig/exceptions.py",
+        "venv/lib/python3.12/site-packages/iniconfig/_version.py",
+        "venv/lib/python3.12/site-packages/paho/__init__.py",
+        "venv/lib/python3.12/site-packages/fastapi/logger.py",
+        "venv/lib/python3.12/site-packages/fastapi/concurrency.py",
+        "venv/lib/python3.12/site-packages/fastapi/testclient.py",
+        "venv/lib/python3.12/site-packages/fastapi/websockets.py",
+        "venv/lib/python3.12/site-packages/fastapi/types.py",
+        "venv/lib/python3.12/site-packages/fastapi/_compat.py",
+        "venv/lib/python3.12/site-packages/fastapi/templating.py",
+        "venv/lib/python3.12/site-packages/fastapi/requests.py",
+        "venv/lib/python3.12/site-packages/fastapi/exception_handlers.py",
+        "venv/lib/python3.12/site-packages/fastapi/params.py",
+        "venv/lib/python3.12/site-packages/fastapi/staticfiles.py",
+        "venv/lib/python3.12/site-packages/asyncio_mqtt/__init__.py",
+        "venv/lib/python3.12/site-packages/asyncio_mqtt/types.py",
+        "venv/lib/python3.12/site-packages/asyncio_mqtt/_version.py",
+        "venv/lib/python3.12/site-packages/pytest_asyncio/_version.py",
+        "venv/lib/python3.12/site-packages/starlette/concurrency.py",
+        "venv/lib/python3.12/site-packages/starlette/__init__.py",
+        "venv/lib/python3.12/site-packages/starlette/_utils.py",
+        "venv/lib/python3.12/site-packages/starlette/convertors.py",
+        "venv/lib/python3.12/site-packages/starlette/responses.py",
+        "venv/lib/python3.12/site-packages/starlette/types.py",
+        "venv/lib/python3.12/site-packages/starlette/_compat.py",
+        "venv/lib/python3.12/site-packages/starlette/exceptions.py",
+        "venv/lib/python3.12/site-packages/starlette/config.py",
+        "venv/lib/python3.12/site-packages/starlette/authentication.py",
+        "venv/lib/python3.12/site-packages/starlette/background.py",
+        "venv/lib/python3.12/site-packages/starlette/formparsers.py",
+        "venv/lib/python3.12/site-packages/certifi/__init__.py",
+        "venv/lib/python3.12/site-packages/certifi/__main__.py",
+        "venv/lib/python3.12/site-packages/dotenv/version.py",
+        "venv/lib/python3.12/site-packages/dotenv/parser.py",
+        "venv/lib/python3.12/site-packages/PIL/QoiImagePlugin.py",
+        "venv/lib/python3.12/site-packages/PIL/McIdasImagePlugin.py",
+        "venv/lib/python3.12/site-packages/PIL/PixarImagePlugin.py",
+        "venv/lib/python3.12/site-packages/PIL/PdfImagePlugin.py",
+        "venv/lib/python3.12/site-packages/PIL/__main__.py",
+        "venv/lib/python3.12/site-packages/PIL/PalmImagePlugin.py",
+        "venv/lib/python3.12/site-packages/PIL/MicImagePlugin.py",
+        "venv/lib/python3.12/site-packages/PIL/ImtImagePlugin.py",
+        "venv/lib/python3.12/site-packages/PIL/GbrImagePlugin.py",
+        "venv/lib/python3.12/site-packages/PIL/FpxImagePlugin.py",
+        "venv/lib/python3.12/site-packages/PIL/PsdImagePlugin.py",
+        "venv/lib/python3.12/site-packages/PIL/ImageGrab.py",
+        "venv/lib/python3.12/site-packages/PIL/FitsImagePlugin.py",
+        "venv/lib/python3.12/site-packages/PIL/MspImagePlugin.py",
+        "venv/lib/python3.12/site-packages/PIL/PcdImagePlugin.py",
+        "venv/lib/python3.12/site-packages/PIL/PcxImagePlugin.py",
+        "venv/lib/python3.12/site-packages/PIL/TgaImagePlugin.py",
+        "venv/lib/python3.12/site-packages/PIL/DcxImagePlugin.py",
+        "venv/lib/python3.12/site-packages/PIL/FliImagePlugin.py",
+        "venv/lib/python3.12/site-packages/PIL/SgiImagePlugin.py",
+        "venv/lib/python3.12/site-packages/PIL/CurImagePlugin.py",
+        "venv/lib/python3.12/site-packages/PIL/SunImagePlugin.py",
+        "venv/lib/python3.12/site-packages/PIL/XbmImagePlugin.py",
+        "venv/lib/python3.12/site-packages/PIL/ImagePath.py",
+        "venv/lib/python3.12/site-packages/PIL/XVThumbImagePlugin.py",
+        "venv/lib/python3.12/site-packages/PIL/ImImagePlugin.py",
+        "venv/lib/python3.12/site-packages/PIL/_version.py",
+        "venv/lib/python3.12/site-packages/PIL/MpegImagePlugin.py",
+        "venv/lib/python3.12/site-packages/PIL/XpmImagePlugin.py",
+        "venv/lib/python3.12/site-packages/idna/idnadata.py",
+        "venv/lib/python3.12/site-packages/idna/package_data.py",
+        "venv/lib/python3.12/site-packages/idna/__init__.py",
+        "venv/lib/python3.12/site-packages/idna/codec.py",
+        "venv/lib/python3.12/site-packages/idna/compat.py",
+        "venv/lib/python3.12/site-packages/yaml/dumper.py",
+        "venv/lib/python3.12/site-packages/yaml/reader.py",
+        "venv/lib/python3.12/site-packages/yaml/tokens.py",
+        "venv/lib/python3.12/site-packages/yaml/nodes.py",
+        "venv/lib/python3.12/site-packages/yaml/representer.py",
+        "venv/lib/python3.12/site-packages/yaml/serializer.py",
+        "venv/lib/python3.12/site-packages/yaml/events.py",
+        "venv/lib/python3.12/site-packages/yaml/emitter.py",
+        "venv/lib/python3.12/site-packages/yaml/cyaml.py",
+        "venv/lib/python3.12/site-packages/yaml/composer.py",
+        "venv/lib/python3.12/site-packages/yaml/loader.py",
+        "venv/lib/python3.12/site-packages/yaml/parser.py",
+        "venv/lib/python3.12/site-packages/yaml/error.py",
+        "venv/lib/python3.12/site-packages/httpx/__version__.py",
+        "venv/lib/python3.12/site-packages/httpx/__init__.py",
+        "venv/lib/python3.12/site-packages/pydantic/v1/__init__.py",
+        "venv/lib/python3.12/site-packages/pydantic/v1/version.py",
+        "venv/lib/python3.12/site-packages/pydantic/v1/parse.py",
+        "venv/lib/python3.12/site-packages/pydantic/v1/error_wrappers.py",
+        "venv/lib/python3.12/site-packages/pydantic/deprecated/__init__.py",
+        "venv/lib/python3.12/site-packages/pydantic/deprecated/copy_internals.py",
+        "venv/lib/python3.12/site-packages/pydantic/deprecated/parse.py",
+        "venv/lib/python3.12/site-packages/pydantic/_internal/_import_utils.py",
+        "venv/lib/python3.12/site-packages/pydantic/_internal/__init__.py",
+        "venv/lib/python3.12/site-packages/pydantic/_internal/_internal_dataclass.py",
+        "venv/lib/python3.12/site-packages/pydantic/_internal/_serializers.py",
+        "venv/lib/python3.12/site-packages/sniffio/_tests/test_sniffio.py",
+        "venv/lib/python3.12/site-packages/sniffio/_tests/__init__.py",
+        "venv/lib/python3.12/site-packages/h11/tests/test_state.py",
+        "venv/lib/python3.12/site-packages/h11/tests/__init__.py",
+        "venv/lib/python3.12/site-packages/h11/tests/test_connection.py",
+        "venv/lib/python3.12/site-packages/h11/tests/test_util.py",
+        "venv/lib/python3.12/site-packages/h11/tests/test_receivebuffer.py",
+        "venv/lib/python3.12/site-packages/h11/tests/helpers.py",
+        "venv/lib/python3.12/site-packages/h11/tests/test_helpers.py",
+        "venv/lib/python3.12/site-packages/h11/tests/test_against_stdlib_http.py",
+        "venv/lib/python3.12/site-packages/h11/tests/test_headers.py",
+        "venv/lib/python3.12/site-packages/h11/tests/test_io.py",
+        "venv/lib/python3.12/site-packages/h11/tests/test_events.py",
+        "venv/lib/python3.12/site-packages/uvicorn/supervisors/watchfilesreload.py",
+        "venv/lib/python3.12/site-packages/uvicorn/supervisors/__init__.py",
+        "venv/lib/python3.12/site-packages/uvicorn/supervisors/watchgodreload.py",
+        "venv/lib/python3.12/site-packages/uvicorn/supervisors/statreload.py",
+        "venv/lib/python3.12/site-packages/uvicorn/middleware/__init__.py",
+        "venv/lib/python3.12/site-packages/uvicorn/middleware/asgi2.py",
+        "venv/lib/python3.12/site-packages/uvicorn/protocols/__init__.py",
+        "venv/lib/python3.12/site-packages/uvicorn/protocols/utils.py",
+        "venv/lib/python3.12/site-packages/uvicorn/loops/uvloop.py",
+        "venv/lib/python3.12/site-packages/uvicorn/loops/__init__.py",
+        "venv/lib/python3.12/site-packages/uvicorn/loops/asyncio.py",
+        "venv/lib/python3.12/site-packages/uvicorn/loops/auto.py",
+        "venv/lib/python3.12/site-packages/uvicorn/lifespan/on.py",
+        "venv/lib/python3.12/site-packages/uvicorn/lifespan/__init__.py",
+        "venv/lib/python3.12/site-packages/uvicorn/lifespan/off.py",
+        "venv/lib/python3.12/site-packages/uvicorn/protocols/http/__init__.py",
+        "venv/lib/python3.12/site-packages/uvicorn/protocols/http/flow_control.py",
+        "venv/lib/python3.12/site-packages/uvicorn/protocols/http/auto.py",
+        "venv/lib/python3.12/site-packages/uvicorn/protocols/websockets/__init__.py",
+        "venv/lib/python3.12/site-packages/uvicorn/protocols/websockets/auto.py",
+        "venv/lib/python3.12/site-packages/anyio/_core/__init__.py",
+        "venv/lib/python3.12/site-packages/anyio/streams/__init__.py",
+        "venv/lib/python3.12/site-packages/anyio/abc/__init__.py",
+        "venv/lib/python3.12/site-packages/anyio/_backends/__init__.py",
+        "venv/lib/python3.12/site-packages/anyio/_backends/_trio.py",
+        "venv/lib/python3.12/site-packages/_pytest/_io/__init__.py",
+        "venv/lib/python3.12/site-packages/_pytest/_py/__init__.py",
+        "venv/lib/python3.12/site-packages/httpcore/_sync/http11.py",
+        "venv/lib/python3.12/site-packages/httpcore/_sync/__init__.py",
+        "venv/lib/python3.12/site-packages/httpcore/_async/http11.py",
+        "venv/lib/python3.12/site-packages/httpcore/_async/__init__.py",
+        "venv/lib/python3.12/site-packages/httpcore/_backends/base.py",
+        "venv/lib/python3.12/site-packages/httpcore/_backends/trio.py",
+        "venv/lib/python3.12/site-packages/httpcore/_backends/__init__.py",
+        "venv/lib/python3.12/site-packages/httpcore/_backends/anyio.py",
+        "venv/lib/python3.12/site-packages/httpcore/_backends/mock.py",
+        "venv/lib/python3.12/site-packages/httpcore/_backends/auto.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/rich/_cell_widths.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/rich/themes.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/rich/_extension.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/rich/_log_render.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/rich/_emoji_codes.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/rich/_null_file.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/rich/_palettes.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/rich/default_styles.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/rich/_wrap.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/platformdirs/version.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/_compat.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/cachecontrol/_cmd.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/cachecontrol/wrapper.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/cachecontrol/compat.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/tomli/_types.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/tomli/__init__.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/colorama/__init__.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/colorama/winterm.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/colorama/initialise.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/tenacity/_asyncio.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/tenacity/tornadoweb.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/urllib3/_version.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/packaging/__about__.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/packaging/__init__.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/packaging/_structures.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/requests/__version__.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/requests/packages.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/distro/__init__.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/distro/__main__.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/langhebrewmodel.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/langbulgarianmodel.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/big5freq.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/hebrewprober.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/sjisprober.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/jpcntx.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/mbcsgroupprober.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/eucjpprober.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/langrussianmodel.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/euctwprober.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/langturkishmodel.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/big5prober.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/jisfreq.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/sbcharsetprober.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/gb2312freq.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/gb2312prober.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/latin1prober.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/resultdict.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/codingstatemachinedict.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/charsetgroupprober.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/langthaimodel.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/johabfreq.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/macromanprober.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/langhungarianmodel.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/johabprober.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/euckrprober.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/sbcsgroupprober.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/escsm.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/utf8prober.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/euckrfreq.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/langgreekmodel.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/cp949prober.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/euctwfreq.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/mbcssm.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/distlib/__init__.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/certifi/__init__.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/certifi/__main__.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/resolvelib/__init__.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/idna/idnadata.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/idna/package_data.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/idna/__init__.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/idna/codec.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/idna/compat.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/cachecontrol/caches/__init__.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/colorama/tests/__init__.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/colorama/tests/initialise_test.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/colorama/tests/winterm_test.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/colorama/tests/ansitowin32_test.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/colorama/tests/isatty_test.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/colorama/tests/utils.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/colorama/tests/ansi_test.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/pygments/lexers/_mapping.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/pygments/formatters/_mapping.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/urllib3/packages/__init__.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/urllib3/util/__init__.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/urllib3/util/queue.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/urllib3/contrib/__init__.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/urllib3/packages/backports/__init__.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/urllib3/contrib/_securetransport/__init__.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/metadata/__init__.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/chardet/cli/__init__.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/resolvelib/compat/__init__.py",
+        "venv/lib/python3.12/site-packages/pip/_vendor/resolvelib/compat/collections_abc.py",
+        "venv/lib/python3.12/site-packages/pip/_internal/vcs/__init__.py",
+        "venv/lib/python3.12/site-packages/pip/_internal/utils/__init__.py",
+        "venv/lib/python3.12/site-packages/pip/_internal/operations/__init__.py",
+        "venv/lib/python3.12/site-packages/pip/_internal/cli/command_context.py",
+        "venv/lib/python3.12/site-packages/pip/_internal/cli/status_codes.py",
+        "venv/lib/python3.12/site-packages/pip/_internal/cli/spinners.py",
+        "venv/lib/python3.12/site-packages/pip/_internal/resolution/base.py",
+        "venv/lib/python3.12/site-packages/pip/_internal/resolution/__init__.py",
+        "venv/lib/python3.12/site-packages/pip/_internal/models/installation_report.py",
+        "venv/lib/python3.12/site-packages/pip/_internal/operations/build/__init__.py",
+        "venv/lib/python3.12/site-packages/pip/_internal/metadata/importlib/__init__.py",
+        "venv/lib/python3.12/site-packages/pip/_internal/resolution/legacy/__init__.py",
+        "venv/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/__init__.py",
+        "venv/lib/python3.12/site-packages/packaging/licenses/_spdx.py",
+        "venv/lib/python3.12/site-packages/paho/mqtt/__init__.py",
+        "venv/lib/python3.12/site-packages/fastapi/middleware/__init__.py",
+        "venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py",
+        "venv/lib/python3.12/site-packages/fastapi/middleware/trustedhost.py",
+        "venv/lib/python3.12/site-packages/fastapi/middleware/cors.py",
+        "venv/lib/python3.12/site-packages/fastapi/middleware/httpsredirect.py",
+        "venv/lib/python3.12/site-packages/fastapi/middleware/wsgi.py",
+        "venv/lib/python3.12/site-packages/fastapi/middleware/gzip.py",
+        "venv/lib/python3.12/site-packages/fastapi/security/base.py",
+        "venv/lib/python3.12/site-packages/fastapi/security/__init__.py",
+        "venv/lib/python3.12/site-packages/fastapi/security/utils.py",
+        "venv/lib/python3.12/site-packages/fastapi/openapi/__init__.py",
+        "venv/lib/python3.12/site-packages/fastapi/openapi/constants.py",
+        "venv/lib/python3.12/site-packages/fastapi/openapi/utils.py",
+        "venv/lib/python3.12/site-packages/fastapi/openapi/models.py",
+        "venv/lib/python3.12/site-packages/fastapi/dependencies/__init__.py",
+        "venv/lib/python3.12/site-packages/fastapi/dependencies/utils.py",
+        "venv/lib/python3.12/site-packages/fastapi/dependencies/models.py",
+        "venv/lib/python3.12/site-packages/starlette/middleware/base.py",
+        "venv/lib/python3.12/site-packages/starlette/middleware/__init__.py",
+        "venv/lib/python3.12/site-packages/starlette/middleware/trustedhost.py",
+        "venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py",
+        "venv/lib/python3.12/site-packages/starlette/middleware/sessions.py",
+        "venv/lib/python3.12/site-packages/starlette/middleware/cors.py",
+        "venv/lib/python3.12/site-packages/starlette/middleware/httpsredirect.py",
+        "venv/lib/python3.12/site-packages/starlette/middleware/authentication.py",
+        "venv/lib/python3.12/site-packages/starlette/middleware/gzip.py",
+        "venv/lib/python3.12/site-packages/httpx/_transports/__init__.py",
+        "venv/lib/python3.12/site-packages/httpx/_transports/mock.py",
+        "device_farm/controllers/device_manager.py",
+        "tests/unit/test_ml_api_endpoints.py",
+        "tests/unit/test_device_manager.py",
+        "tests/unit/test_gologin_client.py",
+        "tests/unit/test_alerts.py"
+      ],
+      "potential_issues": [
+        "TODO found in apply_system.py",
+        "FIXME found in apply_system.py",
+        "TODO found in awakener.py",
+        "TODO found in scaffold_prod_factories.py",
+        "TODO found in youtube_executor.py",
+        "TODO found in conversation_handler.py",
+        "TODO found in typing_extensions.py",
+        "TODO found in _hooks.py",
+        "TODO found in json_schema.py",
+        "FIXME found in json_schema.py",
+        "TODO found in main.py",
+        "TODO found in alias_generators.py",
+        "TODO found in mypy.py",
+        "TODO found in type_adapter.py",
+        "TODO found in functional_validators.py",
+        "TODO found in fields.py",
+        "TODO found in functional_serializers.py",
+        "TODO found in dataclasses.py",
+        "FIXME found in _writers.py",
+        "FIXME found in _readers.py",
+        "FIXME found in _events.py",
+        "TODO found in _termui_impl.py",
+        "TODO found in core_schema.py",
+        "TODO found in python.py",
+        "TODO found in pathlib.py",
+        "TODO found in main.py",
+        "TODO found in terminal.py",
+        "TODO found in fixtures.py",
+        "FIXME found in fixtures.py",
+        "TODO found in legacypath.py",
+        "TODO found in compat.py",
+        "TODO found in cacheprovider.py",
+        "TODO found in nodes.py",
+        "TODO found in junitxml.py",
+        "TODO found in doctest.py",
+        "TODO found in capture.py",
+        "TODO found in unittest.py",
+        "TODO found in reports.py",
+        "TODO found in tags.py",
+        "TODO found in requirements.py",
+        "TODO found in metadata.py",
+        "TODO found in introspection.py",
+        "TODO found in __init__.py",
+        "TODO found in routing.py",
+        "TODO found in applications.py",
+        "TODO found in param_functions.py",
+        "TODO found in _compat.py",
+        "TODO found in encoders.py",
+        "TODO found in params.py",
+        "TODO found in client.py",
+        "TODO found in _utils.py",
+        "TODO found in applications.py",
+        "FIXME found in McIdasImagePlugin.py",
+        "FIXME found in PixarImagePlugin.py",
+        "TODO found in TiffImagePlugin.py",
+        "FIXME found in TiffImagePlugin.py",
+        "FIXME found in SpiderImagePlugin.py",
+        "TODO found in ImageFont.py",
+        "FIXME found in ImageFont.py",
+        "FIXME found in PdfImagePlugin.py",
+        "FIXME found in ImagePalette.py",
+        "FIXME found in ImageQt.py",
+        "FIXME found in ImageDraw2.py",
+        "FIXME found in FpxImagePlugin.py",
+        "FIXME found in JpegImagePlugin.py",
+        "FIXME found in PsdImagePlugin.py",
+        "FIXME found in PSDraw.py",
+        "FIXME found in MspImagePlugin.py",
+        "FIXME found in PcdImagePlugin.py",
+        "FIXME found in ImageCms.py",
+        "TODO found in IcoImagePlugin.py",
+        "FIXME found in PcxImagePlugin.py",
+        "TODO found in PdfParser.py",
+        "FIXME found in ImageOps.py",
+        "FIXME found in PngImagePlugin.py",
+        "FIXME found in TiffTags.py",
+        "FIXME found in GdImageFile.py",
+        "FIXME found in Image.py",
+        "FIXME found in GifImagePlugin.py",
+        "FIXME found in MpoImagePlugin.py",
+        "FIXME found in XVThumbImagePlugin.py",
+        "FIXME found in ImageDraw.py",
+        "FIXME found in ImageFile.py",
+        "FIXME found in ImImagePlugin.py",
+        "FIXME found in XpmImagePlugin.py",
+        "TODO found in scanner.py",
+        "TODO found in _auth.py",
+        "TODO found in utils.py",
+        "TODO found in networks.py",
+        "TODO found in json.py",
+        "TODO found in pipeline.py",
+        "TODO found in _generics.py",
+        "TODO found in _known_annotated_metadata.py",
+        "TODO found in _generate_schema.py",
+        "FIXME found in _generate_schema.py",
+        "TODO found in _typing_extra.py",
+        "TODO found in _core_metadata.py",
+        "TODO found in _docs_extraction.py",
+        "TODO found in _utils.py",
+        "TODO found in _namespace_utils.py",
+        "TODO found in _fields.py",
+        "TODO found in _validators.py",
+        "TODO found in _repr.py",
+        "TODO found in _schema_gather.py",
+        "TODO found in wsproto_impl.py",
+        "TODO found in _trio.py",
+        "TODO found in __init__.py",
+        "TODO found in structures.py",
+        "TODO found in code.py",
+        "TODO found in __init__.py",
+        "TODO found in rewrite.py",
+        "FIXME found in build_env.py",
+        "TODO found in cache.py",
+        "TODO found in cells.py",
+        "TODO found in text.py",
+        "TODO found in filewrapper.py",
+        "TODO found in controller.py",
+        "TODO found in fallback.py",
+        "TODO found in lexer.py",
+        "TODO found in connectionpool.py",
+        "TODO found in connection.py",
+        "TODO found in exceptions.py",
+        "FIXME found in response.py",
+        "TODO found in tags.py",
+        "TODO found in requirements.py",
+        "TODO found in hooks.py",
+        "TODO found in adapters.py",
+        "TODO found in __init__.py",
+        "FIXME found in __init__.py",
+        "TODO found in sbcharsetprober.py",
+        "TODO found in resultdict.py",
+        "TODO found in codingstatemachinedict.py",
+        "TODO found in sbcsgroupprober.py",
+        "TODO found in universaldetector.py",
+        "TODO found in util.py",
+        "TODO found in resources.py",
+        "TODO found in locators.py",
+        "TODO found in metadata.py",
+        "FIXME found in metadata.py",
+        "TODO found in database.py",
+        "FIXME found in database.py",
+        "TODO found in version.py",
+        "TODO found in wheel.py",
+        "TODO found in python.py",
+        "TODO found in _mapping.py",
+        "TODO found in __init__.py",
+        "FIXME found in __init__.py",
+        "TODO found in latex.py",
+        "TODO found in terminal256.py",
+        "TODO found in img.py",
+        "TODO found in url.py",
+        "TODO found in retry.py",
+        "FIXME found in response.py",
+        "TODO found in securetransport.py",
+        "FIXME found in pyopenssl.py",
+        "TODO found in languages.py",
+        "FIXME found in subversion.py",
+        "TODO found in versioncontrol.py",
+        "FIXME found in req_uninstall.py",
+        "TODO found in constructors.py",
+        "FIXME found in req_install.py",
+        "TODO found in req_file.py",
+        "FIXME found in req_file.py",
+        "TODO found in req_set.py",
+        "FIXME found in unpacking.py",
+        "TODO found in subprocess.py",
+        "TODO found in prepare.py",
+        "FIXME found in prepare.py",
+        "TODO found in lazy_wheel.py",
+        "TODO found in base.py",
+        "TODO found in base_command.py",
+        "TODO found in inspect.py",
+        "TODO found in installation_report.py",
+        "TODO found in collector.py",
+        "FIXME found in base.py",
+        "TODO found in found_candidates.py",
+        "TODO found in factory.py",
+        "TODO found in candidates.py",
+        "TODO found in matcher.py",
+        "TODO found in client.py",
+        "FIXME found in client.py",
+        "TODO found in oauth2.py",
+        "TODO found in utils.py",
+        "TODO found in models.py",
+        "TODO found in exceptions.py"
+      ]
+    },
+    "common_issues": [
+      "Potential hardcoded credential in apply_system.py:269",
+      "Potential hardcoded credential in apply_system.py:270",
+      "Potential hardcoded credential in datastructures.py:172",
+      "Potential hardcoded credential in misc.py:474",
+      "Potential hardcoded credential in misc.py:477",
+      "Using print() instead of logging in __init__.py",
+      "Using print() instead of logging in config_generator.py",
+      "Using print() instead of logging in test_system.py",
+      "Using print() instead of logging in import_resolver.py",
+      "Using print() instead of logging in ml_client.py",
+      "Using print() instead of logging in scaffold_prod_factories.py",
+      "Using print() instead of logging in workflow_validator.py",
+      "Using print() instead of logging in typing_extensions.py",
+      "Using print() instead of logging in json_schema.py",
+      "Using print() instead of logging in types.py",
+      "Using print() instead of logging in functional_validators.py",
+      "Using print() instead of logging in config.py",
+      "Using print() instead of logging in fields.py",
+      "Using print() instead of logging in functional_serializers.py",
+      "Using print() instead of logging in networks.py",
+      "Using print() instead of logging in utils.py",
+      "Using print() instead of logging in core_schema.py",
+      "Using print() instead of logging in cacheprovider.py",
+      "Using print() instead of logging in capture.py",
+      "Using print() instead of logging in pytester.py",
+      "Using print() instead of logging in reports.py",
+      "Using print() instead of logging in _musllinux.py",
+      "Using print() instead of logging in version.py",
+      "Using print() instead of logging in __main__.py",
+      "Using print() instead of logging in cli.py",
+      "Using print() instead of logging in ipython.py",
+      "Using print() instead of logging in IcnsImagePlugin.py",
+      "Using print() instead of logging in SpiderImagePlugin.py",
+      "Using print() instead of logging in ImageShow.py",
+      "Using print() instead of logging in features.py",
+      "Using print() instead of logging in IptcImagePlugin.py",
+      "Using print() instead of logging in __init__.py",
+      "Using print() instead of logging in _exceptions.py",
+      "Using print() instead of logging in _main.py",
+      "Using print() instead of logging in _known_annotated_metadata.py",
+      "Using print() instead of logging in _core_utils.py",
+      "Using print() instead of logging in test_connection.py",
+      "Using print() instead of logging in test_against_stdlib_http.py",
+      "Using print() instead of logging in test_io.py",
+      "Using print() instead of logging in _fileio.py",
+      "Using print() instead of logging in code.py",
+      "Using print() instead of logging in six.py",
+      "Using print() instead of logging in typing_extensions.py",
+      "Using print() instead of logging in _ratio.py",
+      "Using print() instead of logging in styled.py",
+      "Using print() instead of logging in abc.py",
+      "Using print() instead of logging in cells.py",
+      "Using print() instead of logging in theme.py",
+      "Using print() instead of logging in scope.py",
+      "Using print() instead of logging in diagnose.py",
+      "Using print() instead of logging in ansi.py",
+      "Using print() instead of logging in __init__.py",
+      "Using print() instead of logging in padding.py",
+      "Using print() instead of logging in __main__.py",
+      "Using print() instead of logging in color.py",
+      "Using print() instead of logging in _log_render.py",
+      "Using print() instead of logging in segment.py",
+      "Using print() instead of logging in file_proxy.py",
+      "Using print() instead of logging in live.py",
+      "Using print() instead of logging in logging.py",
+      "Using print() instead of logging in highlighter.py",
+      "Using print() instead of logging in _windows.py",
+      "Using print() instead of logging in panel.py",
+      "Using print() instead of logging in columns.py",
+      "Using print() instead of logging in control.py",
+      "Using print() instead of logging in jupyter.py",
+      "Using print() instead of logging in align.py",
+      "Using print() instead of logging in progress_bar.py",
+      "Using print() instead of logging in traceback.py",
+      "Using print() instead of logging in palette.py",
+      "Using print() instead of logging in box.py",
+      "Using print() instead of logging in _win32_console.py",
+      "Using print() instead of logging in default_styles.py",
+      "Using print() instead of logging in pretty.py",
+      "Using print() instead of logging in emoji.py",
+      "Using print() instead of logging in _timer.py",
+      "Using print() instead of logging in progress.py",
+      "Using print() instead of logging in _wrap.py",
+      "Using print() instead of logging in tree.py",
+      "Using print() instead of logging in text.py",
+      "Using print() instead of logging in table.py",
+      "Using print() instead of logging in rule.py",
+      "Using print() instead of logging in syntax.py",
+      "Using print() instead of logging in status.py",
+      "Using print() instead of logging in layout.py",
+      "Using print() instead of logging in markup.py",
+      "Using print() instead of logging in pager.py",
+      "Using print() instead of logging in prompt.py",
+      "Using print() instead of logging in console.py",
+      "Using print() instead of logging in json.py",
+      "Using print() instead of logging in repr.py",
+      "Using print() instead of logging in __main__.py",
+      "Using print() instead of logging in x_user_defined.py",
+      "Using print() instead of logging in mklabels.py",
+      "Using print() instead of logging in wait.py",
+      "Using print() instead of logging in sphinxext.py",
+      "Using print() instead of logging in cmdline.py",
+      "Using print() instead of logging in lexer.py",
+      "Using print() instead of logging in connection.py",
+      "Using print() instead of logging in _musllinux.py",
+      "Using print() instead of logging in help.py",
+      "Using print() instead of logging in __init__.py",
+      "Using print() instead of logging in certs.py",
+      "Using print() instead of logging in __init__.py",
+      "Using print() instead of logging in __main__.py",
+      "Using print() instead of logging in results.py",
+      "Using print() instead of logging in actions.py",
+      "Using print() instead of logging in common.py",
+      "Using print() instead of logging in __init__.py",
+      "Using print() instead of logging in exceptions.py",
+      "Using print() instead of logging in core.py",
+      "Using print() instead of logging in testing.py",
+      "Using print() instead of logging in helpers.py",
+      "Using print() instead of logging in _in_process.py",
+      "Using print() instead of logging in python.py",
+      "Using print() instead of logging in html.py",
+      "Using print() instead of logging in six.py",
+      "Using print() instead of logging in ssl_.py",
+      "Using print() instead of logging in chardetect.py",
+      "Using print() instead of logging in setuptools_build.py",
+      "Using print() instead of logging in glibc.py",
+      "Using print() instead of logging in autocompletion.py",
+      "Using print() instead of logging in completion.py",
+      "Using print() instead of logging in base.py",
+      "Using print() instead of logging in discord_notifier.py"
+    ],
+    "dependencies": {
+      "requirement_files": 6,
+      "dependencies_per_file": {
+        "requirements-dummy.txt": 7,
+        "requirements-ml.txt": 5,
+        "requirements-dev.txt": 11,
+        "requirements.txt": 30,
+        "requirements-full.txt": 21
+      },
+      "total_unique_deps": 95
+    }
+  },
+  "recommendations": [
+    "Add docstrings to more modules for better documentation",
+    "Consider refactoring long files (>500 lines) into smaller modules",
+    "Add type hints to improve code clarity and IDE support",
+    "Address identified code quality issues",
+    "Consider using pre-commit hooks for code quality",
+    "Implement automated testing in CI/CD pipeline",
+    "Add performance monitoring for production deployment",
+    "Consider using black or autopep8 for code formatting"
+  ]
+}
