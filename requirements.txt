@@ -8,6 +8,7 @@ psycopg2-binary==2.9.9
 httpx==0.25.0
 python-multipart==0.0.6
 pillow==10.1.0
+aiohttp==3.9.0
 
 # ML dependencies
 ultralytics==8.0.196
@@ -21,3 +22,11 @@ scikit-learn==1.3.2
 prometheus-client==0.18.0
 grafana-api==1.0.3
 python-json-logger==2.0.7
+
+# Optional social media dependencies (uncomment for production)
+# instagrapi>=1.16.0
+# tweepy>=4.12.0
+# linkedin_api>=2.0.0
+
+# Optional cloud dependencies (uncomment for production)
+# boto3>=1.26.0

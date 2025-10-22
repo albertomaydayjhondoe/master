@@ -1,0 +1,203 @@
+{
+    "platforms": {
+        "instagram": {
+            "enabled": true,
+            "account_id": "instagram_main_account",
+            "username": "your_instagram_username",
+            "credentials": {
+                "username": "your_instagram_username",
+                "password": "your_instagram_password"
+            },
+            "automation_settings": {
+                "daily_likes_limit": 500,
+                "daily_follows_limit": 100,
+                "daily_comments_limit": 50,
+                "engagement_rate_target": 8.5,
+                "growth_rate_target": 15.0,
+                "safe_mode": true,
+                "competitor_accounts": ["@competitor1", "@competitor2", "@competitor3"],
+                "target_hashtags": ["#yourindustry", "#yourspecialty", "#trending"],
+                "engagement_schedule": {
+                    "morning": "09:00-11:00",
+                    "afternoon": "14:00-16:00", 
+                    "evening": "19:00-21:00"
+                }
+            }
+        },
+        "twitter": {
+            "enabled": true,
+            "account_id": "twitter_main_account", 
+            "username": "your_twitter_handle",
+            "credentials": {
+                "api_key": "your_twitter_api_key",
+                "api_secret": "your_twitter_api_secret",
+                "access_token": "your_twitter_access_token",
+                "access_token_secret": "your_twitter_access_token_secret",
+                "bearer_token": "your_twitter_bearer_token"
+            },
+            "automation_settings": {
+                "daily_tweets_limit": 25,
+                "daily_likes_limit": 300,
+                "daily_retweets_limit": 50,
+                "engagement_style": "professional_casual",
+                "trending_participation": true,
+                "auto_thread_creation": true,
+                "target_keywords": ["#AI", "#Innovation", "#TechTrends", "#Startup"],
+                "competitor_monitoring": ["@competitor_twitter1", "@competitor_twitter2"],
+                "posting_schedule": {
+                    "optimal_times": ["08:00", "12:00", "17:00", "20:00"],
+                    "time_zone": "UTC-5"
+                }
+            }
+        },
+        "linkedin": {
+            "enabled": true,
+            "account_id": "linkedin_professional_account",
+            "username": "your_linkedin_profile",
+            "credentials": {
+                "client_id": "your_linkedin_client_id",
+                "client_secret": "your_linkedin_client_secret", 
+                "access_token": "your_linkedin_access_token",
+                "redirect_uri": "your_redirect_uri"
+            },
+            "automation_settings": {
+                "daily_connections_limit": 25,
+                "daily_messages_limit": 15,
+                "daily_posts_limit": 2,
+                "target_industries": ["Technology", "Financial Services", "Marketing", "Consulting"],
+                "target_job_titles": ["CEO", "CTO", "VP", "Director", "Manager"],
+                "target_companies": ["Fortune 500", "Tech Startups", "Scale-ups"],
+                "content_themes": ["thought_leadership", "industry_insights", "innovation"],
+                "networking_schedule": {
+                    "business_hours": "09:00-17:00",
+                    "optimal_days": ["Tuesday", "Wednesday", "Thursday"]
+                }
+            }
+        },
+        "whatsapp": {
+            "enabled": true,
+            "account_id": "whatsapp_business_main",
+            "username": "+1234567890",
+            "credentials": {
+                "phone_number_id": "your_whatsapp_phone_number_id",
+                "access_token": "your_whatsapp_access_token",
+                "webhook_verify_token": "your_webhook_verify_token",
+                "app_id": "your_whatsapp_app_id",
+                "app_secret": "your_whatsapp_app_secret"
+            },
+            "automation_settings": {
+                "customer_service_hours": "08:00-20:00",
+                "auto_response_enabled": true,
+                "broadcast_limits": {
+                    "daily_broadcasts": 5,
+                    "messages_per_broadcast": 1000
+                },
+                "message_templates": {
+                    "welcome": "¡Hola {name}! Bienvenido a {business_name}. ¿En qué podemos ayudarte?",
+                    "order_confirmation": "Tu pedido #{order_id} ha sido confirmado. Te mantendremos informado.",
+                    "support_response": "Hemos recibido tu consulta. Nuestro equipo te contactará pronto."
+                },
+                "customer_segments": ["new_customers", "vip_customers", "at_risk_customers"],
+                "business_hours": {
+                    "timezone": "America/Mexico_City",
+                    "weekdays": "09:00-18:00",
+                    "weekends": "10:00-14:00"
+                }
+            }
+        }
+    },
+    "global_settings": {
+        "dummy_mode": true,
+        "logging_level": "INFO",
+        "rate_limiting": {
+            "respect_platform_limits": true,
+            "safety_margin": 0.8,
+            "adaptive_delays": true
+        },
+        "analytics": {
+            "reporting_frequency": "daily",
+            "metrics_retention_days": 90,
+            "cross_platform_tracking": true
+        },
+        "campaign_management": {
+            "max_concurrent_campaigns": 3,
+            "campaign_overlap_allowed": false,
+            "auto_optimization": true
+        },
+        "content_distribution": {
+            "auto_adapt_content": true,
+            "platform_optimization": true,
+            "scheduling_intelligence": true
+        },
+        "security": {
+            "anomaly_detection": true,
+            "shadowban_monitoring": true,
+            "account_health_checks": true,
+            "backup_accounts": false
+        }
+    },
+    "cross_platform_campaigns": {
+        "default_campaign": {
+            "name": "Brand Awareness Q4",
+            "platforms": ["instagram", "twitter", "linkedin"],
+            "content_strategy": {
+                "themes": ["innovation", "thought_leadership", "community"],
+                "tone": "professional_friendly",
+                "hashtag_strategy": "platform_optimized"
+            },
+            "target_audience": {
+                "demographics": "25-45",
+                "interests": ["technology", "business", "innovation"],
+                "geographic_focus": "North America, Europe"
+            },
+            "budget_allocation": {
+                "instagram": 0.4,
+                "twitter": 0.3,
+                "linkedin": 0.3
+            },
+            "success_metrics": {
+                "reach_target": 50000,
+                "engagement_rate_target": 5.5,
+                "lead_generation_target": 100,
+                "brand_awareness_lift": 25
+            }
+        }
+    },
+    "notification_settings": {
+        "email_reports": {
+            "enabled": true,
+            "frequency": "weekly",
+            "recipients": ["admin@yourcompany.com"]
+        },
+        "slack_integration": {
+            "enabled": false,
+            "webhook_url": "your_slack_webhook_url",
+            "alert_channels": ["#social-media", "#marketing"]
+        },
+        "alert_thresholds": {
+            "engagement_drop": 30,
+            "follower_loss": 100,
+            "api_error_rate": 5
+        }
+    },
+    "integrations": {
+        "ml_core": {
+            "enabled": true,
+            "content_analysis_endpoint": "http://localhost:8000/analyze_content",
+            "sentiment_analysis": true,
+            "trend_prediction": true
+        },
+        "n8n_workflows": {
+            "enabled": true,
+            "webhook_endpoints": {
+                "campaign_trigger": "http://localhost:5678/webhook/social-campaign",
+                "analytics_report": "http://localhost:5678/webhook/social-analytics"
+            }
+        },
+        "database": {
+            "connection_string": "postgresql://user:password@localhost/social_automation",
+            "metrics_table": "social_metrics",
+            "campaigns_table": "social_campaigns"
+        }
+    }
+}
