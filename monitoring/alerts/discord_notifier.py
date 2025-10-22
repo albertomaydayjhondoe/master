@@ -2,16 +2,19 @@
 
 Does not make network calls; stores the last dispatched message for tests.
 """
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 import json
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class DiscordNotifier:
-    def __init__(self, webhook_url: str = None):
+    def __init__(self, webhook_url: Optional[str] = None):
         self.webhook_url = webhook_url
         self.last_message = None
 
     def send(self, alert: Dict[str, Any]) -> None:
-        # In dummy mode, we only record the message and print
+        # In dummy mode, we only record the message and log
         self.last_message = alert
-        print("[DiscordNotifier] Alert:", json.dumps(alert))
+        logger.info("Discord alert sent: %s", json.dumps(alert))

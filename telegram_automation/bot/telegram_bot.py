@@ -13,9 +13,10 @@ from typing import Dict, List, Optional, Any
 
 # Safe imports with dummy mode support
 DUMMY_MODE = os.getenv('DUMMY_MODE', 'true').lower() == 'true'
+logger = logging.getLogger(__name__)
 
 if DUMMY_MODE:
-    print("🎭 Using dummy Telethon implementations")
+    logger.info("Using dummy Telethon implementations")
     
     # Dummy Telethon implementations
     class TelegramClient:
@@ -24,15 +25,15 @@ if DUMMY_MODE:
             self.api_id = api_id  
             self.api_hash = api_hash
             self.is_connected = False
-            print(f"🎭 Dummy Telegram Client: {session_name}")
+            logger.debug("Dummy Telegram Client: %s", session_name)
         
         async def start(self, phone=None, password=None):
             self.is_connected = True
-            print("🎭 Dummy client started")
+            logger.debug("Dummy client started")
         
         async def disconnect(self):
             self.is_connected = False
-            print("🎭 Dummy client disconnected")
+            logger.debug("Dummy client disconnected")
         
         async def get_me(self):
             return User(id=123456789, first_name="Dummy", last_name="User")
@@ -41,17 +42,17 @@ if DUMMY_MODE:
             return [Chat(id=i, title=f"Chat {i}") for i in range(1, 6)]
         
         async def send_message(self, entity, message):
-            print(f"🎭 Send message to {entity}: {message[:50]}...")
+            logger.debug("Send message to %s: %s", entity, message[:50])
             return type('Message', (), {'id': 1, 'text': message})()
         
         def on(self, event):
             def decorator(func):
-                print(f"🎭 Event handler: {func.__name__}")
+                logger.debug("Event handler: %s", func.__name__)
                 return func
             return decorator
         
         async def run_until_disconnected(self):
-            print("🎭 Running until disconnected...")
+            logger.debug("Running until disconnected...")
             while self.is_connected:
                 await asyncio.sleep(1)
     
@@ -95,53 +96,55 @@ if DUMMY_MODE:
 
 else:
     # Production imports
-    print("🚀 Using real Telethon implementations")
+    logger.info("Using real Telethon implementations")
     # Note: These will only work if telethon is installed
     # In production: pip install telethon==1.33.1
 
 try:
-    from database.models import DatabaseConnection, Exchange, ExchangeStatus, Contact, ContactStatus, ConversationContext, ConversationState
-
+    from telegram_automation.database.models import DatabaseConnection, Exchange, ExchangeStatus, Contact, ContactStatus, ConversationContext, ConversationState
+    EXTERNAL_DB_AVAILABLE = True
+except ImportError:
+    EXTERNAL_DB_AVAILABLE = False
 
 __all__ = ['TelegramClient', 'start', 'disconnect', 'get_me', 'get_dialogs', 'send_message', 'on', 'decorator', 'run_until_disconnected', 'events', 'NewMessage', 'NewMessage', 'User', 'Chat', 'Channel', 'FloodWaitError', 'PeerFloodError', 'DatabaseConnection', 'create_exchange', 'get_exchange_by_id', 'update_exchange', 'create_contact', 'get_contact_by_telegram_id', 'get_contact_by_user_id', 'update_contact', 'create_conversation_context', 'create_conversation_state', 'get_conversation_state', 'execute_query', 'execute_command', 'get_active_promotion_video', 'Exchange', 'ExchangeStatus', 'Contact', 'ContactStatus', 'Status', 'ConversationContext', 'ConversationState', 'State', 'calculate_reliability_score', 'TelegramBot', 'start', 'stop', 'process_message', 'MessageClassifier', 'classify_message', 'TelegramLike4LikeBot', 'start', 'load_monitored_groups', 'load_current_video', 'handle_new_message', 'process_like4like_message', 'send_initial_dm', 'craft_initial_message', 'generate_initial_terms', 'handle_private_message', 'process_conversation_response', 'check_dm_limit', 'reset_daily_limits', 'check_timeouts', 'handle_conversation_timeout', 'handle_exchange_timeout', 'log_message']
 
-except ImportError:
-    print("🎭 Using dummy database models")
+if not EXTERNAL_DB_AVAILABLE:
+    logger.info("Using dummy database models")
     
     class DatabaseConnection:
         def __init__(self, database_url: str = None):
             self.database_url = database_url or "sqlite:///dummy.db"
-            print(f"🎭 Dummy database connection: {self.database_url}")
+            logger.debug("Dummy database connection: %s", self.database_url)
         
         async def create_exchange(self, exchange_data): 
-            print(f"🎭 Create exchange: {exchange_data}")
+            logger.debug("Create exchange: %s", exchange_data)
             return 1
         async def get_exchange_by_id(self, exchange_id): 
             return None
         async def update_exchange(self, exchange): 
-            print(f"🎭 Update exchange: {exchange}")
+            logger.debug("Update exchange: %s", exchange)
         async def create_contact(self, contact_data):
-            print(f"🎭 Create contact: {contact_data}")
+            logger.debug("Create contact: %s", contact_data)
             return 1
         async def get_contact_by_telegram_id(self, telegram_id):
             return None
         async def get_contact_by_user_id(self, user_id, platform):
             return None
         async def update_contact(self, contact):
-            print(f"🎭 Update contact: {contact}")
+            logger.debug("Update contact: %s", contact)
         async def create_conversation_context(self, context_data):
-            print(f"🎭 Create conversation: {context_data}")
+            logger.debug("Create conversation: %s", context_data)
             return 1
         async def create_conversation_state(self, context_data):
-            print(f"🎭 Create conversation state: {context_data}")
+            logger.debug("Create conversation state: %s", context_data)
             return 1
         async def get_conversation_state(self, contact_id):
             return None
         async def execute_query(self, query, *args):
-            print(f"🎭 Execute query: {query[:50]}...")
+            logger.debug("Execute query: %s", query[:50])
             return []
         async def execute_command(self, query, *args):
-            print(f"🎭 Execute command: {query[:50]}...")
+            logger.debug("Execute command: %s", query[:50])
         async def get_active_promotion_video(self):
             return None
     
@@ -205,7 +208,7 @@ except ImportError:
 # Dummy function for reliability calculation
 def calculate_reliability_score(contact_data):
     """Calculate reliability score for dummy mode"""
-    print("🎭 Calculate reliability score")
+    logger.debug("Calculate reliability score")
     return random.randint(60, 90)
 class TelegramBot:
     """Main Telegram Bot class for Like4Like automation"""
@@ -219,9 +222,9 @@ class TelegramBot:
         # Initialize client
         if DUMMY_MODE:
             self.client = TelegramClient('dummy_session', api_id, api_hash)
-            print("🎭 Dummy Telegram bot initialized")
+            logger.info("Dummy Telegram bot initialized")
         else:
-            print("🚀 Production Telegram bot initialized")
+            logger.info("Production Telegram bot initialized")
             # In production, use real TelegramClient
         
         self.db = DatabaseConnection(self.database_url)
@@ -229,27 +232,27 @@ class TelegramBot:
     
     async def start(self):
         """Start the bot"""
-        print(f"🚀 Starting Telegram bot...")
+        logger.info("Starting Telegram bot...")
         self.is_running = True
         
         if DUMMY_MODE:
             await self.client.start()
-            print("🎭 Dummy bot started")
+            logger.info("Dummy bot started")
         else:
-            print("🚀 Production bot would start here")
+            logger.info("Production bot would start here")
     
     async def stop(self):
         """Stop the bot"""
-        print("🔒 Stopping Telegram bot...")
+        logger.info("Stopping Telegram bot...")
         self.is_running = False
         
         if DUMMY_MODE:
             await self.client.disconnect()
-            print("🎭 Dummy bot stopped")
+            logger.info("Dummy bot stopped")
     
     async def process_message(self, message):
         """Process incoming message"""
-        print(f"💬 Processing message: {message}")
+        logger.debug("Processing message: %s", message)
         # Message processing logic would go here
 
 logger = logging.getLogger(__name__)

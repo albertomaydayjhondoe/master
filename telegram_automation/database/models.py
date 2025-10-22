@@ -18,27 +18,29 @@ __all__ = ['DummyConnection', 'execute', 'fetch', 'fetchrow', 'close', 'connect'
 # Safe imports with dummy mode support
 DUMMY_MODE = os.getenv('DUMMY_MODE', 'true').lower() == 'true'
 
+logger = logging.getLogger(__name__)
+
 if DUMMY_MODE:
-    print("🎭 Using dummy asyncpg implementation")
+    logger.info("Using dummy asyncpg implementation")
     
     class DummyConnection:
         async def execute(self, query, *args):
-            print(f"🎭 SQL Execute: {query[:50]}...")
+            logger.debug("SQL Execute: %s", query[:50])
             return "SELECT 1"
         
         async def fetch(self, query, *args):
-            print(f"🎭 SQL Fetch: {query[:50]}...")
+            logger.debug("SQL Fetch: %s", query[:50])
             return []
         
         async def fetchrow(self, query, *args):
-            print(f"🎭 SQL Fetchrow: {query[:50]}...")
+            logger.debug("SQL Fetchrow: %s", query[:50])
             return None
         
         async def close(self):
-            print("🎭 Close database connection")
+            logger.debug("Close database connection")
     
     async def connect(*args, **kwargs):
-        print("🎭 Connect to dummy database")
+        logger.debug("Connect to dummy database")
         return DummyConnection()
     
     # Create asyncpg-like module
@@ -47,10 +49,8 @@ if DUMMY_MODE:
         Connection = DummyConnection
 
 else:
-    print("🚀 Production mode - asyncpg should be installed")
+    logger.info("Production mode - asyncpg should be installed")
     # Note: In production, install with: pip install asyncpg==0.29.0
-
-logger = logging.getLogger(__name__)
 
 
 class ContactStatus(Enum):

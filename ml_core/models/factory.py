@@ -1,8 +1,21 @@
+"""Factory module for ML models with dummy/production mode support.
+
+This module provides factory functions to create ML model instances,
+supporting both dummy implementations for development/testing and
+production implementations via environment variable configuration.
+"""
 from typing import Any
 from config.app_settings import is_dummy_mode, get_env
 
 # Lazy import helper
 from scripts.import_by_path import import_by_path
+
+__all__ = [
+    'get_yolo_screenshot_detector',
+    'get_yolo_video_detector', 
+    'get_affinity_model',
+    'get_anomaly_detector'
+]
 
 
 def _load_impl(env_var: str, default_callable):
