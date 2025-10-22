@@ -105,6 +105,10 @@ except ImportError:
     print("🎭 Using dummy database models")
     
     class DatabaseConnection:
+        def __init__(self, database_url: str = None):
+            self.database_url = database_url or "sqlite:///dummy.db"
+            print(f"🎭 Dummy database connection: {self.database_url}")
+        
         async def create_exchange(self, exchange_data): 
             print(f"🎭 Create exchange: {exchange_data}")
             return 1
@@ -117,11 +121,25 @@ except ImportError:
             return 1
         async def get_contact_by_telegram_id(self, telegram_id):
             return None
+        async def get_contact_by_user_id(self, user_id, platform):
+            return None
         async def update_contact(self, contact):
             print(f"🎭 Update contact: {contact}")
         async def create_conversation_context(self, context_data):
             print(f"🎭 Create conversation: {context_data}")
             return 1
+        async def create_conversation_state(self, context_data):
+            print(f"🎭 Create conversation state: {context_data}")
+            return 1
+        async def get_conversation_state(self, contact_id):
+            return None
+        async def execute_query(self, query, *args):
+            print(f"🎭 Execute query: {query[:50]}...")
+            return []
+        async def execute_command(self, query, *args):
+            print(f"🎭 Execute command: {query[:50]}...")
+        async def get_active_promotion_video(self):
+            return None
     
     class Exchange:
         def __init__(self):
@@ -138,19 +156,27 @@ except ImportError:
         def __init__(self, **kwargs):
             self.id = kwargs.get('id', 1)
             self.telegram_id = kwargs.get('telegram_id', 123456)
+            self.user_id = kwargs.get('user_id', 123456)  # Add user_id
             self.username = kwargs.get('username', 'dummyuser')
             self.first_name = kwargs.get('first_name', 'Dummy')
             self.last_name = kwargs.get('last_name', 'User')
             self.status = kwargs.get('status', 'discovered')
             self.reliability_score = kwargs.get('reliability_score', 50)
             self.created_at = datetime.now()
+            # Add missing attributes
+            self.first_contact_at = None
+            self.last_contact_at = None
     
     class ContactStatus:
-        DISCOVERED = type('Status', (), {'value': 'discovered'})()
-        CONTACTED = type('Status', (), {'value': 'contacted'})()
-        RESPONDED = type('Status', (), {'value': 'responded'})()
-        ACTIVE_SAVED = type('Status', (), {'value': 'active_saved'})()
-        UNRESPONSIVE = type('Status', (), {'value': 'unresponsive'})()
+        class Status:
+            def __init__(self, value):
+                self.value = value
+        
+        DISCOVERED = Status('discovered')
+        CONTACTED = Status('contacted')
+        RESPONDED = Status('responded')
+        ACTIVE_SAVED = Status('active_saved')
+        UNRESPONSIVE = Status('unresponsive')
     
     class ConversationContext:
         def __init__(self, **kwargs):
@@ -160,17 +186,67 @@ except ImportError:
             self.their_video_url = kwargs.get('their_video_url', '')
             self.extracted_terms = kwargs.get('extracted_terms', {})
             self.created_at = datetime.now()
+            # Add missing attributes
+            self.initiated_by = kwargs.get('initiated_by', 'us')
     
     class ConversationState:
-        WAITING_RESPONSE = type('State', (), {'value': 'waiting_response'})()
-        NEGOTIATING = type('State', (), {'value': 'negotiating'})()
-        CONFIRMED = type('State', (), {'value': 'confirmed'})()
-
+        class State:
+            def __init__(self, value):
+                self.value = value
+        
+        WAITING_RESPONSE = State('waiting_response')
+        NEGOTIATING = State('negotiating')
+        CONFIRMED = State('confirmed')
+    
 # Dummy function for reliability calculation
 def calculate_reliability_score(contact_data):
     """Calculate reliability score for dummy mode"""
     print("🎭 Calculate reliability score")
     return random.randint(60, 90)
+class TelegramBot:
+    """Main Telegram Bot class for Like4Like automation"""
+    
+    def __init__(self, api_id: int, api_hash: str, bot_token: str, database_url: str = "sqlite:///dummy.db"):
+        self.api_id = api_id
+        self.api_hash = api_hash
+        self.bot_token = bot_token
+        self.database_url = database_url or "sqlite:///dummy.db"
+        
+        # Initialize client
+        if DUMMY_MODE:
+            self.client = TelegramClient('dummy_session', api_id, api_hash)
+            print("🎭 Dummy Telegram bot initialized")
+        else:
+            print("🚀 Production Telegram bot initialized")
+            # In production, use real TelegramClient
+        
+        self.db = DatabaseConnection(self.database_url)
+        self.is_running = False
+    
+    async def start(self):
+        """Start the bot"""
+        print(f"🚀 Starting Telegram bot...")
+        self.is_running = True
+        
+        if DUMMY_MODE:
+            await self.client.start()
+            print("🎭 Dummy bot started")
+        else:
+            print("🚀 Production bot would start here")
+    
+    async def stop(self):
+        """Stop the bot"""
+        print("🔒 Stopping Telegram bot...")
+        self.is_running = False
+        
+        if DUMMY_MODE:
+            await self.client.disconnect()
+            print("🎭 Dummy bot stopped")
+    
+    async def process_message(self, message):
+        """Process incoming message"""
+        print(f"💬 Processing message: {message}")
+        # Message processing logic would go here
 
 logger = logging.getLogger(__name__)
 
