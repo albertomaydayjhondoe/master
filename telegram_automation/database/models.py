@@ -12,7 +12,12 @@ import json
 import uuid
 
 
-__all__ = ['DummyConnection', 'execute', 'fetch', 'fetchrow', 'close', 'connect', 'asyncpg', 'ContactStatus', 'ExchangeStatus', 'ConversationState', 'Contact', 'Exchange', 'ConversationContext', 'DatabaseConnection', 'connect', 'disconnect', 'execute_query', 'execute_command', 'fetchone', 'create_contact', 'get_contact_by_user_id', 'get_contact_by_id', 'update_contact', 'get_contacts_ready_for_relaunch', 'count_contacts', 'create_exchange', 'get_exchange_by_id', 'update_exchange', 'get_active_exchanges', 'count_exchanges', 'create_conversation_state', 'get_conversation_state', 'update_conversation_state', 'delete_conversation_state', 'record_analytics', 'get_performance_summary', 'add_my_video', 'get_active_promotion_video', 'get_my_video_by_id', 'calculate_reliability_score', 'initialize_database']
+__all__ = [
+    'DummyConnection', 'connect', 'asyncpg', 
+    'ContactStatus', 'ExchangeStatus', 'ConversationState', 
+    'Contact', 'Exchange', 'ConversationContext', 'DatabaseConnection',
+    'calculate_reliability_score'
+]
 
 
 # Safe imports with dummy mode support
@@ -549,21 +554,21 @@ class DatabaseConnection:
     
     # ==================== MY VIDEOS METHODS ====================
     
-    async def add_my_video(self, video_id: str, video_url: str, title: str = None) -> Dict[str, Any]:
+    async def add_my_video(self, video_id: str, video_url: str, title: Optional[str] = None) -> Dict[str, Any]:
         """Add our video for promotion"""
         query = """
         INSERT INTO my_videos (video_id, video_url, title)
         VALUES ($1, $2, $3)
         ON CONFLICT (video_id) DO UPDATE SET
+            video_url = EXCLUDED.video_url,
             title = EXCLUDED.title,
-            promotion_active = true,
             updated_at = NOW()
         RETURNING *
         """
         
         result = await self.fetchone(query, video_id, video_url, title)
         logger.info(f"✅ Added video for promotion: {title} ({video_id})")
-        return result
+        return result or {}
     
     async def get_active_promotion_video(self) -> Optional[Dict[str, Any]]:
         """Get current video being promoted"""
