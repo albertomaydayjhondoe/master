@@ -44,6 +44,15 @@ except ImportError:
     from ml_core.action_generation import UniversalActionGenerationSystem, create_action_generation_system
     from ml_core.platform_toggle import UniversalPlatformToggleSystem, create_platform_toggle_system, PlatformMode, PlatformCapability
 
+# Import Meta Ads integration
+try:
+    from social_extensions.meta import meta_router, initialize_meta_endpoints, META_AVAILABLE
+    HAVE_META_INTEGRATION = META_AVAILABLE
+except ImportError:
+    print("⚠️ Meta Ads integration not available")
+    HAVE_META_INTEGRATION = False
+    meta_router = None
+
 # Pydantic models for API requests/responses
 class PlatformActivationRequest(BaseModel):
     platform_id: str = Field(..., description="Platform identifier")
@@ -137,8 +146,13 @@ logger = logging.getLogger(__name__)
 # Helper functions
 async def get_system_health():
     """Get comprehensive system health status"""
-    if not system_state["is_initialized"]:
-        return {"status": "initializing", "components": {}}
+# Logging setup
+logger = logging.getLogger(__name__)
+
+# Include Meta Ads router if available (after logger is defined)
+if FASTAPI_AVAILABLE and HAVE_META_INTEGRATION and meta_router and app:
+    app.include_router(meta_router)
+    logger.info("✅ Meta Ads endpoints included in API Gateway")ing", "components": {}}
     
     components = {}
     

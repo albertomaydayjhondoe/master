@@ -28,5 +28,9 @@ python-json-logger==2.0.7
 # tweepy>=4.12.0
 # linkedin_api>=2.0.0
 
+# Meta Ads dependencies (uncomment for production)
+# facebook-business>=18.0.0
+# requests>=2.31.0
+
 # Optional cloud dependencies (uncomment for production)
 # boto3>=1.26.0
