@@ -13,9 +13,9 @@ import time
 import subprocess
 from pathlib import Path
 from typing import Dict, List, Any, Tuple, Optional
-import aiohttp
 import sqlite3
 from datetime import datetime
+import aiohttp
 
 # Setup logging
 logging.basicConfig(

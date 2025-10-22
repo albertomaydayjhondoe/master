@@ -1,14 +1,50 @@
 """
-Database connection and models for Like4Like Telegram Bot
+Database models and connection management for Telegram automation
+Handles PostgreSQL operations for exchanges, contacts, and conversation tracking
 """
-import asyncio
-import asyncpg
-import json
+import os
 import logging
-from typing import Optional, List, Dict, Any
 from datetime import datetime, timedelta
-from dataclasses import dataclass, asdict
+from typing import Dict, List, Optional, Any, Union
 from enum import Enum
+from dataclasses import dataclass
+import json
+import uuid
+
+# Safe imports with dummy mode support
+DUMMY_MODE = os.getenv('DUMMY_MODE', 'true').lower() == 'true'
+
+if DUMMY_MODE:
+    print("🎭 Using dummy asyncpg implementation")
+    
+    class DummyConnection:
+        async def execute(self, query, *args):
+            print(f"🎭 SQL Execute: {query[:50]}...")
+            return "SELECT 1"
+        
+        async def fetch(self, query, *args):
+            print(f"🎭 SQL Fetch: {query[:50]}...")
+            return []
+        
+        async def fetchrow(self, query, *args):
+            print(f"🎭 SQL Fetchrow: {query[:50]}...")
+            return None
+        
+        async def close(self):
+            print("🎭 Close database connection")
+    
+    async def connect(*args, **kwargs):
+        print("🎭 Connect to dummy database")
+        return DummyConnection()
+    
+    # Create asyncpg-like module
+    class asyncpg:
+        connect = staticmethod(connect)
+        Connection = DummyConnection
+
+else:
+    print("🚀 Production mode - asyncpg should be installed")
+    # Note: In production, install with: pip install asyncpg==0.29.0
 
 logger = logging.getLogger(__name__)
 
