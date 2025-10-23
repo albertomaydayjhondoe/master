@@ -19,10 +19,34 @@ try:
         create_audience_segment, CampaignPerformance, LearningInsight
     )
     ARTISTIC_CAMPAIGNS_AVAILABLE = True
-except ImportError:
-    print("⚠️ Artistic campaigns module not available - using placeholders")
+except ImportError as e:
+    print(f"⚠️ Artistic campaigns module not available: {e}")
     ARTISTIC_CAMPAIGNS_AVAILABLE = False
-    ArtisticCampaignSystem = object
+    
+    # Create placeholder classes for import safety
+    class ArtisticCampaignSystem:
+        pass
+    class ArtisticContent:
+        pass
+    class AudienceSegment:
+        pass
+    class ArtisticMedium:
+        pass
+    class CampaignObjective:
+        pass
+    class AudienceType:
+        pass
+    class CampaignPerformance:
+        pass
+    class LearningInsight:
+        pass
+    
+    def create_artistic_campaign_system(config):
+        return ArtisticCampaignSystem()
+    def create_artistic_content(*args, **kwargs):
+        return ArtisticContent()
+    def create_audience_segment(*args, **kwargs):
+        return AudienceSegment()
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/artistic", tags=["Artistic Campaigns"])

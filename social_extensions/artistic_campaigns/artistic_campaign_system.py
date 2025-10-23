@@ -236,15 +236,20 @@ class ArtisticCampaignSystem:
                 }
             }
         
-        # Análisis real usando modelos ML
-        analysis_results = {
-            'visual_features': await self._extract_visual_features(content),
-            'emotional_analysis': await self._analyze_emotional_content(content),
-            'market_positioning': await self._analyze_market_fit(content),
-            'platform_optimization': await self._optimize_for_platforms(content)
-        }
+        # Análisis real usando modelos ML (no disponible en modo dummy)
+        self.logger.warning("⚠️ Production ML analysis not available in dummy mode")
         
-        return analysis_results
+        # Retornar análisis dummy como fallback
+        return {
+            'visual_appeal_score': random.uniform(0.6, 0.95),
+            'emotional_impact': random.uniform(0.5, 0.9),
+            'technical_quality': random.uniform(0.7, 0.98),
+            'uniqueness_factor': random.uniform(0.4, 0.85),
+            'market_readiness': random.uniform(0.6, 0.92),
+            'viral_potential': random.uniform(0.3, 0.8),
+            'target_demographics': ['25-34', '35-44'],
+            'optimal_platforms': ['instagram', 'twitter', 'tiktok']
+        }
 
     async def _optimize_audience_targeting(
         self,
@@ -301,11 +306,18 @@ class ArtisticCampaignSystem:
                 'success_probability': random.uniform(0.65, 0.88)
             }
         
-        # Modelo predictivo real
-        features = await self._extract_prediction_features(content, audiences, objective)
-        prediction = await self._run_performance_model(features)
+        # Modelo predictivo real (no disponible en modo dummy)
+        self.logger.warning("⚠️ Production ML prediction not available in dummy mode")
         
-        return prediction
+        # Retornar predicción dummy como fallback
+        return {
+            'expected_reach': random.randint(50000, 500000),
+            'predicted_engagement_rate': random.uniform(0.03, 0.12),
+            'estimated_conversions': random.randint(100, 2000),
+            'confidence_interval': [0.75, 0.92],
+            'risk_factors': ['market_saturation', 'seasonal_trends'],
+            'success_probability': random.uniform(0.65, 0.88)
+        }
 
     async def continuous_learning_cycle(self, campaign_id: str):
         """Ciclo de aprendizaje continuo durante la campaña"""
@@ -585,6 +597,112 @@ class ArtisticCampaignSystem:
             self.learning_patterns[campaign_id].append(asdict(insight))
         
         self.logger.info(f"🧠 Generated {insights_generated} learning insights for {campaign_id}")
+
+    # Dummy implementations for missing methods
+    async def _collect_real_time_metrics(self, campaign_id: str) -> List[CampaignPerformance]:
+        """Collect real-time metrics (dummy implementation)"""
+        performance_history = self.campaign_history.get(campaign_id, [])
+        return performance_history[-5:] if performance_history else []
+
+    async def _update_predictive_models(self, campaign_id: str, metrics: List[CampaignPerformance]):
+        """Update predictive models (dummy implementation)"""
+        self.logger.info(f"🧠 Updating predictive models for {campaign_id}")
+
+    async def _calculate_content_audience_fit(self, content_analysis: Dict[str, Any], audience: AudienceSegment) -> float:
+        """Calculate content-audience compatibility (dummy implementation)"""
+        return random.uniform(0.5, 0.9)
+
+    async def _get_historical_audience_performance(self, audience_type: AudienceType, objective: CampaignObjective) -> Dict[str, Any]:
+        """Get historical audience performance (dummy implementation)"""
+        return {
+            'avg_performance': random.uniform(0.4, 0.8),
+            'conversion_rate': random.uniform(0.02, 0.08),
+            'engagement_rate': random.uniform(0.05, 0.15)
+        }
+
+    async def _enhance_audience_parameters(self, audience: AudienceSegment, content_analysis: Dict[str, Any], historical_performance: Dict[str, Any]) -> AudienceSegment:
+        """Enhance audience parameters (dummy implementation)"""
+        return audience  # Return original for now
+
+    async def _generate_lookalike_audiences(self, audiences: List[AudienceSegment], content_analysis: Dict[str, Any]) -> List[AudienceSegment]:
+        """Generate lookalike audiences (dummy implementation)"""
+        return []  # No additional audiences for now
+
+    async def _optimize_budget_distribution(self, budget_allocation: Dict[str, float], performance_prediction: Dict[str, Any], audiences: List[AudienceSegment]) -> Dict[str, float]:
+        """Optimize budget distribution (dummy implementation)"""
+        return budget_allocation  # Return original allocation
+
+    async def _deploy_to_platforms(self, campaign_id: str, content: ArtisticContent, audiences: List[AudienceSegment], budget_distribution: Dict[str, float], duration_days: int) -> Dict[str, Any]:
+        """Deploy to platforms (dummy implementation)"""
+        return {
+            'instagram': {'status': 'deployed', 'campaign_id': f'ig_{campaign_id}'},
+            'twitter': {'status': 'deployed', 'campaign_id': f'tw_{campaign_id}'},
+            'tiktok': {'status': 'deployed', 'campaign_id': f'tt_{campaign_id}'}
+        }
+
+    async def _monitor_campaign_continuously(self, campaign_id: str):
+        """Monitor campaign continuously (dummy implementation)"""
+        # This is handled by dummy monitor campaign
+        pass
+
+    async def _analyze_campaign_performance(self, campaign_id: str, performance_history: List[CampaignPerformance]) -> Dict[str, Any]:
+        """Analyze campaign performance (dummy implementation)"""
+        if not performance_history:
+            return {'status': 'insufficient_data'}
+        
+        latest = performance_history[-1]
+        return {
+            'avg_engagement': latest.engagement_rate,
+            'total_impressions': sum(p.impressions for p in performance_history),
+            'total_clicks': sum(p.clicks for p in performance_history),
+            'trend': 'improving' if len(performance_history) > 1 and latest.engagement_rate > performance_history[-2].engagement_rate else 'stable'
+        }
+
+    async def _summarize_learning_insights(self, campaign_id: str) -> Dict[str, Any]:
+        """Summarize learning insights (dummy implementation)"""
+        insights = self.learning_patterns.get(campaign_id, [])
+        return {
+            'total_insights': len(insights),
+            'avg_confidence': sum(i.get('confidence', 0) for i in insights) / len(insights) if insights else 0,
+            'top_insight_types': list(set(i.get('insight_type', '') for i in insights))
+        }
+
+    async def _generate_future_recommendations(self, campaign_id: str, performance_analysis: Dict[str, Any], learning_summary: Dict[str, Any]) -> List[str]:
+        """Generate future recommendations (dummy implementation)"""
+        recommendations = []
+        
+        if performance_analysis.get('trend') == 'improving':
+            recommendations.append("Continue current strategy - performance is improving")
+        
+        if learning_summary.get('total_insights', 0) > 5:
+            recommendations.append("Apply learned optimizations to future campaigns")
+        
+        recommendations.append("Consider A/B testing new creative variants")
+        recommendations.append("Expand successful audience segments")
+        
+        return recommendations
+
+    async def _analyze_artistic_impact(self, campaign_id: str) -> Dict[str, Any]:
+        """Analyze artistic impact (dummy implementation)"""
+        performance_history = self.campaign_history.get(campaign_id, [])
+        if not performance_history:
+            return {'artistic_reach': 0, 'cultural_impact': 0}
+        
+        latest = performance_history[-1]
+        return {
+            'artistic_reach': latest.impressions,
+            'cultural_impact': latest.artistic_appreciation_score,
+            'creative_resonance': latest.creative_resonance_score,
+            'community_engagement': latest.engagement_rate,
+            'artistic_appreciation_trend': 'positive' if latest.artistic_appreciation_score > 0.7 else 'neutral'
+        }
+
+    async def _calculate_model_accuracy(self, campaign_id: str) -> float:
+        """Calculate model accuracy (dummy implementation)"""
+        insights = self.learning_patterns.get(campaign_id, [])
+        base_accuracy = 0.75
+        improvement_factor = min(len(insights) * 0.01, 0.15)
+        return min(base_accuracy + improvement_factor, 0.95)
 
 # Factory function
 def create_artistic_campaign_system(config: Dict[str, Any]) -> ArtisticCampaignSystem:

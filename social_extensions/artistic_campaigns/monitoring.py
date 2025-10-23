@@ -13,7 +13,13 @@ from dataclasses import dataclass, asdict
 from enum import Enum
 from collections import deque, defaultdict
 import statistics
-import numpy as np
+
+# Remove numpy dependency for dummy mode compatibility
+try:
+    import numpy as np
+    NUMPY_AVAILABLE = True
+except ImportError:
+    NUMPY_AVAILABLE = False
 
 try:
     from config.app_settings import is_dummy_mode

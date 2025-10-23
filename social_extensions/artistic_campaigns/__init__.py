@@ -18,8 +18,6 @@ try:
         create_audience_segment
     )
     
-    from .api_endpoints import router as artistic_router
-    
     from .monitoring import (
         ArtisticCampaignMonitor,
         ArtisticAlert,
@@ -28,20 +26,80 @@ try:
         create_artistic_monitor
     )
     
+    from .api_endpoints import router as artistic_router
+    
     ARTISTIC_CAMPAIGNS_AVAILABLE = True
     
 except ImportError as e:
     print(f"⚠️ Artistic campaigns dependencies not available: {e}")
     ARTISTIC_CAMPAIGNS_AVAILABLE = False
     
-    # Provide placeholder classes
+    # Provide placeholder classes for import safety
     class ArtisticCampaignSystem:
-        pass
+        def __init__(self, config=None):
+            self.config = config or {}
+            print("🎭 DUMMY: Using placeholder ArtisticCampaignSystem")
     
     class ArtisticCampaignMonitor:
+        def __init__(self, config=None):
+            self.config = config or {}
+            print("🎭 DUMMY: Using placeholder ArtisticCampaignMonitor")
+    
+    class ArtisticContent:
+        pass
+    class AudienceSegment:
+        pass
+    class CampaignPerformance:
+        pass
+    class LearningInsight:
+        pass
+    class ArtisticAlert:
+        pass
+    class LearningMetric:
+        pass
+    class ArtisticHealthScore:
         pass
     
-    artistic_router = None
+    # Enum placeholders
+    class ArtisticMedium:
+        VISUAL_ART = "visual_art"
+        DIGITAL_ART = "digital_art"
+        PHOTOGRAPHY = "photography"
+        NFT = "nft"
+    
+    class CampaignObjective:
+        BRAND_AWARENESS = "brand_awareness"
+        ENGAGEMENT = "engagement"
+        SALES = "sales"
+    
+    class AudienceType:
+        ART_COLLECTORS = "art_collectors"
+        DIGITAL_NATIVES = "digital_natives"
+    
+    # Factory functions
+    def create_artistic_campaign_system(config=None):
+        return ArtisticCampaignSystem(config)
+    
+    def create_artistic_monitor(config=None):
+        return ArtisticCampaignMonitor(config)
+    
+    def create_artistic_content(*args, **kwargs):
+        return ArtisticContent()
+    
+    def create_audience_segment(*args, **kwargs):
+        return AudienceSegment()
+    
+    # Router placeholder
+    try:
+        from fastapi import APIRouter
+        artistic_router = APIRouter(prefix="/artistic", tags=["Artistic Campaigns Dummy"])
+        
+        @artistic_router.get("/health")
+        async def dummy_health():
+            return {"status": "dummy_mode", "artistic_campaigns": "placeholder"}
+            
+    except ImportError:
+        artistic_router = None
 
 __version__ = "1.0.0"
 
