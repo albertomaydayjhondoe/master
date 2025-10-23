@@ -1,0 +1,52 @@
+[
+  {
+    "_id": "dummy_0",
+    "data": "mock_data_0",
+    "timestamp": "2025-10-22T10:15:58.036853"
+  },
+  {
+    "_id": "dummy_1",
+    "data": "mock_data_1",
+    "timestamp": "2025-10-22T10:15:58.036861"
+  },
+  {
+    "_id": "dummy_2",
+    "data": "mock_data_2",
+    "timestamp": "2025-10-22T10:15:58.036864"
+  },
+  {
+    "_id": "dummy_3",
+    "data": "mock_data_3",
+    "timestamp": "2025-10-22T10:15:58.036867"
+  },
+  {
+    "_id": "dummy_4",
+    "data": "mock_data_4",
+    "timestamp": "2025-10-22T10:15:58.036870"
+  },
+  {
+    "_id": "dummy_5",
+    "data": "mock_data_5",
+    "timestamp": "2025-10-22T10:15:58.036872"
+  },
+  {
+    "_id": "dummy_6",
+    "data": "mock_data_6",
+    "timestamp": "2025-10-22T10:15:58.036875"
+  },
+  {
+    "_id": "dummy_7",
+    "data": "mock_data_7",
+    "timestamp": "2025-10-22T10:15:58.036878"
+  },
+  {
+    "_id": "dummy_8",
+    "data": "mock_data_8",
+    "timestamp": "2025-10-22T10:15:58.036881"
+  },
+  {
+    "_id": "dummy_9",
+    "data": "mock_data_9",
+    "timestamp": "2025-10-22T10:15:58.036883"
+  }
+]

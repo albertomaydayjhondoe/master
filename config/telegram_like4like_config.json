@@ -1,0 +1,180 @@
+{
+  "telegram_like4like_config": {
+    "api_credentials": {
+      "api_id": "YOUR_TELEGRAM_API_ID",
+      "api_hash": "YOUR_TELEGRAM_API_HASH",
+      "phone_numbers": [
+        "+1234567890",
+        "+0987654321"
+      ]
+    },
+    
+    "warmup_schedule": {
+      "phase_1_days_1_2": {
+        "interactions_per_hour": 10,
+        "max_groups_joined": 2,
+        "messages_per_day": 20,
+        "delay_between_actions": "300-600"
+      },
+      "phase_2_days_3_5": {
+        "interactions_per_hour": 30,
+        "max_groups_joined": 5, 
+        "messages_per_day": 50,
+        "delay_between_actions": "180-400"
+      },
+      "phase_3_days_6_plus": {
+        "interactions_per_hour": 50,
+        "max_groups_joined": 10,
+        "messages_per_day": 100,
+        "delay_between_actions": "120-300"
+      }
+    },
+    
+    "ml_configuration": {
+      "ultralytics_model": {
+        "model_path": "/workspaces/master/data/models/youtube_interaction_detector.pt",
+        "confidence_threshold": 0.7,
+        "classes": {
+          "0": "like_button",
+          "1": "subscribe_button",
+          "2": "comment_section", 
+          "3": "video_title",
+          "4": "like_active",
+          "5": "subscribed_active",
+          "6": "comment_posted"
+        }
+      },
+      "screenshot_analysis": {
+        "min_confidence": 0.8,
+        "required_detections": ["like_active", "subscribed_active"],
+        "video_title_match": true,
+        "save_training_data": true
+      }
+    },
+    
+    "negotiation_patterns": {
+      "greeting_messages": [
+        "¡Hola! 👋 Vi tu solicitud de like4like. ¿Intercambiamos?",
+        "Hola! Me interesa tu propuesta de intercambio 🔄",
+        "¡Perfecto para intercambio! ¿Hacemos el deal? ⚡"
+      ],
+      
+      "request_formats": [
+        "Dame like + comentario + suscripción y yo hago lo mismo 🚀",
+        "Intercambio: Like + Comment + Sub por lo mismo",
+        "Deal: Nos damos like, comentario y suscripción mutuamente"
+      ],
+      
+      "proof_requests": [
+        "Envía screenshot como prueba y procedo de inmediato 📸⚡",
+        "Manda captura del like+comment+sub = Reward instantáneo",
+        "Screenshot de las 3 acciones y te devuelvo el favor al momento"
+      ],
+      
+      "success_messages": [
+        "✅ ¡Listo! Ya tienes mi like + comentario + suscripción. ¡Gracias!",
+        "🎉 Completado! Check tu video - interacción completa enviada",
+        "✨ Todo hecho! Ya está tu like, comentario y suscripción. ¡Excelente!"
+      ],
+      
+      "follow_up_messages": {
+        "attempt_1": "¿Te interesa el intercambio? Es 100% real e inmediato 🚀",
+        "attempt_2": "Última oportunidad para el intercambio. ¿Deal? ⏰",
+        "attempt_3": "Ok, no hay problema. Si cambias de opinión, aquí estaré 👍"
+      }
+    },
+    
+    "target_groups": {
+      "like4like_groups": [
+        "@like4likegroup1",
+        "@youtubepromotion", 
+        "@sub4subgroup",
+        "@videopromoters"
+      ],
+      "engagement_groups": [
+        "@youtubecreators",
+        "@contentcreators",
+        "@socialmedia"
+      ]
+    },
+    
+    "reward_system": {
+      "youtube_automation": {
+        "like_comments": [
+          "¡Excelente contenido! 🔥",
+          "Me encantó el video 👏",
+          "¡Sigue así! 💪",
+          "Muy buen trabajo 🎯",
+          "¡Increíble! 🚀"
+        ],
+        "subscribe_channels": true,
+        "notification_bell": false,
+        "watch_duration_seconds": "30-120"
+      },
+      "verification_requirements": {
+        "screenshot_required": true,
+        "video_url_match": true,
+        "interaction_detection": ["like", "comment", "subscribe"],
+        "max_verification_attempts": 3
+      }
+    },
+    
+    "safety_settings": {
+      "anti_spam": {
+        "min_delay_between_messages": 30,
+        "max_messages_per_chat_per_hour": 5,
+        "blacklist_keywords": ["spam", "fake", "bot"],
+        "user_verification": true
+      },
+      "rate_limiting": {
+        "respect_telegram_limits": true,
+        "custom_delays": true,
+        "burst_protection": true,
+        "cooldown_on_limits": "3600"
+      },
+      "account_protection": {
+        "rotate_accounts": true,
+        "monitor_account_health": true,
+        "auto_pause_on_issues": true,
+        "backup_sessions": true
+      }
+    },
+    
+    "logging_and_analytics": {
+      "github_integration": {
+        "log_all_interactions": true,
+        "daily_summary_reports": true,
+        "ml_training_data_export": true,
+        "performance_metrics": true
+      },
+      "metrics_tracking": [
+        "total_negotiations_started",
+        "successful_conversions", 
+        "screenshot_verification_accuracy",
+        "average_response_time",
+        "daily_interaction_volume",
+        "user_satisfaction_score"
+      ],
+      "data_retention": {
+        "logs_retention_days": 90,
+        "screenshots_retention_days": 30,
+        "analytics_retention_days": 365
+      }
+    },
+    
+    "advanced_features": {
+      "ai_optimization": {
+        "message_ab_testing": true,
+        "timing_optimization": true,
+        "user_pattern_analysis": true,
+        "success_prediction": true
+      },
+      "scalability": {
+        "auto_add_phone_numbers": false,
+        "load_balancing": true,
+        "geographic_optimization": true,
+        "language_adaptation": true
+      }
+    }
+  }
+}

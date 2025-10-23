@@ -1,0 +1,19 @@
+# Meta Ads GCP Configuration Example
+# This file shows example values for testing the GCP deployment
+
+project_id  = "meta-ads-production-2024"
+region      = "us-central1" 
+zone        = "us-central1-a"
+environment = "prod"
+
+# Optional: Override default resource names
+# service_name = "meta-ads-api"
+# database_name = "meta-ads-db"
+# storage_bucket_suffix = "storage"
+
+# Optional: Customize resource sizes
+# database_tier = "db-f1-micro"  # For development
+# cloudrun_cpu = "2"
+# cloudrun_memory = "2Gi"
+# max_instances = 10
+# min_instances = 1

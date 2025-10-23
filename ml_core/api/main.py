@@ -1,3 +1,10 @@
+"""
+Main - Machine Learning and Device Automation
+
+This module is part of the TikTok ML Branch system.
+Maintained as part of the universal automation platform.
+"""
+
 from fastapi import FastAPI, Depends, HTTPException, Security
 from fastapi.security.api_key import APIKeyHeader
 from fastapi.middleware.cors import CORSMiddleware
@@ -67,6 +74,10 @@ async def verify_api_key(api_key: str = Security(api_key_header)):
 
 # Import routers
 from ml_core.api.endpoints import (
+
+
+__all__ = ['ErrorResponse', 'Config', 'verify_api_key', 'root', 'health']
+
     screenshot_analysis,
     anomaly_detection,
     posting_predictor,

@@ -1,0 +1,139 @@
+active_branches:
+- rama
+- tele
+branch_configs:
+  rama:
+    database_requirements:
+    - postgresql
+    - redis
+    dependencies:
+    - fastapi
+    - uvicorn
+    - ultralytics
+    - selenium
+    description: TikTok ML Automation System
+    env_vars:
+      ADB_CONTROLLER_IMPL: device_farm.controllers.adb_controller.ADBController
+      BRANCH_NAME: rama
+      DATABASE_URL: postgresql://dummy:dummy@localhost:5432/tiktok_ml
+      DEVICE_FARM_SIZE: '10'
+      DUMMY_MODE: 'true'
+      LOG_LEVEL: INFO
+      ML_API_HOST: 0.0.0.0
+      ML_API_PORT: '8000'
+      MONITORING_ENABLED: 'true'
+      PROJECT_ROOT: /workspaces/master
+      REDIS_URL: redis://localhost:6379/0
+      YOLO_SCREENSHOT_IMPL: ml_core.models.yolo_screenshot.YoloScreenshotDetector
+      YOLO_VIDEO_IMPL: ml_core.models.yolo_video.YoloVideoDetector
+    health_checks:
+    - http://localhost:8000/health
+    main_directory: /workspaces/master
+    ml_requirements:
+    - yolo_screenshot
+    - yolo_video
+    - affinity_model
+    name: rama
+    services:
+    - ml_api
+    - device_farm
+    - monitoring
+    startup_commands:
+    - uvicorn ml_core.api.main:app --host 0.0.0.0 --port 8000 --reload
+  tele:
+    database_requirements:
+    - postgresql
+    dependencies:
+    - telethon
+    - selenium
+    - asyncpg
+    description: Like4Like Telegram Automation
+    env_vars:
+      BRANCH_NAME: tele
+      DATABASE_URL: postgresql://dummy:dummy@localhost:5432/like4like_bot
+      DUMMY_MODE: 'true'
+      GOLOGIN_API_TOKEN: dummy_gologin_token
+      GOLOGIN_MAX_PROFILES: '5'
+      LOG_LEVEL: INFO
+      PROJECT_ROOT: /workspaces/master
+      SECURITY_HUMAN_DELAYS: 'true'
+      TELEGRAM_API_HASH: dummy_hash
+      TELEGRAM_API_ID: '12345'
+      TELEGRAM_BOT_TOKEN: dummy_bot_token
+      TELEGRAM_PHONE: '+1234567890'
+      YOUTUBE_ENABLE_COMMENTS: 'true'
+      YOUTUBE_MAX_ACTIONS_PER_DAY: '50'
+      YOUTUBE_MAX_WATCH_TIME: '300'
+      YOUTUBE_MIN_WATCH_TIME: '30'
+    health_checks: []
+    main_directory: /workspaces/master/telegram_automation
+    ml_requirements: []
+    name: tele
+    services:
+    - telegram_bot
+    - youtube_executor
+    startup_commands:
+    - python main.py
+cloud_endpoints:
+  elasticsearch: http://localhost:9200
+  grafana: http://localhost:3000
+  mongodb: mongodb://dummy:dummy@localhost:27017
+  postgresql: postgresql://dummy:dummy@localhost:5432
+  prometheus: http://localhost:9090
+  redis: redis://localhost:6379
+  webhook_notifications: http://localhost:3001/webhooks
+dummy_mode: true
+global_settings:
+  api_docs_enabled: true
+  auto_wake_services: true
+  cors_enabled: true
+  debug_mode: true
+  dummy_mode: true
+  generate_test_data: true
+  health_check_interval: 300
+  hot_reload: true
+  metrics_collection_enabled: true
+  simulation_level: full
+monitoring_config:
+  alerting:
+    channels:
+    - console
+    - file
+    enabled: true
+    thresholds:
+      cpu_usage: 80
+      disk_usage: 90
+      error_rate: 5
+      memory_usage: 85
+  enabled: true
+  health_checks:
+    interval: 300
+    retries: 3
+    timeout: 30
+  metrics:
+    collection_interval: 60
+    enable_application_metrics: true
+    enable_system_metrics: true
+    retention_days: 30
+project_name: Universal Multi-Branch Automation System
+project_root: /workspaces/master
+security_config:
+  authentication:
+    enabled: false
+    require_api_key: false
+  cors:
+    allowed_headers:
+    - '*'
+    allowed_methods:
+    - '*'
+    allowed_origins:
+    - '*'
+    enabled: true
+  dummy_api_keys:
+    gologin: dummy_gologin_key
+    meta_ads: dummy_meta_key
+    ml_api: dummy_development_key
+  rate_limiting:
+    burst_limit: 10
+    enabled: true
+    requests_per_minute: 60

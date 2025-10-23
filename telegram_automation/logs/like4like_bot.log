@@ -1,0 +1,9 @@
+2025-10-22 10:34:12,553 - __main__ - INFO - 🚀 Initializing Like4Like application...
+2025-10-22 10:34:12,553 - __main__ - ERROR - ❌ Failed to initialize application: DatabaseConnection.__init__() got an unexpected keyword argument 'host'
+2025-10-22 10:34:12,553 - __main__ - ERROR - ❌ Application failed to start: DatabaseConnection.__init__() got an unexpected keyword argument 'host'
+2025-10-22 10:34:22,226 - __main__ - INFO - 🚀 Initializing Like4Like application...
+2025-10-22 10:34:22,226 - __main__ - ERROR - ❌ Failed to initialize application: DatabaseConnection.__init__() got an unexpected keyword argument 'host'
+2025-10-22 10:34:22,227 - __main__ - ERROR - ❌ Application failed to start: DatabaseConnection.__init__() got an unexpected keyword argument 'host'
+2025-10-22 10:47:22,319 - __main__ - INFO - 🚀 Initializing Like4Like application...
+2025-10-22 10:47:22,320 - __main__ - ERROR - ❌ Failed to initialize application: DatabaseConnection.__init__() got an unexpected keyword argument 'host'
+2025-10-22 10:47:22,320 - __main__ - ERROR - ❌ Application failed to start: DatabaseConnection.__init__() got an unexpected keyword argument 'host'

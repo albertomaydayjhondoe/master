@@ -1,0 +1,35 @@
+{
+  "meta_ads": {
+    "api_config": {
+      "app_id": "${META_APP_ID}",
+      "app_secret": "${META_APP_SECRET}",
+      "access_token": "${META_ACCESS_TOKEN}",
+      "ad_account_id": "${META_AD_ACCOUNT_ID}",
+      "page_id": "${META_PAGE_ID}",
+      "pixel_id": "${META_PIXEL_ID}",
+      "webhook_verify_token": "${META_WEBHOOK_VERIFY_TOKEN}",
+      "api_version": "v18.0"
+    },
+    "rate_limits": {
+      "calls_per_hour": 200,
+      "calls_per_day": 4800,
+      "burst_limit": 20,
+      "respect_rate_limits": true
+    },
+    "retry_config": {
+      "max_retries": 3,
+      "initial_delay": 1.0,
+      "max_delay": 30.0,
+      "exponential_backoff": true
+    }
+  },
+  "action_generation": {
+    "meta": {
+      "min_roas_threshold": 2.0,
+      "max_cpa_threshold": 50.0,
+      "budget_scale_factor": 1.2,
+      "confidence_threshold": 0.6,
+      "max_daily_actions": 10
+    }
+  }
+}
