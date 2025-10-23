@@ -5,6 +5,7 @@ Complete Facebook/Instagram advertising automation with ML optimization
 
 import asyncio
 import logging
+import numpy as np
 from typing import Dict, Any, List, Optional, Tuple
 from datetime import datetime, timedelta
 from dataclasses import dataclass, asdict
@@ -35,7 +36,6 @@ if not DUMMY_MODE:
         from facebook_business.adobjects.adimage import AdImage
         from facebook_business.adobjects.advideo import AdVideo
         from facebook_business.exceptions import FacebookRequestError
-import numpy as np
         META_SDK_AVAILABLE = True
     except ImportError:
         META_SDK_AVAILABLE = False
