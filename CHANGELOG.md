@@ -77,3 +77,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 	- `monitoring/alerts/discord_notifier.py` (dummy notifier)
 	- `monitoring/health/account_health.py` (example health checks that raise alerts)
 	- Unit test `tests/unit/test_alerts.py`
+
+## [0.2.0] - 2025-10-23
+
+### Changed
+- **Breaking**: Renamed package from `tiktok-viral-ml` to `social-media-automation-ml` in `setup.py`
+- Replaced all TikTok-specific references with generic "social media" terminology
+- Updated system to be platform-agnostic (supports multiple social networks)
+- Model paths renamed: `tiktok_ui_detector.pt` → `social_ui_detector.pt`
+- Dataset paths updated: `tiktok_ui/` → `social_ui/`
+- Test URLs changed from tiktok.com to example.com
+
+### Added
+- Comprehensive technical integration documentation:
+	- `docs/technical_integrations.md` - Setup guide for Ultralytics, GoLogin, and Google Cloud
+	- `docs/migration_guide.md` - Complete migration strategy from TikTok to multi-platform
+- Enhanced API documentation with technical contacts section
+- Google Cloud integration notes (optional cloud services)
+- Ultralytics YOLOv8 documentation references throughout
+- GoLogin documentation and setup instructions
+- Security best practices in integration guides
+- Platform abstraction guidance for multi-platform support
+
+### Improved
+- README.md: Updated to reflect generic social media automation
+- API documentation: Added integration details for external services
+- Code comments: More descriptive and platform-agnostic
+- Configuration files: Added notes about platform-specific customization
+- Copilot instructions: Updated system architecture description
