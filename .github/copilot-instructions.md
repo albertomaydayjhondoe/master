@@ -32,11 +32,13 @@ This is a sophisticated ML-powered TikTok automation system with several key com
 
 1. **Initial Setup**
 ```bash
-# Set up core components
-./scripts/setup/setup_ml_environment.sh
-./scripts/setup/setup_gologin.sh
-./scripts/setup/setup_n8n.sh
-./scripts/setup/setup_database.sh
+# Set up core components (TODO: These scripts are planned but not yet implemented)
+# ./scripts/setup/setup_ml_environment.sh
+# ./scripts/setup/setup_gologin.sh
+# ./scripts/setup/setup_n8n.sh
+# ./scripts/setup/setup_database.sh
+
+# For now, use manual setup as documented in README.md
 ```
 
 2. **ML Development**
