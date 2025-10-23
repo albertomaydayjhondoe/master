@@ -1,0 +1,47 @@
+name: Audit Socials and Cleanup
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 9 * * *'  # every day at 09:00 UTC (example)
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Set up Node (optional)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Set up Python (optional)
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Make scripts executable
+        run: |
+          chmod +x scripts/audit_socials.sh || true
+
+      - name: Run socials audit script
+        run: |
+          ./scripts/audit_socials.sh
+
+      - name: Upload audit artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: social-audit-artifacts
+          path: |
+            audit_socials_inventory.txt
+            code_integration_hits.txt
+            candidates_dup.txt
+          if-no-files-found: ignore
