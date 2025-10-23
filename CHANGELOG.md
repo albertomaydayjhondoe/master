@@ -77,3 +77,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 	- `monitoring/alerts/discord_notifier.py` (dummy notifier)
 	- `monitoring/health/account_health.py` (example health checks that raise alerts)
 	- Unit test `tests/unit/test_alerts.py`
+
+### [0.1.8] - 2025-10-23
+
+### Added
+- Comprehensive social media audit documentation (`AUDIT_SOCIALS.md`)
+	- Complete inventory of all social media and third-party service references
+	- Classification of references (active/dormant/documental)
+	- Security review confirming no credentials in code
+	- Test results and code quality assessment
+- Branch analysis document (`BRANCH_ANALYSIS.md`)
+	- Analysis of duplicate audit branches
+	- Recommendations for branch cleanup
+	- Explanation of correct vs incorrect interpretations
+
+### Changed
+- Updated `.github/copilot-instructions.md`
+	- Clarified that setup scripts referenced in documentation are planned TODOs
+	- Improved accuracy of architecture descriptions
+
+### Documented
+- **TikTok is the primary and intended platform** for this system (per README)
+- All TikTok references preserved as they represent the active integration
+- GoLogin correctly identified as browser automation tool (not social media)
+- Ultralytics correctly identified as ML library dependency (not social media)
+- Audit confirms no incorrect social media references to replace
