@@ -363,6 +363,14 @@ class GranularTaggingSystem:
         """
         Analiza colaboración y calcula métricas de impacto
         """
+        if not collaboration_data or collaboration_data is None:
+            return {
+                'collaboration_type': 'none',
+                'collaborator_profile': None,
+                'boost_factor': 1.0,
+                'audience_expansion': 0
+            }
+            
         collaborator_id = collaboration_data.get('artist_id')
         collaboration_type = collaboration_data.get('type', 'featuring')
         
