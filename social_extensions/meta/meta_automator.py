@@ -35,6 +35,7 @@ if not DUMMY_MODE:
         from facebook_business.adobjects.adimage import AdImage
         from facebook_business.adobjects.advideo import AdVideo
         from facebook_business.exceptions import FacebookRequestError
+import numpy as np
         META_SDK_AVAILABLE = True
     except ImportError:
         META_SDK_AVAILABLE = False

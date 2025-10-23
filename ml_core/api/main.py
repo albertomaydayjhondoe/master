@@ -1,4 +1,12 @@
 """
+# MCP Auto-Fix: Imports Dummy para DUMMY_MODE
+import os
+if os.getenv("DUMMY_MODE", "true").lower() == "true":
+    try:
+        from mcp_server.dummy_implementations import install_dummy_modules
+        install_dummy_modules()
+    except ImportError:
+        pass  # MCP server no disponible
 Main - Machine Learning and Device Automation
 
 This module is part of the TikTok ML Branch system.

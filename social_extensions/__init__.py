@@ -1,4 +1,12 @@
 """
+# MCP Auto-Fix: Imports Dummy para DUMMY_MODE
+import os
+if os.getenv("DUMMY_MODE", "true").lower() == "true":
+    try:
+        from mcp_server.dummy_implementations import install_dummy_modules
+        install_dummy_modules()
+    except ImportError:
+        pass  # MCP server no disponible
 Social Extensions Integration Module
 Integrates social media extensions with the main TikTok ML system
 """
