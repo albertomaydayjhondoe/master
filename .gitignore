@@ -41,3 +41,23 @@ ENV/
 
 # Docker state
 docker-compose.override.yml
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+config/secrets/
+*.key
+*.pem
+*.crt
+
+# Data and models (potentially large files)
+data/
+*.pt
+*.onnx
+*.h5
+*.pkl
+
+# Logs
+*.log
+logs/
