@@ -107,3 +107,17 @@ Si quieres, puedo:
 - Crear workflows n8n dummy y validador.
 
 ¡Dime qué prefieres y continúo!
+
+## Targets and Aims
+
+Targets:
+- Meta (Facebook / Instagram)
+- YouTube
+- Twitter / X
+- GitHub / Community channels
+
+Aims:
+- Viralización de campañas: diseñar contenido y pipelines orientados a maximizar alcance y engagement.
+- Seguimiento: métricas y dashboards para medir rendimiento por canal.
+- Reutilización: centralizar integraciones y evitar duplicados.
+
