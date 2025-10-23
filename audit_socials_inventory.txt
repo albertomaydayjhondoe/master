@@ -1,0 +1,52 @@
+./examples/ml_client.py:3:This module provides examples of integrating with the TikTok Viral ML API
+./requirements.txt:13:ultralytics==8.0.196
+./setup.py:4:    name="tiktok-viral-ml",
+./.github/copilot-instructions.md:3:This document provides key information to help AI coding agents effectively work with this TikTok viral ML system codebase.
+./.github/copilot-instructions.md:7:This is a sophisticated ML-powered TikTok automation system with several key components:
+./.github/copilot-instructions.md:19:3. **GoLogin Automation** (`gologin_automation/`)
+./.github/copilot-instructions.md:37:./scripts/setup/setup_gologin.sh
+./.github/copilot-instructions.md:83:- Device/GoLogin triggers: `device_farm_trigger.json`, `gologin_trigger.json`
+./.github/copilot-instructions.md:101:integration testing without requiring GPUs, Appium devices, GoLogin accounts or
+./.github/copilot-instructions.md:121:3. Ensure environment variables for GoLogin, proxies and Appium are set.
+./.github/copilot-instructions.md:137:    return await tiktok_actions.execute(prediction.action)
+./docker/.env.example:2:POSTGRES_USER=tiktok_ml
+./docker/.env.example:4:POSTGRES_DB=tiktok_viral_db
+./docker/.env.example:16:# GoLogin
+./docker/.env.example:17:GOLOGIN_API_KEY=your_gologin_api_key
+./gologin_automation/api/gologin_client.py:1:"""Dummy GoLogin API wrapper.
+./gologin_automation/api/gologin_client.py:4:wrap the real GoLogin HTTP API.
+./gologin_automation/api/gologin_client.py:11:class GoLoginClient:
+./gologin_automation/browser/selenium_wrapper.py:1:"""Dummy Selenium wrapper that simulates a browser session attached to a GoLogin profile.
+./README.md:1:# TikTok Viral ML System (Dummy Mode)
+./README.md:3:Este repositorio implementa una plataforma de automatización TikTok potenciada por
+./README.md:12:- Contiene stubs para: ML (YOLO), Device Farm (ADB/Appium) y GoLogin (navegadores).
+./README.md:71:3. Asegura credenciales y variables de entorno necesarias (GoLogin, proxies, Appium).
+./README.md:80:- `gologin_automation/` - stubs para GoLogin (por implementar)
+./README.md:102:- Usa `.github/copilot-instructions.md` para orientación interna del agente.
+./README.md:105:- Implementar la parte dummy de GoLogin (siguiente tarea),
+./pyproject.toml:23:addopts = "-ra -q --cov=ml_core --cov=device_farm --cov=gologin_automation"
+./ml_core/api/main.py:9:    title="TikTok Viral ML System",
+./ml_core/api/main.py:11:    Sistema de automatización TikTok basado en ML.
+./ml_core/models/yolo_prod.py:1:"""Production YOLOv8 implementation for TikTok screenshot analysis.
+./ml_core/models/yolo_prod.py:3:This module provides a concrete implementation using Ultralytics YOLOv8 for
+./ml_core/models/yolo_prod.py:7:   pip install ultralytics torch
+./ml_core/models/yolo_prod.py:19:from ultralytics import YOLO
+./ml_core/models/yolo_prod.py:23:    """Production YOLO detector for TikTok UI elements.
+./ml_core/models/__init__.py:1:"""Model integration surface for ML components (Ultralytics wrappers).
+./ml_core/training/train_yolo.py:1:"""Training script for YOLOv8 TikTok UI detector.
+./ml_core/training/train_yolo.py:11:- ultralytics
+./ml_core/training/train_yolo.py:28:    """Run YOLOv8 training on TikTok UI dataset."""
+./ml_core/training/train_yolo.py:57:        checkpoint_path = checkpoint_dir / f"tiktok_ui_detector_{timestamp}.pt"
+./ml_core/training/train_yolo.py:62:        prod_path = output_dir / "tiktok_ui_detector.pt"
+./docs/api_integration.md:3:Esta guía explica cómo integrar el sistema TikTok Viral ML en otros servicios y aplicaciones.
+./docs/api_integration.md:217:- GitHub Issues
+./tests/unit/test_gologin_client.py:1:from gologin_automation.api.gologin_client import GoLoginClient
+./tests/unit/test_gologin_client.py:2:from gologin_automation.browser.selenium_wrapper import SeleniumWrapper
+./tests/unit/test_gologin_client.py:5:def test_gologin_profile_lifecycle():
+./tests/unit/test_gologin_client.py:6:    client = GoLoginClient()
+./tests/unit/test_gologin_client.py:17:    r = sw.open("https://www.tiktok.com")
+./config/ml/data.yaml:3:path: /app/data/datasets/tiktok_ui  # Dataset root
+./config/ml/data.yaml:8:# Classes for TikTok UI elements
+./config/ml/model_config.yaml:5:  model_path: /app/data/models/production/tiktok_ui_detector.pt
+./config/ml/model_config.yaml:16:    data_yaml: /app/data/datasets/tiktok_ui/data.yaml
+./config/ml/model_config.yaml:22:  model_path: /app/data/models/production/tiktok_video_analyzer.pt

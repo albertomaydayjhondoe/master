@@ -1,0 +1,2 @@
+./gologin_automation/api/gologin_client.py
+./tests/unit/test_gologin_client.py
