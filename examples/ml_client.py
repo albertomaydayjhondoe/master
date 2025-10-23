@@ -1,6 +1,6 @@
 """API integration examples and usage guide.
 
-This module provides examples of integrating with the TikTok Viral ML API
+This module provides examples of integrating with the Social Media Automation ML API
 in both dummy and production modes.
 """
 import httpx

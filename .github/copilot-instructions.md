@@ -1,14 +1,14 @@
 # AI Agent Instructions
 
-This document provides key information to help AI coding agents effectively work with this TikTok viral ML system codebase.
+This document provides key information to help AI coding agents effectively work with this social media automation ML system codebase.
 
 ## System Architecture Overview
 
-This is a sophisticated ML-powered TikTok automation system with several key components:
+This is a sophisticated ML-powered social media automation system with several key components:
 
 1. **ML Core** (`ml_core/`)
    - FastAPI service with endpoints for screenshot analysis, anomaly detection, and content optimization
-   - Custom YOLOv8 models for visual analysis
+   - Custom YOLOv8 models (via Ultralytics) for visual analysis
    - Automated retraining pipeline for continuous model improvement
 
 2. **Device Farm** (`device_farm/`)
@@ -17,9 +17,10 @@ This is a sophisticated ML-powered TikTok automation system with several key com
    - Continuous monitoring for anomalies/shadowbans
 
 3. **GoLogin Automation** (`gologin_automation/`)
-   - Manages 30 browser profiles for web automation
+   - Manages browser profiles for web automation via GoLogin API
    - ML-guided browsing patterns
    - Integrated anomaly detection
+   - See [GoLogin documentation](https://gologin.com/docs) for setup
 
 4. **Orchestration** (`orchestration/`)
    - n8n workflows coordinate all system components
@@ -98,9 +99,9 @@ python -m pytest tests/e2e/
 ## Dummy mode
 
 This repository contains a full "dummy" mode to allow local development and
-integration testing without requiring GPUs, Appium devices, GoLogin accounts or
-paid proxies. The mode is enabled by default via the environment variable
-`DUMMY_MODE=true` (see `config/app_settings.py`).
+integration testing without requiring GPUs, Appium devices, GoLogin accounts,
+Google Cloud services, or paid proxies. The mode is enabled by default via the 
+environment variable `DUMMY_MODE=true` (see `config/app_settings.py`).
 
 How it works:
 - Factories under `ml_core/models/factory.py` and
@@ -119,7 +120,8 @@ When leaving dummy mode you must:
     factories import).
 2. Provide model files and weights (update `config/ml/model_config.yaml`).
 3. Ensure environment variables for GoLogin, proxies and Appium are set.
-4. Run the full integration smoke tests.
+4. (Optional) Set up Google Cloud credentials if using cloud services for ML or storage.
+5. Run the full integration smoke tests.
 
 Shortcut: you can implement a production class elsewhere and point the factory
 to it using environment variables: e.g. `YOLO_SCREENSHOT_IMPL=ml_core.models.my_impl.YoloScreenshotDetector`.
@@ -134,7 +136,7 @@ Use `scripts/import_by_path.py` to resolve dotted paths. A helper script
 async def execute_ml_guided_action(session, context):
     prediction = await ml_client.predict_next_action(context)
     await human_patterns.apply_delay(prediction.confidence)
-    return await tiktok_actions.execute(prediction.action)
+    return await platform_actions.execute(prediction.action)
 ```
 
 2. **Anomaly Detection**

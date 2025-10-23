@@ -1,6 +1,6 @@
 # Guía de Integración API
 
-Esta guía explica cómo integrar el sistema TikTok Viral ML en otros servicios y aplicaciones.
+Esta guía explica cómo integrar el sistema de automatización de redes sociales ML en otros servicios y aplicaciones.
 
 ## Cliente Python
 
@@ -214,5 +214,18 @@ Se añadirá soporte para notificaciones via webhook.
 ## Soporte
 
 Contactar a los mantenedores para dudas o incidencias:
-- GitHub Issues
+- GitHub Issues: [albertomaydayjhondoe/master](https://github.com/albertomaydayjhondoe/master/issues)
 - Email: support@example.com
+
+## Integraciones Técnicas
+
+Este sistema utiliza las siguientes tecnologías externas:
+
+### Ultralytics YOLOv8
+Para detección de elementos UI en screenshots. Ver [documentación de Ultralytics](https://docs.ultralytics.com/).
+
+### GoLogin
+Para gestión de perfiles de navegador y automatización web. Configurar credenciales de GoLogin en variables de entorno. Ver [documentación de GoLogin](https://gologin.com/docs).
+
+### Google Cloud (Opcional)
+Si usas servicios de Google Cloud para ML o almacenamiento, configura las credenciales según la [guía de autenticación de Google Cloud](https://cloud.google.com/docs/authentication).

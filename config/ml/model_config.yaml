@@ -1,8 +1,9 @@
 # Model configuration for production use
+# Note: Train models specific to your target social media platform
 
 yolo_screenshot:
-  # Path to trained YOLOv8 weights
-  model_path: /app/data/models/production/tiktok_ui_detector.pt
+  # Path to trained YOLOv8 weights (Ultralytics)
+  model_path: /app/data/models/production/social_ui_detector.pt
   
   # Inference device (cuda/cpu)
   device: cuda
@@ -13,13 +14,13 @@ yolo_screenshot:
 
   # Training configuration
   training:
-    data_yaml: /app/data/datasets/tiktok_ui/data.yaml
+    data_yaml: /app/data/datasets/social_ui/data.yaml
     epochs: 100
     imgsz: 640
     batch: 16
     
 yolo_video:
-  model_path: /app/data/models/production/tiktok_video_analyzer.pt
+  model_path: /app/data/models/production/social_video_analyzer.pt
   device: cuda
   
 affinity:

@@ -1,16 +1,18 @@
-"""Training script for YOLOv8 TikTok UI detector.
+"""Training script for YOLOv8 social media UI detector.
 
 This script handles model training using labeled screenshots. To use:
 
-1. Prepare dataset following data.yaml structure
+1. Prepare dataset following data.yaml structure (label UI elements for your target platform)
 2. Run training:
    python -m ml_core.training.train_yolo
 3. Trained weights will be saved to /app/data/models/production/
 
 Requirements:
-- ultralytics
+- ultralytics (see requirements.txt)
 - torch
 - pyyaml
+
+Note: Adapt the training data to your specific social media platform(s).
 """
 from pathlib import Path
 import shutil
@@ -25,7 +27,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 def main():
-    """Run YOLOv8 training on TikTok UI dataset."""
+    """Run YOLOv8 training on social media UI dataset."""
     # Load config
     config = get_model_config()
     yolo_config = config["yolo_screenshot"]
@@ -54,12 +56,12 @@ def main():
         
         # Save checkpoint
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        checkpoint_path = checkpoint_dir / f"tiktok_ui_detector_{timestamp}.pt"
+        checkpoint_path = checkpoint_dir / f"social_ui_detector_{timestamp}.pt"
         shutil.copy(detector.model_path, checkpoint_path)
         logger.info(f"Saved checkpoint to {checkpoint_path}")
         
         # Copy best model to production
-        prod_path = output_dir / "tiktok_ui_detector.pt"
+        prod_path = output_dir / "social_ui_detector.pt"
         shutil.copy(detector.model_path, prod_path)
         logger.info(f"Saved production model to {prod_path}")
         

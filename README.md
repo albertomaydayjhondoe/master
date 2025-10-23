@@ -1,6 +1,6 @@
-# TikTok Viral ML System (Dummy Mode)
+# Social Media Automation ML System (Dummy Mode)
 
-Este repositorio implementa una plataforma de automatización TikTok potenciada por
+Este repositorio implementa una plataforma de automatización de redes sociales potenciada por
 Modelos de Visión (YOLOv8) y reglas ML. Está pensada para desarrollo local y pruebas
 mediante un "modo dummy" que emula hardware y servicios externos.
 
@@ -9,7 +9,7 @@ Este README explica cómo empezar rápido en modo dummy y cómo migrar a producc
 ## Estado actual
 
 - El repositorio corre en "dummy mode" por defecto (`DUMMY_MODE=true`).
-- Contiene stubs para: ML (YOLO), Device Farm (ADB/Appium) y GoLogin (navegadores).
+- Contiene stubs para: ML (YOLO via Ultralytics), Device Farm (ADB/Appium) y GoLogin (navegadores).
 - `docker/` contiene una configuración `docker-compose.yml` orientada a pruebas locales.
 
 ## Requisitos
@@ -68,9 +68,11 @@ docker compose -f docker/docker-compose.yml up --build
 	etc.). El helper `scripts/import_by_path.py` permite importar por ruta puntuada.
 	Usa `scripts/scaffold_prod_factories.py` para generar plantillas de fábrica.
 2. Provee pesos y configuración real en `config/ml/model_config.yaml`.
-3. Asegura credenciales y variables de entorno necesarias (GoLogin, proxies, Appium).
+3. Asegura credenciales y variables de entorno necesarias (GoLogin, proxies, Appium, Google Cloud si es necesario).
 4. Ejecuta los tests de integración y smoke tests.
 5. Cambia `DUMMY_MODE=false` y reinicia los servicios.
+
+Nota: Para usar Google Cloud ML APIs o almacenamiento, configura las credenciales apropiadas según la [documentación de Google Cloud](https://cloud.google.com/docs/authentication).
 
 ## Estructura importante
 

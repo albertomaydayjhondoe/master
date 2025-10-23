@@ -1,11 +1,12 @@
 # Example YOLO training dataset configuration
+# Adapt UI element classes for your target social media platform
 
-path: /app/data/datasets/tiktok_ui  # Dataset root
+path: /app/data/datasets/social_ui  # Dataset root
 train: train/images  # Train images
 val: val/images  # Val images
 test: test/images  # Test images (optional)
 
-# Classes for TikTok UI elements
+# Classes for social media UI elements (generic - customize per platform)
 names:
   0: like_button
   1: follow_button

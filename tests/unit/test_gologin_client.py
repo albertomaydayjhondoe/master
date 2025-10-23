@@ -14,7 +14,7 @@ def test_gologin_profile_lifecycle():
 
     # Simulate browser actions
     sw = SeleniumWrapper(p2)
-    r = sw.open("https://www.tiktok.com")
+    r = sw.open("https://www.example.com")  # Use generic URL in tests
     assert r["status"] == "ok"
     assert sw.screenshot().startswith(b"\x89PNG")
 

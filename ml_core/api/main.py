@@ -6,12 +6,12 @@ import os
 api_key_header = APIKeyHeader(name="X-API-Key")
 
 app = FastAPI(
-    title="TikTok Viral ML System",
+    title="Social Media Automation ML System",
     description="""
-    Sistema de automatización TikTok basado en ML.
+    Sistema de automatización de redes sociales basado en ML.
     
     Este sistema proporciona endpoints para:
-    - Análisis de screenshots mediante YOLO
+    - Análisis de screenshots mediante YOLO (Ultralytics)
     - Detección de anomalías y shadowbans
     - Predicción de mejores momentos para publicar
     - Cálculo de afinidad entre cuentas

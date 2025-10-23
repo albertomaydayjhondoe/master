@@ -1,4 +1,4 @@
-"""Production YOLOv8 implementation for TikTok screenshot analysis.
+"""Production YOLOv8 implementation for social media UI screenshot analysis.
 
 This module provides a concrete implementation using Ultralytics YOLOv8 for
 production use. To use this implementation:
@@ -20,10 +20,12 @@ from ultralytics import YOLO
 
 
 class YoloScreenshotDetector:
-    """Production YOLO detector for TikTok UI elements.
+    """Production YOLO detector for social media platform UI elements.
 
     This class loads a trained YOLOv8 model and provides the same interface
     as the dummy detector but with real inference.
+    
+    Note: Train models specific to your target platform (e.g., Twitter, Instagram, etc.)
     """
 
     def __init__(self, model_path: str = None, device: str = None) -> None:
