@@ -1,0 +1,91 @@
+name: Audit Social Media References
+
+on:
+  # Allow manual trigger
+  workflow_dispatch:
+    inputs:
+      base_branch:
+        description: 'Base branch for the audit'
+        required: false
+        default: 'main'
+  
+  # Schedule: Run daily at 09:00 UTC
+  schedule:
+    - cron: '0 9 * * *'
+
+# Required permissions for the workflow
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  audit-socials:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 0  # Fetch all history for proper branching
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+        # Only if package.json exists
+        if: hashFiles('package.json') != ''
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
+      
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      
+      - name: Run audit script
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BASE_BRANCH: ${{ github.event.inputs.base_branch || 'main' }}
+        run: |
+          bash scripts/audit_socials.sh
+      
+      - name: Upload inventory artifacts
+        uses: actions/upload-artifact@v4
+        if: always()  # Upload even if previous steps fail
+        with:
+          name: social-media-audit-${{ github.run_number }}
+          path: |
+            audit_socials_inventory.txt
+            code_integration_hits.txt
+            candidates_dup.txt
+          retention-days: 30
+      
+      - name: Summary
+        if: always()
+        run: |
+          echo "## Audit Complete! 🔍" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "The social media audit has been completed." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Generated Files:" >> $GITHUB_STEP_SUMMARY
+          echo "- \`audit_socials_inventory.txt\` - Complete inventory" >> $GITHUB_STEP_SUMMARY
+          echo "- \`code_integration_hits.txt\` - Code references" >> $GITHUB_STEP_SUMMARY
+          echo "- \`candidates_dup.txt\` - Duplicate candidates" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Next Steps:" >> $GITHUB_STEP_SUMMARY
+          echo "1. Download the artifacts from this workflow run" >> $GITHUB_STEP_SUMMARY
+          echo "2. Review the generated inventory files" >> $GITHUB_STEP_SUMMARY
+          echo "3. Check for the draft PR created by the script" >> $GITHUB_STEP_SUMMARY
+          echo "4. Manually review and update code references as needed" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📦 Artifacts are available in the workflow run page." >> $GITHUB_STEP_SUMMARY
