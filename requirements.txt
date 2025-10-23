@@ -23,14 +23,24 @@ prometheus-client==0.18.0
 grafana-api==1.0.3
 python-json-logger==2.0.7
 
-# Optional social media dependencies (uncomment for production)
-# instagrapi>=1.16.0
-# tweepy>=4.12.0
-# linkedin_api>=2.0.0
+# Social media dependencies - enabled for core functionality
+instagrapi>=1.16.0
+tweepy>=4.12.0
+linkedin-api>=2.0.0
 
-# Meta Ads dependencies (uncomment for production)
-# facebook-business>=18.0.0
-# requests>=2.31.0
+# Meta Ads dependencies - critical for core system
+facebook-business>=18.0.0
+requests>=2.31.0
 
-# Optional cloud dependencies (uncomment for production)
-# boto3>=1.26.0
+# Telegram dependencies
+telethon>=1.29.0
+
+# Cloud dependencies
+boto3>=1.26.0
+google-cloud-storage>=2.10.0
+
+# Additional core dependencies
+selenium>=4.15.0
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+aiofiles>=23.2.0

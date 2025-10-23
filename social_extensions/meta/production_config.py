@@ -6,7 +6,7 @@ Configuration templates and initialization for production Meta Ads deployment
 import os
 import json
 import logging
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, List
 from pathlib import Path
 
 logger = logging.getLogger(__name__)

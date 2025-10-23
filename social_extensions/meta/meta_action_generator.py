@@ -15,16 +15,17 @@ from enum import Enum
 try:
     from ml_core.action_generation.action_generator import ActionGenerator, ActionRequest, GeneratedAction
     from ml_core.action_generation.ml_predictor import MLPredictor
-    # Import types only to avoid circular imports
-    from typing import TYPE_CHECKING
-    if TYPE_CHECKING:
-        from social_extensions.meta.meta_automator import AdMetrics, MLInsight
+    # Import MLInsight from local module to avoid circular imports
+    ML_CORE_AVAILABLE = True
 except ImportError:
     # Fallback for standalone testing
     ActionGenerator = object
     ActionRequest = dict
     GeneratedAction = dict
     MLPredictor = object
+    ML_CORE_AVAILABLE = False
+
+# MLInsight will be imported later to avoid circular imports
 
 class MetaActionType(Enum):
     CREATE_CAMPAIGN = "create_campaign"
@@ -62,7 +63,8 @@ class MetaActionGenerator(ActionGenerator):
         self.budget_scale_factor = self.meta_config.get('budget_scale_factor', 1.2)
         
         # Initialize ML predictor for Meta-specific predictions
-        self.meta_predictor = MLPredictor(config.get('meta_ml_config', {}))
+        from ml_core.action_generation.ml_predictor import get_ml_predictor
+        self.meta_predictor = get_ml_predictor(config.get('meta_ml_config', {}).get('model_type', 'default'))
         
         self.logger.info("🎯 Meta Action Generator initialized")
     
@@ -238,68 +240,68 @@ class MetaActionGenerator(ActionGenerator):
         if current_cpa > context.max_cpa:
             confidence = min(0.85, (current_cpa / context.max_cpa - 1) / 2)
             
-            insights.append(MLInsight(
-                insight_id=f"cpa_optimize_{datetime.now().timestamp()}",
-                campaign_id=context.account_id,
-                insight_type="cpa_optimization",
-                score=current_cpa,
-                confidence=confidence,
-                recommended_action={
+            insights.append({
+                'insight_id': f"cpa_optimize_{datetime.now().timestamp()}",
+                'campaign_id': context.account_id,
+                'insight_type': "cpa_optimization",
+                'score': current_cpa,
+                'confidence': confidence,
+                'recommended_action': {
                     'type': 'adjust_bidding',
                     'bid_adjustment': -0.2,  # Reduce bids by 20%
                     'reason': f'High CPA ({current_cpa:.2f}) exceeds limit ({context.max_cpa:.2f})'
                 },
-                generated_at=datetime.now()
-            ))
+                'generated_at': datetime.now().isoformat()
+            })
         
         # 4. Trend-based insights
         if trends.get('roas_trend') == 'decreasing':
-            insights.append(MLInsight(
-                insight_id=f"trend_alert_{datetime.now().timestamp()}",
-                campaign_id=context.account_id,
-                insight_type="performance_decline",
-                score=0.3,  # Low score indicates concern
-                confidence=0.7,
-                recommended_action={
+            insights.append({
+                'insight_id': f"trend_alert_{datetime.now().timestamp()}",
+                'campaign_id': context.account_id,
+                'insight_type': "performance_decline",
+                'score': 0.3,  # Low score indicates concern
+                'confidence': 0.7,
+                'recommended_action': {
                     'type': 'creative_refresh',
                     'reason': 'Declining ROAS trend detected - creative fatigue possible'
                 },
-                generated_at=datetime.now()
-            ))
+                'generated_at': datetime.now().isoformat()
+            })
         
         # 5. Audience expansion opportunities
         ctr = overall_perf.get('ctr', 0)
         if ctr > 2.0 and current_roas > context.target_roas:  # High CTR + Good ROAS
-            insights.append(MLInsight(
-                insight_id=f"audience_expand_{datetime.now().timestamp()}",
-                campaign_id=context.account_id,
-                insight_type="audience_expansion",
-                score=ctr,
-                confidence=0.75,
-                recommended_action={
+            insights.append({
+                'insight_id': f"audience_expand_{datetime.now().timestamp()}",
+                'campaign_id': context.account_id,
+                'insight_type': "audience_expansion",
+                'score': ctr,
+                'confidence': 0.75,
+                'recommended_action': {
                     'type': 'scale_audience',
                     'expansion_factor': 1.3,
                     'reason': f'High CTR ({ctr:.2f}%) indicates audience resonance'
                 },
-                generated_at=datetime.now()
-            ))
+                'generated_at': datetime.now().isoformat()
+            })
         
         # 6. Dayparting optimization
         hourly_performance = self._analyze_hourly_performance(context.campaign_metrics)
         if hourly_performance.get('has_clear_patterns'):
-            insights.append(MLInsight(
-                insight_id=f"daypart_optimize_{datetime.now().timestamp()}",
-                campaign_id=context.account_id,
-                insight_type="dayparting",
-                score=hourly_performance.get('optimization_potential', 0),
-                confidence=0.65,
-                recommended_action={
+            insights.append({
+                'insight_id': f"daypart_optimize_{datetime.now().timestamp()}",
+                'campaign_id': context.account_id,
+                'insight_type': "dayparting",
+                'score': hourly_performance.get('optimization_potential', 0),
+                'confidence': 0.65,
+                'recommended_action': {
                     'type': 'dayparting_optimization',
                     'optimal_hours': hourly_performance.get('best_hours', []),
                     'reason': 'Clear performance patterns detected across time periods'
                 },
-                generated_at=datetime.now()
-            ))
+                'generated_at': datetime.now().isoformat()
+            })
         
         return insights
     
@@ -432,13 +434,17 @@ class MetaActionGenerator(ActionGenerator):
         
         return actions
     
-    def _calculate_priority(self, insight: MLInsight) -> str:
+    def _calculate_priority(self, insight: Dict[str, Any]) -> str:
         """Calculate action priority based on insight score and confidence"""
         
-        # Priority scoring
-        priority_score = insight.confidence * insight.score
+        # Priority scoring - using dict access for compatibility
+        confidence = insight.get('confidence', 0.5)
+        score = insight.get('score', 0.5)
+        insight_type = insight.get('insight_type', '')
         
-        if insight.insight_type in ['budget_scale', 'cpa_optimization']:
+        priority_score = confidence * score
+        
+        if insight_type in ['budget_scale', 'cpa_optimization']:
             priority_score *= 1.2  # Boost budget/cost related actions
         
         if priority_score > 0.8:
@@ -447,6 +453,93 @@ class MetaActionGenerator(ActionGenerator):
             return 'medium'
         else:
             return 'low'
+    
+    async def validate_action(self, action: GeneratedAction) -> bool:
+        """Validate if a Meta action can be executed"""
+        try:
+            # Basic validation checks
+            if not action.action_id or not action.platform == 'meta':
+                return False
+            
+            # Check if action type is supported
+            supported_types = ['budget_scale', 'audience_expand', 'creative_refresh', 'dayparting_optimization']
+            action_params = action.content.get('parameters', {})
+            action_type = action_params.get('type', '')
+            
+            if action_type not in supported_types:
+                return False
+            
+            # Validate confidence threshold
+            if action.confidence < 0.5:
+                return False
+            
+            # Additional validation based on action type
+            if action_type == 'budget_scale':
+                scale_factor = action_params.get('scale_factor', 1.0)
+                if not (0.5 <= scale_factor <= 3.0):  # Reasonable scaling limits
+                    return False
+            
+            elif action_type == 'audience_expand':
+                expansion_factor = action_params.get('expansion_factor', 1.0)
+                if not (1.0 <= expansion_factor <= 2.0):  # Reasonable expansion limits
+                    return False
+            
+            return True
+            
+        except Exception as e:
+            self.logger.error(f"Error validating action {action.action_id}: {e}")
+            return False
+    
+    async def estimate_performance(self, action: GeneratedAction) -> Dict[str, float]:
+        """Estimate performance metrics for a Meta action"""
+        try:
+            # Base performance estimates
+            estimates = {
+                'expected_roas': 2.5,
+                'estimated_cpa': 25.0,
+                'reach_increase': 0.15,
+                'engagement_boost': 0.10,
+                'conversion_improvement': 0.08
+            }
+            
+            # Adjust based on action type and confidence
+            action_params = action.content.get('parameters', {})
+            action_type = action_params.get('type', '')
+            confidence_multiplier = action.confidence
+            
+            if action_type == 'budget_scale':
+                scale_factor = action_params.get('scale_factor', 1.0)
+                estimates['reach_increase'] = (scale_factor - 1.0) * 0.8
+                estimates['estimated_cpa'] = 25.0 / scale_factor  # Better CPA with higher budget
+                
+            elif action_type == 'audience_expand':
+                expansion_factor = action_params.get('expansion_factor', 1.0)
+                estimates['reach_increase'] = (expansion_factor - 1.0) * 0.6
+                estimates['expected_roas'] = 2.5 * (1 + (expansion_factor - 1.0) * 0.3)
+                
+            elif action_type == 'creative_refresh':
+                estimates['engagement_boost'] = 0.20 * confidence_multiplier
+                estimates['expected_roas'] = 2.5 * (1 + 0.15 * confidence_multiplier)
+                
+            elif action_type == 'dayparting_optimization':
+                estimates['conversion_improvement'] = 0.12 * confidence_multiplier
+                estimates['estimated_cpa'] = 25.0 * (1 - 0.1 * confidence_multiplier)
+            
+            # Apply confidence multiplier to all estimates
+            for key in estimates:
+                estimates[key] *= confidence_multiplier
+            
+            return estimates
+            
+        except Exception as e:
+            self.logger.error(f"Error estimating performance for action {action.action_id}: {e}")
+            return {
+                'expected_roas': 1.0,
+                'estimated_cpa': 50.0,
+                'reach_increase': 0.0,
+                'engagement_boost': 0.0,
+                'conversion_improvement': 0.0
+            }
 
 # Factory function
 def create_meta_action_generator(config: Dict[str, Any]) -> MetaActionGenerator:
