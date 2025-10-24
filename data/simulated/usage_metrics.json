@@ -1,0 +1,58 @@
+{
+  "monitoring_system_README.md": {
+    "views": 133,
+    "searches": 12,
+    "last_accessed": "2025-10-20T12:05:32.143384",
+    "avg_time_spent": 268.2807845170698,
+    "bounce_rate": 0.21981577689767848
+  },
+  "ml_integration_README.md": {
+    "views": 84,
+    "searches": 30,
+    "last_accessed": "2025-10-23T12:05:32.143414",
+    "avg_time_spent": 203.19369075381883,
+    "bounce_rate": 0.2593153626212853
+  },
+  "device_farm_README.md": {
+    "views": 100,
+    "searches": 48,
+    "last_accessed": "2025-10-19T12:05:32.143424",
+    "avg_time_spent": 351.55901128014943,
+    "bounce_rate": 0.33264018538972073
+  },
+  "analytics_dashboard_README.md": {
+    "views": 184,
+    "searches": 15,
+    "last_accessed": "2025-10-21T12:05:32.143432",
+    "avg_time_spent": 322.08278175877354,
+    "bounce_rate": 0.31316661226838954
+  },
+  "identity_management_README.md": {
+    "views": 150,
+    "searches": 40,
+    "last_accessed": "2025-10-20T12:05:32.143438",
+    "avg_time_spent": 387.3063093984783,
+    "bounce_rate": 0.3603521772388736
+  },
+  "platform_publishing_README.md": {
+    "views": 83,
+    "searches": 30,
+    "last_accessed": "2025-10-20T12:05:32.143445",
+    "avg_time_spent": 386.17080998534897,
+    "bounce_rate": 0.2192890656076643
+  },
+  "meta_ads_integration_README.md": {
+    "views": 178,
+    "searches": 45,
+    "last_accessed": "2025-10-21T12:05:32.143452",
+    "avg_time_spent": 177.54007801466764,
+    "bounce_rate": 0.4059743128722505
+  },
+  "gologin_automation_README.md": {
+    "views": 166,
+    "searches": 11,
+    "last_accessed": "2025-10-23T12:05:32.143458",
+    "avg_time_spent": 241.64841686718674,
+    "bounce_rate": 0.3952894809284134
+  }
+}

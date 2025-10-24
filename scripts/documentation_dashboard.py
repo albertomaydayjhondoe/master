@@ -11,7 +11,6 @@ Autor: Sistema de Documentación Inteligente
 Fecha: 2024
 """
 
-import streamlit as st
 import os
 import re
 import json
@@ -21,17 +20,38 @@ from datetime import datetime, timedelta
 from typing import List, Dict, Any, Optional, Tuple
 from dataclasses import dataclass
 from collections import defaultdict, Counter
-import plotly.express as px
-import plotly.graph_objects as go
-import pandas as pd
 
-# Configuración de página
-st.set_page_config(
-    page_title="📚 Documentation Dashboard",
-    page_icon="📚",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
+# Importaciones condicionales con fallbacks
+try:
+    import streamlit as st
+    STREAMLIT_AVAILABLE = True
+except ImportError:
+    STREAMLIT_AVAILABLE = False
+    print("⚠️  Streamlit no disponible - ejecutando en modo CLI")
+
+try:
+    import plotly.express as px
+    import plotly.graph_objects as go
+    PLOTLY_AVAILABLE = True
+except ImportError:
+    PLOTLY_AVAILABLE = False
+    print("⚠️  Plotly no disponible - sin gráficos interactivos")
+
+try:
+    import pandas as pd
+    PANDAS_AVAILABLE = True
+except ImportError:
+    PANDAS_AVAILABLE = False
+    print("⚠️  Pandas no disponible - usando estructuras básicas")
+
+# Configuración de página (solo si Streamlit está disponible)
+if STREAMLIT_AVAILABLE:
+    st.set_page_config(
+        page_title="📚 Documentation Dashboard",
+        page_icon="📚",
+        layout="wide",
+        initial_sidebar_state="expanded"
+    )
 
 @dataclass
 class DocumentationFile:
@@ -74,6 +94,10 @@ class DocumentationDashboard:
         self.docs_path = self.repo_path / "docs"
         self.functionality_guides_path = self.docs_path / "functionality_guides"
         
+        # Crear directorios si no existen
+        self.docs_path.mkdir(parents=True, exist_ok=True)
+        self.functionality_guides_path.mkdir(parents=True, exist_ok=True)
+        
         # Cache para mejorar performance
         self.docs_cache = {}
         self.search_index = {}
@@ -91,25 +115,39 @@ class DocumentationDashboard:
             "filename": 1.5
         }
     
+    def _ensure_streamlit(self):
+        """Verificar que Streamlit esté disponible"""
+        if not STREAMLIT_AVAILABLE:
+            raise RuntimeError("Streamlit no está disponible - usa modo CLI")
+    
     def run_dashboard(self):
         """Ejecutar dashboard principal"""
         
-        # Sidebar navigation
-        self.render_sidebar()
+        if not STREAMLIT_AVAILABLE:
+            print("❌ Streamlit no disponible - usa CLIDashboard en su lugar")
+            return
         
-        # Main content area
-        page = st.session_state.get('current_page', 'Home')
-        
-        if page == 'Home':
-            self.render_home_page()
-        elif page == 'Search':
-            self.render_search_page()
-        elif page == 'Browse':
-            self.render_browse_page()
-        elif page == 'Analytics':
-            self.render_analytics_page()
-        elif page == 'Admin':
-            self.render_admin_page()
+        try:
+            # Sidebar navigation
+            self.render_sidebar()
+            
+            # Main content area
+            page = st.session_state.get('current_page', 'Home')
+            
+            if page == 'Home':
+                self.render_home_page()
+            elif page == 'Search':
+                self.render_search_page()
+            elif page == 'Browse':
+                self.render_browse_page()
+            elif page == 'Analytics':
+                self.render_analytics_page()
+            elif page == 'Admin':
+                self.render_admin_page()
+                
+        except Exception as e:
+            st.error(f"❌ Error en dashboard: {e}")
+            print(f"❌ Dashboard error: {e}")
     
     def render_sidebar(self):
         """Renderizar sidebar de navegación"""
@@ -285,29 +323,37 @@ class DocumentationDashboard:
         
         with col1:
             # Health score gauge
-            fig = go.Figure(go.Indicator(
-                mode = "gauge+number+delta",
-                value = health_metrics['overall_score'],
-                domain = {'x': [0, 1], 'y': [0, 1]},
-                title = {'text': "Health Score"},
-                delta = {'reference': 85},
-                gauge = {
-                    'axis': {'range': [None, 100]},
-                    'bar': {'color': "darkblue"},
-                    'steps': [
-                        {'range': [0, 50], 'color': "lightgray"},
-                        {'range': [50, 85], 'color': "gray"}
-                    ],
-                    'threshold': {
-                        'line': {'color': "red", 'width': 4},
-                        'thickness': 0.75,
-                        'value': 90
+            if PLOTLY_AVAILABLE:
+                fig = go.Figure(go.Indicator(
+                    mode = "gauge+number+delta",
+                    value = health_metrics['overall_score'],
+                    domain = {'x': [0, 1], 'y': [0, 1]},
+                    title = {'text': "Health Score"},
+                    delta = {'reference': 85},
+                    gauge = {
+                        'axis': {'range': [None, 100]},
+                        'bar': {'color': "darkblue"},
+                        'steps': [
+                            {'range': [0, 50], 'color': "lightgray"},
+                            {'range': [50, 85], 'color': "gray"}
+                        ],
+                        'threshold': {
+                            'line': {'color': "red", 'width': 4},
+                            'thickness': 0.75,
+                            'value': 90
+                        }
                     }
-                }
-            ))
-            
-            fig.update_layout(height=300)
-            st.plotly_chart(fig, use_container_width=True)
+                ))
+                
+                fig.update_layout(height=300)
+                st.plotly_chart(fig, use_container_width=True)
+            else:
+                # Fallback sin Plotly
+                st.markdown("#### Health Score")
+                score = health_metrics['overall_score']
+                color = "🟢" if score >= 85 else "🟡" if score >= 70 else "🔴"
+                st.markdown(f"### {color} {score:.1f}/100")
+                st.progress(score / 100)
         
         with col2:
             # Health breakdown
@@ -610,18 +656,33 @@ class DocumentationDashboard:
             st.markdown("#### 📊 Views Over Time")
             
             # Generate sample data for demo
-            dates = pd.date_range(end=datetime.now(), periods=30, freq='D')
-            views = [50 + i*2 + (i%7)*10 for i in range(30)]
-            
-            df_views = pd.DataFrame({'Date': dates, 'Views': views})
-            
-            fig_views = px.line(
-                df_views, 
-                x='Date', 
-                y='Views',
-                title="Daily Documentation Views"
-            )
-            st.plotly_chart(fig_views, use_container_width=True)
+            if PANDAS_AVAILABLE and PLOTLY_AVAILABLE:
+                dates = pd.date_range(end=datetime.now(), periods=30, freq='D')
+                views = [50 + i*2 + (i%7)*10 for i in range(30)]
+                
+                df_views = pd.DataFrame({'Date': dates, 'Views': views})
+                
+                fig_views = px.line(
+                    df_views, 
+                    x='Date', 
+                    y='Views',
+                    title="Daily Documentation Views"
+                )
+                st.plotly_chart(fig_views, use_container_width=True)
+            else:
+                # Fallback sin Pandas/Plotly
+                st.markdown("📊 **Tendencias de Visualizaciones**")
+                views_data = [50, 55, 65, 58, 72, 68, 75, 82]
+                for i, views in enumerate(views_data[-7:]):
+                    day = (datetime.now() - timedelta(days=6-i)).strftime("%m/%d")
+                    st.write(f"📅 {day}: {views} views")
+                
+                # Simple bar chart usando st.bar_chart si está disponible
+                try:
+                    chart_data = {"Views": views_data[-7:]}
+                    st.bar_chart(chart_data)
+                except:
+                    pass
         
         with col2:
             st.markdown("#### 🔍 Search Trends")
@@ -630,13 +691,28 @@ class DocumentationDashboard:
             search_terms = ["ML integration", "Device setup", "API reference", "Configuration", "Troubleshooting"]
             search_counts = [25, 18, 15, 12, 8]
             
-            fig_search = px.bar(
-                x=search_terms,
-                y=search_counts,
-                title="Top Search Terms"
-            )
-            fig_search.update_layout(xaxis_title="Search Terms", yaxis_title="Count")
-            st.plotly_chart(fig_search, use_container_width=True)
+            if PLOTLY_AVAILABLE:
+                fig_search = px.bar(
+                    x=search_terms,
+                    y=search_counts,
+                    title="Top Search Terms"
+                )
+                fig_search.update_layout(xaxis_title="Search Terms", yaxis_title="Count")
+                st.plotly_chart(fig_search, use_container_width=True)
+            else:
+                # Fallback sin Plotly
+                st.markdown("🔍 **Top Search Terms**")
+                for term, count in zip(search_terms, search_counts):
+                    bar_length = int(count / max(search_counts) * 20)
+                    bar = "█" * bar_length + "░" * (20 - bar_length)
+                    st.write(f"`{term:20s}` {bar} {count}")
+                
+                # Simple bar chart si está disponible
+                try:
+                    chart_data = {term: count for term, count in zip(search_terms, search_counts)}
+                    st.bar_chart(chart_data)
+                except:
+                    pass
         
         # Most popular docs
         st.markdown("### 🏆 Most Popular Documentation")
@@ -669,15 +745,37 @@ class DocumentationDashboard:
         
         section_data = self.get_section_popularity_data()
         
-        fig_heatmap = px.imshow(
-            section_data['values'],
-            x=section_data['sections'],
-            y=section_data['documents'],
-            title="Section Views by Document",
-            color_continuous_scale="Blues"
-        )
-        
-        st.plotly_chart(fig_heatmap, use_container_width=True)
+        if PLOTLY_AVAILABLE:
+            fig_heatmap = px.imshow(
+                section_data['values'],
+                x=section_data['sections'],
+                y=section_data['documents'],
+                title="Section Views by Document",
+                color_continuous_scale="Blues"
+            )
+            
+            st.plotly_chart(fig_heatmap, use_container_width=True)
+        else:
+            # Fallback sin Plotly - tabla simple
+            st.markdown("🗺️ **Section Popularity**")
+            
+            # Crear tabla de texto
+            sections = section_data['sections']
+            documents = section_data['documents']
+            values = section_data['values']
+            
+            # Header
+            header = "| Document | " + " | ".join(sections) + " |"
+            separator = "|" + "|".join(["-" * 10 for _ in range(len(sections) + 1)]) + "|"
+            
+            st.markdown(header)
+            st.markdown(separator)
+            
+            # Rows
+            for i, doc in enumerate(documents):
+                row_values = [str(values[i][j]) for j in range(len(sections))]
+                row = f"| {doc} | " + " | ".join(row_values) + " |"
+                st.markdown(row)
         
         # Export options
         st.markdown("---")
@@ -1200,70 +1298,126 @@ class DocumentationDashboard:
         return activities
     
     def calculate_health_metrics(self) -> Dict[str, float]:
-        """Calcular métricas de salud de documentación"""
+        """Calcular métricas de salud de documentación usando datos simulados"""
         
-        docs = self.get_all_documentation_files()
-        
-        # Content quality - based on word count, sections, code examples
-        avg_words = sum(doc.word_count for doc in docs) / len(docs) if docs else 0
-        content_quality = min(avg_words / 1000 * 100, 100)  # Target: 1000 words avg
-        
-        # Link integrity - simulate checking
-        link_integrity = 92.5  # Simulated
-        
-        # Freshness - docs updated recently
-        recent_docs = sum(1 for doc in docs 
-                         if (datetime.now() - doc.last_modified).days <= 30)
-        freshness = recent_docs / len(docs) * 100 if docs else 0
-        
-        # Coverage - comprehensive documentation
-        coverage = self.calculate_documentation_coverage()
-        
-        # Searchability - well-structured content
-        structured_docs = sum(1 for doc in docs if len(doc.sections) >= 4)
-        searchability = structured_docs / len(docs) * 100 if docs else 0
-        
-        # Overall score
-        overall_score = (content_quality * 0.25 + link_integrity * 0.20 + 
-                        freshness * 0.20 + coverage * 0.20 + searchability * 0.15)
-        
-        return {
-            'overall_score': overall_score,
-            'content_quality': content_quality,
-            'link_integrity': link_integrity,
-            'freshness': freshness,
-            'coverage': coverage,
-            'searchability': searchability
-        }
+        try:
+            # Intentar cargar datos simulados
+            from scripts.generate_simulation_data import get_simulated_health
+            
+            health_data = get_simulated_health(str(self.repo_path))
+            components = health_data.get("components", {})
+            
+            return {
+                'overall_score': health_data.get("overall_score", 88.5),
+                'content_quality': components.get("content_quality", 85.0),
+                'link_integrity': components.get("link_integrity", 92.5),
+                'freshness': components.get("freshness", 78.0),
+                'coverage': components.get("coverage", 85.2),
+                'searchability': components.get("searchability", 91.0)
+            }
+            
+        except Exception as e:
+            # Fallback usando datos reales si están disponibles
+            print(f"⚠️  Usando cálculo fallback para health: {e}")
+            
+            docs = self.get_all_documentation_files()
+            
+            # Content quality - based on word count, sections, code examples
+            avg_words = sum(doc.word_count for doc in docs) / len(docs) if docs else 0
+            content_quality = min(avg_words / 1000 * 100, 100)  # Target: 1000 words avg
+            
+            # Link integrity - simulate checking
+            link_integrity = 92.5  # Simulated
+            
+            # Freshness - docs updated recently
+            recent_docs = sum(1 for doc in docs 
+                             if (datetime.now() - doc.last_modified).days <= 30)
+            freshness = recent_docs / len(docs) * 100 if docs else 0
+            
+            # Coverage - comprehensive documentation
+            coverage = self.calculate_documentation_coverage()
+            
+            # Searchability - well-structured content
+            structured_docs = sum(1 for doc in docs if len(doc.sections) >= 4)
+            searchability = structured_docs / len(docs) * 100 if docs else 0
+            
+            # Overall score
+            overall_score = (content_quality * 0.25 + link_integrity * 0.20 + 
+                            freshness * 0.20 + coverage * 0.20 + searchability * 0.15)
+            
+            return {
+                'overall_score': overall_score,
+                'content_quality': content_quality,
+                'link_integrity': link_integrity,
+                'freshness': freshness,
+                'coverage': coverage,
+                'searchability': searchability
+            }
     
     def calculate_analytics_metrics(self, time_range: str) -> Dict[str, Any]:
-        """Calcular métricas de analytics (simuladas)"""
+        """Calcular métricas de analytics usando datos simulados"""
         
-        # Simulate metrics based on time range
-        base_views = 1250
-        base_visitors = 85
-        base_time = 145.5
-        base_queries = 230
-        
-        if time_range == "Last 7 days":
-            multiplier = 0.2
-        elif time_range == "Last 30 days":
-            multiplier = 1.0
-        elif time_range == "Last 90 days":
-            multiplier = 3.0
-        else:  # All time
-            multiplier = 10.0
-        
-        return {
-            'total_views': int(base_views * multiplier),
-            'views_delta': int(base_views * multiplier * 0.15),
-            'unique_visitors': int(base_visitors * multiplier),
-            'visitors_delta': int(base_visitors * multiplier * 0.08),
-            'avg_time': base_time,
-            'time_delta': 12.3,
-            'search_queries': int(base_queries * multiplier),
-            'queries_delta': int(base_queries * multiplier * 0.12)
-        }
+        try:
+            # Intentar cargar datos simulados
+            from scripts.generate_simulation_data import get_simulated_analytics
+            
+            analytics_data = get_simulated_analytics(str(self.repo_path))
+            overview = analytics_data.get("overview", {})
+            
+            # Ajustar según el rango de tiempo
+            if time_range == "Last 7 days":
+                multiplier = 0.2
+            elif time_range == "Last 30 days":
+                multiplier = 1.0
+            elif time_range == "Last 90 days":
+                multiplier = 3.0
+            else:  # All time
+                multiplier = 10.0
+            
+            base_views = overview.get("total_views", 1250)
+            base_visitors = overview.get("unique_visitors", 85)
+            base_time = overview.get("avg_session_duration", 145.5)
+            base_queries = overview.get("search_queries", 230)
+            
+            return {
+                'total_views': int(base_views * multiplier),
+                'views_delta': int(base_views * multiplier * 0.15),
+                'unique_visitors': int(base_visitors * multiplier),
+                'visitors_delta': int(base_visitors * multiplier * 0.08),
+                'avg_time': base_time,
+                'time_delta': 12.3,
+                'search_queries': int(base_queries * multiplier),
+                'queries_delta': int(base_queries * multiplier * 0.12)
+            }
+            
+        except Exception as e:
+            # Fallback a datos hardcodeados
+            print(f"⚠️  Usando datos fallback para analytics: {e}")
+            
+            base_views = 1250
+            base_visitors = 85
+            base_time = 145.5
+            base_queries = 230
+            
+            if time_range == "Last 7 days":
+                multiplier = 0.2
+            elif time_range == "Last 30 days":
+                multiplier = 1.0
+            elif time_range == "Last 90 days":
+                multiplier = 3.0
+            else:  # All time
+                multiplier = 10.0
+            
+            return {
+                'total_views': int(base_views * multiplier),
+                'views_delta': int(base_views * multiplier * 0.15),
+                'unique_visitors': int(base_visitors * multiplier),
+                'visitors_delta': int(base_visitors * multiplier * 0.08),
+                'avg_time': base_time,
+                'time_delta': 12.3,
+                'search_queries': int(base_queries * multiplier),
+                'queries_delta': int(base_queries * multiplier * 0.12)
+            }
     
     def get_popular_documents(self) -> List[Dict[str, Any]]:
         """Obtener documentos más populares (simulado)"""
@@ -1366,12 +1520,142 @@ class DocumentationDashboard:
         
         return issues
 
+# Modo CLI alternativo cuando Streamlit no está disponible
+class CLIDashboard:
+    """Dashboard en modo CLI para cuando Streamlit no está disponible"""
+    
+    def __init__(self):
+        self.dashboard = DocumentationDashboard()
+    
+    def run_cli(self):
+        """Ejecutar dashboard en modo CLI"""
+        print("\n📚 Documentation Dashboard - CLI Mode")
+        print("=" * 50)
+        
+        while True:
+            print("\nOpciones disponibles:")
+            print("1. 🔍 Buscar documentación")
+            print("2. 📖 Listar documentos")
+            print("3. 📊 Ver estadísticas")
+            print("4. 🏥 Health check")
+            print("5. 🔄 Ejecutar auto-update")
+            print("0. 🚪 Salir")
+            
+            choice = input("\nSelecciona una opción (0-5): ").strip()
+            
+            if choice == "0":
+                print("👋 ¡Hasta luego!")
+                break
+            elif choice == "1":
+                self.cli_search()
+            elif choice == "2":
+                self.cli_list_docs()
+            elif choice == "3":
+                self.cli_show_stats()
+            elif choice == "4":
+                self.cli_health_check()
+            elif choice == "5":
+                self.cli_run_update()
+            else:
+                print("❌ Opción no válida")
+    
+    def cli_search(self):
+        """Búsqueda en modo CLI"""
+        query = input("🔍 Ingresa tu búsqueda: ").strip()
+        if not query:
+            return
+        
+        print(f"\n🔍 Buscando: '{query}'...")
+        results = self.dashboard.search_documentation(query)
+        
+        if results:
+            print(f"\n📋 Encontrados {len(results)} resultados:")
+            for i, result in enumerate(results[:10], 1):
+                print(f"\n{i}. 📄 {result.file_name} - {result.section}")
+                print(f"   Relevancia: {result.relevance_score:.2f}")
+                print(f"   Preview: {result.content_preview[:100]}...")
+        else:
+            print("❌ No se encontraron resultados")
+    
+    def cli_list_docs(self):
+        """Listar documentos en modo CLI"""
+        docs = self.dashboard.get_all_documentation_files()
+        
+        print(f"\n📖 Documentos disponibles ({len(docs)}):")
+        for i, doc in enumerate(docs, 1):
+            print(f"{i:2d}. 📄 {doc.name}")
+            print(f"     📝 {doc.word_count} palabras | 💻 {doc.code_blocks} ejemplos")
+            print(f"     📅 Modificado: {doc.last_modified.strftime('%Y-%m-%d')}")
+    
+    def cli_show_stats(self):
+        """Mostrar estadísticas en modo CLI"""
+        docs = self.dashboard.get_all_documentation_files()
+        
+        print("\n📊 Estadísticas de Documentación:")
+        print("-" * 40)
+        print(f"📄 Total documentos: {len(docs)}")
+        print(f"📝 Total palabras: {sum(doc.word_count for doc in docs):,}")
+        print(f"💻 Total ejemplos: {sum(doc.code_blocks for doc in docs)}")
+        
+        if docs:
+            avg_words = sum(doc.word_count for doc in docs) / len(docs)
+            print(f"📊 Promedio palabras: {avg_words:.0f}")
+            
+            recent_docs = sum(1 for doc in docs 
+                            if (datetime.now() - doc.last_modified).days <= 30)
+            print(f"🆕 Actualizados (30 días): {recent_docs}")
+    
+    def cli_health_check(self):
+        """Health check en modo CLI"""
+        print("\n🏥 Verificando salud de la documentación...")
+        
+        issues = self.dashboard.scan_content_quality()
+        
+        if issues:
+            print(f"\n⚠️  Encontrados {len(issues)} problemas:")
+            for i, issue in enumerate(issues[:10], 1):
+                print(f"{i:2d}. {issue}")
+            
+            if len(issues) > 10:
+                print(f"    ... y {len(issues) - 10} problemas más")
+        else:
+            print("✅ ¡Documentación en perfecto estado!")
+    
+    def cli_run_update(self):
+        """Ejecutar auto-update en modo CLI"""
+        print("\n🔄 Ejecutando auto-update de documentación...")
+        
+        try:
+            from scripts.auto_update_docs import DocumentationAutoUpdater
+            
+            updater = DocumentationAutoUpdater()
+            
+            # Ejecutar de forma síncrona
+            import asyncio
+            results = asyncio.run(updater.run_auto_update_cycle())
+            
+            print("✅ Auto-update completado:")
+            print(f"   📊 Cambios detectados: {results.get('changes_detected', 0)}")
+            print(f"   📝 Updates generados: {results.get('updates_generated', 0)}")
+            print(f"   ✅ Auto-aplicados: {results.get('auto_applied', 0)}")
+            print(f"   ✋ Requieren manual: {results.get('manual_required', 0)}")
+            
+        except Exception as e:
+            print(f"❌ Error en auto-update: {e}")
+
 # Main execution
 def main():
     """Función principal del dashboard"""
     
-    dashboard = DocumentationDashboard()
-    dashboard.run_dashboard()
+    if STREAMLIT_AVAILABLE:
+        # Modo Streamlit completo
+        dashboard = DocumentationDashboard()
+        dashboard.run_dashboard()
+    else:
+        # Modo CLI alternativo
+        print("⚠️  Streamlit no disponible - iniciando modo CLI")
+        cli_dashboard = CLIDashboard()
+        cli_dashboard.run_cli()
 
 if __name__ == "__main__":
     main()

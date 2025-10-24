@@ -15,14 +15,21 @@ Fecha: 2024
 import os
 import re
 import ast
-import git
 import json
 import asyncio
 from pathlib import Path
 from datetime import datetime, timedelta
-from dataclasses import dataclass
+from dataclasses import dataclass, asdict
 from typing import List, Dict, Any, Optional
 from collections import defaultdict
+
+# Importaciones condicionales para modo no-dummy
+try:
+    import git
+    GIT_AVAILABLE = True
+except ImportError:
+    GIT_AVAILABLE = False
+    print("⚠️  GitPython no disponible - usando modo simulado")
 
 @dataclass
 class CodeChange:
@@ -123,6 +130,9 @@ class DocumentationAutoUpdater:
     async def detect_code_changes(self, since: datetime) -> List[CodeChange]:
         """Detectar cambios en el código desde una fecha específica"""
         
+        if not GIT_AVAILABLE:
+            return await self.simulate_code_changes(since)
+        
         try:
             repo = git.Repo(self.repo_path)
             
@@ -153,12 +163,64 @@ class DocumentationAutoUpdater:
             
         except Exception as e:
             print(f"❌ Error detecting code changes: {e}")
-            return []
+            return await self.simulate_code_changes(since)
     
-    async def analyze_file_changes(self, file_path: str, commit) -> Optional[CodeChange]:
+    async def simulate_code_changes(self, since: datetime) -> List[CodeChange]:
+        """Simular cambios de código para modo dummy"""
+        
+        # Datos simulados realistas
+        simulated_changes = [
+            CodeChange(
+                file_path="social_extensions/telegram/monitoring.py",
+                change_type="modified",
+                function_changes=["send_alert", "track_metric", "get_system_status"],
+                class_changes=["TelegramMonitor", "ActivityMetric"],
+                import_changes=["asyncio", "telegram.Bot"],
+                docstring_changes=["Updated TelegramMonitor with new alert system"],
+                commit_hash="abc123def456",
+                commit_message="feat: Enhanced Telegram monitoring with metrics",
+                timestamp=datetime.now() - timedelta(hours=2)
+            ),
+            CodeChange(
+                file_path="ml_integration/ultralytics_bridge.py",
+                change_type="modified",
+                function_changes=["predict_viral_content", "analyze_engagement"],
+                class_changes=["UltralyticsMLBridge"],
+                import_changes=["ultralytics", "cv2"],
+                docstring_changes=["Added viral prediction capabilities"],
+                commit_hash="def456ghi789",
+                commit_message="feat: ML viral prediction system",
+                timestamp=datetime.now() - timedelta(hours=4)
+            ),
+            CodeChange(
+                file_path="device_farm/controllers/device_manager.py",
+                change_type="added",
+                function_changes=["connect_device", "execute_action"],
+                class_changes=["DeviceController"],
+                import_changes=["adb", "appium"],
+                docstring_changes=["New device management system"],
+                commit_hash="ghi789jkl012",
+                commit_message="feat: Advanced device farm management",
+                timestamp=datetime.now() - timedelta(hours=6)
+            )
+        ]
+        
+        # Filtrar por fecha
+        filtered_changes = [
+            change for change in simulated_changes 
+            if change.timestamp >= since
+        ]
+        
+        print(f"🎭 Simulated {len(filtered_changes)} code changes for demo")
+        return filtered_changes
+    
+    async def analyze_file_changes(self, file_path: str, commit=None) -> Optional[CodeChange]:
         """Analizar cambios específicos en un archivo"""
         
         try:
+            if not GIT_AVAILABLE or commit is None:
+                return await self.analyze_file_current(file_path)
+            
             # Obtener contenido del archivo en el commit
             file_content = commit.tree[file_path].data_stream.read().decode()
             
@@ -182,6 +244,39 @@ class DocumentationAutoUpdater:
             
         except Exception as e:
             print(f"❌ Error analyzing file {file_path}: {e}")
+            return None
+    
+    async def analyze_file_current(self, file_path: str) -> Optional[CodeChange]:
+        """Analizar archivo actual cuando Git no está disponible"""
+        
+        try:
+            full_path = self.repo_path / file_path
+            if not full_path.exists():
+                return None
+            
+            with open(full_path, 'r', encoding='utf-8') as f:
+                file_content = f.read()
+            
+            # Analizar funciones, clases, imports, etc.
+            functions = self.extract_functions(file_content)
+            classes = self.extract_classes(file_content)
+            imports = self.extract_imports(file_content)
+            docstrings = self.extract_docstrings(file_content)
+            
+            return CodeChange(
+                file_path=file_path,
+                change_type="modified",
+                function_changes=functions,
+                class_changes=classes,
+                import_changes=imports,
+                docstring_changes=docstrings,
+                commit_hash="simulated_" + str(hash(file_path))[:8],
+                commit_message=f"Current state of {file_path}",
+                timestamp=datetime.now()
+            )
+            
+        except Exception as e:
+            print(f"❌ Error analyzing current file {file_path}: {e}")
             return None
     
     def extract_functions(self, code: str) -> List[str]:

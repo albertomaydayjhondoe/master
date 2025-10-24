@@ -1,0 +1,46 @@
+{
+  "files_analyzed": 37,
+  "functions_detected": 279,
+  "classes_detected": 50,
+  "documentation_coverage": 78.98061376608567,
+  "recent_changes": [
+    {
+      "file": "social_extensions/telegram/monitoring.py",
+      "functions_added": [
+        "send_alert",
+        "track_metric"
+      ],
+      "classes_modified": [
+        "TelegramMonitor"
+      ],
+      "impact": "medium"
+    },
+    {
+      "file": "ml_integration/ultralytics_bridge.py",
+      "functions_added": [
+        "predict_viral_content"
+      ],
+      "classes_modified": [
+        "UltralyticsMLBridge"
+      ],
+      "impact": "high"
+    },
+    {
+      "file": "device_farm/controllers/device_manager.py",
+      "functions_added": [
+        "connect_device",
+        "execute_action"
+      ],
+      "classes_added": [
+        "DeviceController"
+      ],
+      "impact": "high"
+    }
+  ],
+  "suggestions": [
+    "Add docstrings to newly created functions",
+    "Update API documentation for modified classes",
+    "Create examples for new device management features",
+    "Document viral prediction model parameters"
+  ]
+}
