@@ -65,7 +65,23 @@ class UnifiedCommunityManagerSystem:
         self.dummy_mode = dummy_mode
         logger.info(f"Initializing Unified System v3 (DUMMY_MODE={dummy_mode})")
         
-        # Components from v1
+        # ========================================
+        # ML CORE (from v1)
+        # ========================================
+        self.ml_core_url = "http://localhost:8000" if not dummy_mode else None
+        self.ml_client = None  # Will be initialized when needed
+        
+        # ML Capabilities:
+        # - Screenshot analysis (YOLOv8)
+        # - Anomaly detection (shadowban)
+        # - Posting time prediction
+        # - Content optimization
+        # - Affinity calculation
+        # - Viral probability prediction
+        
+        # ========================================
+        # Components from v1 (Organic Viral)
+        # ========================================
         try:
             self.cross_platform_manager = CrossPlatformManager()
         except:
@@ -76,12 +92,16 @@ class UnifiedCommunityManagerSystem:
         self.twitter_controller = None
         self.youtube_service = None
         
-        # Components from v2
+        # ========================================
+        # Components from v2 (Paid Acquisition)
+        # ========================================
         self.meta_ads_api_url = "http://localhost:9000" if not dummy_mode else None
         self.pixel_tracker_url = "http://localhost:9001" if not dummy_mode else None
         self.youtube_uploader_url = "http://localhost:9003" if not dummy_mode else None
         
+        # ========================================
         # State
+        # ========================================
         self.current_campaign = None
         self.published_posts = []
         self.analytics = {}
@@ -275,19 +295,30 @@ class UnifiedCommunityManagerSystem:
         song_name: str,
         genre: str
     ) -> Dict[str, Any]:
-        """Prepara todos los assets necesarios"""
+        """Prepara todos los assets necesarios CON ML OPTIMIZATION"""
         
         if self.dummy_mode:
+            # Simulate ML optimization
+            ml_optimization = {
+                "best_posting_time": "19:30",  # ML prediction
+                "predicted_virality": 0.78,    # ML score
+                "optimal_hashtags": [f"#{genre.lower()}", "#music", "#viral", "#trending"],
+                "caption_sentiment": "positive",
+                "thumbnail_score": 8.2,
+                "content_quality_score": 9.1
+            }
+            
             return {
                 "video_validated": True,
                 "thumbnail_generated": f"/data/thumbnails/{song_name}_thumb.jpg",
+                "ml_optimization": ml_optimization,  # ← ML CORE OUTPUT
                 "captions_generated": {
                     "tiktok": f"🔥 {song_name} - {artist_name} 🎵 #trap #music",
                     "instagram": f"🎶 Nueva música! {song_name} ya disponible\n\n#{genre.lower()} #music #{artist_name.lower().replace(' ', '')}",
                     "twitter": f"🎵 {song_name} - {artist_name}\n\nEscúchala ahora: [link]\n\n#{genre} #NewMusic",
                     "youtube": f"{artist_name} - {song_name} (Official Video)"
                 },
-                "hashtags": [f"#{genre.lower()}", "#music", "#newrelease", f"#{artist_name.lower().replace(' ', '')}"],
+                "hashtags": ml_optimization["optimal_hashtags"],  # ← ML optimized
                 "optimized_metadata": {
                     "title": f"{artist_name} - {song_name}",
                     "description": f"Official video for {song_name} by {artist_name}",
@@ -295,11 +326,44 @@ class UnifiedCommunityManagerSystem:
                 }
             }
         
-        # TODO: Real implementation
-        # - Validar video existe
-        # - Generar thumbnail con PIL
-        # - ML optimization de captions
-        # - Hashtag research
+        # ========================================
+        # REAL ML IMPLEMENTATION (for production)
+        # ========================================
+        # 1. Validate video exists
+        # if not os.path.exists(video_path):
+        #     raise FileNotFoundError(f"Video not found: {video_path}")
+        
+        # 2. ML: Predict virality
+        # virality_score = await self._ml_predict_virality(
+        #     video_path=video_path,
+        #     metadata={"artist": artist_name, "genre": genre}
+        # )
+        
+        # 3. ML: Optimize posting time
+        # best_time = await self._ml_optimize_posting_time(
+        #     artist_name=artist_name,
+        #     target_countries=target_countries
+        # )
+        
+        # 4. ML: Optimize captions for each platform
+        # captions = {}
+        # for platform in ["tiktok", "instagram", "twitter", "youtube"]:
+        #     base_caption = f"{song_name} - {artist_name}"
+        #     captions[platform] = await self._ml_optimize_captions(
+        #         base_caption=base_caption,
+        #         platform=platform,
+        #         target_audience={"genre": genre}
+        #     )
+        
+        # 5. Generate thumbnail with PIL + ML thumbnail scorer
+        # from PIL import Image
+        # import cv2
+        # video = cv2.VideoCapture(video_path)
+        # # Extract best frame using ML
+        # thumbnail_path = f"/data/thumbnails/{song_name}_thumb.jpg"
+        
+        # 6. Hashtag research with ML effectiveness scoring
+        # hashtags = await self._ml_research_hashtags(genre, platform="tiktok")
         
         return {}
     
@@ -607,7 +671,19 @@ class UnifiedCommunityManagerSystem:
                     "total_views": 220300,
                     "total_engagement": 15334,
                     "estimated_reach": 180000,
-                    "viral_score": 8.5
+                    "viral_score": 8.5  # ← ML Core calculates this
+                },
+                "ml_insights": {  # ← NEW: ML Core insights
+                    "virality_prediction": 0.78,
+                    "predicted_peak_time": "23:00 UTC",
+                    "sentiment_analysis": {
+                        "positive": 0.82,
+                        "neutral": 0.15,
+                        "negative": 0.03
+                    },
+                    "shadowban_detected": False,
+                    "engagement_health": "excellent",
+                    "algorithm_favor_score": 0.89
                 },
                 "recommendations": [
                     "Aumentar presupuesto Meta Ads (+20%): ROAS actual 3.2x",
@@ -664,6 +740,139 @@ class UnifiedCommunityManagerSystem:
         # POST http://localhost:9004/optimize
         
         return {}
+    
+    # ============================================
+    # ML CORE METHODS (from Docker v1)
+    # ============================================
+    
+    async def _ml_predict_virality(
+        self,
+        video_path: str,
+        metadata: Dict[str, Any]
+    ) -> float:
+        """
+        Predice probabilidad de viralidad usando ML Core
+        
+        En producción:
+        - POST http://localhost:8000/predict_virality
+        - YOLOv8 analiza video frame by frame
+        - LSTM predice engagement basado en histórico
+        - Returns: 0.0-1.0 score
+        """
+        if self.dummy_mode:
+            # Simulated ML prediction
+            import random
+            base_score = 0.65
+            
+            # Adjust based on metadata
+            if "trap" in str(metadata).lower() or "reggaeton" in str(metadata).lower():
+                base_score += 0.10  # Trap/Reggaeton trend bonus
+            
+            if metadata.get("has_hook", False):
+                base_score += 0.05  # Hook bonus
+            
+            return min(base_score + random.uniform(-0.05, 0.10), 0.95)
+        
+        # TODO: Real ML Core API call
+        # response = await httpx.post(f"{self.ml_core_url}/predict_virality", ...)
+        return 0.0
+    
+    async def _ml_optimize_posting_time(
+        self,
+        artist_name: str,
+        target_countries: List[str]
+    ) -> str:
+        """
+        ML predicts best posting time based on:
+        - Historical engagement patterns
+        - Audience timezone distribution
+        - Platform algorithms
+        
+        Returns: "HH:MM" (24h format)
+        """
+        if self.dummy_mode:
+            # Simulated ML optimization
+            # Best times for music content: 7pm-9pm local time
+            return "19:30"
+        
+        # TODO: Real ML Core API call
+        # POST http://localhost:8000/predict_posting_time
+        return "18:00"
+    
+    async def _ml_detect_shadowban(
+        self,
+        account_id: str,
+        platform: str,
+        recent_posts: List[Dict]
+    ) -> bool:
+        """
+        ML-based shadowban detection
+        
+        Analyzes:
+        - Engagement drop patterns
+        - View distribution anomalies
+        - Follower/view ratio
+        
+        Returns: True if shadowbanned
+        """
+        if self.dummy_mode:
+            # Simulate no shadowban
+            return False
+        
+        # TODO: Real ML Core API call
+        # POST http://localhost:8000/detect_anomaly
+        return False
+    
+    async def _ml_optimize_captions(
+        self,
+        base_caption: str,
+        platform: str,
+        target_audience: Dict
+    ) -> str:
+        """
+        ML-optimized caption generation
+        
+        Uses:
+        - NLP sentiment analysis
+        - Emoji optimization
+        - Hashtag effectiveness scoring
+        - Platform-specific best practices
+        """
+        if self.dummy_mode:
+            # Basic optimization
+            if platform == "tiktok":
+                return f"🔥 {base_caption} 🎵 #fyp #viral"
+            elif platform == "instagram":
+                return f"✨ {base_caption} 💫\n\n#music #newmusic #viral"
+            else:
+                return base_caption
+        
+        # TODO: Real ML Core API call
+        # POST http://localhost:8000/optimize_caption
+        return base_caption
+    
+    async def _ml_calculate_affinity(
+        self,
+        account_id: str,
+        target_account_id: str
+    ) -> float:
+        """
+        Calculate affinity score between accounts
+        
+        Used for:
+        - Engagement target selection
+        - Collaboration opportunities
+        - Audience overlap analysis
+        
+        Returns: 0.0-1.0 affinity score
+        """
+        if self.dummy_mode:
+            import random
+            return random.uniform(0.5, 0.9)
+        
+        # TODO: Real ML Core API call
+        # POST http://localhost:8000/calculate_affinity
+        return 0.0
     
     # ============================================
     # HELPER METHODS
