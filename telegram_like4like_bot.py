@@ -1,6 +1,13 @@
 """
 Telegram Like4Like Bot Implementation
 Sistema de intercambio automático de likes usando ML para negociación inteligente
+
+Características:
+- Manejo inteligente de dependencias con fallbacks
+- Modo dummy para desarrollo seguro
+- ML integration para análisis viral
+- Screenshot verification automática
+- Negociación humanizada con patrones aprendidos
 """
 
 import asyncio
@@ -11,35 +18,105 @@ from dataclasses import dataclass, asdict
 from enum import Enum
 import json
 import time
-import numpy as np
-import cv2
 import base64
 from pathlib import Path
 
-# ML dependencies
-try:
-    from ultralytics import YOLO
-    import torch
-    ULTRALYTICS_AVAILABLE = True
-except ImportError:
-    ULTRALYTICS_AVAILABLE = False
-    print("⚠️ Ultralytics not available - using dummy ML mode")
+# Sistema inteligente de dependencias
+from config.dependency_manager import (
+    check_dependencies, get_safe_import, is_dummy_mode, 
+    get_dependency_status, DependencyStatus
+)
 
-# Telegram dependencies  
-try:
+# Verificar dependencias al inicio
+print("🔍 Initializing Telegram Like4Like Bot...")
+dependencies_status = check_dependencies()
+
+# Importaciones inteligentes con fallbacks
+np = get_safe_import('numpy')
+cv2 = get_safe_import('opencv-python')
+
+# ML dependencies con fallback inteligente
+ultralytics_module = get_safe_import('ultralytics')
+if get_dependency_status('ultralytics') and get_dependency_status('ultralytics').available:
+    YOLO = ultralytics_module.YOLO
+    ULTRALYTICS_AVAILABLE = True
+else:
+    YOLO = ultralytics_module['YOLO'] if isinstance(ultralytics_module, dict) else ultralytics_module.YOLO
+    ULTRALYTICS_AVAILABLE = False
+    print("🎭 Using Ultralytics fallback mode")
+
+# Telegram dependencies con fallback inteligente  
+telethon_module = get_safe_import('telethon')
+if get_dependency_status('telethon') and get_dependency_status('telethon').available:
     from telethon import TelegramClient, events
     from telethon.tl.types import MessageMediaPhoto, MessageMediaDocument
     TELEGRAM_AVAILABLE = True
-except ImportError:
+else:
+    # Usar implementaciones mock del dependency manager
+    TelegramClient = telethon_module['TelegramClient'] if isinstance(telethon_module, dict) else telethon_module.TelegramClient
+    events = telethon_module['events'] if isinstance(telethon_module, dict) else telethon_module.events
+    MessageMediaPhoto = telethon_module['types'].MessageMediaPhoto if isinstance(telethon_module, dict) else None
+    MessageMediaDocument = telethon_module['types'].MessageMediaDocument if isinstance(telethon_module, dict) else None
     TELEGRAM_AVAILABLE = False
-    print("⚠️ Telethon not available - using dummy Telegram mode")
+    print("🎭 Using Telegram fallback mode")
 
-# Import our ML core
+# Import our ML core con manejo de errores mejorado
 try:
-    from ml_core.bidirectional_engine import BidirectionalMLEngine
-    from ml_core.cloud_processing import CloudMLProcessingPipeline
-except ImportError:
-    print("⚠️ ML Core not available - using standalone mode")
+    from ml_integration.ultralytics_bridge import UltralyticsMLBridge, MLAnalysisResult
+    from social_extensions.telegram.monitoring import TelegramMonitor, ActivityMetric
+    ML_CORE_AVAILABLE = True
+except ImportError as e:
+    ML_CORE_AVAILABLE = False
+    print(f"🎭 ML Core not available: {e}")
+    
+    # Mock classes mejoradas
+    class UltralyticsMLBridge:
+        def __init__(self):
+            self.dummy_mode = True
+        
+        async def predict_viral_content(self, content_data: Dict[str, Any]) -> Dict[str, Any]:
+            """Predicción viral simulada"""
+            import random
+            return {
+                "viral_score": random.uniform(0.3, 0.9),
+                "engagement_potential": random.uniform(0.4, 0.8),
+                "optimal_posting_time": "14:30",
+                "predicted_views": random.randint(1000, 50000),
+                "confidence": random.uniform(0.7, 0.95)
+            }
+        
+        async def analyze_engagement_potential(self, video_url: str) -> Dict[str, Any]:
+            """Análisis de engagement simulado"""
+            return {
+                "engagement_score": random.uniform(0.5, 0.9),
+                "like_prediction": random.randint(100, 5000),
+                "comment_prediction": random.randint(10, 500),
+                "subscriber_growth": random.randint(5, 200)
+            }
+    
+    class MLAnalysisResult:
+        def __init__(self, **kwargs): 
+            for k, v in kwargs.items():
+                setattr(self, k, v)
+        
+        def to_dict(self):
+            return {k: v for k, v in self.__dict__.items()}
+    
+    class TelegramMonitor:
+        def __init__(self):
+            self.dummy_mode = True
+        
+        async def send_alert(self, message: str, priority: str = "info"):
+            print(f"🚨 Mock Alert ({priority}): {message}")
+        
+        async def track_activity(self, activity_type: str, data: Dict[str, Any]):
+            print(f"📊 Mock Activity Tracked: {activity_type} - {data}")
+    
+    class ActivityMetric:
+        def __init__(self, **kwargs):
+            self.timestamp = datetime.now()
+            for k, v in kwargs.items():
+                setattr(self, k, v)
 
 class InteractionType(Enum):
     LIKE = "like"
@@ -311,6 +388,14 @@ class TelegramLike4LikeBot:
         # Componentes ML
         self.screenshot_analyzer = ScreenshotAnalyzer()
         self.negotiation_engine = NegotiationEngine()
+        
+        # ML Bridge
+        if ML_CORE_AVAILABLE:
+            self.ml_bridge = UltralyticsMLBridge()
+            self.telegram_monitor = TelegramMonitor()
+        else:
+            self.ml_bridge = UltralyticsMLBridge()  # Mock version
+            self.telegram_monitor = TelegramMonitor()  # Mock version
         
         # Estado del bot
         self.active_requests: Dict[int, InteractionRequest] = {}
