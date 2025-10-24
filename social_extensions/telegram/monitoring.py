@@ -1,13 +1,9 @@
-"""""""""
-
+"""
 Telegram Monitoring System - Advanced Health and Performance Monitoring
+Tracks activity, performance metrics, alerts and provides comprehensive analytics
+"""
 
-"""Telegram Monitoring - Advanced System Health and Performance MonitoringTelegram Monitoring - Advanced System Health and Performance Monitoring
-
-
-
-import logging"""Tracks activity, performance metrics, alerts and provides comprehensive analytics
-
+import logging
 import asyncio
 
 from typing import Dict, List, Optional, Any"""

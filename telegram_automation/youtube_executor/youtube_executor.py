@@ -127,10 +127,7 @@ else:
 # Database imports with dummy fallback
 try:
     from database.models import DatabaseConnection, Exchange, ExchangeStatus
-
-
-__all__ = ['webdriver', 'Chrome', 'get', 'quit', 'find_element', 'find_elements', 'execute_script', 'set_page_load_timeout', 'implicitly_wait', 'DummyElement', 'click', 'send_keys', 'clear', 'is_displayed', 'is_enabled', 'get_attribute', 'By', 'WebDriverWait', 'until', 'EC', 'presence_of_element_located', 'element_to_be_clickable', 'Keys', 'Options', 'add_argument', 'add_experimental_option', 'TimeoutException', 'WebDriverException', 'DatabaseConnection', 'update_exchange', 'execute_command', 'get_exchange_by_id', 'Exchange', 'ExchangeStatus', 'GoLoginAPI', 'get_available_profiles', 'start_profile', 'stop_profile', 'get_profile_health', 'YouTubeExecutor', 'session', 'start_session', 'stop_session', 'select_best_profile', 'execute_exchange_terms', 'navigate_to_video', 'close_popups', 'watch_video', 'like_video', 'subscribe_to_channel', 'comment_on_video', 'generate_comment', 'update_profile_stats', 'get_channel_url_from_video', 'YouTubeExecutorService', 'start', 'stop', 'queue_exchange_execution', 'process_execution_queue', 'execute_exchange', 'notify_execution_complete']
-
+    
 except ImportError:
     print("🎭 Using dummy database models")
     
@@ -142,7 +139,9 @@ except ImportError:
         async def get_exchange_by_id(self, exchange_id): 
             print(f"🎭 Get exchange: {exchange_id}")
             return None
-    
+
+# Logger setup
+import logging
     class Exchange:
         def __init__(self):
             self.exchange_uuid = "dummy-uuid-12345"
@@ -157,7 +156,15 @@ except ImportError:
         MY_TURN_DONE = "my_turn_done"
         FAILED = "failed"
 
+# Logger setup
+import logging
 logger = logging.getLogger(__name__)
+
+# Export list
+__all__ = [
+    'YouTubeExecutor', 'YouTubeExecutorService', 'DatabaseConnection', 
+    'Exchange', 'ExchangeStatus', 'GoLoginAPI'
+]
 
 
 class GoLoginAPI:
