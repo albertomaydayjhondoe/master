@@ -1,0 +1,350 @@
+# 🚀 Docker v2.0 - Meta Ads → Pixeles → Landing Pages → YouTube
+# Automated Music Marketing Funnel with ML Optimization
+
+version: '3.8'
+
+services:
+  # ============================================
+  # META ADS MANAGER - Campaign Orchestration
+  # ============================================
+  meta-ads-manager:
+    build:
+      context: .
+      dockerfile: docker/v2/Dockerfile.meta-ads-manager
+    container_name: meta-ads-manager-v2
+    environment:
+      - META_APP_ID=${META_APP_ID}
+      - META_APP_SECRET=${META_APP_SECRET}
+      - META_ACCESS_TOKEN=${META_ACCESS_TOKEN}
+      - META_AD_ACCOUNT_ID=${META_AD_ACCOUNT_ID}
+      - META_PAGE_ID=${META_PAGE_ID}
+      - DAILY_BUDGET=${DAILY_BUDGET:-50}
+      - AUTO_OPTIMIZATION=true
+      - AB_TESTING_ENABLED=true
+      - DUMMY_MODE=${DUMMY_MODE:-true}
+    volumes:
+      - ./v2/meta_ads:/app/meta_ads
+      - ./v2/data/campaigns:/data/campaigns
+      - ./v2/logs:/app/logs
+    ports:
+      - "9000:9000"  # Meta Ads API
+    networks:
+      - marketing-funnel-v2
+    restart: unless-stopped
+    depends_on:
+      - database-v2
+      - redis-v2
+      - ml-predictor-v2
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ============================================
+  # FACEBOOK PIXEL TRACKER - Event & Conversion Tracking
+  # ============================================
+  pixel-tracker:
+    build:
+      context: .
+      dockerfile: docker/v2/Dockerfile.pixel-tracker
+    container_name: pixel-tracker-v2
+    environment:
+      - META_PIXEL_ID=${META_PIXEL_ID}
+      - META_CONVERSION_API_TOKEN=${META_CONVERSION_API_TOKEN}
+      - TRACK_PAGE_VIEW=true
+      - TRACK_ADD_TO_CART=true
+      - TRACK_PURCHASE=true
+      - TRACK_LEAD=true
+      - TRACK_COMPLETE_REGISTRATION=true
+      - CUSTOM_EVENTS_ENABLED=true
+      - DUMMY_MODE=${DUMMY_MODE:-true}
+    volumes:
+      - ./v2/pixel_tracker:/app/pixel_tracker
+      - ./v2/data/conversions:/data/conversions
+      - ./v2/logs:/app/logs
+    ports:
+      - "9001:9001"  # Pixel Tracker API
+    networks:
+      - marketing-funnel-v2
+    restart: unless-stopped
+    depends_on:
+      - database-v2
+      - redis-v2
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ============================================
+  # LANDING PAGE OPTIMIZER - High-Converting Pages
+  # ============================================
+  landing-optimizer:
+    build:
+      context: .
+      dockerfile: docker/v2/Dockerfile.landing-optimizer
+    container_name: landing-optimizer-v2
+    environment:
+      - TEMPLATES_DIR=/app/templates
+      - AB_TESTING_ENABLED=true
+      - HEATMAP_TRACKING=true
+      - SPEED_OPTIMIZATION=true
+      - SEO_OPTIMIZATION=true
+      - ML_PERSONALIZATION=true
+      - DUMMY_MODE=${DUMMY_MODE:-true}
+    volumes:
+      - ./v2/landing_pages:/app/landing_pages
+      - ./v2/templates:/app/templates
+      - ./v2/static:/app/static
+      - ./v2/data/analytics:/data/analytics
+      - ./v2/logs:/app/logs
+    ports:
+      - "9002:9002"  # Landing Pages Server
+      - "9012:9012"  # Admin Dashboard
+    networks:
+      - marketing-funnel-v2
+    restart: unless-stopped
+    depends_on:
+      - pixel-tracker
+      - ml-predictor-v2
+      - database-v2
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9002/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ============================================
+  # YOUTUBE UPLOADER - Automated Video Publishing
+  # ============================================
+  youtube-uploader:
+    build:
+      context: .
+      dockerfile: docker/v2/Dockerfile.youtube-uploader
+    container_name: youtube-uploader-v2
+    environment:
+      - YOUTUBE_CLIENT_ID=${YOUTUBE_CLIENT_ID}
+      - YOUTUBE_CLIENT_SECRET=${YOUTUBE_CLIENT_SECRET}
+      - YOUTUBE_REFRESH_TOKEN=${YOUTUBE_REFRESH_TOKEN}
+      - YOUTUBE_CHANNEL_ID=${YOUTUBE_CHANNEL_ID}
+      - AUTO_OPTIMIZE_METADATA=true
+      - AUTO_GENERATE_THUMBNAILS=true
+      - AUTO_SCHEDULE=true
+      - UPLOAD_BATCH_SIZE=5
+      - DUMMY_MODE=${DUMMY_MODE:-true}
+    volumes:
+      - ./v2/youtube_uploader:/app/youtube_uploader
+      - ./v2/data/videos:/data/videos
+      - ./v2/data/thumbnails:/data/thumbnails
+      - ./v2/logs:/app/logs
+    ports:
+      - "9003:9003"  # YouTube API
+    networks:
+      - marketing-funnel-v2
+    restart: unless-stopped
+    depends_on:
+      - database-v2
+      - ml-predictor-v2
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9003/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ============================================
+  # ML PREDICTOR - AI-Powered Optimization
+  # ============================================
+  ml-predictor-v2:
+    build:
+      context: .
+      dockerfile: docker/v2/Dockerfile.ml-predictor
+    container_name: ml-predictor-v2
+    environment:
+      - MODEL_TYPE=music_marketing
+      - AUTO_RETRAIN=true
+      - RETRAIN_INTERVAL=86400  # 24 horas
+      - PREDICTION_CACHE=true
+      - DUMMY_MODE=${DUMMY_MODE:-true}
+    volumes:
+      - ./v2/ml_models:/app/models
+      - ./v2/data/training:/data/training
+      - ./v2/logs:/app/logs
+    ports:
+      - "9004:9004"  # ML Prediction API
+    networks:
+      - marketing-funnel-v2
+    restart: unless-stopped
+    depends_on:
+      - database-v2
+      - redis-v2
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9004/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ============================================
+  # ANALYTICS DASHBOARD - Real-time Monitoring
+  # ============================================
+  analytics-dashboard:
+    build:
+      context: .
+      dockerfile: docker/v2/Dockerfile.analytics-dashboard
+    container_name: analytics-dashboard-v2
+    environment:
+      - DASHBOARD_PORT=9005
+      - REFRESH_INTERVAL=30
+      - ENABLE_ALERTS=true
+      - ALERT_WEBHOOK=${DISCORD_WEBHOOK}
+      - DUMMY_MODE=${DUMMY_MODE:-true}
+    volumes:
+      - ./v2/analytics:/app/analytics
+      - ./v2/data:/data
+      - ./v2/logs:/app/logs
+    ports:
+      - "9005:9005"  # Analytics Dashboard
+    networks:
+      - marketing-funnel-v2
+    restart: unless-stopped
+    depends_on:
+      - database-v2
+      - redis-v2
+      - meta-ads-manager
+      - pixel-tracker
+      - youtube-uploader
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9005/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ============================================
+  # AUTOMATION ORCHESTRATOR - Workflow Coordination
+  # ============================================
+  automation-orchestrator:
+    build:
+      context: .
+      dockerfile: docker/v2/Dockerfile.orchestrator
+    container_name: automation-orchestrator-v2
+    environment:
+      - WORKFLOW_ENABLED=true
+      - CRON_SCHEDULE=0 */6 * * *  # Cada 6 horas
+      - AUTO_SCALE_BUDGET=true
+      - AUTO_PAUSE_LOW_PERFORMERS=true
+      - AUTO_BOOST_HIGH_PERFORMERS=true
+      - DUMMY_MODE=${DUMMY_MODE:-true}
+    volumes:
+      - ./v2/orchestrator:/app/orchestrator
+      - ./v2/workflows:/app/workflows
+      - ./v2/logs:/app/logs
+    ports:
+      - "9006:9006"  # Orchestrator API
+    networks:
+      - marketing-funnel-v2
+    restart: unless-stopped
+    depends_on:
+      - meta-ads-manager
+      - pixel-tracker
+      - landing-optimizer
+      - youtube-uploader
+      - ml-predictor-v2
+      - database-v2
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9006/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ============================================
+  # DATABASE - PostgreSQL for Metrics & Campaigns
+  # ============================================
+  database-v2:
+    image: postgres:15-alpine
+    container_name: marketing-database-v2
+    environment:
+      - POSTGRES_DB=marketing_funnel_v2
+      - POSTGRES_USER=${DB_USER:-marketing_user}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-change_this_password}
+    volumes:
+      - postgres-data-v2:/var/lib/postgresql/data
+      - ./v2/database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    ports:
+      - "5433:5432"  # Puerto diferente al v1
+    networks:
+      - marketing-funnel-v2
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-marketing_user}"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ============================================
+  # REDIS - Caching & Queue Management
+  # ============================================
+  redis-v2:
+    image: redis:7-alpine
+    container_name: marketing-redis-v2
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-change_this_password}
+    volumes:
+      - redis-data-v2:/data
+    ports:
+      - "6380:6379"  # Puerto diferente al v1
+    networks:
+      - marketing-funnel-v2
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ============================================
+  # NGINX - Reverse Proxy & SSL
+  # ============================================
+  nginx-v2:
+    image: nginx:alpine
+    container_name: marketing-nginx-v2
+    volumes:
+      - ./docker/v2/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./docker/v2/ssl:/etc/nginx/ssl:ro
+      - ./v2/landing_pages:/usr/share/nginx/html:ro
+    ports:
+      - "8080:80"
+      - "8443:443"
+    networks:
+      - marketing-funnel-v2
+    restart: unless-stopped
+    depends_on:
+      - landing-optimizer
+      - analytics-dashboard
+
+networks:
+  marketing-funnel-v2:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.21.0.0/16
+
+volumes:
+  postgres-data-v2:
+    driver: local
+  redis-data-v2:
+    driver: local
+
+# ============================================
+# PUERTOS RESUMEN
+# ============================================
+# 9000 - Meta Ads Manager
+# 9001 - Pixel Tracker
+# 9002 - Landing Pages
+# 9003 - YouTube Uploader
+# 9004 - ML Predictor
+# 9005 - Analytics Dashboard
+# 9006 - Automation Orchestrator
+# 9012 - Landing Admin Dashboard
+# 5433 - PostgreSQL
+# 6380 - Redis
+# 8080 - Nginx HTTP
+# 8443 - Nginx HTTPS
