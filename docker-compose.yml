@@ -1,0 +1,181 @@
+# TikTok ML Automation System - Multi-service Docker Setup
+# Production-ready configuration with all system components
+
+version: '3.8'
+
+services:
+  # ML Core Service - Machine Learning and YOLO Detection
+  ml-core:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.ml-core
+    container_name: tiktok-ml-core
+    environment:
+      - DUMMY_MODE=${DUMMY_MODE:-true}
+      - PYTHONUNBUFFERED=1
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./logs:/app/logs
+    ports:
+      - "8000:8000"  # ML API
+    networks:
+      - tiktok-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Red Button Dashboard - Production Control Interface
+  dashboard:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.dashboard
+    container_name: tiktok-dashboard
+    environment:
+      - DUMMY_MODE=${DUMMY_MODE:-true}
+      - STREAMLIT_SERVER_PORT=8501
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+    volumes:
+      - ./config:/app/config
+      - ./logs:/app/logs
+    ports:
+      - "8501:8501"  # Streamlit Dashboard
+    networks:
+      - tiktok-network
+    restart: unless-stopped
+    depends_on:
+      - ml-core
+
+  # Telegram Bot - Automation and ML Predictions
+  telegram-bot:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.telegram
+    container_name: tiktok-telegram-bot
+    environment:
+      - DUMMY_MODE=${DUMMY_MODE:-true}
+      - TELEGRAM_API_ID=${TELEGRAM_API_ID}
+      - TELEGRAM_API_HASH=${TELEGRAM_API_HASH}
+      - TELEGRAM_PHONE=${TELEGRAM_PHONE}
+    volumes:
+      - ./telegram_automation:/app/telegram_automation
+      - ./sessions:/app/sessions
+      - ./logs:/app/logs
+    networks:
+      - tiktok-network
+    restart: unless-stopped
+    depends_on:
+      - ml-core
+
+  # Meta Ads Service - Campaign Management
+  meta-ads:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.meta
+    container_name: tiktok-meta-ads
+    environment:
+      - DUMMY_MODE=${DUMMY_MODE:-true}
+      - META_APP_ID=${META_APP_ID}
+      - META_APP_SECRET=${META_APP_SECRET}
+      - META_ACCESS_TOKEN=${META_ACCESS_TOKEN}
+    volumes:
+      - ./social_extensions/meta:/app/meta
+      - ./data:/app/data
+      - ./logs:/app/logs
+    ports:
+      - "8002:8002"  # Meta Ads API
+    networks:
+      - tiktok-network
+    restart: unless-stopped
+
+  # Device Farm Controller (Optional - requires physical devices)
+  # device-farm:
+  #   build:
+  #     context: .
+  #     dockerfile: docker/Dockerfile.device-farm
+  #   container_name: tiktok-device-farm
+  #   environment:
+  #     - DUMMY_MODE=${DUMMY_MODE:-true}
+  #   privileged: true  # Required for ADB access
+  #   volumes:
+  #     - /dev/bus/usb:/dev/bus/usb  # USB device access
+  #     - ./device_farm:/app/device_farm
+  #     - ./logs:/app/logs
+  #   networks:
+  #     - tiktok-network
+  #   restart: unless-stopped
+
+  # Database - PostgreSQL for production data
+  database:
+    image: postgres:15-alpine
+    container_name: tiktok-database
+    environment:
+      - POSTGRES_DB=tiktok_automation
+      - POSTGRES_USER=${DB_USER:-tiktok_user}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-change_this_password}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - tiktok-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-tiktok_user}"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Redis - Caching and Queue Management
+  redis:
+    image: redis:7-alpine
+    container_name: tiktok-redis
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-change_this_password}
+    volumes:
+      - redis-data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - tiktok-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Nginx - Reverse Proxy and SSL Termination
+  nginx:
+    image: nginx:alpine
+    container_name: tiktok-nginx
+    volumes:
+      - ./docker/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./docker/ssl:/etc/nginx/ssl:ro
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - tiktok-network
+    restart: unless-stopped
+    depends_on:
+      - dashboard
+      - ml-core
+      - meta-ads
+
+networks:
+  tiktok-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+volumes:
+  postgres-data:
+    driver: local
+  redis-data:
+    driver: local
