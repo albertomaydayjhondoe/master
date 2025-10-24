@@ -1,0 +1,49 @@
+# ═══════════════════════════════════════════════════════════════════════════
+# Dockerfile.unified-v3 - Sistema Unificado v3
+# ═══════════════════════════════════════════════════════════════════════════
+
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Install additional dependencies
+RUN pip install --no-cache-dir \
+    fastapi==0.104.1 \
+    uvicorn[standard]==0.24.0 \
+    httpx==0.25.0 \
+    redis==5.0.1
+
+# Copy application code
+COPY unified_system_v3.py .
+COPY ml_core/ ./ml_core/
+COPY device_farm/ ./device_farm/
+COPY social_extensions/ ./social_extensions/
+COPY config/ ./config/
+COPY database/ ./database/
+
+# Create directories
+RUN mkdir -p /data/videos /data/screenshots /data/cache
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1
+ENV DUMMY_MODE=false
+
+# Expose port
+EXPOSE 10000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
+    CMD curl -f http://localhost:10000/health || exit 1
+
+# Run Unified Orchestrator as API
+CMD ["python", "unified_system_v3.py", "--mode", "api", "--port", "10000"]

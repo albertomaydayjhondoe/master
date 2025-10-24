@@ -1,0 +1,35 @@
+# ═══════════════════════════════════════════════════════════════════════════
+# Dockerfile.gologin - GoLogin Automation
+# ═══════════════════════════════════════════════════════════════════════════
+
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    git \
+    chromium \
+    chromium-driver \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Install Selenium
+RUN pip install --no-cache-dir \
+    selenium==4.15.0
+
+# Copy application code
+COPY gologin_automation/ ./gologin_automation/
+COPY config/ ./config/
+COPY database/ ./database/
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1
+ENV DUMMY_MODE=false
+
+# Run GoLogin Automation
+CMD ["python", "-m", "gologin_automation.main"]

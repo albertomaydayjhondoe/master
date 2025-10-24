@@ -1,0 +1,417 @@
+version: '3.8'
+
+# ═══════════════════════════════════════════════════════════════════════════
+# 🚀 DOCKER COMPOSE V3 - SISTEMA COMPLETO PARA ROMPER DISCOGRÁFICA + RRSS
+# ═══════════════════════════════════════════════════════════════════════════
+#
+# Integra TODAS las capacidades:
+# - ML Core con YOLOv8/Ultralytics (Docker v1)
+# - Device Farm + GoLogin (Docker v1)
+# - Meta Ads + Pixel + YouTube (Docker v2)
+# - n8n Orchestrator (workflows automation)
+# - Sistema Unificado v3 (Community Manager)
+#
+# Stack completo: 15 servicios
+# Network: 172.22.0.0/16 (unified)
+# ═══════════════════════════════════════════════════════════════════════════
+
+networks:
+  unified-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.22.0.0/16
+
+volumes:
+  postgres-data:
+  redis-data:
+  n8n-data:
+  ml-models:
+  video-data:
+
+services:
+  # ═════════════════════════════════════════════════════════════════════════
+  # 🤖 ML CORE - YOLOv8 + Ultralytics (from Docker v1)
+  # ═════════════════════════════════════════════════════════════════════════
+  ml-core:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.ml-core
+    container_name: unified-ml-core
+    ports:
+      - "8000:8000"
+    environment:
+      - DUMMY_MODE=false
+      - ULTRALYTICS_ENABLED=true
+      - YOLO_MODEL_PATH=/models/yolov8n_screenshot.pt
+      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD:-postgres123}@postgres:5432/community_manager
+      - REDIS_URL=redis://redis:6379/0
+    volumes:
+      - ml-models:/models
+      - video-data:/data/videos
+      - ./ml_core:/app/ml_core
+      - ./config:/app/config
+    networks:
+      - unified-network
+    depends_on:
+      - postgres
+      - redis
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ═════════════════════════════════════════════════════════════════════════
+  # 📱 DEVICE FARM - 10 Móviles ADB/Appium (from Docker v1)
+  # ═════════════════════════════════════════════════════════════════════════
+  device-farm:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.device-farm
+    container_name: unified-device-farm
+    ports:
+      - "4723:4723"  # Appium
+    environment:
+      - DUMMY_MODE=false
+      - ADB_DEVICES=${ADB_DEVICES:-10}
+      - ML_CORE_URL=http://ml-core:8000
+      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD:-postgres123}@postgres:5432/community_manager
+    volumes:
+      - ./device_farm:/app/device_farm
+      - /dev/bus/usb:/dev/bus/usb  # USB devices for real phones
+    privileged: true
+    networks:
+      - unified-network
+    depends_on:
+      - ml-core
+      - postgres
+    restart: unless-stopped
+
+  # ═════════════════════════════════════════════════════════════════════════
+  # 🌐 GOLOGIN AUTOMATION - 5 Browser Profiles (from Docker v1)
+  # ═════════════════════════════════════════════════════════════════════════
+  gologin-automation:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.gologin
+    container_name: unified-gologin
+    environment:
+      - GOLOGIN_API_KEY=${GOLOGIN_API_KEY}
+      - GOLOGIN_PROFILE_IDS=${GOLOGIN_PROFILE_IDS}
+      - ML_CORE_URL=http://ml-core:8000
+      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD:-postgres123}@postgres:5432/community_manager
+    volumes:
+      - ./gologin_automation:/app/gologin_automation
+    networks:
+      - unified-network
+    depends_on:
+      - ml-core
+    restart: unless-stopped
+
+  # ═════════════════════════════════════════════════════════════════════════
+  # 💰 META ADS MANAGER - Campaign Automation (from Docker v2)
+  # ═════════════════════════════════════════════════════════════════════════
+  meta-ads-manager:
+    build:
+      context: .
+      dockerfile: docker/v2/Dockerfile.meta-ads-manager
+    container_name: unified-meta-ads
+    ports:
+      - "9000:9000"
+    environment:
+      - META_ACCESS_TOKEN=${META_ACCESS_TOKEN}
+      - META_AD_ACCOUNT_ID=${META_AD_ACCOUNT_ID}
+      - META_PIXEL_ID=${META_PIXEL_ID}
+      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD:-postgres123}@postgres:5432/community_manager
+      - REDIS_URL=redis://redis:6379/1
+    volumes:
+      - ./v2/meta_ads:/app
+    networks:
+      - unified-network
+    depends_on:
+      - postgres
+      - redis
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ═════════════════════════════════════════════════════════════════════════
+  # 📊 FACEBOOK PIXEL TRACKER - Conversion API (from Docker v2)
+  # ═════════════════════════════════════════════════════════════════════════
+  pixel-tracker:
+    build:
+      context: .
+      dockerfile: docker/v2/Dockerfile.pixel-tracker
+    container_name: unified-pixel-tracker
+    ports:
+      - "9001:9001"
+    environment:
+      - META_PIXEL_ID=${META_PIXEL_ID}
+      - META_ACCESS_TOKEN=${META_ACCESS_TOKEN}
+      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD:-postgres123}@postgres:5432/community_manager
+    volumes:
+      - ./v2/pixel_tracker:/app
+    networks:
+      - unified-network
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+  # ═════════════════════════════════════════════════════════════════════════
+  # 🎥 YOUTUBE UPLOADER - Automated Publishing (from Docker v2)
+  # ═════════════════════════════════════════════════════════════════════════
+  youtube-uploader:
+    build:
+      context: .
+      dockerfile: docker/v2/Dockerfile.youtube-uploader
+    container_name: unified-youtube-uploader
+    ports:
+      - "9003:9003"
+    environment:
+      - YOUTUBE_CLIENT_ID=${YOUTUBE_CLIENT_ID}
+      - YOUTUBE_CLIENT_SECRET=${YOUTUBE_CLIENT_SECRET}
+      - YOUTUBE_CHANNEL_ID=${YOUTUBE_CHANNEL_ID}
+      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD:-postgres123}@postgres:5432/community_manager
+    volumes:
+      - ./v2/youtube_uploader:/app
+      - video-data:/data/videos
+    networks:
+      - unified-network
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+  # ═════════════════════════════════════════════════════════════════════════
+  # 🔄 N8N ORCHESTRATOR - Workflow Automation Engine
+  # ═════════════════════════════════════════════════════════════════════════
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: unified-n8n
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=${N8N_USER:-admin}
+      - N8N_BASIC_AUTH_PASSWORD=${N8N_PASSWORD:-viral_admin_2025}
+      - N8N_HOST=0.0.0.0
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - WEBHOOK_URL=http://n8n:5678/
+      - GENERIC_TIMEZONE=America/Mexico_City
+      - DB_TYPE=postgresdb
+      - DB_POSTGRESDB_HOST=postgres
+      - DB_POSTGRESDB_PORT=5432
+      - DB_POSTGRESDB_DATABASE=n8n
+      - DB_POSTGRESDB_USER=postgres
+      - DB_POSTGRESDB_PASSWORD=${POSTGRES_PASSWORD:-postgres123}
+      # Service URLs for n8n workflows
+      - ML_CORE_URL=http://ml-core:8000
+      - META_ADS_URL=http://meta-ads-manager:9000
+      - PIXEL_TRACKER_URL=http://pixel-tracker:9001
+      - YOUTUBE_URL=http://youtube-uploader:9003
+      - UNIFIED_ORCHESTRATOR_URL=http://unified-orchestrator:10000
+    volumes:
+      - n8n-data:/home/node/.n8n
+      - ./orchestration/n8n_workflows:/home/node/.n8n/workflows
+    networks:
+      - unified-network
+    depends_on:
+      - postgres
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:5678/healthz"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ═════════════════════════════════════════════════════════════════════════
+  # 🚀 UNIFIED ORCHESTRATOR - Sistema v3 Community Manager
+  # ═════════════════════════════════════════════════════════════════════════
+  unified-orchestrator:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.unified-v3
+    container_name: unified-orchestrator
+    ports:
+      - "10000:10000"
+    environment:
+      - DUMMY_MODE=false
+      - ML_CORE_URL=http://ml-core:8000
+      - META_ADS_URL=http://meta-ads-manager:9000
+      - PIXEL_TRACKER_URL=http://pixel-tracker:9001
+      - YOUTUBE_URL=http://youtube-uploader:9003
+      - N8N_URL=http://n8n:5678
+      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD:-postgres123}@postgres:5432/community_manager
+      - REDIS_URL=redis://redis:6379/2
+    volumes:
+      - ./unified_system_v3.py:/app/unified_system_v3.py
+      - ./ml_core:/app/ml_core
+      - ./device_farm:/app/device_farm
+      - ./social_extensions:/app/social_extensions
+      - video-data:/data/videos
+    networks:
+      - unified-network
+    depends_on:
+      - ml-core
+      - meta-ads-manager
+      - pixel-tracker
+      - youtube-uploader
+      - n8n
+      - postgres
+      - redis
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:10000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ═════════════════════════════════════════════════════════════════════════
+  # 🎨 DASHBOARD - Streamlit UI (from Docker v1)
+  # ═════════════════════════════════════════════════════════════════════════
+  dashboard:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.dashboard
+    container_name: unified-dashboard
+    ports:
+      - "8501:8501"
+    environment:
+      - UNIFIED_ORCHESTRATOR_URL=http://unified-orchestrator:10000
+      - ML_CORE_URL=http://ml-core:8000
+      - N8N_URL=http://n8n:5678
+      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD:-postgres123}@postgres:5432/community_manager
+    volumes:
+      - ./community_manager_dashboard.py:/app/dashboard.py
+      - ./scripts:/app/scripts
+    networks:
+      - unified-network
+    depends_on:
+      - unified-orchestrator
+    restart: unless-stopped
+
+  # ═════════════════════════════════════════════════════════════════════════
+  # 🗄️ POSTGRESQL - Database (shared by all services)
+  # ═════════════════════════════════════════════════════════════════════════
+  postgres:
+    image: postgres:15-alpine
+    container_name: unified-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres123}
+      - POSTGRES_DB=community_manager
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - unified-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ═════════════════════════════════════════════════════════════════════════
+  # 🔴 REDIS - Cache (shared by all services)
+  # ═════════════════════════════════════════════════════════════════════════
+  redis:
+    image: redis:7-alpine
+    container_name: unified-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - unified-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ═════════════════════════════════════════════════════════════════════════
+  # 🌐 NGINX - Reverse Proxy & SSL
+  # ═════════════════════════════════════════════════════════════════════════
+  nginx:
+    image: nginx:alpine
+    container_name: unified-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./docker/nginx/ssl:/etc/nginx/ssl
+    networks:
+      - unified-network
+    depends_on:
+      - unified-orchestrator
+      - dashboard
+      - n8n
+    restart: unless-stopped
+
+  # ═════════════════════════════════════════════════════════════════════════
+  # 📊 GRAFANA - Monitoring Dashboard (Optional)
+  # ═════════════════════════════════════════════════════════════════════════
+  grafana:
+    image: grafana/grafana:latest
+    container_name: unified-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GRAFANA_USER:-admin}
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-viral_monitor_2025}
+      - GF_INSTALL_PLUGINS=redis-datasource,postgres-datasource
+    volumes:
+      - ./monitoring/dashboards/grafana:/etc/grafana/provisioning/dashboards
+      - ./monitoring/datasources:/etc/grafana/provisioning/datasources
+    networks:
+      - unified-network
+    depends_on:
+      - postgres
+      - redis
+    restart: unless-stopped
+
+# ═════════════════════════════════════════════════════════════════════════════
+# 🎯 DEPLOYMENT COMMANDS
+# ═════════════════════════════════════════════════════════════════════════════
+#
+# Start everything:
+#   docker-compose -f docker-compose-v3.yml up -d
+#
+# Start specific services:
+#   docker-compose -f docker-compose-v3.yml up -d ml-core n8n unified-orchestrator
+#
+# View logs:
+#   docker-compose -f docker-compose-v3.yml logs -f unified-orchestrator
+#
+# Stop everything:
+#   docker-compose -f docker-compose-v3.yml down
+#
+# Rebuild and restart:
+#   docker-compose -f docker-compose-v3.yml up -d --build
+#
+# Scale Device Farm:
+#   docker-compose -f docker-compose-v3.yml up -d --scale device-farm=3
+#
+# ═════════════════════════════════════════════════════════════════════════════
+# 🌐 ACCESS POINTS
+# ═════════════════════════════════════════════════════════════════════════════
+#
+# Dashboard:              http://localhost:8501
+# Unified Orchestrator:   http://localhost:10000
+# n8n Workflows:          http://localhost:5678 (admin/viral_admin_2025)
+# ML Core API:            http://localhost:8000
+# Meta Ads Manager:       http://localhost:9000
+# Grafana Monitoring:     http://localhost:3000 (admin/viral_monitor_2025)
+# Nginx (Production):     https://your-domain.com
+#
+# ═════════════════════════════════════════════════════════════════════════════
