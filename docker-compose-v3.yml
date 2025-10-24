@@ -36,12 +36,12 @@ services:
   ml-core:
     build:
       context: .
-      dockerfile: docker/Dockerfile.ml-core
+      dockerfile: docker/ml-core-v3.Dockerfile
     container_name: unified-ml-core
     ports:
       - "8000:8000"
     environment:
-      - DUMMY_MODE=false
+      - DUMMY_MODE=${DUMMY_MODE:-false}
       - ULTRALYTICS_ENABLED=true
       - YOLO_MODEL_PATH=/models/yolov8n_screenshot.pt
       - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD:-postgres123}@postgres:5432/community_manager
@@ -237,12 +237,12 @@ services:
   unified-orchestrator:
     build:
       context: .
-      dockerfile: docker/Dockerfile.unified-v3
+      dockerfile: docker/unified-orchestrator-v3.Dockerfile
     container_name: unified-orchestrator
     ports:
       - "10000:10000"
     environment:
-      - DUMMY_MODE=false
+      - DUMMY_MODE=${DUMMY_MODE:-false}
       - ML_CORE_URL=http://ml-core:8000
       - META_ADS_URL=http://meta-ads-manager:9000
       - PIXEL_TRACKER_URL=http://pixel-tracker:9001
@@ -279,7 +279,7 @@ services:
   dashboard:
     build:
       context: .
-      dockerfile: docker/Dockerfile.dashboard
+      dockerfile: docker/dashboard-v3.Dockerfile
     container_name: unified-dashboard
     ports:
       - "8501:8501"
@@ -289,7 +289,7 @@ services:
       - N8N_URL=http://n8n:5678
       - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD:-postgres123}@postgres:5432/community_manager
     volumes:
-      - ./community_manager_dashboard.py:/app/dashboard.py
+      - ./dashboard_v3.py:/app/dashboard_v3.py
       - ./scripts:/app/scripts
     networks:
       - unified-network
