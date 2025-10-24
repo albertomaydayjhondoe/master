@@ -66,49 +66,51 @@ services:
   # ═════════════════════════════════════════════════════════════════════════
   # 📱 DEVICE FARM - 10 Móviles ADB/Appium (from Docker v1)
   # ═════════════════════════════════════════════════════════════════════════
-  device-farm:
-    build:
-      context: .
-      dockerfile: docker/Dockerfile.device-farm
-    container_name: unified-device-farm
-    ports:
-      - "4723:4723"  # Appium
-    environment:
-      - DUMMY_MODE=false
-      - ADB_DEVICES=${ADB_DEVICES:-10}
-      - ML_CORE_URL=http://ml-core:8000
-      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD:-postgres123}@postgres:5432/community_manager
-    volumes:
-      - ./device_farm:/app/device_farm
-      - /dev/bus/usb:/dev/bus/usb  # USB devices for real phones
-    privileged: true
-    networks:
-      - unified-network
-    depends_on:
-      - ml-core
-      - postgres
-    restart: unless-stopped
+  # DESHABILITADO TEMPORALMENTE
+  # device-farm:
+  #   build:
+  #     context: .
+  #     dockerfile: docker/Dockerfile.device-farm
+  #   container_name: unified-device-farm
+  #   ports:
+  #     - "4723:4723"  # Appium
+  #   environment:
+  #     - DUMMY_MODE=false
+  #     - ADB_DEVICES=${ADB_DEVICES:-10}
+  #     - ML_CORE_URL=http://ml-core:8000
+  #     - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD:-postgres123}@postgres:5432/community_manager
+  #   volumes:
+  #     - ./device_farm:/app/device_farm
+  #     - /dev/bus/usb:/dev/bus/usb  # USB devices for real phones
+  #   privileged: true
+  #   networks:
+  #     - unified-network
+  #   depends_on:
+  #     - ml-core
+  #     - postgres
+  #   restart: unless-stopped
 
   # ═════════════════════════════════════════════════════════════════════════
   # 🌐 GOLOGIN AUTOMATION - 5 Browser Profiles (from Docker v1)
   # ═════════════════════════════════════════════════════════════════════════
-  gologin-automation:
-    build:
-      context: .
-      dockerfile: docker/Dockerfile.gologin
-    container_name: unified-gologin
-    environment:
-      - GOLOGIN_API_KEY=${GOLOGIN_API_KEY}
-      - GOLOGIN_PROFILE_IDS=${GOLOGIN_PROFILE_IDS}
-      - ML_CORE_URL=http://ml-core:8000
-      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD:-postgres123}@postgres:5432/community_manager
-    volumes:
-      - ./gologin_automation:/app/gologin_automation
-    networks:
-      - unified-network
-    depends_on:
-      - ml-core
-    restart: unless-stopped
+  # DESHABILITADO TEMPORALMENTE
+  # gologin-automation:
+  #   build:
+  #     context: .
+  #     dockerfile: docker/Dockerfile.gologin
+  #   container_name: unified-gologin
+  #   environment:
+  #     - GOLOGIN_API_KEY=${GOLOGIN_API_KEY}
+  #     - GOLOGIN_PROFILE_IDS=${GOLOGIN_PROFILE_IDS}
+  #     - ML_CORE_URL=http://ml-core:8000
+  #     - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD:-postgres123}@postgres:5432/community_manager
+  #   volumes:
+  #     - ./gologin_automation:/app/gologin_automation
+  #   networks:
+  #     - unified-network
+  #   depends_on:
+  #     - ml-core
+  #   restart: unless-stopped
 
   # ═════════════════════════════════════════════════════════════════════════
   # 💰 META ADS MANAGER - Campaign Automation (from Docker v2)

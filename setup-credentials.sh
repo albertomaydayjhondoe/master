@@ -133,10 +133,59 @@ configure_credentials() {
         log_success "YouTube Channel ID configurado"
     fi
     
+    # YouTube Artista Genérico (para Landing Pages Meta Ads)
+    echo ""
+    log_info "Credenciales del Artista Genérico (Landing Pages)"
+    echo ""
+    read -p "Nombre del Artista: " artist_name
+    read -p "YouTube Channel del Artista (URL completa): " artist_channel_url
+    read -p "Instagram Handle (@username): " artist_instagram
+    read -p "TikTok Handle (@username): " artist_tiktok
+    
+    if [ -n "$artist_name" ]; then
+        sed -i "s|ARTIST_NAME=.*|ARTIST_NAME=$artist_name|g" .env
+        log_success "Nombre del artista configurado"
+    fi
+    
+    if [ -n "$artist_channel_url" ]; then
+        sed -i "s|ARTIST_YOUTUBE_CHANNEL=.*|ARTIST_YOUTUBE_CHANNEL=$artist_channel_url|g" .env
+        log_success "YouTube Channel del artista configurado"
+    fi
+    
+    if [ -n "$artist_instagram" ]; then
+        sed -i "s|ARTIST_INSTAGRAM=.*|ARTIST_INSTAGRAM=$artist_instagram|g" .env
+        log_success "Instagram del artista configurado"
+    fi
+    
+    if [ -n "$artist_tiktok" ]; then
+        sed -i "s|ARTIST_TIKTOK=.*|ARTIST_TIKTOK=$artist_tiktok|g" .env
+        log_success "TikTok del artista configurado"
+    fi
+    
+    # Runway ML
+    echo ""
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo -e "${CYAN}3. RUNWAY ML (Generación de Videos AI)${NC}"
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo ""
+    read -p "¿Configurar Runway ML? (y/n): " configure_runway
+    
+    if [ "$configure_runway" = "y" ]; then
+        echo "Obtén tu API Key en: https://app.runwayml.com/settings/api"
+        read -p "Runway API Key: " runway_key
+        
+        if [ -n "$runway_key" ]; then
+            sed -i "s|RUNWAY_API_KEY=.*|RUNWAY_API_KEY=$runway_key|g" .env
+            log_success "Runway API Key configurado"
+        fi
+    else
+        log_info "Runway ML omitido (opcional)"
+    fi
+    
     # GoLogin (Optional)
     echo ""
     echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-    echo -e "${CYAN}3. GOLOGIN (Opcional - Browser Automation)${NC}"
+    echo -e "${CYAN}4. GOLOGIN (Opcional - Browser Automation)${NC}"
     echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
     echo ""
     read -p "¿Configurar GoLogin? (y/n): " configure_gologin
@@ -159,10 +208,32 @@ configure_credentials() {
         log_info "GoLogin omitido (opcional)"
     fi
     
+    # n8n Webhooks
+    echo ""
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo -e "${CYAN}5. N8N WEBHOOKS (Automation Workflows)${NC}"
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo ""
+    log_info "n8n se configurará automáticamente en http://localhost:5678"
+    log_info "Usuario por defecto: admin / viral_admin_2025"
+    echo ""
+    read -p "¿Deseas configurar webhook personalizado? (y/n): " configure_n8n_webhook
+    
+    if [ "$configure_n8n_webhook" = "y" ]; then
+        read -p "Webhook URL personalizado (ej: https://n8n.tu-dominio.com): " n8n_webhook
+        
+        if [ -n "$n8n_webhook" ]; then
+            sed -i "s|WEBHOOK_URL=.*|WEBHOOK_URL=$n8n_webhook|g" .env
+            log_success "n8n Webhook URL configurado"
+        fi
+    else
+        log_info "n8n usará URL local por defecto"
+    fi
+    
     # Telegram Bot (Optional)
     echo ""
     echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-    echo -e "${CYAN}4. TELEGRAM BOT (Opcional - Notificaciones)${NC}"
+    echo -e "${CYAN}6. TELEGRAM BOT (Opcional - Notificaciones)${NC}"
     echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
     echo ""
     read -p "¿Configurar Telegram Bot? (y/n): " configure_telegram
@@ -188,7 +259,7 @@ configure_credentials() {
     # Database & Services (Keep defaults)
     echo ""
     echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-    echo -e "${CYAN}5. PASSWORDS (Seguridad)${NC}"
+    echo -e "${CYAN}7. PASSWORDS (Seguridad)${NC}"
     echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
     echo ""
     log_warning "IMPORTANTE: Cambia estos passwords en PRODUCCIÓN"

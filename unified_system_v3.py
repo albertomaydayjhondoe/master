@@ -107,7 +107,7 @@ class UnifiedCommunityManagerSystem:
         self.analytics = {}
         
     # ============================================
-    # WORKFLOW: LANZAMIENTO VIRAL DE VIDEO
+    # WORKFLOW 1: LANZAMIENTO VIRAL DE VIDEO
     # ============================================
     
     async def launch_viral_video_campaign(
@@ -742,6 +742,322 @@ class UnifiedCommunityManagerSystem:
         return {}
     
     # ============================================
+    # WORKFLOW 2: MONITOR Y AUTO-VIRALIZAR CANAL
+    # ============================================
+    
+    async def monitor_and_viralize_channel(
+        self,
+        youtube_channel_id: str,
+        auto_launch: bool = True,
+        virality_threshold: float = 0.70,
+        max_campaigns_per_day: int = 2,
+        daily_ad_budget_per_video: float = 50.0,
+        target_countries: List[str] = None,
+        check_interval_hours: int = 6
+    ) -> Dict[str, Any]:
+        """
+        🔄 WORKFLOW DE MONITOREO CONTINUO DE CANAL
+        
+        Monitorea un canal de YouTube 24/7 y automáticamente viraliza
+        videos nuevos que tengan alto potencial viral.
+        
+        CONTROL DE CARGA INTELIGENTE:
+        - max_campaigns_per_day: Límite diario de campañas (default: 2)
+        - virality_threshold: Score mínimo para auto-launch (default: 0.70)
+        - check_interval_hours: Cada cuántas horas revisar (default: 6)
+        - Prioriza videos con mayor score si hay múltiples nuevos
+        - Respeta límites de UTM (Meta Ads, Device Farm, GoLogin)
+        
+        Args:
+            youtube_channel_id: ID del canal a monitorear (UC_xxx)
+            auto_launch: Si True, auto-lanza campañas. Si False, solo notifica
+            virality_threshold: Score ML mínimo (0.0-1.0) para auto-launch
+            max_campaigns_per_day: Máximo de campañas por día (evita sobrecarga)
+            daily_ad_budget_per_video: Budget Meta Ads por video
+            target_countries: Países objetivo
+            check_interval_hours: Intervalo de revisión en horas
+        
+        Returns:
+            Dict con estado del monitor, videos detectados, campañas lanzadas
+        """
+        
+        logger.info(f"🔄 STARTING CHANNEL MONITOR: {youtube_channel_id}")
+        logger.info(f"   - Auto-launch: {auto_launch}")
+        logger.info(f"   - Virality threshold: {virality_threshold}")
+        logger.info(f"   - Max campaigns/day: {max_campaigns_per_day}")
+        logger.info(f"   - Check interval: {check_interval_hours}h")
+        
+        if target_countries is None:
+            target_countries = ["US", "MX", "ES", "AR", "CL", "CO"]
+        
+        monitor_state = {
+            "channel_id": youtube_channel_id,
+            "started_at": datetime.now().isoformat(),
+            "auto_launch_enabled": auto_launch,
+            "virality_threshold": virality_threshold,
+            "max_campaigns_per_day": max_campaigns_per_day,
+            "campaigns_launched_today": 0,
+            "videos_monitored": [],
+            "campaigns": [],
+            "status": "monitoring"
+        }
+        
+        try:
+            # ========================================
+            # FASE 1: VERIFICAR LÍMITES DIARIOS
+            # ========================================
+            campaigns_today = self._count_campaigns_today(monitor_state)
+            
+            if campaigns_today >= max_campaigns_per_day:
+                logger.warning(f"⚠️ Daily campaign limit reached: {campaigns_today}/{max_campaigns_per_day}")
+                logger.info(f"   Next check in {check_interval_hours} hours...")
+                
+                return {
+                    **monitor_state,
+                    "status": "waiting",
+                    "message": f"Daily limit reached ({campaigns_today}/{max_campaigns_per_day})",
+                    "next_check": self._calculate_next_check(check_interval_hours)
+                }
+            
+            # ========================================
+            # FASE 2: DETECTAR VIDEOS NUEVOS
+            # ========================================
+            logger.info("📹 Buscando videos nuevos en el canal...")
+            
+            new_videos = await self._fetch_new_videos_from_channel(
+                youtube_channel_id,
+                hours_lookback=check_interval_hours * 2  # 2x para evitar perder videos
+            )
+            
+            logger.info(f"   Encontrados: {len(new_videos)} videos nuevos")
+            
+            if not new_videos:
+                logger.info("   No hay videos nuevos. Esperando...")
+                
+                return {
+                    **monitor_state,
+                    "status": "waiting",
+                    "message": "No new videos found",
+                    "next_check": self._calculate_next_check(check_interval_hours)
+                }
+            
+            # ========================================
+            # FASE 3: ANÁLISIS ML DE CADA VIDEO
+            # ========================================
+            logger.info("🧠 Analizando potencial viral con ML...")
+            
+            analyzed_videos = []
+            
+            for video in new_videos:
+                logger.info(f"   Analizando: {video['title']}")
+                
+                # ML: Predict virality score
+                virality_score = await self._ml_predict_virality(
+                    video_path=video.get("video_id"),  # In production: download video
+                    metadata={
+                        "title": video["title"],
+                        "description": video.get("description", ""),
+                        "channel": youtube_channel_id,
+                        "published_at": video["published_at"]
+                    }
+                )
+                
+                analyzed_videos.append({
+                    **video,
+                    "virality_score": virality_score,
+                    "above_threshold": virality_score >= virality_threshold
+                })
+                
+                logger.info(f"      Score: {virality_score:.2f} {'✅' if virality_score >= virality_threshold else '❌'}")
+            
+            # ========================================
+            # FASE 4: PRIORIZAR Y FILTRAR
+            # ========================================
+            # Sort by virality score (highest first)
+            analyzed_videos.sort(key=lambda v: v["virality_score"], reverse=True)
+            
+            # Filter: only above threshold
+            viral_candidates = [v for v in analyzed_videos if v["above_threshold"]]
+            
+            logger.info(f"   Videos con potencial viral: {len(viral_candidates)}/{len(analyzed_videos)}")
+            
+            if not viral_candidates:
+                logger.info("   Ningún video supera el threshold. Esperando...")
+                
+                monitor_state["videos_monitored"] = analyzed_videos
+                
+                return {
+                    **monitor_state,
+                    "status": "waiting",
+                    "message": f"No videos above threshold ({virality_threshold})",
+                    "analyzed_videos": analyzed_videos,
+                    "next_check": self._calculate_next_check(check_interval_hours)
+                }
+            
+            # ========================================
+            # FASE 5: LANZAR CAMPAÑAS (CON LÍMITE)
+            # ========================================
+            remaining_slots = max_campaigns_per_day - campaigns_today
+            
+            videos_to_launch = viral_candidates[:remaining_slots]
+            
+            logger.info(f"🚀 Lanzando {len(videos_to_launch)} campañas (quedan {remaining_slots} slots)")
+            
+            launched_campaigns = []
+            
+            for i, video in enumerate(videos_to_launch, 1):
+                logger.info(f"\n{'='*60}")
+                logger.info(f"CAMPAÑA {i}/{len(videos_to_launch)}: {video['title']}")
+                logger.info(f"Virality Score: {video['virality_score']:.2f}")
+                logger.info(f"{'='*60}\n")
+                
+                if auto_launch:
+                    try:
+                        # Extract artist name from channel or video title
+                        artist_name = self._extract_artist_name(video, youtube_channel_id)
+                        song_name = video["title"]
+                        
+                        # Launch full viral campaign
+                        campaign_result = await self.launch_viral_video_campaign(
+                            video_path=video["video_id"],  # In production: download first
+                            artist_name=artist_name,
+                            song_name=song_name,
+                            genre="Music",  # Could be ML-predicted
+                            daily_ad_budget=daily_ad_budget_per_video,
+                            target_countries=target_countries
+                        )
+                        
+                        launched_campaigns.append({
+                            "video": video,
+                            "campaign": campaign_result,
+                            "launched_at": datetime.now().isoformat()
+                        })
+                        
+                        logger.info(f"✅ Campaña lanzada: {campaign_result.get('campaign_id')}")
+                        
+                        # Update counter
+                        monitor_state["campaigns_launched_today"] += 1
+                        
+                        # Delay between campaigns (avoid rate limits)
+                        if i < len(videos_to_launch):
+                            logger.info("⏳ Esperando 5 minutos antes de siguiente campaña...")
+                            await asyncio.sleep(300)  # 5 min
+                        
+                    except Exception as e:
+                        logger.error(f"❌ Error lanzando campaña: {e}", exc_info=True)
+                        launched_campaigns.append({
+                            "video": video,
+                            "error": str(e),
+                            "launched_at": datetime.now().isoformat()
+                        })
+                else:
+                    # Solo notificar (no auto-launch)
+                    logger.info(f"📧 NOTIFICACIÓN: Video '{video['title']}' tiene score {video['virality_score']:.2f}")
+                    logger.info(f"   Auto-launch deshabilitado. Requiere aprobación manual.")
+            
+            # ========================================
+            # FASE 6: RESUMEN Y NEXT STEPS
+            # ========================================
+            monitor_state["videos_monitored"] = analyzed_videos
+            monitor_state["campaigns"] = launched_campaigns
+            monitor_state["status"] = "active"
+            
+            logger.info(f"\n{'='*60}")
+            logger.info(f"RESUMEN DEL CICLO:")
+            logger.info(f"{'='*60}")
+            logger.info(f"   Videos analizados: {len(analyzed_videos)}")
+            logger.info(f"   Con potencial viral: {len(viral_candidates)}")
+            logger.info(f"   Campañas lanzadas: {len(launched_campaigns)}")
+            logger.info(f"   Campañas hoy: {monitor_state['campaigns_launched_today']}/{max_campaigns_per_day}")
+            logger.info(f"   Próxima revisión: {check_interval_hours} horas")
+            logger.info(f"{'='*60}\n")
+            
+            return monitor_state
+            
+        except Exception as e:
+            logger.error(f"❌ Monitor error: {e}", exc_info=True)
+            monitor_state["status"] = "error"
+            monitor_state["error"] = str(e)
+            return monitor_state
+    
+    async def _fetch_new_videos_from_channel(
+        self,
+        channel_id: str,
+        hours_lookback: int = 12
+    ) -> List[Dict[str, Any]]:
+        """Obtiene videos nuevos del canal en las últimas N horas"""
+        
+        if self.dummy_mode:
+            # Simulate 2 new videos found
+            from datetime import timedelta
+            now = datetime.now()
+            
+            return [
+                {
+                    "video_id": f"dummy_video_1_{int(now.timestamp())}",
+                    "title": "Nuevo Single 2025 - Official Video",
+                    "description": "Official music video for my new single",
+                    "url": "https://youtube.com/watch?v=dummy1",
+                    "published_at": (now - timedelta(hours=3)).isoformat(),
+                    "duration": "3:45",
+                    "views": 1250,
+                    "likes": 89,
+                    "comments": 12
+                },
+                {
+                    "video_id": f"dummy_video_2_{int(now.timestamp())}",
+                    "title": "Behind The Scenes - Nuevo Album",
+                    "description": "Behind the scenes footage",
+                    "url": "https://youtube.com/watch?v=dummy2",
+                    "published_at": (now - timedelta(hours=8)).isoformat(),
+                    "duration": "5:20",
+                    "views": 450,
+                    "likes": 32,
+                    "comments": 5
+                }
+            ]
+        
+        # TODO: Real YouTube Data API v3 call
+        # GET https://www.googleapis.com/youtube/v3/search
+        # ?part=snippet
+        # &channelId={channel_id}
+        # &publishedAfter={hours_lookback}
+        # &type=video
+        # &order=date
+        
+        return []
+    
+    def _count_campaigns_today(self, monitor_state: Dict) -> int:
+        """Cuenta campañas lanzadas hoy (para rate limiting)"""
+        
+        # In production: query database
+        # SELECT COUNT(*) FROM campaigns
+        # WHERE DATE(created_at) = CURRENT_DATE
+        
+        return monitor_state.get("campaigns_launched_today", 0)
+    
+    def _calculate_next_check(self, hours: int) -> str:
+        """Calcula timestamp de próxima revisión"""
+        from datetime import timedelta
+        
+        next_check = datetime.now() + timedelta(hours=hours)
+        return next_check.isoformat()
+    
+    def _extract_artist_name(self, video: Dict, channel_id: str) -> str:
+        """Extrae nombre del artista del video o canal"""
+        
+        # Try from video title (pattern: "Artist - Song")
+        title = video.get("title", "")
+        if " - " in title:
+            return title.split(" - ")[0].strip()
+        
+        # TODO: In production, fetch channel info from YouTube API
+        # GET https://www.googleapis.com/youtube/v3/channels?id={channel_id}
+        
+        # Fallback
+        return "Artist"
+    
+    # ============================================
     # ML CORE METHODS (from Docker v1)
     # ============================================
     
@@ -917,7 +1233,41 @@ class UnifiedCommunityManagerSystem:
 async def main():
     """
     CLI para testear el sistema unificado
+    
+    Modos:
+    - launch: Lanza campaña viral de un video
+    - monitor-channel: Monitorea canal y auto-viraliza videos nuevos
     """
+    import argparse
+    
+    parser = argparse.ArgumentParser(
+        description="🚀 Unified System V3 - Community Manager"
+    )
+    
+    parser.add_argument(
+        "--mode",
+        choices=["launch", "monitor-channel", "demo"],
+        default="demo",
+        help="Modo de operación"
+    )
+    
+    # Launch mode arguments
+    parser.add_argument("--video", help="Path o URL del video")
+    parser.add_argument("--campaign-name", help="Nombre de la campaña")
+    parser.add_argument("--artist-name", help="Nombre del artista")
+    parser.add_argument("--genre", default="Music", help="Género musical")
+    parser.add_argument("--target-views", type=int, default=1000000, help="Views objetivo")
+    parser.add_argument("--paid-budget", type=float, default=50.0, help="Budget diario Meta Ads")
+    
+    # Monitor mode arguments
+    parser.add_argument("--youtube-channel", help="ID del canal de YouTube (UC_xxx)")
+    parser.add_argument("--auto-launch", action="store_true", help="Auto-lanzar campañas")
+    parser.add_argument("--virality-threshold", type=float, default=0.70, help="Score mínimo (0.0-1.0)")
+    parser.add_argument("--max-campaigns-per-day", type=int, default=2, help="Máx campañas/día")
+    parser.add_argument("--check-interval", type=int, default=6, help="Intervalo revisión (horas)")
+    
+    args = parser.parse_args()
+    
     print("""
     ╔═══════════════════════════════════════════════════════╗
     ║   🚀 UNIFIED SYSTEM V3 - Community Manager           ║
@@ -928,44 +1278,111 @@ async def main():
     # Initialize system
     system = UnifiedCommunityManagerSystem(dummy_mode=True)
     
-    print("\n📋 Ejemplo: Lanzamiento de 'Nueva Vida' por Stakas\n")
+    # ============================================
+    # MODE: LAUNCH
+    # ============================================
+    if args.mode == "launch":
+        if not args.video or not args.campaign_name:
+            print("❌ Error: --video y --campaign-name son requeridos")
+            return
+        
+        print(f"\n� LANZANDO CAMPAÑA: {args.campaign_name}\n")
+        
+        results = await system.launch_viral_video_campaign(
+            video_path=args.video,
+            artist_name=args.artist_name or "Artist",
+            song_name=args.campaign_name,
+            genre=args.genre,
+            daily_ad_budget=args.paid_budget,
+            target_countries=["US", "MX", "ES", "AR", "CL", "CO"]
+        )
+        
+        print("\n" + "="*60)
+        print("CAMPAIGN RESULTS:")
+        print("="*60)
+        print(json.dumps(results, indent=2))
+        
+        print(f"\n✅ Campaña lanzada: {results.get('campaign_id')}")
+        print(f"📊 Target: {args.target_views:,} views")
+        print(f"💰 Budget: ${args.paid_budget}/día")
+        print(f"📈 Estimated reach: {system._estimate_reach(results)}")
     
-    # Launch campaign
-    results = await system.launch_viral_video_campaign(
-        video_path="/data/videos/nueva_vida_official.mp4",
-        artist_name="Stakas",
-        song_name="Nueva Vida",
-        genre="Trap",
-        daily_ad_budget=50.0,
-        target_countries=["US", "MX", "ES", "AR", "CL", "CO"]
-    )
+    # ============================================
+    # MODE: MONITOR-CHANNEL
+    # ============================================
+    elif args.mode == "monitor-channel":
+        if not args.youtube_channel:
+            print("❌ Error: --youtube-channel es requerido")
+            return
+        
+        print(f"\n🔄 MONITOREANDO CANAL: {args.youtube_channel}\n")
+        print(f"   Auto-launch: {'SÍ' if args.auto_launch else 'NO'}")
+        print(f"   Threshold: {args.virality_threshold:.2f}")
+        print(f"   Max campañas/día: {args.max_campaigns_per_day}")
+        print(f"   Intervalo: {args.check_interval}h\n")
+        
+        monitor_result = await system.monitor_and_viralize_channel(
+            youtube_channel_id=args.youtube_channel,
+            auto_launch=args.auto_launch,
+            virality_threshold=args.virality_threshold,
+            max_campaigns_per_day=args.max_campaigns_per_day,
+            daily_ad_budget_per_video=args.paid_budget,
+            target_countries=["US", "MX", "ES", "AR", "CL", "CO"],
+            check_interval_hours=args.check_interval
+        )
+        
+        print("\n" + "="*60)
+        print("MONITOR RESULTS:")
+        print("="*60)
+        print(json.dumps(monitor_result, indent=2))
+        
+        print(f"\n✅ Status: {monitor_result.get('status')}")
+        print(f"📹 Videos analizados: {len(monitor_result.get('videos_monitored', []))}")
+        print(f"🚀 Campañas lanzadas: {len(monitor_result.get('campaigns', []))}")
+        print(f"📊 Campañas hoy: {monitor_result.get('campaigns_launched_today')}/{args.max_campaigns_per_day}")
     
-    print("\n" + "="*60)
-    print("CAMPAIGN RESULTS:")
-    print("="*60)
-    print(json.dumps(results, indent=2))
-    
-    # Wait and get analytics
-    print("\n⏳ Esperando 2 horas (simulado)...\n")
-    await asyncio.sleep(2)  # Simulate time passing
-    
-    analytics = await system.get_campaign_analytics()
-    
-    print("\n" + "="*60)
-    print("CAMPAIGN ANALYTICS (2h):")
-    print("="*60)
-    print(json.dumps(analytics, indent=2))
-    
-    # Optimize
-    print("\n🎯 Optimizando campaña...\n")
-    optimizations = await system.optimize_ongoing_campaign()
-    
-    print("\n" + "="*60)
-    print("OPTIMIZATIONS APPLIED:")
-    print("="*60)
-    print(json.dumps(optimizations, indent=2))
-    
-    print("\n✅ DEMO COMPLETADO\n")
+    # ============================================
+    # MODE: DEMO (default)
+    # ============================================
+    else:
+        print("\n�📋 Ejemplo: Lanzamiento de 'Nueva Vida' por Stakas\n")
+        
+        # Launch campaign
+        results = await system.launch_viral_video_campaign(
+            video_path="/data/videos/nueva_vida_official.mp4",
+            artist_name="Stakas",
+            song_name="Nueva Vida",
+            genre="Trap",
+            daily_ad_budget=50.0,
+            target_countries=["US", "MX", "ES", "AR", "CL", "CO"]
+        )
+        
+        print("\n" + "="*60)
+        print("CAMPAIGN RESULTS:")
+        print("="*60)
+        print(json.dumps(results, indent=2))
+        
+        # Wait and get analytics
+        print("\n⏳ Esperando 2 horas (simulado)...\n")
+        await asyncio.sleep(2)  # Simulate time passing
+        
+        analytics = await system.get_campaign_analytics()
+        
+        print("\n" + "="*60)
+        print("CAMPAIGN ANALYTICS (2h):")
+        print("="*60)
+        print(json.dumps(analytics, indent=2))
+        
+        # Optimize
+        print("\n🎯 Optimizando campaña...\n")
+        optimizations = await system.optimize_ongoing_campaign()
+        
+        print("\n" + "="*60)
+        print("OPTIMIZATIONS APPLIED:")
+        print("="*60)
+        print(json.dumps(optimizations, indent=2))
+        
+        print("\n✅ DEMO COMPLETADO\n")
 
 
 if __name__ == "__main__":
