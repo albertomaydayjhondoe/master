@@ -1,736 +1,370 @@
-""""""
+"""
+Telegram Monitoring System - Advanced Health and Performance Monitoring
+Tracks activity, performance metrics, alerts and provides comprehensive analytics
+"""
 
-Telegram Monitoring System - Advanced Health and Performance MonitoringTelegram Monitoring System - Advanced Health and Performance Monitoring
+import logging
+import asyncio
+import statistics
+from typing import Dict, List, Optional, Any
+from datetime import datetime, timedelta
+from dataclasses import dataclass
+from collections import defaultdict, deque
 
-Tracks activity, performance metrics, alerts and provides comprehensive analyticsTracks activity, performance metrics, alerts and provides comprehensive analytics
+from ...config.app_settings import is_dummy_mode
 
-""""""
+@dataclass
+class TelegramAlert:
+    """Telegram alert data structure"""
+    id: str
+    type: str
+    severity: str
+    message: str
+    timestamp: datetime
+    group_id: Optional[int] = None
+    data: Optional[Dict[str, Any]] = None
+    resolved: bool = False
+    resolved_at: Optional[datetime] = None
 
+@dataclass
+class ActivityMetric:
+    """Activity metric data structure"""
+    timestamp: datetime
+    type: str
+    group_id: Optional[int]
+    success: bool
+    duration_ms: Optional[float]
+    metadata: Dict[str, Any]
 
+class TelegramMonitor:
+    """Advanced Telegram Groups Monitoring System"""
+    
+    def __init__(self):
+        self.dummy_mode = is_dummy_mode()
+        self.logger = logging.getLogger(__name__)
 
-import loggingimport logging
+            data: Optional[Dict[str, Any]] = None    timestamp: datetime
 
-import asyncioimport asyncio
+        # Monitoring configuration
 
-import statisticsimport statistics
-
-from typing import Dict, List, Optional, Anyfrom typing import Dict, List, Optional, Any
-
-from datetime import datetime, timedeltafrom datetime import datetime, timedelta
-
-from dataclasses import dataclassfrom dataclasses import dataclass
-
-from collections import defaultdict, dequefrom collections import defaultdict, deque
-
-
-
-from ...config.app_settings import is_dummy_modefrom ...config.app_settings import is_dummy_mode
-
-
-
-@dataclass@dataclass
-
-class TelegramAlert:class TelegramAlert:
-
-    """Telegram alert data structure"""    """Telegram alert data structure"""
-
-    id: str    id: str
-
-    type: str    type: str
-
-    severity: str    severity: str
-
-    message: str    message: str
-
-    timestamp: datetime    timestamp: datetime
-
-    group_id: Optional[int] = None    group_id: Optional[int] = None
-
-    data: Optional[Dict[str, Any]] = None    data: Optional[Dict[str, Any]] = None
-
-    resolved: bool = False    resolved: bool = False
-
-    resolved_at: Optional[datetime] = None    resolved_at: Optional[datetime] = None
-
-
-
-@dataclass@dataclass
-
-class ActivityMetric:class ActivityMetric:
-
-    """Activity metric data structure"""    """Activity metric data structure"""
-
-    timestamp: datetime    timestamp: datetime
-
-    type: str    type: str
-
-    group_id: Optional[int]    group_id: Optional[int]
-
-    success: bool    success: bool
-
-    duration_ms: Optional[float]    duration_ms: Optional[float]
-
-    metadata: Dict[str, Any]    metadata: Dict[str, Any]
-
-
-
-class TelegramMonitor:class TelegramMonitor:
-
-    """Advanced Telegram Groups Monitoring System"""    """Advanced Telegram Groups Monitoring System"""
-
-        
-
-    def __init__(self):    def __init__(self):
-
-        self.dummy_mode = is_dummy_mode()        self.dummy_mode = is_dummy_mode()
-
-        self.logger = logging.getLogger(__name__)        self.logger = logging.getLogger(__name__)
-
-        
-
-        # Alert thresholds            data: Optional[Dict[str, Any]] = None    timestamp: datetime
-
-        self.alert_thresholds = {
-
-            "message_failure_rate": 0.15,        # Monitoring configuration
-
-            "response_time": 5.0,
-
-            "rate_limit_hits": 10,        self.alert_thresholds = {    resolved: bool = False    group_id: Optional[int] = None
+        self.alert_thresholds = {    resolved: bool = False    group_id: Optional[int] = None
 
             "low_engagement": 0.05,
 
-            "high_failure_rate": 0.25,            "low_engagement": 0.05,
+            "high_failure_rate": 0.2,    resolved_at: Optional[datetime] = None    data: Optional[Dict[str, Any]] = None
 
-            "error_spike": 5,
+            "flood_wait_frequent": 5,
 
-            "flood_wait_frequent": 3,            "high_failure_rate": 0.2,    resolved_at: Optional[datetime] = None    data: Optional[Dict[str, Any]] = None
+            "group_inactive": 24,    resolved: bool = False
 
-            "engagement_drop": 0.7
+            "high_response_time": 5000,
 
-        }            "flood_wait_frequent": 5,
+            "rate_limit_threshold": 0.8,@dataclass    resolved_at: Optional[datetime] = None
 
-        
+            "error_spike": 10,
 
-        # Activity tracking            "group_inactive": 24,    resolved: bool = False
+            "engagement_drop": 0.5class ActivityMetric:
 
-        self.activity_log = deque(maxlen=10000)
+        }
 
-                    "high_response_time": 5000,
+            """Activity metric data structure"""@dataclass
 
-        # Alert management
+        # Monitoring data structures
 
-        self.active_alerts = {}            "rate_limit_threshold": 0.8,@dataclass    resolved_at: Optional[datetime] = None
+        self.activity_log = deque(maxlen=10000)    timestamp: datetimeclass ActivityMetric:
 
-        self.alert_history = []
+        self.performance_metrics = defaultdict(list)
 
-                    "error_spike": 10,
+        self.active_alerts = {}    type: str    """Activity metric data structure"""
 
-        # Metrics tracking
+        self.alert_history = deque(maxlen=1000)
 
-        self.group_metrics = defaultdict(lambda: defaultdict(list))            "engagement_drop": 0.5class ActivityMetric:
+        self.group_metrics = defaultdict(lambda: defaultdict(list))    group_id: Optional[int]    timestamp: datetime
 
         self.system_stats = {}
 
-                }
+            success: bool    type: str
 
-        # Monitoring state
+        # Real-time monitoring
 
-        self.monitoring_enabled = True            """Activity metric data structure"""@dataclass
+        self.monitoring_enabled = True    duration_ms: Optional[float]    group_id: Optional[int]
 
-        
+        self.last_health_check = datetime.now()
 
-        self.logger.info("🎭 Telegram Monitor initialized in dummy mode" if self.dummy_mode else "✅ Telegram Monitor initialized")        # Monitoring data structures
-
-    
-
-    async def log_activity(self, activity: ActivityMetric):        self.activity_log = deque(maxlen=10000)    timestamp: datetimeclass ActivityMetric:
-
-        """Log an activity metric"""
-
-        self.activity_log.append(activity)        self.performance_metrics = defaultdict(list)
-
-        
-
-        # Check for patterns that need alerts        self.active_alerts = {}    type: str    """Activity metric data structure"""
-
-        await self._check_activity_patterns(activity)
-
-                self.alert_history = deque(maxlen=1000)
-
-        # Update group metrics
-
-        if activity.group_id:        self.group_metrics = defaultdict(lambda: defaultdict(list))    group_id: Optional[int]    timestamp: datetime
-
-            self.group_metrics[activity.group_id]["activities"].append({
-
-                "timestamp": activity.timestamp,        self.system_stats = {}
-
-                "type": activity.type,
-
-                "success": activity.success,            success: bool    type: str
-
-                "duration_ms": activity.duration_ms
-
-            })        # Real-time monitoring
-
-    
-
-    async def _check_activity_patterns(self, activity: ActivityMetric):        self.monitoring_enabled = True    duration_ms: Optional[float]    group_id: Optional[int]
-
-        """Check activity for patterns that need alerts"""
-
-                self.last_health_check = datetime.now()
-
-        # Check for high response time alerts
-
-        if activity.duration_ms and activity.duration_ms > 3000:            metadata: Dict[str, Any]    success: bool
-
-            await self._create_alert(
-
-                "high_response_time",        if self.dummy_mode:
-
-                "warning",
-
-                f"High response time detected: {activity.duration_ms}ms for {activity.type}",            self.logger.info("🎭 Running Telegram monitor in dummy mode")    duration_ms: Optional[float]
-
-                {"duration_ms": activity.duration_ms, "type": activity.type}
-
-            )            self._initialize_dummy_data()
-
-        
-
-        # Check for flood wait patterns    class TelegramMonitor:    metadata: Dict[str, Any]
-
-        if activity.type == "flood_wait" or (not activity.success and "flood" in str(activity.metadata.get("error", "")).lower()):
-
-            await self._check_flood_wait_pattern()    def _initialize_dummy_data(self):
-
-        
-
-        # Check engagement drop alerts        """Initialize dummy data for development"""    """Advanced Telegram Groups Monitoring System"""
-
-        if activity.type == "message_sent" and activity.group_id:
-
-            await self._check_engagement_drop_alert(activity.group_id, activity.metadata.get("engagement", 0))        now = datetime.now()
-
-        
-
-        # Check for error spikes        for i in range(50):    class TelegramMonitor:
-
-        await self._check_error_spike_alert()
-
-                activity = ActivityMetric(
-
-    async def _check_flood_wait_pattern(self):
-
-        """Check for flood wait patterns"""                timestamp=now - timedelta(minutes=i*10),    def __init__(self):    """Advanced Telegram Groups Monitoring System"""
-
-        
-
-        hour_ago = datetime.now() - timedelta(hours=1)                type=["message_sent", "content_generated", "group_analyzed"][i % 3],
-
-        flood_waits = [
-
-            a for a in self.activity_log                 group_id=[-1001234567890, -1001234567891][i % 2],        self.dummy_mode = is_dummy_mode()    
-
-            if (a.timestamp > hour_ago and 
-
-                (a.type == "flood_wait" or "flood" in str(a.metadata.get("error", "")).lower()))                success=i % 10 != 0,
-
-        ]
-
-                        duration_ms=500 + (i * 10),        self.logger = logging.getLogger(__name__)    def __init__(self):
-
-        if len(flood_waits) > self.alert_thresholds["flood_wait_frequent"]:
-
-            await self._create_alert(                metadata={"size": 100 + i, "engagement": 0.1 + (i * 0.01)}
-
-                "frequent_flood_waits",
-
-                "warning",            )                self.dummy_mode = is_dummy_mode()
-
-                f"Frequent flood waits: {len(flood_waits)} in last hour",
-
-                {"flood_wait_count": len(flood_waits), "time_window": "1_hour"}            self.activity_log.append(activity)
-
-            )
-
-                # Monitoring configuration        self.logger = logging.getLogger(__name__)
-
-    async def _check_engagement_drop_alert(self, group_id: int, current_engagement: float):
-
-        """Check for significant engagement drops"""    async def log_activity(self, activity_type: str, data: Dict[str, Any]):
-
-        
-
-        # Get historical engagement for this group        """Log Telegram activity with comprehensive metrics tracking"""        self.alert_thresholds = {        
-
-        recent_engagements = [
-
-            m["rate"] for m in self.group_metrics[group_id]["engagement"]        activity = ActivityMetric(
-
-            if (datetime.now() - m["timestamp"]).days <= 7
-
-        ]            timestamp=datetime.now(),            "low_engagement": 0.05,                   # Monitoring configuration
-
-        
-
-        if len(recent_engagements) >= 5:            type=activity_type,
-
-            avg_engagement = statistics.mean(recent_engagements)
-
-                        group_id=data.get("group_id"),            "high_failure_rate": 0.2,                 self.alert_thresholds = {
-
-            # Check if current engagement is significantly lower
-
-            if (avg_engagement > 0 and             success=data.get("success", True),
-
-                current_engagement < avg_engagement * self.alert_thresholds["engagement_drop"]):
-
-                            duration_ms=data.get("duration_ms"),            "flood_wait_frequent": 5,                     "low_engagement": 0.05,           # Below 5% engagement rate
-
-                await self._create_alert(
-
-                    "engagement_drop",            metadata=data
-
-                    "warning",
-
-                    f"Engagement drop in group {group_id}: {current_engagement:.3f} vs avg {avg_engagement:.3f}",        )            "group_inactive": 24,                         "high_failure_rate": 0.2,         # Above 20% message failures  
-
-                    {
-
-                        "group_id": group_id,        
-
-                        "current_engagement": current_engagement,
-
-                        "avg_engagement": avg_engagement,        self.activity_log.append(activity)            "high_response_time": 5000,                   "flood_wait_frequent": 5,         # More than 5 flood waits per hour
-
-                        "drop_percentage": (1 - current_engagement/avg_engagement) * 100
-
-                    },        
-
-                    group_id=group_id
-
-                )        # Update metrics            "rate_limit_threshold": 0.8,                  "group_inactive": 24,             # No posts for 24 hours
-
-    
-
-    async def _check_error_spike_alert(self):        await self._update_performance_metrics(activity)
-
-        """Check for error spikes across all activities"""
-
-                if activity.group_id:            "error_spike": 10,                            "high_response_time": 5000,       # Above 5 seconds response time
-
-        # Get activities from last 10 minutes
-
-        recent_time = datetime.now() - timedelta(minutes=10)            await self._update_group_metrics(activity)
-
-        recent_activities = [a for a in self.activity_log if a.timestamp > recent_time]
-
-                await self._check_activity_alerts(activity)            "engagement_drop": 0.5                        "rate_limit_threshold": 0.8,      # 80% of rate limit reached
-
-        if len(recent_activities) < 5:  # Need minimum sample
-
-            return        
-
-        
-
-        failure_rate = len([a for a in recent_activities if not a.success]) / len(recent_activities)        # Update system stats periodically        }            "error_spike": 10,                # 10+ errors in 10 minutes
-
-        
-
-        if failure_rate > self.alert_thresholds["high_failure_rate"]:        if (datetime.now() - self.last_health_check).seconds > 300:
-
-            await self._create_alert(
-
-                "high_failure_rate",            await self._update_system_stats()                    "engagement_drop": 0.5            # 50% drop in engagement
-
-                "critical" if failure_rate > 0.5 else "warning",
-
-                f"High failure rate: {failure_rate:.1%} ({len([a for a in recent_activities if not a.success])}/{len(recent_activities)})",            self.last_health_check = datetime.now()
-
-                {
-
-                    "failure_rate": failure_rate,                # Monitoring data structures        }
-
-                    "total_activities": len(recent_activities),
-
-                    "time_window": "10_minutes"        self.logger.debug(f"📊 Activity logged: {activity_type}")
-
-                }
-
-            )            self.activity_log = deque(maxlen=10000)        
-
-    
-
-    async def _create_alert(self, alert_type: str, severity: str, message: str,     async def _update_performance_metrics(self, activity: ActivityMetric):
-
-                           data: Dict[str, Any], group_id: Optional[int] = None):
-
-        """Create and manage alerts"""        """Update performance metrics based on activity"""        self.performance_metrics = defaultdict(list)        # Monitoring data structures
-
-        
-
-        alert_id = f"{alert_type}_{group_id or 'system'}_{datetime.now().strftime('%Y%m%d_%H%M%S')}"        if activity.duration_ms:
-
-        
-
-        # Check for duplicate alerts (same type, group, within last hour)            self.performance_metrics["response_times"].append({        self.active_alerts = {}        self.activity_log = deque(maxlen=10000)  # Recent activities
-
-        existing_alert = None
-
-        for alert in self.active_alerts.values():                "timestamp": activity.timestamp,
-
-            if (alert.type == alert_type and 
-
-                alert.group_id == group_id and                "duration_ms": activity.duration_ms,        self.alert_history = deque(maxlen=1000)        self.performance_metrics = defaultdict(list)  # Performance data
-
-                (datetime.now() - alert.timestamp).seconds < 3600 and
-
-                not alert.resolved):                "type": activity.type
-
-                existing_alert = alert
-
-                break            })        self.group_metrics = defaultdict(lambda: defaultdict(list))        self.active_alerts = {}  # Active alerts by ID
-
-        
-
-        if existing_alert:        
-
-            # Update existing alert data
-
-            existing_alert.data.update(data)        self.performance_metrics["success_rate"].append({        self.system_stats = {}        self.alert_history = deque(maxlen=1000)  # Alert history
-
-            existing_alert.timestamp = datetime.now()
-
-            self.logger.debug(f"🔄 Updated existing alert: {alert_type}")            "timestamp": activity.timestamp,
-
-            return
-
-                    "success": activity.success,                self.group_metrics = defaultdict(lambda: defaultdict(list))  # Per-group metrics
-
-        # Create new alert
-
-        alert = TelegramAlert(            "type": activity.type
-
-            id=alert_id,
-
-            type=alert_type,        })        # Real-time monitoring        self.system_stats = {}  # System-wide statistics
-
-            severity=severity,
-
-            message=message,        
-
-            timestamp=datetime.now(),
-
-            group_id=group_id,        # Keep metrics for last 24 hours only        self.monitoring_enabled = True        
-
-            data=data
-
-        )        cutoff_time = datetime.now() - timedelta(hours=24)
-
-        
-
-        self.active_alerts[alert_id] = alert        for metric_type in self.performance_metrics:        self.last_health_check = datetime.now()        # Real-time monitoring
-
-        self.alert_history.append(alert)
-
-                    self.performance_metrics[metric_type] = [
-
-        # Log alert based on severity
-
-        if severity == "critical":                m for m in self.performance_metrics[metric_type]                 self.monitoring_enabled = True
-
-            self.logger.error(f"🚨 CRITICAL ALERT: {message}")
-
-        elif severity == "warning":                if m["timestamp"] > cutoff_time
-
-            self.logger.warning(f"⚠️ WARNING ALERT: {message}")
-
-        else:            ]        if self.dummy_mode:        self.last_health_check = datetime.now()
-
-            self.logger.info(f"ℹ️ INFO ALERT: {message}")
-
-            
-
-        # In production, this would trigger notifications
-
-        await self._send_alert_notification(alert)    async def _update_group_metrics(self, activity: ActivityMetric):            self.logger.info("🎭 Running Telegram monitor in dummy mode")        
-
-    
-
-    async def _send_alert_notification(self, alert: TelegramAlert):        """Update group-specific metrics"""
-
-        """Send alert notifications (placeholder for actual implementation)"""
-
-                group_id = activity.group_id            self._initialize_dummy_data()        if self.dummy_mode:
+            metadata: Dict[str, Any]    success: bool
 
         if self.dummy_mode:
 
-            self.logger.info(f"🎭 Would send notification for alert: {alert.type}")        
+            self.logger.info("🎭 Running Telegram monitor in dummy mode")    duration_ms: Optional[float]
 
-            return
+            self._initialize_dummy_data()
 
-                if activity.type == "message_sent" and activity.success:                self.logger.info("🎭 Running Telegram monitor in dummy mode")
+    class TelegramMonitor:    metadata: Dict[str, Any]
 
-        # In production, implement:
+    def _initialize_dummy_data(self):
 
-        # - Email notifications            engagement = activity.metadata.get("engagement", 0)
-
-        # - Slack/Discord webhooks
-
-        # - SMS alerts for critical issues            self.group_metrics[group_id]["engagement"].append({    def _initialize_dummy_data(self):            self._initialize_dummy_data()
-
-        # - Dashboard updates
-
-        # - Webhook notifications                "timestamp": activity.timestamp,
-
-    
-
-    async def get_system_health(self) -> Dict[str, Any]:                "rate": engagement        """Initialize dummy data for development"""    
-
-        """Get comprehensive system health status"""
-
-                    })
-
-        await self._update_system_stats()
-
-                        now = datetime.now()    def _initialize_dummy_data(self):
-
-        if self.dummy_mode:
-
-            return {        if activity.type == "message_sent":
-
-                "status": "healthy",
-
-                "uptime_percentage": 99.8,            self.group_metrics[group_id]["posts"].append({        for i in range(50):        """Initialize dummy data for development"""
-
-                "response_time_ms": 1200,
-
-                "success_rate": 0.985,                "timestamp": activity.timestamp,
-
-                "active_groups": len(self.group_metrics),
-
-                "messages_sent_24h": len([a for a in self.activity_log if a.type == "message_sent"]),                "success": activity.success            activity = ActivityMetric(        
-
-                "active_alerts": len([a for a in self.active_alerts.values() if not a.resolved]),
-
-                "critical_alerts": len([a for a in self.active_alerts.values() if a.severity == "critical" and not a.resolved]),            })
-
-                "last_updated": datetime.now().isoformat(),
-
-                "monitoring_enabled": self.monitoring_enabled,                        timestamp=now - timedelta(minutes=i*10),        # Add some dummy activities
-
-                "system_load": "normal"
-
-            }        if activity.duration_ms:
-
-        
-
-        # Calculate real metrics            self.group_metrics[group_id]["response_times"].append({                type=["message_sent", "content_generated", "group_analyzed"][i % 3],        now = datetime.now()
-
-        day_ago = datetime.now() - timedelta(days=1)
-
-        activities_24h = [a for a in self.activity_log if a.timestamp > day_ago]                "timestamp": activity.timestamp,
-
-        
-
-        success_rate = (len([a for a in activities_24h if a.success]) / len(activities_24h)) if activities_24h else 1.0                "duration_ms": activity.duration_ms                group_id=[-1001234567890, -1001234567891][i % 2],        for i in range(50):
-
-        
-
-        response_times = [a.duration_ms for a in activities_24h if a.duration_ms is not None]            })
-
-        avg_response_time = statistics.mean(response_times) if response_times else 0
-
-                            success=i % 10 != 0,  # 10% failure rate            activity = ActivityMetric(
-
-        return {
-
-            "status": self.system_stats.get("uptime_status", "unknown"),    async def _check_activity_alerts(self, activity: ActivityMetric):
-
-            "success_rate": success_rate,
-
-            "response_time_ms": avg_response_time,        """Check for alert conditions"""                duration_ms=500 + (i * 10),                timestamp=now - timedelta(minutes=i*10),
-
-            "activities_24h": len(activities_24h),
-
-            "messages_sent_24h": len([a for a in activities_24h if a.type == "message_sent"]),        if not activity.success:
-
-            "active_groups": len(self.group_metrics),
-
-            "active_alerts": len([a for a in self.active_alerts.values() if not a.resolved]),            await self._check_failure_pattern_alert()                metadata={"size": 100 + i, "engagement": 0.1 + (i * 0.01)}                type=["message_sent", "content_generated", "group_analyzed"][i % 3],
-
-            "critical_alerts": len([a for a in self.active_alerts.values() if a.severity == "critical" and not a.resolved]),
-
-            "monitoring_enabled": self.monitoring_enabled,        
-
-            "last_updated": datetime.now().isoformat()
-
-        }        if activity.duration_ms and activity.duration_ms > self.alert_thresholds["high_response_time"]:            )                group_id=[-1001234567890, -1001234567891][i % 2],
-
-    
-
-    async def _update_system_stats(self):            await self._create_alert(
-
-        """Update system-wide statistics"""
-
-                        "high_response_time",            self.activity_log.append(activity)                success=i % 10 != 0,  # 10% failure rate
+        """Initialize dummy data for development"""    """Advanced Telegram Groups Monitoring System"""
 
         now = datetime.now()
 
-        recent_activities = [a for a in self.activity_log if (now - a.timestamp).seconds < 3600]                "warning",
+        for i in range(50):    class TelegramMonitor:
+
+            activity = ActivityMetric(
+
+                timestamp=now - timedelta(minutes=i*10),    def __init__(self):    """Advanced Telegram Groups Monitoring System"""
+
+                type=["message_sent", "content_generated", "group_analyzed"][i % 3],
+
+                group_id=[-1001234567890, -1001234567891][i % 2],        self.dummy_mode = is_dummy_mode()    
+
+                success=i % 10 != 0,
+
+                duration_ms=500 + (i * 10),        self.logger = logging.getLogger(__name__)    def __init__(self):
+
+                metadata={"size": 100 + i, "engagement": 0.1 + (i * 0.01)}
+
+            )                self.dummy_mode = is_dummy_mode()
+
+            self.activity_log.append(activity)
+
+            # Monitoring configuration        self.logger = logging.getLogger(__name__)
+
+    async def log_activity(self, activity_type: str, data: Dict[str, Any]):
+
+        """Log Telegram activity with comprehensive metrics tracking"""        self.alert_thresholds = {        
+
+        activity = ActivityMetric(
+
+            timestamp=datetime.now(),            "low_engagement": 0.05,                   # Monitoring configuration
+
+            type=activity_type,
+
+            group_id=data.get("group_id"),            "high_failure_rate": 0.2,                 self.alert_thresholds = {
+
+            success=data.get("success", True),
+
+            duration_ms=data.get("duration_ms"),            "flood_wait_frequent": 5,                     "low_engagement": 0.05,           # Below 5% engagement rate
+
+            metadata=data
+
+        )            "group_inactive": 24,                         "high_failure_rate": 0.2,         # Above 20% message failures  
 
         
 
-        if recent_activities:                f"High response time: {activity.duration_ms}ms",                    duration_ms=500 + (i * 10),
-
-            success_rate = len([a for a in recent_activities if a.success]) / len(recent_activities)
-
-            avg_response_time = statistics.mean([                {"duration_ms": activity.duration_ms, "type": activity.type}
-
-                a.duration_ms for a in recent_activities 
-
-                if a.duration_ms is not None            )    async def log_activity(self, activity_type: str, data: Dict[str, Any]):                metadata={"size": 100 + i, "engagement": 0.1 + (i * 0.01)}
-
-            ]) if any(a.duration_ms for a in recent_activities) else 0
-
-        else:    
-
-            success_rate = 1.0
-
-            avg_response_time = 0    async def _check_failure_pattern_alert(self):        """Log Telegram activity with comprehensive metrics tracking"""            )
+        self.activity_log.append(activity)            "high_response_time": 5000,                   "flood_wait_frequent": 5,         # More than 5 flood waits per hour
 
         
 
-        self.system_stats = {        """Check for concerning failure patterns"""
+        # Update metrics            "rate_limit_threshold": 0.8,                  "group_inactive": 24,             # No posts for 24 hours
 
-            "last_updated": now,
+        await self._update_performance_metrics(activity)
 
-            "activities_last_hour": len(recent_activities),        recent_time = datetime.now() - timedelta(minutes=10)        activity = ActivityMetric(            self.activity_log.append(activity)
+        if activity.group_id:            "error_spike": 10,                            "high_response_time": 5000,       # Above 5 seconds response time
 
-            "success_rate_1h": success_rate,
+            await self._update_group_metrics(activity)
 
-            "avg_response_time_1h": avg_response_time,        recent_failures = [
+        await self._check_activity_alerts(activity)            "engagement_drop": 0.5                        "rate_limit_threshold": 0.8,      # 80% of rate limit reached
 
-            "active_alerts": len([a for a in self.active_alerts.values() if not a.resolved]),
+        
 
-            "total_groups_monitored": len(self.group_metrics),            a for a in self.activity_log             timestamp=datetime.now(),    
+        # Update system stats periodically        }            "error_spike": 10,                # 10+ errors in 10 minutes
 
-            "uptime_status": "healthy" if len(self.active_alerts) == 0 else "degraded"
+        if (datetime.now() - self.last_health_check).seconds > 300:
 
-        }            if a.timestamp > recent_time and not a.success
+            await self._update_system_stats()                    "engagement_drop": 0.5            # 50% drop in engagement
+
+            self.last_health_check = datetime.now()
+
+                # Monitoring data structures        }
+
+        self.logger.debug(f"📊 Activity logged: {activity_type}")
+
+            self.activity_log = deque(maxlen=10000)        
+
+    async def _update_performance_metrics(self, activity: ActivityMetric):
+
+        """Update performance metrics based on activity"""        self.performance_metrics = defaultdict(list)        # Monitoring data structures
+
+        if activity.duration_ms:
+
+            self.performance_metrics["response_times"].append({        self.active_alerts = {}        self.activity_log = deque(maxlen=10000)  # Recent activities
+
+                "timestamp": activity.timestamp,
+
+                "duration_ms": activity.duration_ms,        self.alert_history = deque(maxlen=1000)        self.performance_metrics = defaultdict(list)  # Performance data
+
+                "type": activity.type
+
+            })        self.group_metrics = defaultdict(lambda: defaultdict(list))        self.active_alerts = {}  # Active alerts by ID
+
+        
+
+        self.performance_metrics["success_rate"].append({        self.system_stats = {}        self.alert_history = deque(maxlen=1000)  # Alert history
+
+            "timestamp": activity.timestamp,
+
+            "success": activity.success,                self.group_metrics = defaultdict(lambda: defaultdict(list))  # Per-group metrics
+
+            "type": activity.type
+
+        })        # Real-time monitoring        self.system_stats = {}  # System-wide statistics
+
+        
+
+        # Keep metrics for last 24 hours only        self.monitoring_enabled = True        
+
+        cutoff_time = datetime.now() - timedelta(hours=24)
+
+        for metric_type in self.performance_metrics:        self.last_health_check = datetime.now()        # Real-time monitoring
+
+            self.performance_metrics[metric_type] = [
+
+                m for m in self.performance_metrics[metric_type]                 self.monitoring_enabled = True
+
+                if m["timestamp"] > cutoff_time
+
+            ]        if self.dummy_mode:        self.last_health_check = datetime.now()
 
     
 
-    async def get_alerts(self, severity: Optional[str] = None, hours: int = 24,         ]            type=activity_type,    async def log_activity(self, activity_type: str, data: Dict[str, Any]):
+    async def _update_group_metrics(self, activity: ActivityMetric):            self.logger.info("🎭 Running Telegram monitor in dummy mode")        
 
-                        resolved: bool = False) -> List[Dict[str, Any]]:
+        """Update group-specific metrics"""
 
-        """Get alerts with filtering options"""        
-
-        
-
-        time_ago = datetime.now() - timedelta(hours=hours)        if len(recent_failures) >= self.alert_thresholds["error_spike"]:            group_id=data.get("group_id"),        """Log Telegram activity with comprehensive metrics tracking"""
+        group_id = activity.group_id            self._initialize_dummy_data()        if self.dummy_mode:
 
         
 
-        filtered_alerts = []            await self._create_alert(
+        if activity.type == "message_sent" and activity.success:                self.logger.info("🎭 Running Telegram monitor in dummy mode")
+
+            engagement = activity.metadata.get("engagement", 0)
+
+            self.group_metrics[group_id]["engagement"].append({    def _initialize_dummy_data(self):            self._initialize_dummy_data()
+
+                "timestamp": activity.timestamp,
+
+                "rate": engagement        """Initialize dummy data for development"""    
+
+            })
+
+                now = datetime.now()    def _initialize_dummy_data(self):
+
+        if activity.type == "message_sent":
+
+            self.group_metrics[group_id]["posts"].append({        for i in range(50):        """Initialize dummy data for development"""
+
+                "timestamp": activity.timestamp,
+
+                "success": activity.success            activity = ActivityMetric(        
+
+            })
+
+                        timestamp=now - timedelta(minutes=i*10),        # Add some dummy activities
+
+        if activity.duration_ms:
+
+            self.group_metrics[group_id]["response_times"].append({                type=["message_sent", "content_generated", "group_analyzed"][i % 3],        now = datetime.now()
+
+                "timestamp": activity.timestamp,
+
+                "duration_ms": activity.duration_ms                group_id=[-1001234567890, -1001234567891][i % 2],        for i in range(50):
+
+            })
+
+                    success=i % 10 != 0,  # 10% failure rate            activity = ActivityMetric(
+
+    async def _check_activity_alerts(self, activity: ActivityMetric):
+
+        """Check for alert conditions"""                duration_ms=500 + (i * 10),                timestamp=now - timedelta(minutes=i*10),
+
+        if not activity.success:
+
+            await self._check_failure_pattern_alert()                metadata={"size": 100 + i, "engagement": 0.1 + (i * 0.01)}                type=["message_sent", "content_generated", "group_analyzed"][i % 3],
+
+        
+
+        if activity.duration_ms and activity.duration_ms > self.alert_thresholds["high_response_time"]:            )                group_id=[-1001234567890, -1001234567891][i % 2],
+
+            await self._create_alert(
+
+                "high_response_time",            self.activity_log.append(activity)                success=i % 10 != 0,  # 10% failure rate
+
+                "warning",
+
+                f"High response time: {activity.duration_ms}ms",                    duration_ms=500 + (i * 10),
+
+                {"duration_ms": activity.duration_ms, "type": activity.type}
+
+            )    async def log_activity(self, activity_type: str, data: Dict[str, Any]):                metadata={"size": 100 + i, "engagement": 0.1 + (i * 0.01)}
+
+    
+
+    async def _check_failure_pattern_alert(self):        """Log Telegram activity with comprehensive metrics tracking"""            )
+
+        """Check for concerning failure patterns"""
+
+        recent_time = datetime.now() - timedelta(minutes=10)        activity = ActivityMetric(            self.activity_log.append(activity)
+
+        recent_failures = [
+
+            a for a in self.activity_log             timestamp=datetime.now(),    
+
+            if a.timestamp > recent_time and not a.success
+
+        ]            type=activity_type,    async def log_activity(self, activity_type: str, data: Dict[str, Any]):
+
+        
+
+        if len(recent_failures) >= self.alert_thresholds["error_spike"]:            group_id=data.get("group_id"),        """Log Telegram activity with comprehensive metrics tracking"""
+
+            await self._create_alert(
+
+                "error_spike",            success=data.get("success", True),        
+
+                "critical",
+
+                f"Error spike: {len(recent_failures)} failures in 10 minutes",            duration_ms=data.get("duration_ms"),        activity = ActivityMetric(
+
+                {"failure_count": len(recent_failures)}
+
+            )            metadata=data            timestamp=datetime.now(),
+
+    
+
+    async def _create_alert(self, alert_type: str, severity: str, message: str,         )            type=activity_type,
+
+                           data: Dict[str, Any], group_id: Optional[int] = None):
+
+        """Create and manage alerts"""                    group_id=data.get("group_id"),
+
+        alert_id = f"{alert_type}_{group_id or 'system'}_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+
+                self.activity_log.append(activity)            success=data.get("success", True),
+
+        # Check for duplicate alerts
+
+        existing_alert = None                    duration_ms=data.get("duration_ms"),
 
         for alert in self.active_alerts.values():
 
-            # Filter by time                "error_spike",            success=data.get("success", True),        
+            if (alert.type == alert_type and         # Update metrics            metadata=data
 
-            if alert.timestamp <= time_ago:
+                alert.group_id == group_id and
 
-                continue                "critical",
+                (datetime.now() - alert.timestamp).seconds < 3600 and        await self._update_performance_metrics(activity)        )
 
-            
+                not alert.resolved):
 
-            # Filter by severity                f"Error spike: {len(recent_failures)} failures in 10 minutes",            duration_ms=data.get("duration_ms"),        activity = ActivityMetric(
+                existing_alert = alert        if activity.group_id:        
 
-            if severity and alert.severity != severity:
+                break
 
-                continue                {"failure_count": len(recent_failures)}
+                    await self._update_group_metrics(activity)        self.activity_log.append(activity)
 
-            
+        if existing_alert:
 
-            # Filter by resolved status            )            metadata=data            timestamp=datetime.now(),
+            existing_alert.data.update(data)        await self._check_activity_alerts(activity)        
 
-            if alert.resolved != resolved:
-
-                continue    
-
-            
-
-            filtered_alerts.append({    async def _create_alert(self, alert_type: str, severity: str, message: str,         )            type=activity_type,
-
-                "id": alert.id,
-
-                "type": alert.type,                           data: Dict[str, Any], group_id: Optional[int] = None):
-
-                "severity": alert.severity,
-
-                "message": alert.message,        """Create and manage alerts"""                    group_id=data.get("group_id"),
-
-                "timestamp": alert.timestamp.isoformat(),
-
-                "group_id": alert.group_id,        alert_id = f"{alert_type}_{group_id or 'system'}_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
-
-                "data": alert.data,
-
-                "resolved": alert.resolved,                self.activity_log.append(activity)            success=data.get("success", True),
-
-                "resolved_at": alert.resolved_at.isoformat() if alert.resolved_at else None
-
-            })        # Check for duplicate alerts
-
-        
-
-        # Sort by timestamp (newest first)        existing_alert = None                    duration_ms=data.get("duration_ms"),
-
-        filtered_alerts.sort(key=lambda x: x["timestamp"], reverse=True)
-
-                for alert in self.active_alerts.values():
-
-        return filtered_alerts
-
-                if (alert.type == alert_type and         # Update metrics            metadata=data
-
-    async def resolve_alert(self, alert_id: str) -> bool:
-
-        """Mark an alert as resolved"""                alert.group_id == group_id and
-
-        
-
-        if alert_id in self.active_alerts:                (datetime.now() - alert.timestamp).seconds < 3600 and        await self._update_performance_metrics(activity)        )
-
-            alert = self.active_alerts[alert_id]
-
-            alert.resolved = True                not alert.resolved):
-
-            alert.resolved_at = datetime.now()
-
-                            existing_alert = alert        if activity.group_id:        
-
-            self.logger.info(f"✅ Resolved alert: {alert.type}")
-
-            return True                break
-
-        
-
-        return False                    await self._update_group_metrics(activity)        self.activity_log.append(activity)
-
-
-
-# Factory function for dependency injection        if existing_alert:
-
-def create_telegram_monitor(**kwargs) -> TelegramMonitor:
-
-    """Create TelegramMonitor instance with dependency injection"""            existing_alert.data.update(data)        await self._check_activity_alerts(activity)        
-
-    return TelegramMonitor(**kwargs)
             existing_alert.timestamp = datetime.now()
 
             return                # Update performance metrics
