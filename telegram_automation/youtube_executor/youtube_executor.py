@@ -12,6 +12,10 @@ from datetime import datetime, timedelta
 from typing import Dict, List, Optional, Any, Tuple
 from contextlib import asynccontextmanager
 
+# Configure logger
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
 # Safe imports with dummy mode support
 DUMMY_MODE = os.getenv('DUMMY_MODE', 'true').lower() == 'true'
 
@@ -43,8 +47,11 @@ if DUMMY_MODE:
                 print(f"🎭 Execute script: {script[:50]}...")
                 return True
             
-            def set_page_load_timeout(self, timeout): logger.error(f"Error: {e}")
-            def implicitly_wait(self, timeout): logger.error(f"Error: {e}")
+            def set_page_load_timeout(self, timeout): 
+                print(f"🎭 Set page load timeout: {timeout}")
+            
+            def implicitly_wait(self, timeout): 
+                print(f"🎭 Set implicit wait: {timeout}")
     
     class DummyElement:
         def __init__(self):
@@ -113,10 +120,10 @@ if DUMMY_MODE:
             self.experimental[name] = value
     
     class TimeoutException(Exception): 
-        logger.error(f"Error: {e}")
+        pass
     
     class WebDriverException(Exception): 
-        logger.error(f"Error: {e}")
+        pass
 
 else:
     # Production imports (will be used when DUMMY_MODE=false)
@@ -873,4 +880,4 @@ class YouTubeExecutorService:
         """Notify that execution is complete (to be called by conversation handler)"""
         # This will be integrated with the conversation handler
         # to send notifications to contacts
-        logger.error(f"Error: {e}")
+        logger.info("✅ Execution notification complete")
