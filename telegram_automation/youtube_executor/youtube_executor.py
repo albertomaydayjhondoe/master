@@ -142,7 +142,8 @@ except ImportError:
 
 # Logger setup
 import logging
-    class Exchange:
+
+class Exchange:
         def __init__(self):
             self.exchange_uuid = "dummy-uuid-12345"
             self.their_video_url = "https://youtube.com/watch?v=dummyvideo"
@@ -152,9 +153,9 @@ import logging
             self.our_execution_results = {}
             self.status = "pending"
     
-    class ExchangeStatus:
-        MY_TURN_DONE = "my_turn_done"
-        FAILED = "failed"
+class ExchangeStatus:
+    MY_TURN_DONE = "my_turn_done" 
+    FAILED = "failed"
 
 # Logger setup
 import logging
