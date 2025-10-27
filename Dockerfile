@@ -1,99 +1,66 @@
-# TikTok ML Automation System v4 - Production# TikTok ML API v3 - Original Simple Version
+# TikTok ML Automation System - Fixed Dockerfile
+# Production-ready container for ML processing and automation
 
-# Core system: n8n + ML Ultralytics + Landing Page + Meta Ads + SupabaseFROM python:3.11-slim
+FROM python:3.11-slim
 
-
-
-FROM python:3.11-slimWORKDIR /app
-
-
-
-# System dependencies# Variables de entorno
-
-RUN apt-get update && apt-get install -y \ENV PYTHONUNBUFFERED=1
-
-    curl \ENV DUMMY_MODE=true
-
-    gcc \ENV PORT=8000
-
+# System dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    gcc \
     g++ \
+    git \
+    && rm -rf /var/lib/apt/lists/*
 
-    git \# Instalar dependencias básicas del sistema
+WORKDIR /app
 
-    && rm -rf /var/lib/apt/lists/*RUN apt-get update && \
+# Environment variables
+ENV DUMMY_MODE=true
+ENV PORT=8000
+ENV PYTHONPATH=/app
+ENV PYTHONUNBUFFERED=1
 
-    apt-get install -y --no-install-recommends \
-
-WORKDIR /app    curl \
-
-    ca-certificates \
-
-# Install Python dependencies    && rm -rf /var/lib/apt/lists/*
-
+# Copy requirements and install Python dependencies
 COPY requirements.txt ./
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
 
-RUN pip install --no-cache-dir --upgrade pip && \# Copiar requirements básicos
-
-    pip install --no-cache-dir -r requirements.txtCOPY requirements.txt ./
-
-
-
-# Install Ultralytics and ML dependencies# Instalar solo dependencias esenciales de FastAPI
-
-RUN pip install --no-cache-dir \RUN pip install --no-cache-dir --upgrade pip && \
-
-    ultralytics==8.1.0 \    pip install --no-cache-dir \
-
-    torch torchvision \    fastapi==0.104.1 \
-
-    opencv-python-headless \    uvicorn==0.24.0 \
-
-    pillow \    python-dotenv==1.0.0 \
-
-    numpy \    pydantic==2.4.2 \
-
-    scikit-learn \    httpx==0.25.0 \
-
-    pandas    python-multipart==0.0.6 \
-
+# Install ML dependencies
+RUN pip install --no-cache-dir \
+    ultralytics==8.1.0 \
+    fastapi==0.104.1 \
+    uvicorn==0.24.0 \
+    python-dotenv==1.0.0 \
+    pydantic==2.4.2 \
+    httpx==0.25.0 \
+    python-multipart==0.0.6 \
     pillow==10.1.0 \
+    torch \
+    torchvision \
+    opencv-python-headless \
+    numpy \
+    scikit-learn \
+    pandas \
+    prometheus-client==0.18.0 \
+    python-json-logger==2.0.7
 
-# Copy application    prometheus-client==0.18.0 \
+# Copy application code
+COPY . .
 
-COPY . .    python-json-logger==2.0.7
+# Create necessary directories
+RUN mkdir -p /app/data/models /app/logs /app/uploads
 
+# Create non-root user for security
+RUN useradd --create-home --shell /bin/bash --uid 1000 appuser && \
+    chown -R appuser:appuser /app
 
+USER appuser
 
-# Create directories# Copiar todo el código fuente
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=15s --retries=3 \
+    CMD curl -f http://localhost:${PORT}/health || exit 1
 
-RUN mkdir -p /app/data/models /app/logs /app/uploadsCOPY . /app
+# Expose port
+EXPOSE $PORT
 
-
-
-# Environment variables# Crear usuario no-root para seguridad
-
-ENV PYTHONPATH=/appRUN useradd --create-home --shell /bin/bash --uid 1000 appuser && \
-
-ENV PYTHONUNBUFFERED=1    chown -R appuser:appuser /app
-
-ENV PRODUCTION_MODE=true
-
-ENV PORT=8000USER appuser
-
-
-
-# Health check# Health check
-
-HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \HEALTHCHECK --interval=30s --timeout=10s --start-period=15s --retries=3 \
-
-    CMD curl -f http://localhost:${PORT}/health || exit 1    CMD curl -f http://localhost:${PORT}/health || exit 1
-
-
-
-EXPOSE $PORT# Exponer puerto
-
-EXPOSE ${PORT}
-
+# Start the application
 CMD ["python", "-m", "uvicorn", "ml_core.api.main:app", "--host", "0.0.0.0", "--port", "8000"]
-# Comando de inicio - usar la app original
-CMD ["sh", "-c", "uvicorn ml_core.api.main:app --host 0.0.0.0 --port ${PORT} --workers 1"]
