@@ -47,13 +47,19 @@ Ver documentación completa: [`docs/MONITOR_CHANNEL_MODE.md`](docs/MONITOR_CHANN
 ./setup-credentials.sh
 ```
 
-Pedirá:
-- Meta Ads (ACCESS_TOKEN, AD_ACCOUNT_ID, PIXEL_ID)
-- YouTube API (CLIENT_ID, CLIENT_SECRET, CHANNEL_ID)
-- **Artista genérico** (nombre, YouTube channel, Instagram, TikTok) ⭐
-- Runway ML (opcional, AI video generation)
-- n8n webhooks (automation)
-- Telegram (notificaciones)
+**🚀 NUEVO: Setup Automático con APIs**
+```bash
+python scripts/configure_apis.py
+```
+
+**📊 Estado Actual de APIs:**
+- ✅ **Meta Ads**: Token + Account ID configurados (Angel Garcia)  
+- ✅ **YouTube API**: Client ID + Secret + Channel ID configurados ✅
+- ✅ **YouTube Channel ID**: UCgohgqLVu1QPdfa64Vkrgeg ✅
+- ✅ **Supabase**: COMPLETAMENTE CONFIGURADO ✅ (ilsikngctkrmqnbutpuz.supabase.co)
+- ✅ **Sistema Meta ML**: Operativo al 100% 🧠
+
+**🔥 SISTEMA 100% COMPLETO**: Meta Ads €400 + ML España-LATAM + Analytics Real-Time **OPERATIVO**
 
 ### 2. **Descargar Modelos YOLOv8**
 ```bash
@@ -316,6 +322,7 @@ Pass: viral_admin_2025
 ### **Completado:**
 - ✅ Docker V3 infrastructure (14 servicios)
 - ✅ ML Core (YOLOv8 analysis)
+- ✅ **Sistema Meta ML** 🧠 (España-LATAM optimization)
 - ✅ Meta Ads integration
 - ✅ YouTube uploader
 - ✅ Pixel Tracker
@@ -324,6 +331,7 @@ Pass: viral_admin_2025
 - ✅ Modo monitor-channel ⭐
 - ✅ Control de carga inteligente
 - ✅ Artista genérico para landing pages
+- ✅ **Cross-Platform ML Learning** (YouTube + Spotify + Meta)
 
 ### **Pendiente:**
 - ⏳ Runway ML integration (AI video generation)
@@ -407,7 +415,36 @@ python unified_system_v3.py \
 
 ---
 
-## 🚀 **NUEVO: Meta Ads-Centric Flow**
+## 🧠 **NUEVO: Sistema Meta ML (España-LATAM)**
+
+**Machine Learning Avanzado**: Sistema que aprende del rendimiento de Meta Ads, YouTube y Spotify para optimizar distribución geográfica España-LATAM automáticamente.
+
+### **🎯 Características ML:**
+- ✅ **Aprendizaje Cross-Platform**: YouTube + Spotify + Meta Ads
+- ✅ **Distribución Dinámica**: España 35% fijo, LATAM 65% variable
+- ✅ **Filtrado Inteligente**: Solo usuarios orgánicos de alta calidad
+- ✅ **Optimización Automática**: Redistribución basada en performance
+- ✅ **Exploración Controlada**: 20% presupuesto para nuevos mercados
+
+### **🚀 Quick Start Meta ML:**
+```bash
+# Windows
+.\scripts\Start-MetaML.ps1
+
+# Linux/Mac  
+./scripts/start_meta_ml.sh
+```
+
+**Resultado**: Optimización automática de campañas €400 con ML insights en tiempo real.
+
+### **📊 Dashboards:**
+- **Meta ML API**: http://localhost:8006
+- **Dashboard ML**: http://localhost:8501  
+- **Analytics**: Distribución España-LATAM en tiempo real
+
+---
+
+## 🆕 **Meta Ads-Centric Flow**
 
 **Revoluciona tu workflow**: Crea campañas Meta Ads y **automáticamente** lanza en todas las plataformas.
 

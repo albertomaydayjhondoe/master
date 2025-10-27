@@ -13,6 +13,7 @@ from datetime import datetime, timedelta
 import json
 import os
 import uuid
+from .meta_ml_integration import meta_ml_integrator
 
 # Configurar logging
 logging.basicConfig(level=logging.INFO)
@@ -78,6 +79,8 @@ class WorkflowResult(BaseModel):
     
     # ML y autorización
     ml_analysis_complete: bool
+    meta_ml_optimizations: List[Dict[str, Any]] = []
+    meta_ml_next_actions: List[Dict[str, Any]] = []
     authorization_requests: List[Dict[str, Any]]
     
     # Railway deployment
@@ -125,9 +128,13 @@ class MetaAds400Orchestrator:
             logger.info("📊 Step 2: Activating UTM tracking...")
             utm_result = await self._setup_utm_tracking(campaign_id, landing_result)
             
-            # 3. ANÁLISIS ML + ULTRALYTICS
-            logger.info("🤖 Step 3: Running ML analysis (Ultralytics + Music Analysis)...")
+            # 3. ANÁLISIS ML + ULTRALYTICS + SISTEMA META ML
+            logger.info("🤖 Step 3: Running ML analysis (Ultralytics + Meta ML System)...")
             ml_result = await self._run_ml_analysis(campaign)
+            
+            # 3.5. INTEGRACIÓN SISTEMA META ML (NUEVA FUNCIONALIDAD)
+            logger.info("🧠 Step 3.5: Integrating Meta ML optimization system...")
+            meta_ml_result = await self._integrate_meta_ml_system(campaign, ml_result)
             
             # 4. DISTRIBUCIÓN CROSS-PLATFORM
             logger.info("📱 Step 4: Distributing to all platforms...")
@@ -137,9 +144,9 @@ class MetaAds400Orchestrator:
             logger.info("☁️ Step 5: Setting up Railway 24/7 monitoring...")
             railway_result = await self._setup_railway_monitoring(campaign_id)
             
-            # 6. CONFIGURAR AUTORIZACIONES ML
+            # 6. CONFIGURAR AUTORIZACIONES ML (Integrado con Meta ML)
             logger.info("🔐 Step 6: Setting up ML authorization system...")
-            auth_requests = await self._setup_ml_authorizations(campaign, ml_result)
+            auth_requests = await self._setup_ml_authorizations(campaign, ml_result, meta_ml_result)
             
             # 7. CREAR DASHBOARDS DE MONITOREO
             logger.info("📊 Step 7: Creating monitoring dashboards...")
@@ -157,6 +164,8 @@ class MetaAds400Orchestrator:
                 utm_tracking_active=utm_result["active"],
                 analytics_dashboard_url=dashboard_urls["analytics"],
                 ml_analysis_complete=ml_result["complete"],
+                meta_ml_optimizations=meta_ml_result.get("optimizations_applied", []),
+                meta_ml_next_actions=meta_ml_result.get("next_actions", []),
                 authorization_requests=auth_requests,
                 railway_services_active=railway_result["active_services"],
                 monitoring_urls=dashboard_urls,
@@ -370,13 +379,120 @@ class MetaAds400Orchestrator:
             "deployment_url": f"{RAILWAY_BASE_URL}"
         }
     
-    async def _setup_ml_authorizations(self, campaign: MetaAds400Campaign, ml_result: Dict[str, Any]) -> List[Dict[str, Any]]:
+    async def _integrate_meta_ml_system(self, campaign: MetaAds400Campaign, ml_result: Dict[str, Any]) -> Dict[str, Any]:
+        """Integrar sistema Meta ML de optimización automática"""
+        
+        logger.info("🧠 Integrando sistema Meta ML...")
+        
+        try:
+            # Obtener datos de YouTube y Spotify (simulados por ahora)
+            youtube_analytics = await self._get_youtube_analytics(campaign.youtube_channel)
+            spotify_analytics = await self._get_spotify_analytics(campaign.artist_name, campaign.song_name)
+            
+            # Datos de la campaña para ML
+            campaign_data = {
+                "campaign_id": f"meta400_{campaign.artist_name}_{campaign.song_name}",
+                "artist": campaign.artist_name,
+                "song": campaign.song_name,
+                "genre": campaign.genre,
+                "daily_budget": campaign.daily_budget_euros,
+                "target_countries": campaign.target_countries,
+                "current_performance": {
+                    "ctr": 0.05,  # Datos iniciales
+                    "retention_rate": 0.7,
+                    "conversions": 0,
+                    "cost_per_conversion": 0
+                }
+            }
+            
+            # Integrar con sistema ML
+            ml_integration_result = await meta_ml_integrator.integrate_ml_with_campaign(
+                campaign_data, youtube_analytics, spotify_analytics
+            )
+            
+            if ml_integration_result["success"]:
+                logger.info("✅ Meta ML integrado exitosamente")
+                return ml_integration_result["ml_integration"]
+            else:
+                logger.warning("⚠️ Meta ML falló, usando optimizaciones básicas")
+                return {
+                    "optimizations_applied": [],
+                    "next_actions": [],
+                    "performance_boost": {"estimated_roi_improvement": 0}
+                }
+                
+        except Exception as e:
+            logger.error(f"❌ Error integrando Meta ML: {str(e)}")
+            return {
+                "error": str(e),
+                "optimizations_applied": [],
+                "next_actions": [],
+                "performance_boost": {"estimated_roi_improvement": 0}
+            }
+    
+    async def _get_youtube_analytics(self, youtube_channel: str) -> Dict[str, Any]:
+        """Obtener analytics filtrados de YouTube"""
+        
+        # Simulación de datos YouTube filtrados
+        return {
+            "channel": youtube_channel,
+            "viewers": [
+                {
+                    "user_id": f"yt_user_{i}",
+                    "country": ["ES", "MX", "CO", "AR"][i % 4],
+                    "age": 18 + (i % 25),
+                    "retention_rate": 0.45 + (i % 40) / 100,  # >40% filtro
+                    "traffic_source": "organic" if i % 3 != 0 else "paid",
+                    "is_recurring": i % 2 == 0,
+                    "watch_time": 45 + (i % 60),
+                    "actions": ["like", "comment"] if i % 3 == 0 else []
+                }
+                for i in range(100)
+            ]
+        }
+    
+    async def _get_spotify_analytics(self, artist: str, song: str) -> Dict[str, Any]:
+        """Obtener analytics filtrados de Spotify"""
+        
+        # Simulación de datos Spotify filtrados
+        return {
+            "artist": artist,
+            "song": song,
+            "listeners": [
+                {
+                    "user_id": f"sp_user_{i}",
+                    "country": ["ES", "MX", "CO", "AR", "CL"][i % 5],
+                    "age": 16 + (i % 30),
+                    "playlist_source": "organic" if i % 4 != 0 else "external_paid",
+                    "saved_track": i % 3 == 0,
+                    "repeat_listens": i % 5,
+                    "listening_time": 120 + (i % 60)
+                }
+                for i in range(80)
+            ]
+        }
+
+    async def _setup_ml_authorizations(self, campaign: MetaAds400Campaign, ml_result: Dict[str, Any], meta_ml_result: Dict[str, Any] = None) -> List[Dict[str, Any]]:
         """Configurar solicitudes de autorización ML"""
         
         auth_requests = []
         
-        # Procesar recomendaciones de optimización
+        # Procesar recomendaciones de optimización tradicionales
         recommendations = ml_result.get("optimization_recommendations", [])
+        
+        # Agregar recomendaciones del sistema Meta ML
+        if meta_ml_result and meta_ml_result.get("next_actions"):
+            for action in meta_ml_result["next_actions"]:
+                # Convertir acciones ML a recomendaciones con costo
+                estimated_cost = self._estimate_action_cost(action)
+                recommendations.append({
+                    "type": f"meta_ml_{action['action']}",
+                    "amount_euros": estimated_cost,
+                    "reason": action.get("description", "Optimización Meta ML"),
+                    "confidence": 0.9,  # Alta confianza del sistema ML
+                    "priority": action.get("priority", "medium"),
+                    "estimated_impact": action.get("estimated_impact", "N/A")
+                })
         
         for rec in recommendations:
             cost = rec.get("amount_euros", 0)
@@ -406,6 +522,34 @@ class MetaAds400Orchestrator:
                 })
         
         return auth_requests
+    
+    def _estimate_action_cost(self, action: Dict[str, Any]) -> float:
+        """Estimar costo de una acción Meta ML"""
+        
+        action_costs = {
+            "scale_up_campaign": 100.0,  # €100 adicionales
+            "expand_high_performers": 75.0,  # €75 por país
+            "create_viral_variants": 50.0,  # €50 por creativa
+            "explore_new_markets": 40.0,  # €40 por exploración
+            "increase_mexico": 60.0,  # País específico
+            "increase_colombia": 50.0,
+            "reduce_argentina": -30.0,  # Reducción (ahorro)
+            "boost_viral_creative": 80.0
+        }
+        
+        action_type = action.get("action", "unknown")
+        base_cost = action_costs.get(action_type, 25.0)  # Default €25
+        
+        # Ajustar por prioridad
+        priority_multiplier = {
+            "high": 1.5,
+            "medium": 1.0,
+            "low": 0.7
+        }
+        
+        multiplier = priority_multiplier.get(action.get("priority", "medium"), 1.0)
+        
+        return base_cost * multiplier
     
     async def _create_monitoring_dashboards(self, campaign_id: str) -> Dict[str, str]:
         """Crear URLs de dashboards de monitoreo"""

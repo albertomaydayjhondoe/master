@@ -1,0 +1,53 @@
+{
+  "ml_models": {
+    "yolo_v8": {
+      "model_size": "yolov8n (6.2MB)",
+      "inference_speed": "<500ms per image",
+      "supported_formats": [
+        "jpg",
+        "png",
+        "bmp"
+      ],
+      "min_confidence": 0.1,
+      "max_confidence": 1.0,
+      "default_confidence": 0.7,
+      "supported_devices": [
+        "cuda",
+        "cpu",
+        "mps"
+      ]
+    },
+    "anomaly_detection": {
+      "algorithm": "Statistical + ML Hybrid",
+      "baseline_window": "7 days",
+      "sensitivity_levels": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "detection_types": [
+        "shadowban",
+        "security",
+        "performance",
+        "ui_bugs"
+      ]
+    }
+  },
+  "performance": {
+    "max_concurrent_devices": 10,
+    "screenshots_per_minute": 100,
+    "ml_processing_queue": "Redis-based",
+    "gpu_memory_usage": "2GB typical",
+    "cpu_cores_recommended": 8,
+    "ram_recommended": "16GB"
+  },
+  "integrations": {
+    "ml_core_v4": true,
+    "ultralytics": true,
+    "pytorch": true,
+    "opencv": true,
+    "supabase_analytics": true,
+    "grafana_monitoring": true,
+    "n8n_workflows": true
+  }
+}

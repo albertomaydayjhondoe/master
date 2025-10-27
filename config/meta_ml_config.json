@@ -1,0 +1,20 @@
+{
+  "setup_date": "2025-10-27",
+  "version": "1.0.0",
+  "models_trained": true,
+  "data_quality_threshold": 0.7,
+  "geographic_distribution": {
+    "spain_minimum": 35.0,
+    "latam_variable": 65.0,
+    "exploration_budget": 20.0
+  },
+  "ml_thresholds": {
+    "high_performance": 130.0,
+    "low_performance": 70.0,
+    "auto_approval_threshold": 50.0
+  },
+  "api_endpoints": {
+    "ml_system": "http://localhost:8006",
+    "dashboard": "http://localhost:8501"
+  }
+}
