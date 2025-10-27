@@ -1,0 +1,223 @@
+# Device Farm v5 - Configuration
+# Main configuration for Android device farm with Gologin integration
+
+# === SYSTEM CONFIGURATION ===
+system:
+  name: "Device Farm v5"
+  version: "5.0.0"
+  max_devices: 10
+  health_check_interval: 60  # seconds
+  auto_save_interval: 30     # seconds
+  log_level: "INFO"          # DEBUG, INFO, WARNING, ERROR
+  
+# === GOLOGIN API CONFIGURATION ===
+gologin:
+  api_url: "https://api.gologin.com"
+  token: "${GOLOGIN_API_TOKEN}"  # Set via environment variable
+  cache_duration: 300            # Cache profiles for 5 minutes
+  max_retries: 3
+  timeout: 30
+  
+  # Profile management
+  profiles:
+    auto_refresh: true
+    refresh_interval: 600      # 10 minutes
+    max_profiles: 50
+    
+# === ADB DEVICE CONFIGURATION ===
+adb:
+  adb_path: "/usr/bin/adb"     # Path to ADB binary
+  connection_timeout: 30       # seconds
+  command_timeout: 15          # seconds
+  max_retries: 3
+  
+  # Device detection
+  detection:
+    scan_interval: 10          # seconds
+    expected_devices: 10
+    auto_reconnect: true
+    
+  # Proxy configuration on Android
+  proxy:
+    test_url: "http://httpbin.org/ip"
+    verification_timeout: 10
+    fallback_enabled: true
+    
+# === APPIUM CONFIGURATION ===
+appium:
+  base_port: 4723              # Starting port for Appium servers
+  port_range: 100              # Ports 4723-4823
+  server_timeout: 60           # seconds
+  session_timeout: 300         # 5 minutes
+  
+  # Chrome configuration
+  chrome:
+    package: "com.android.chrome"
+    activity: "com.google.android.apps.chrome.Main"
+    arguments:
+      - "--no-first-run"
+      - "--disable-background-timer-throttling"
+      - "--disable-renderer-backgrounding"
+      - "--disable-backgrounding-occluded-windows"
+      
+  # Capabilities
+  capabilities:
+    platformName: "Android"
+    automationName: "UiAutomator2"
+    noReset: true
+    fullReset: false
+    newCommandTimeout: 300
+    
+# === TASK QUEUE CONFIGURATION ===
+task_queue:
+  # Redis configuration
+  redis:
+    host: "localhost"
+    port: 6379
+    db: 0
+    password: "${REDIS_PASSWORD}"  # Optional
+    
+  # Queue settings
+  queue:
+    default_priority: 5
+    max_retries: 3
+    retry_delay: 30            # seconds
+    task_timeout: 600          # 10 minutes
+    
+  # Worker settings
+  workers:
+    count: 10                  # One worker per device
+    heartbeat_interval: 30     # seconds
+    
+# === DATABASE CONFIGURATION ===
+database:
+  url: "sqlite:///data/device_farm_v5.db"
+  echo: false                  # Set to true for SQL debugging
+  pool_size: 20
+  max_overflow: 30
+  
+  # Backup settings
+  backup:
+    enabled: true
+    interval: 3600             # 1 hour
+    retention_days: 7
+    
+# === DASHBOARD CONFIGURATION ===
+dashboard:
+  host: "0.0.0.0"
+  port: 5000
+  debug: false
+  secret_key: "${DASHBOARD_SECRET_KEY}"
+  
+  # Authentication
+  auth:
+    enabled: true
+    username: "${DASHBOARD_USERNAME}"
+    password: "${DASHBOARD_PASSWORD}"
+    
+  # Real-time updates
+  socketio:
+    cors_allowed_origins: "*"
+    ping_timeout: 60
+    ping_interval: 25
+    
+# === MONITORING & ALERTS ===
+monitoring:
+  # Health checks
+  health_checks:
+    device_connectivity: true
+    appium_servers: true
+    proxy_functionality: true
+    gologin_api: true
+    
+  # Alerts
+  alerts:
+    webhook_url: "${ALERT_WEBHOOK_URL}"  # Optional
+    telegram:
+      bot_token: "${TELEGRAM_BOT_TOKEN}"  # Optional
+      chat_id: "${TELEGRAM_CHAT_ID}"     # Optional
+      
+    # Alert thresholds
+    thresholds:
+      device_offline_minutes: 5
+      task_failure_rate: 0.3    # 30%
+      queue_size: 100
+      
+# === SECURITY CONFIGURATION ===
+security:
+  # API Keys
+  api_key: "${API_SECRET_KEY}"
+  jwt_secret: "${JWT_SECRET_KEY}"
+  
+  # Rate limiting
+  rate_limit:
+    requests_per_minute: 1000
+    burst_size: 100
+    
+  # Data encryption
+  encryption:
+    enabled: false             # Enable for sensitive data
+    key: "${ENCRYPTION_KEY}"   # 32-byte key
+    
+# === DEVELOPMENT CONFIGURATION ===
+development:
+  dummy_mode: false            # Use dummy devices for testing
+  mock_gologin: false          # Mock Gologin API responses
+  fake_devices: 0              # Number of fake devices to add
+  
+  # Testing
+  testing:
+    auto_cleanup: true
+    test_db_url: "sqlite:///data/test_device_farm.db"
+    
+# === ADVANCED FEATURES ===
+advanced:
+  # Multi-app support
+  supported_apps:
+    - package: "com.instagram.android"
+      name: "Instagram"
+      main_activity: "com.instagram.mainactivity.MainActivity"
+      
+    - package: "com.zhiliaoapp.musically"
+      name: "TikTok"
+      main_activity: "com.ss.android.ugc.aweme.splash.SplashActivity"
+      
+    - package: "com.twitter.android"
+      name: "Twitter"
+      main_activity: "com.twitter.android.StartActivity"
+      
+  # Performance optimization
+  performance:
+    enable_gpu_acceleration: true
+    max_concurrent_tasks: 10
+    memory_limit_mb: 2048
+    
+  # Fingerprint injection
+  fingerprint:
+    user_agent_override: true
+    screen_resolution_override: true
+    hardware_concurrency_override: true
+    language_override: true
+    timezone_override: true
+    
+# === LOGGING CONFIGURATION ===
+logging:
+  level: "INFO"
+  format: "{time:YYYY-MM-DD HH:mm:ss} | {level} | {name}:{function}:{line} | {message}"
+  
+  # File logging
+  file:
+    enabled: true
+    path: "logs/device_farm_v5.log"
+    rotation: "100 MB"
+    retention: "7 days"
+    
+  # Console logging
+  console:
+    enabled: true
+    colorize: true
+    
+  # Structured logging
+  structured:
+    enabled: true
+    format: "json"

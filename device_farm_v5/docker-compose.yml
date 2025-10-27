@@ -1,0 +1,212 @@
+# Device Farm v5 - Docker Compose Configuration
+# Production setup with device access and service orchestration
+
+version: '3.8'
+
+services:
+  # Main Device Farm service
+  device-farm:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: device-farm-v5
+    restart: unless-stopped
+    
+    # Environment configuration
+    environment:
+      - GOLOGIN_API_TOKEN=${GOLOGIN_API_TOKEN}
+      - DASHBOARD_SECRET_KEY=${DASHBOARD_SECRET_KEY:-dev-secret-key}
+      - DASHBOARD_USERNAME=${DASHBOARD_USERNAME:-admin}
+      - DASHBOARD_PASSWORD=${DASHBOARD_PASSWORD:-admin123}
+      - API_SECRET_KEY=${API_SECRET_KEY:-dev-api-key}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY:-dev-jwt-key}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - ENVIRONMENT=${ENVIRONMENT:-production}
+      - DEBUG=${DEBUG:-false}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+    
+    # Port mappings
+    ports:
+      - "5000:5000"       # Dashboard
+      - "8000:8000"       # API
+      - "4723-4733:4723-4733"  # Appium servers (10 ports)
+    
+    # Volume mappings
+    volumes:
+      # Persistent data
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./screenshots:/app/screenshots
+      - ./config:/app/config
+      
+      # USB device access (Linux only)
+      - /dev/bus/usb:/dev/bus/usb
+      - /dev:/dev
+      
+      # Docker socket for container management (optional)
+      # - /var/run/docker.sock:/var/run/docker.sock
+    
+    # Device access for USB debugging
+    devices:
+      - /dev/bus/usb
+    
+    # Privileged access for USB devices
+    privileged: true
+    
+    # Network configuration
+    networks:
+      - device-farm-network
+    
+    # Health check
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import requests; requests.get('http://localhost:5000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '4.0'
+          memory: 4G
+        reservations:
+          cpus: '1.0'
+          memory: 1G
+    
+    # Dependency management
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  # Redis for task queue
+  redis:
+    image: redis:7-alpine
+    container_name: device-farm-redis
+    restart: unless-stopped
+    
+    # Configuration
+    command: >
+      --requirepass ${REDIS_PASSWORD:-devicefarm123}
+      --appendonly yes
+      --appendfsync everysec
+      --maxmemory 256mb
+      --maxmemory-policy allkeys-lru
+    
+    # Volumes
+    volumes:
+      - redis-data:/data
+    
+    # Network
+    networks:
+      - device-farm-network
+    
+    # Health check
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.1'
+          memory: 128M
+
+  # Nginx reverse proxy (optional)
+  nginx:
+    image: nginx:alpine
+    container_name: device-farm-nginx
+    restart: unless-stopped
+    
+    ports:
+      - "80:80"
+      - "443:443"
+    
+    volumes:
+      - ./docker/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./docker/ssl:/etc/nginx/ssl:ro
+    
+    networks:
+      - device-farm-network
+    
+    depends_on:
+      - device-farm
+    
+    profiles:
+      - nginx
+
+  # Monitoring with Prometheus (optional)
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: device-farm-prometheus
+    restart: unless-stopped
+    
+    ports:
+      - "9090:9090"
+    
+    volumes:
+      - ./docker/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--web.enable-lifecycle'
+    
+    networks:
+      - device-farm-network
+    
+    profiles:
+      - monitoring
+
+  # Grafana for visualization (optional)
+  grafana:
+    image: grafana/grafana:latest
+    container_name: device-farm-grafana
+    restart: unless-stopped
+    
+    ports:
+      - "3000:3000"
+    
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin123}
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource
+    
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./docker/grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
+    
+    networks:
+      - device-farm-network
+    
+    depends_on:
+      - prometheus
+    
+    profiles:
+      - monitoring
+
+# Network configuration
+networks:
+  device-farm-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+# Volume definitions
+volumes:
+  redis-data:
+    driver: local
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local

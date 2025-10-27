@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device Farm v5 Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .status-card {
+            transition: all 0.3s ease;
+        }
+        .status-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .device-status {
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        .status-online { background-color: #d4edda; color: #155724; }
+        .status-offline { background-color: #f8d7da; color: #721c24; }
+        .task-status {
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        .status-pending { background-color: #fff3cd; color: #856404; }
+        .status-running { background-color: #cce7ff; color: #004085; }
+        .status-completed { background-color: #d4edda; color: #155724; }
+        .status-failed { background-color: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-mobile-alt"></i> Device Farm v5
+            </a>
+            <div class="navbar-nav">
+                <a class="nav-link active" href="/">Dashboard</a>
+                <a class="nav-link" href="/devices">Devices</a>
+                <a class="nav-link" href="/tasks">Tasks</a>
+                <a class="nav-link" href="/profiles">Profiles</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <!-- Status Cards -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card status-card text-center">
+                    <div class="card-body">
+                        <i class="fas fa-mobile-alt fa-2x text-primary mb-2"></i>
+                        <h5 class="card-title">Devices</h5>
+                        <h3 class="text-primary" id="device-count">-</h3>
+                        <small class="text-muted">
+                            <span id="devices-online">-</span> online / 
+                            <span id="devices-total">-</span> total
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card status-card text-center">
+                    <div class="card-body">
+                        <i class="fas fa-tasks fa-2x text-success mb-2"></i>
+                        <h5 class="card-title">Tasks</h5>
+                        <h3 class="text-success" id="task-count">-</h3>
+                        <small class="text-muted">
+                            <span id="tasks-active">-</span> active / 
+                            <span id="tasks-queued">-</span> queued
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card status-card text-center">
+                    <div class="card-body">
+                        <i class="fas fa-user-circle fa-2x text-warning mb-2"></i>
+                        <h5 class="card-title">Profiles</h5>
+                        <h3 class="text-warning" id="profile-count">-</h3>
+                        <small class="text-muted">
+                            <span id="profiles-synced">-</span> synced / 
+                            <span id="profiles-total">-</span> total
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card status-card text-center">
+                    <div class="card-body">
+                        <i class="fas fa-heartbeat fa-2x text-info mb-2"></i>
+                        <h5 class="card-title">System</h5>
+                        <h3 class="text-info" id="system-status">-</h3>
+                        <small class="text-muted">Last updated: <span id="last-updated">-</span></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-cogs"></i> Quick Actions</h5>
+                    </div>
+                    <div class="card-body">
+                        <button class="btn btn-primary me-2" onclick="scanDevices()">
+                            <i class="fas fa-search"></i> Scan Devices
+                        </button>
+                        <button class="btn btn-success me-2" onclick="syncProfiles()">
+                            <i class="fas fa-sync"></i> Sync Profiles
+                        </button>
+                        <button class="btn btn-info me-2" onclick="syncAll()">
+                            <i class="fas fa-sync-alt"></i> Sync All
+                        </button>
+                        <button class="btn btn-warning me-2" onclick="refreshStatus()">
+                            <i class="fas fa-refresh"></i> Refresh Status
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Devices -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-mobile-alt"></i> Device Status</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="devices-table">
+                                <thead>
+                                    <tr>
+                                        <th>Device Serial</th>
+                                        <th>Status</th>
+                                        <th>Model</th>
+                                        <th>Assigned Profile</th>
+                                        <th>Proxy</th>
+                                        <th>Last Seen</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="6" class="text-center">Loading devices...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Tasks -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-tasks"></i> Recent Tasks</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="tasks-table">
+                                <thead>
+                                    <tr>
+                                        <th>Task ID</th>
+                                        <th>Type</th>
+                                        <th>Status</th>
+                                        <th>Device</th>
+                                        <th>Created</th>
+                                        <th>Duration</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="6" class="text-center">Loading tasks...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script>
+        // Initialize Socket.IO
+        const socket = io();
+        
+        // Global state
+        let currentStatus = null;
+        
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            refreshStatus();
+            loadDevices();
+            loadTasks();
+            
+            // Auto-refresh every 30 seconds
+            setInterval(refreshStatus, 30000);
+        });
+        
+        // Socket.IO event handlers
+        socket.on('connect', function() {
+            console.log('Connected to server');
+        });
+        
+        socket.on('status_update', function(data) {
+            updateStatusDisplay(data);
+        });
+        
+        socket.on('error', function(data) {
+            showAlert('Error: ' + data.message, 'danger');
+        });
+        
+        // Status refresh
+        function refreshStatus() {
+            fetch('/api/status')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        showAlert('Error loading status: ' + data.error, 'danger');
+                        return;
+                    }
+                    updateStatusDisplay(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showAlert('Failed to load status', 'danger');
+                });
+        }
+        
+        // Update status display
+        function updateStatusDisplay(data) {
+            currentStatus = data;
+            
+            // Update device stats
+            document.getElementById('devices-online').textContent = data.devices.online;
+            document.getElementById('devices-total').textContent = data.devices.total;
+            document.getElementById('device-count').textContent = data.devices.online;
+            
+            // Update task stats
+            document.getElementById('tasks-active').textContent = data.tasks.active;
+            document.getElementById('tasks-queued').textContent = data.tasks.queued;
+            document.getElementById('task-count').textContent = data.tasks.active;
+            
+            // Update profile stats
+            document.getElementById('profiles-synced').textContent = data.profiles.synced;
+            document.getElementById('profiles-total').textContent = data.profiles.total;
+            document.getElementById('profile-count').textContent = data.profiles.synced;
+            
+            // Update system status
+            document.getElementById('system-status').textContent = data.status.toUpperCase();
+            document.getElementById('last-updated').textContent = new Date(data.timestamp).toLocaleTimeString();
+        }
+        
+        // Load devices
+        function loadDevices() {
+            fetch('/api/devices')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        showAlert('Error loading devices: ' + data.error, 'danger');
+                        return;
+                    }
+                    updateDevicesTable(data.devices);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showAlert('Failed to load devices', 'danger');
+                });
+        }
+        
+        // Update devices table
+        function updateDevicesTable(devices) {
+            const tbody = document.querySelector('#devices-table tbody');
+            
+            if (devices.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="text-center">No devices found</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = devices.map(device => `
+                <tr>
+                    <td><code>${device.serial}</code></td>
+                    <td>
+                        <span class="device-status status-${device.status === 'online' ? 'online' : 'offline'}">
+                            ${device.status}
+                        </span>
+                    </td>
+                    <td>${device.model || '-'}</td>
+                    <td>${device.assigned_profile || '-'}</td>
+                    <td>${device.proxy_host ? `${device.proxy_host}:${device.proxy_port}` : '-'}</td>
+                    <td>${device.last_seen ? new Date(device.last_seen).toLocaleString() : '-'}</td>
+                </tr>
+            `).join('');
+        }
+        
+        // Load tasks
+        function loadTasks() {
+            fetch('/api/tasks')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        showAlert('Error loading tasks: ' + data.error, 'danger');
+                        return;
+                    }
+                    updateTasksTable(data.tasks);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showAlert('Failed to load tasks', 'danger');
+                });
+        }
+        
+        // Update tasks table
+        function updateTasksTable(tasks) {
+            const tbody = document.querySelector('#tasks-table tbody');
+            
+            if (tasks.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="text-center">No recent tasks</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = tasks.slice(0, 10).map(task => {
+                const duration = calculateDuration(task.created_at, task.completed_at);
+                
+                return `
+                    <tr>
+                        <td><code>${task.id.substring(0, 8)}...</code></td>
+                        <td>${task.task_type}</td>
+                        <td>
+                            <span class="task-status status-${task.status}">
+                                ${task.status}
+                            </span>
+                        </td>
+                        <td>${task.device_serial || '-'}</td>
+                        <td>${new Date(task.created_at).toLocaleString()}</td>
+                        <td>${duration}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+        
+        // Calculate duration
+        function calculateDuration(start, end) {
+            if (!end) return '-';
+            
+            const startTime = new Date(start);
+            const endTime = new Date(end);
+            const duration = Math.round((endTime - startTime) / 1000);
+            
+            if (duration < 60) return `${duration}s`;
+            if (duration < 3600) return `${Math.round(duration / 60)}m`;
+            return `${Math.round(duration / 3600)}h`;
+        }
+        
+        // Action handlers
+        function scanDevices() {
+            showAlert('Scanning devices...', 'info');
+            
+            fetch('/api/devices/scan', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        showAlert('Error scanning devices: ' + data.error, 'danger');
+                        return;
+                    }
+                    showAlert(data.message, 'success');
+                    setTimeout(() => {
+                        loadDevices();
+                        refreshStatus();
+                    }, 1000);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showAlert('Failed to scan devices', 'danger');
+                });
+        }
+        
+        function syncProfiles() {
+            showAlert('Syncing profiles...', 'info');
+            
+            fetch('/api/profiles/sync', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        showAlert('Error syncing profiles: ' + data.error, 'danger');
+                        return;
+                    }
+                    showAlert(data.message, 'success');
+                    setTimeout(() => {
+                        refreshStatus();
+                    }, 1000);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showAlert('Failed to sync profiles', 'danger');
+                });
+        }
+        
+        function syncAll() {
+            showAlert('Synchronizing all devices...', 'info');
+            
+            fetch('/api/sync/all', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        showAlert('Error syncing devices: ' + data.error, 'danger');
+                        return;
+                    }
+                    showAlert(data.message, 'success');
+                    setTimeout(() => {
+                        loadDevices();
+                        refreshStatus();
+                    }, 1000);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showAlert('Failed to sync devices', 'danger');
+                });
+        }
+        
+        // Alert system
+        function showAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+            alertDiv.style.top = '20px';
+            alertDiv.style.right = '20px';
+            alertDiv.style.zIndex = '9999';
+            alertDiv.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(alertDiv);
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.parentNode.removeChild(alertDiv);
+                }
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
