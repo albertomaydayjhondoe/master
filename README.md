@@ -395,7 +395,7 @@ python unified_system_v3.py \
 ### **Inversión:**
 - Setup inicial: $0 (software open-source)
 - Budget mensual: $1,500-3,000 (Meta Ads)
-- Tiempo setup: 10 minutos
+- Tiempo setup: ~~10 minutos~~ **⚡ 30 segundos** (Meta-Centric)
 
 ### **Retorno:**
 - 15-30M views/mes (organic + paid)
@@ -404,3 +404,19 @@ python unified_system_v3.py \
 - Crecimiento canal: 50-80%/mes
 
 **ROI: 500-1000% en 3 meses** 🚀
+
+---
+
+## 🚀 **NUEVO: Meta Ads-Centric Flow**
+
+**Revoluciona tu workflow**: Crea campañas Meta Ads y **automáticamente** lanza en todas las plataformas.
+
+```bash
+# Un solo comando → Ecosistema completo activo
+curl -X POST https://your-app.railway.app/campaigns/create-with-orchestration \
+  -d '{"name": "Mi Hit 2025", "daily_budget": 100, "auto_optimize": true}'
+
+# Resultado: YouTube + TikTok + Instagram + Twitter + Meta Ads ¡ACTIVOS!
+```
+
+**📊 Análisis completo**: [`META_CENTRIC_ARCHITECTURE.md`](META_CENTRIC_ARCHITECTURE.md)

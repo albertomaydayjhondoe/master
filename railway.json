@@ -1,0 +1,63 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "builder": "DOCKER",
+    "dockerfilePath": "docker/Dockerfile.railway"
+  },
+  "deploy": {
+    "numReplicas": 1,
+    "restartPolicyType": "ON_FAILURE",
+    "healthcheckPath": "/health",
+    "healthcheckTimeout": 30,
+    "sleepApplication": false
+  },
+  "environments": {
+    "production": {
+      "variables": {
+        "ENVIRONMENT": "production",
+        "DEBUG": "false",
+        "DUMMY_MODE": "false",
+        "DATABASE_URL": "${{DATABASE_URL}}",
+        "META_ACCESS_TOKEN": "${{META_ACCESS_TOKEN}}",
+        "META_APP_ID": "${{META_APP_ID}}",
+        "META_APP_SECRET": "${{META_APP_SECRET}}",
+        "META_ACCOUNT_ID": "${{META_ACCOUNT_ID}}",
+        "META_PIXEL_ID": "${{META_PIXEL_ID}}",
+        "YOUTUBE_API_KEY": "${{YOUTUBE_API_KEY}}",
+        "YOUTUBE_CLIENT_ID": "${{YOUTUBE_CLIENT_ID}}",
+        "YOUTUBE_CLIENT_SECRET": "${{YOUTUBE_CLIENT_SECRET}}",
+        "TIKTOK_CLIENT_KEY": "${{TIKTOK_CLIENT_KEY}}",
+        "TIKTOK_CLIENT_SECRET": "${{TIKTOK_CLIENT_SECRET}}",
+        "TIKTOK_ACCESS_TOKEN": "${{TIKTOK_ACCESS_TOKEN}}",
+        "INSTAGRAM_ACCESS_TOKEN": "${{INSTAGRAM_ACCESS_TOKEN}}",
+        "INSTAGRAM_BUSINESS_ACCOUNT_ID": "${{INSTAGRAM_BUSINESS_ACCOUNT_ID}}",
+        "TWITTER_API_KEY": "${{TWITTER_API_KEY}}",
+        "TWITTER_API_SECRET": "${{TWITTER_API_SECRET}}",
+        "TWITTER_ACCESS_TOKEN": "${{TWITTER_ACCESS_TOKEN}}",
+        "TWITTER_ACCESS_TOKEN_SECRET": "${{TWITTER_ACCESS_TOKEN_SECRET}}",
+        "OPENAI_API_KEY": "${{OPENAI_API_KEY}}",
+        "ML_CORE_URL": "http://ml-core:8000",
+        "META_ADS_URL": "http://meta-ads-manager:9000",
+        "YOUTUBE_UPLOADER_URL": "http://youtube-uploader:8001",
+        "UNIFIED_ORCHESTRATOR_URL": "http://unified-orchestrator:10000",
+        "META_WEBHOOK_VERIFY_TOKEN": "${{META_WEBHOOK_VERIFY_TOKEN}}",
+        "WEBHOOK_BASE_URL": "${{RAILWAY_STATIC_URL}}",
+        "REDIS_URL": "${{REDIS_URL}}",
+        "JWT_SECRET_KEY": "${{JWT_SECRET_KEY}}",
+        "API_SECRET_KEY": "${{API_SECRET_KEY}}"
+      }
+    },
+    "development": {
+      "variables": {
+        "ENVIRONMENT": "development",
+        "DEBUG": "true",
+        "DUMMY_MODE": "true",
+        "ML_CORE_URL": "http://localhost:8000",
+        "META_ADS_URL": "http://localhost:9000",
+        "YOUTUBE_UPLOADER_URL": "http://localhost:8001",
+        "UNIFIED_ORCHESTRATOR_URL": "http://localhost:10000",
+        "DATABASE_URL": "sqlite:///./dev_database.db"
+      }
+    }
+  }
+}
