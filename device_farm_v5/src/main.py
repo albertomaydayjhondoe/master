@@ -19,6 +19,7 @@ from src.core.profile_synchronizer import get_profile_synchronizer
 from src.core.task_queue import get_task_queue
 from src.integrations.gologin_manager import get_gologin_manager
 from src.integrations.tiktok_ml_adapter import get_tiktok_ml_adapter
+from src.ml.enhanced_yolo_detector import get_device_farm_yolo_detector
 
 
 class DeviceFarmSystem:
@@ -122,6 +123,12 @@ class DeviceFarmSystem:
             tiktok_adapter = await get_tiktok_ml_adapter()
             self.components['tiktok_ml'] = tiktok_adapter
             logger.info("✅ TikTok ML Integration initialized")
+            
+            # Initialize Enhanced YOLO Detector
+            logger.info("🎯 Initializing Enhanced YOLO Detector...")
+            yolo_detector = await get_device_farm_yolo_detector()
+            self.components['yolo_detector'] = yolo_detector
+            logger.info("✅ Enhanced YOLO Detector initialized")
             
             # Perform initial system checks
             await self._perform_system_checks()

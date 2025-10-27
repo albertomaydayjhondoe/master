@@ -328,6 +328,135 @@ def api_sync_all():
         return jsonify({'error': str(e)}), 500
 
 
+# YOLO Analysis API Endpoints
+
+@app.route('/api/yolo/analyze/<device_serial>', methods=['POST'])
+def api_yolo_analyze_device(device_serial):
+    """Analyze device screenshot with YOLO"""
+    try:
+        from ..ml.enhanced_yolo_detector import get_device_farm_yolo_detector
+        
+        detector = run_async(get_device_farm_yolo_detector())
+        analysis_result = run_async(detector.analyze_device_screenshot(device_serial))
+        
+        return jsonify({
+            'message': f'YOLO analysis completed for device {device_serial}',
+            'analysis': {
+                'detections': analysis_result['detections'],
+                'detection_count': analysis_result['detection_count'],
+                'app_state': analysis_result['automation_recommendations']['app_state'],
+                'automation_confidence': analysis_result['automation_recommendations']['automation_confidence'],
+                'safe_actions': len(analysis_result['automation_recommendations']['safe_actions']),
+                'risky_actions': len(analysis_result['automation_recommendations']['risky_actions'])
+            }
+        })
+        
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/api/yolo/anomaly/<device_serial>', methods=['POST'])
+def api_yolo_anomaly_check(device_serial):
+    """Check for anomalies using YOLO"""
+    try:
+        from ..ml.enhanced_yolo_detector import get_device_farm_yolo_detector
+        
+        detector = run_async(get_device_farm_yolo_detector())
+        anomaly_result = run_async(detector.detect_anomalies(device_serial))
+        
+        return jsonify({
+            'message': f'Anomaly check completed for device {device_serial}',
+            'anomaly_detected': anomaly_result['anomaly_detected'],
+            'anomaly_score': anomaly_result['anomaly_score'],
+            'anomaly_types': anomaly_result.get('anomaly_types', []),
+            'recommendations': anomaly_result.get('recommendations', [])
+        })
+        
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/api/yolo/batch_analyze', methods=['POST'])
+def api_yolo_batch_analyze():
+    """Batch analyze multiple devices with YOLO"""
+    try:
+        data = request.get_json()
+        device_serials = data.get('device_serials', [])
+        
+        if not device_serials:
+            return jsonify({'error': 'No device serials provided'}), 400
+        
+        from ..ml.enhanced_yolo_detector import get_device_farm_yolo_detector
+        
+        detector = run_async(get_device_farm_yolo_detector())
+        batch_results = run_async(detector.batch_analyze_devices(device_serials))
+        
+        successful = sum(1 for r in batch_results.values() if r.get('success', False))
+        
+        return jsonify({
+            'message': f'Batch analysis completed: {successful}/{len(device_serials)} successful',
+            'results': batch_results,
+            'success_rate': successful / len(device_serials) if device_serials else 0
+        })
+        
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/api/yolo/model_info')
+def api_yolo_model_info():
+    """Get YOLO model information"""
+    try:
+        from ..ml.enhanced_yolo_detector import get_device_farm_yolo_detector
+        
+        detector = run_async(get_device_farm_yolo_detector())
+        model_info = detector.get_model_info()
+        
+        return jsonify(model_info)
+        
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/api/yolo/create_task', methods=['POST'])
+def api_yolo_create_task():
+    """Create YOLO analysis task"""
+    try:
+        data = request.get_json()
+        
+        task_type = data.get('task_type', 'yolo_screenshot_analysis')
+        device_serial = data.get('device_serial')
+        parameters = data.get('parameters', {})
+        
+        if not device_serial:
+            return jsonify({'error': 'Device serial required'}), 400
+        
+        from ..core.task_queue import get_task_queue, create_task_definition, TaskPriority
+        
+        task_def = create_task_definition(
+            task_type=task_type,
+            parameters={
+                'device_serial': device_serial,
+                **parameters
+            },
+            priority=TaskPriority.HIGH,  # YOLO tasks have high priority
+            timeout_seconds=data.get('timeout_seconds', 120)
+        )
+        
+        task_queue = run_async(get_task_queue())
+        task_id = run_async(task_queue.submit_task(task_def))
+        
+        return jsonify({
+            'message': f'YOLO task created successfully',
+            'task_id': task_id,
+            'task_type': task_type,
+            'device_serial': device_serial
+        })
+        
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 # WebSocket events
 
 @socketio.on('connect')

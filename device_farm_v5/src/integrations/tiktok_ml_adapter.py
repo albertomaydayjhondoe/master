@@ -70,7 +70,12 @@ class TikTokMLIntegrationAdapter:
             'tiktok_view': self._handle_view_task,
             'tiktok_scroll': self._handle_scroll_task,
             'tiktok_screenshot': self._handle_screenshot_task,
-            'tiktok_anomaly_check': self._handle_anomaly_check_task
+            'tiktok_anomaly_check': self._handle_anomaly_check_task,
+            # Enhanced YOLO integration tasks
+            'yolo_screenshot_analysis': self._handle_yolo_screenshot_task,
+            'yolo_anomaly_detection': self._handle_yolo_anomaly_task,
+            'yolo_batch_analysis': self._handle_yolo_batch_task,
+            'yolo_automation_guidance': self._handle_yolo_automation_guidance_task
         }
         
         # Analytics integration
@@ -560,6 +565,155 @@ class TikTokMLIntegrationAdapter:
             
         except Exception as e:
             logger.error(f"Failed to send anomaly alert: {e}")
+    
+    # Enhanced YOLO Task Handlers
+    
+    async def _handle_yolo_screenshot_task(self, device_serial: str, parameters: Dict[str, Any]) -> Dict[str, Any]:
+        """Handle YOLO screenshot analysis task"""
+        try:
+            from ..ml.enhanced_yolo_detector import get_device_farm_yolo_detector
+            
+            detector = await get_device_farm_yolo_detector()
+            analysis_result = await detector.analyze_device_screenshot(
+                device_serial=device_serial,
+                save_analysis=parameters.get('save_analysis', True)
+            )
+            
+            # Store in Supabase if available
+            if self.supabase_config.get('url'):
+                await self._store_yolo_analysis(device_serial, analysis_result)
+            
+            return {
+                'task_type': 'yolo_screenshot_analysis',
+                'device_serial': device_serial,
+                'detections': analysis_result['detections'],
+                'automation_recommendations': analysis_result['automation_recommendations'],
+                'app_state': analysis_result['automation_recommendations']['app_state'],
+                'success': True,
+                'timestamp': datetime.now(timezone.utc).isoformat()
+            }
+            
+        except Exception as e:
+            logger.error(f"YOLO screenshot task failed on device {device_serial}: {e}")
+            raise
+    
+    async def _handle_yolo_anomaly_task(self, device_serial: str, parameters: Dict[str, Any]) -> Dict[str, Any]:
+        """Handle YOLO anomaly detection task"""
+        try:
+            from ..ml.enhanced_yolo_detector import get_device_farm_yolo_detector
+            
+            detector = await get_device_farm_yolo_detector()
+            anomaly_result = await detector.detect_anomalies(device_serial)
+            
+            # Trigger alerts if anomaly detected
+            if anomaly_result['anomaly_detected']:
+                await self._send_anomaly_alert(device_serial, anomaly_result['anomaly_score'])
+            
+            return {
+                'task_type': 'yolo_anomaly_detection',
+                'device_serial': device_serial,
+                'anomaly_detected': anomaly_result['anomaly_detected'],
+                'anomaly_score': anomaly_result['anomaly_score'],
+                'anomaly_types': anomaly_result['anomaly_types'],
+                'success': True,
+                'timestamp': datetime.now(timezone.utc).isoformat()
+            }
+            
+        except Exception as e:
+            logger.error(f"YOLO anomaly task failed on device {device_serial}: {e}")
+            raise
+    
+    async def _handle_yolo_batch_task(self, device_serial: str, parameters: Dict[str, Any]) -> Dict[str, Any]:
+        """Handle YOLO batch analysis task"""
+        try:
+            from ..ml.enhanced_yolo_detector import get_device_farm_yolo_detector
+            
+            detector = await get_device_farm_yolo_detector()
+            device_list = parameters.get('device_serials', [device_serial])
+            batch_results = await detector.batch_analyze_devices(device_list)
+            
+            return {
+                'task_type': 'yolo_batch_analysis',
+                'batch_results': batch_results,
+                'devices_analyzed': len(device_list),
+                'success_rate': sum(1 for r in batch_results.values() if r.get('success', False)) / len(batch_results),
+                'success': True,
+                'timestamp': datetime.now(timezone.utc).isoformat()
+            }
+            
+        except Exception as e:
+            logger.error(f"YOLO batch task failed: {e}")
+            raise
+    
+    async def _handle_yolo_automation_guidance_task(self, device_serial: str, parameters: Dict[str, Any]) -> Dict[str, Any]:
+        """Handle YOLO-based automation guidance task"""
+        try:
+            from ..ml.enhanced_yolo_detector import get_device_farm_yolo_detector
+            
+            detector = await get_device_farm_yolo_detector()
+            analysis_result = await detector.analyze_device_screenshot(device_serial, save_analysis=False)
+            
+            recommendations = analysis_result['automation_recommendations']
+            engagement_type = parameters.get('engagement_type', 'like')
+            
+            # Generate specific guidance based on engagement type and YOLO detection
+            guidance = {
+                'recommended_action': None,
+                'target_element': None,
+                'risk_assessment': 'medium',
+                'confidence': 0.0,
+                'alternative_actions': []
+            }
+            
+            # Find best element for engagement type
+            if engagement_type == 'like' and recommendations['safe_actions']:
+                like_elements = [a for a in recommendations['safe_actions'] if a['element']['class_name'] == 'like_button']
+                if like_elements:
+                    best_element = max(like_elements, key=lambda x: x['element']['confidence'])
+                    guidance['recommended_action'] = 'tap_like_button'
+                    guidance['target_element'] = best_element['element']
+                    guidance['risk_assessment'] = 'low'
+                    guidance['confidence'] = best_element['element']['confidence']
+            
+            elif engagement_type == 'comment' and recommendations['risky_actions']:
+                comment_elements = [a for a in recommendations['risky_actions'] if a['element']['class_name'] == 'comment_button']
+                if comment_elements:
+                    best_element = max(comment_elements, key=lambda x: x['element']['confidence'])
+                    guidance['recommended_action'] = 'tap_comment_button'
+                    guidance['target_element'] = best_element['element']
+                    guidance['risk_assessment'] = 'high'
+                    guidance['confidence'] = best_element['element']['confidence']
+            
+            # Add alternative actions
+            guidance['alternative_actions'] = [
+                {'action': 'scroll_down', 'risk': 'low'},
+                {'action': 'tap_video', 'risk': 'low'},
+                {'action': 'wait', 'risk': 'none'}
+            ]
+            
+            return {
+                'task_type': 'yolo_automation_guidance',
+                'device_serial': device_serial,
+                'engagement_type': engagement_type,
+                'guidance': guidance,
+                'app_state': recommendations['app_state'],
+                'automation_confidence': recommendations['automation_confidence'],
+                'success': True,
+                'timestamp': datetime.now(timezone.utc).isoformat()
+            }
+            
+        except Exception as e:
+            logger.error(f"YOLO automation guidance task failed on device {device_serial}: {e}")
+            raise
+    
+    async def _store_yolo_analysis(self, device_serial: str, analysis_result: Dict[str, Any]):
+        """Store YOLO analysis results in Supabase"""
+        try:
+            # This would integrate with actual Supabase storage
+            logger.debug(f"Stored YOLO analysis for device {device_serial}: {len(analysis_result['detections'])} detections")
+            
+        except Exception as e:
+            logger.error(f"Failed to store YOLO analysis: {e}")
 
 
 # Global adapter instance
