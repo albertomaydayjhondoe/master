@@ -38,16 +38,16 @@ ENV STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
 ENV STREAMLIT_SERVER_ENABLE_CORS=false
 ENV STREAMLIT_SERVER_ENABLE_XSRF_PROTECTION=false
 
-# Expose port (Railway will set PORT env var)
-EXPOSE $PORT
+# Expose default port (Railway will override with PORT env var)
+EXPOSE 8501
 
-# Health check
+# Health check with dynamic port
 HEALTHCHECK --interval=60s --timeout=30s --start-period=120s --retries=3 \
-    CMD curl -f http://localhost:$PORT/_stcore/health || exit 1
+    CMD curl -f http://localhost:${PORT:-8501}/_stcore/health || exit 1
 
-# Start Streamlit dashboard
+# Start Streamlit dashboard with dynamic port
 CMD streamlit run scripts/viral_study_analysis.py \
-    --server.port $PORT \
+    --server.port ${PORT:-8501} \
     --server.address 0.0.0.0 \
     --server.headless true \
     --server.enableCORS false \
