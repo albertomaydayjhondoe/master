@@ -1,44 +1,50 @@
-# 🚀 Stakas MVP Viral Dashboard - Bandwidth Optimized
-FROM python:3.11-alpine
+# 🚀 Stakas Viral System - Railway Production
+FROM python:3.11-slim
 
 # Metadata
-LABEL app="stakas-mvp-viral-dashboard"
+LABEL app="stakas-viral-system"
 LABEL channel="UCgohgqLVu1QPdfa64Vkrgeg" 
-LABEL version="2.0-lightweight"
+LABEL version="3.0-production"
 
 # Set working directory
 WORKDIR /app
 
-# Install minimal system dependencies
-RUN apk add --no-cache curl
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git wget curl build-essential \
+    libgl1-mesa-glx libglib2.0-0 \
+    libsm6 libxext6 libxrender-dev libgomp1 \
+    && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements first (for better Docker layer caching)
-COPY requirements-minimal.txt ./
+# Copy requirements
+COPY requirements.txt requirements-ml.txt ./
 
-# Install minimal Python dependencies
+# Install Python dependencies
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements-minimal.txt
+    pip install --no-cache-dir -r requirements.txt && \
+    pip install --no-cache-dir -r requirements-ml.txt
 
-# Copy entire repository code
+# Copy application code
 COPY . .
 
 # Create directories
-RUN mkdir -p data logs cache uploads
+RUN mkdir -p data/models/production data/logs uploads cache
 
-# Set environment variables for production
+# Set environment variables
+ENV PYTHONPATH=/app
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
+ENV DUMMY_MODE=false
+ENV ENVIRONMENT=production
 ENV STREAMLIT_SERVER_HEADLESS=true
 ENV STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
-ENV STREAMLIT_SERVER_ENABLE_CORS=false
-ENV STREAMLIT_SERVER_ENABLE_XSRF_PROTECTION=false
 
-# Expose port for Railway
+# Expose port
 EXPOSE 8501
 
-# Health check with Railway PORT
-HEALTHCHECK --interval=60s --timeout=30s --start-period=120s --retries=3 \
-    CMD curl -f http://localhost:${PORT:-8501}/_stcore/health || exit 1
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD curl -f http://localhost:${PORT:-8501}/health || exit 1
 
-# Use lightweight Python launcher
-CMD ["python", "app-lightweight.py"]
+# Start Railway launcher
+CMD ["python", "railway_launcher.py"]
