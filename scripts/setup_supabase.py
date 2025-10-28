@@ -11,21 +11,23 @@ def update_supabase_config():
     
     print("🔧 CONFIGURADOR SUPABASE - Sistema Meta ML")
     print("=" * 50)
-    print("Necesitamos 3 credenciales de tu proyecto Supabase:")
-    print("(Ve a Settings → API en tu proyecto)")
+    print("✅ CONFIGURACIÓN AUTOMÁTICA CON CREDENCIALES PROPORCIONADAS")
     print()
     
-    # Solicitar credenciales
-    supabase_url = input("📋 SUPABASE_URL (https://tu-proyecto.supabase.co): ").strip()
-    if not supabase_url.startswith('https://'):
-        supabase_url = f"https://{supabase_url}"
-        
-    supabase_anon = input("🔑 SUPABASE_ANON_KEY (eyJhbG...): ").strip()
-    supabase_service = input("🛡️ SUPABASE_SERVICE_KEY (eyJhbG...): ").strip()
+    # Credenciales ya proporcionadas
+    supabase_url = "https://ilsikngctkrmqnbutpuz.supabase.co"
+    supabase_anon = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlsc2lrbmdjdGtybXFuYnV0cHV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE0MTQwMTMsImV4cCI6MjA3Njk5MDAxM30.05KqrCvc0aDRjO1XzlNwrX5WcRBVAFdXMOgneiZ26Og"
     
+    # Solicitar service key si no se proporcionó
+    supabase_service = input("�️ SUPABASE_SERVICE_KEY (opcional, press Enter para usar anon): ").strip()
+    if not supabase_service:
+        supabase_service = supabase_anon  # Usar anon key como fallback
+        
     # Generar DATABASE_URL
-    project_id = supabase_url.replace('https://', '').replace('.supabase.co', '')
-    db_password = input("🔐 Password de la DB (creaste al crear proyecto): ").strip()
+    project_id = "ilsikngctkrmqnbutpuz"
+    db_password = input("🔐 Password de la DB PostgreSQL (opcional): ").strip()
+    if not db_password:
+        db_password = "[password]"  # Placeholder
     database_url = f"postgresql://postgres:{db_password}@db.{project_id}.supabase.co:5432/postgres"
     
     # Archivo .env
