@@ -16,15 +16,14 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# We'll install packages directly without requirements.txt to avoid conflicts
-# COPY requirements*.txt ./
+# Copy requirements first (for better Docker layer caching)
+COPY requirements-streamlit.txt requirements.txt ./
 
-# Copy and install only Streamlit requirements
-COPY requirements-streamlit.txt ./
+# Install Python dependencies
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements-streamlit.txt
 
-# Copy application code
+# Copy entire repository code
 COPY . .
 
 # Create directories
@@ -45,11 +44,15 @@ EXPOSE 8501
 HEALTHCHECK --interval=60s --timeout=30s --start-period=120s --retries=3 \
     CMD curl -f http://localhost:${PORT:-8501}/_stcore/health || exit 1
 
-# Start Streamlit dashboard with dynamic port
-CMD streamlit run scripts/viral_study_analysis.py \
-    --server.port ${PORT:-8501} \
-    --server.address 0.0.0.0 \
-    --server.headless true \
-    --server.enableCORS false \
-    --server.enableXsrfProtection false \
-    --browser.gatherUsageStats false
+# Default: Start Streamlit dashboard (can be overridden with APP_TYPE env var)
+CMD if [ "$APP_TYPE" = "api" ]; then \
+        uvicorn ml_core.api.main:app --host 0.0.0.0 --port ${PORT:-8000}; \
+    else \
+        streamlit run scripts/viral_study_analysis.py \
+            --server.port ${PORT:-8501} \
+            --server.address 0.0.0.0 \
+            --server.headless true \
+            --server.enableCORS false \
+            --server.enableXsrfProtection false \
+            --browser.gatherUsageStats false; \
+    fi
