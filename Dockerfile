@@ -40,9 +40,9 @@ ENV STREAMLIT_SERVER_ENABLE_XSRF_PROTECTION=false
 # Expose port for Railway
 EXPOSE 8501
 
-# Health check
+# Health check with Railway PORT
 HEALTHCHECK --interval=60s --timeout=30s --start-period=120s --retries=3 \
-    CMD curl -f http://localhost:8501/_stcore/health || exit 1
+    CMD curl -f http://localhost:${PORT:-8501}/_stcore/health || exit 1
 
-# Start Streamlit dashboard
-CMD ["streamlit", "run", "scripts/viral_study_analysis.py", "--server.port=8501", "--server.address=0.0.0.0", "--server.headless=true"]
+# Use Python launcher that handles PORT properly
+CMD ["python", "app.py"]
