@@ -1,0 +1,131 @@
+# 🚀 Railway Build Configuration - Stakas MVP Viral System
+# Optimized for UCgohgqLVu1QPdfa64Vkrgeg production deployment
+
+# Build configuration
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
+
+# Build arguments for optimization
+[build.buildArgs]
+NODE_ENV = "production" 
+PYTHON_VERSION = "3.11"
+BUILD_ENV = "railway"
+CHANNEL_ID = "UCgohgqLVu1QPdfa64Vkrgeg"
+APP_NAME = "stakas-mvp-viral"
+
+# Deployment configuration
+[deploy]
+startCommand = "python -m uvicorn ml_core.api.main:app --host 0.0.0.0 --port $PORT --workers 2"
+healthcheckPath = "/health"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 3
+
+# Service configuration
+[service]
+name = "stakas-mvp-viral-system"
+regions = ["us-west1", "eu-west1"]  # US + Europe for global reach
+autoscaling = true
+minReplicas = 1
+maxReplicas = 3
+
+# Environment variables
+[env]
+# Core application
+APP_ENV = "production"
+DEBUG = "false"
+LOG_LEVEL = "INFO"
+PORT = "${{railway.PORT}}"
+RAILWAY_ENVIRONMENT = "${{railway.RAILWAY_ENVIRONMENT}}"
+
+# Stakas MVP specific
+CHANNEL_ID = "UCgohgqLVu1QPdfa64Vkrgeg"
+CHANNEL_NAME = "Stakas MVP"
+GENRE = "drill_rap_espanol"
+TARGET_SUBSCRIBERS = "10000"
+META_ADS_BUDGET = "500"
+
+# ML Configuration  
+DUMMY_MODE = "false"
+ML_MODEL_PATH = "/app/data/models/production"
+YOLO_WEIGHTS_PATH = "/app/data/models/yolo_screenshot.pt"
+ANOMALY_MODEL_PATH = "/app/data/models/anomaly_detector.pkl"
+
+# Database configuration
+DATABASE_URL = "${{railway.DATABASE_URL}}"
+POSTGRES_HOST = "${{railway.POSTGRES_HOST}}"
+POSTGRES_PORT = "${{railway.POSTGRES_PORT}}"
+POSTGRES_DB = "${{railway.POSTGRES_DB}}"
+POSTGRES_USER = "${{railway.POSTGRES_USER}}"
+POSTGRES_PASSWORD = "${{railway.POSTGRES_PASSWORD}}"
+
+# Redis configuration
+REDIS_URL = "${{railway.REDIS_URL}}"
+REDIS_HOST = "${{railway.REDIS_HOST}}"
+REDIS_PORT = "${{railway.REDIS_PORT}}"
+
+# External APIs
+YOUTUBE_API_KEY = "${{railway.YOUTUBE_API_KEY}}"
+META_ACCESS_TOKEN = "${{railway.META_ACCESS_TOKEN}}"
+META_ACCOUNT_ID = "${{railway.META_ACCOUNT_ID}}"
+DISCORD_WEBHOOK_URL = "${{railway.DISCORD_WEBHOOK_URL}}"
+
+# GitHub integration
+GITHUB_TOKEN = "${{railway.GITHUB_TOKEN}}"
+GITHUB_REPO = "albertomaydayjhondoe/master"
+GITHUB_OWNER = "albertomaydayjhondoe"
+
+# n8n integration
+N8N_URL = "${{railway.N8N_URL}}"
+N8N_API_KEY = "${{railway.N8N_API_KEY}}"
+N8N_WEBHOOK_URL = "${{railway.N8N_WEBHOOK_URL}}"
+
+# Security
+SECRET_KEY = "${{railway.SECRET_KEY}}"
+JWT_SECRET = "${{railway.JWT_SECRET}}"
+ENCRYPTION_KEY = "${{railway.ENCRYPTION_KEY}}"
+
+# Performance optimization
+WORKERS = "2"
+MAX_CONNECTIONS = "100"
+KEEP_ALIVE = "2"
+TIMEOUT = "300"
+
+# Logging and monitoring
+SENTRY_DSN = "${{railway.SENTRY_DSN}}"
+DATADOG_API_KEY = "${{railway.DATADOG_API_KEY}}"
+NEW_RELIC_LICENSE_KEY = "${{railway.NEW_RELIC_LICENSE_KEY}}"
+
+# Content optimization
+OPTIMAL_POSTING_HOURS = "19,20,21,22"
+PEAK_ENGAGEMENT_DAYS = "1,2,3,4,5"  # Monday to Friday
+VIRAL_THRESHOLD = "80"
+META_ADS_AUTO_OPTIMIZE = "true"
+
+# Volume mounts for persistent data
+[volumes]
+models = "/app/data/models"
+logs = "/app/logs"
+uploads = "/app/uploads"
+cache = "/app/cache"
+
+# Health check configuration
+[healthCheck]
+path = "/health"
+port = "${{railway.PORT}}"
+interval = 30
+timeout = 10
+retries = 3
+startPeriod = 60
+
+# Resource limits
+[resources]
+memoryGB = 2
+vCPU = 1
+storageGB = 10
+
+# Networking
+[networking]
+allowPublic = true
+customDomain = "stakas-mvp.railway.app"

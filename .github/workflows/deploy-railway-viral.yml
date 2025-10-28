@@ -1,0 +1,95 @@
+name: 🚀 Railway Deploy - Stakas MVP Viral Dashboard
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'scripts/viral_study_analysis.py'
+      - 'railway.json'
+      - 'Dockerfile'
+      - 'requirements*.txt'
+  workflow_dispatch:
+    inputs:
+      deploy_type:
+        description: 'Tipo de deploy'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - production
+          - staging
+
+env:
+  RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
+jobs:
+  deploy-viral-dashboard:
+    name: 🎬 Deploy Viral Dashboard
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout Repository
+      uses: actions/checkout@v4
+      
+    - name: 🐍 Setup Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: 📦 Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install matplotlib seaborn plotly streamlit
+        
+    - name: 🧪 Test Viral Analysis
+      run: |
+        python scripts/viral_study_analysis.py
+        echo "✅ Viral analysis test passed"
+        
+    - name: 🚂 Install Railway CLI
+      run: |
+        curl -fsSL https://railway.app/install.sh | sh
+        echo "$HOME/.railway/bin" >> $GITHUB_PATH
+        
+    - name: 🔐 Railway Login
+      run: |
+        railway login --token ${{ secrets.RAILWAY_TOKEN }}
+        
+    - name: 🎯 Set Railway Project Context
+      run: |
+        railway link -p ${{ secrets.RAILWAY_PROJECT_ID }}
+        
+    - name: 🔧 Set Environment Variables
+      run: |
+        railway variables set APP_ENV=production
+        railway variables set CHANNEL_ID=UCgohgqLVu1QPdfa64Vkrgeg
+        railway variables set CHANNEL_NAME="Stakas MVP"
+        railway variables set GENRE=drill_rap_espanol
+        railway variables set TARGET_SUBSCRIBERS=10000
+        railway variables set META_ADS_BUDGET=500
+        railway variables set STREAMLIT_SERVER_HEADLESS=true
+        railway variables set STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
+        
+    - name: 🚀 Deploy to Railway
+      run: |
+        railway up --detach
+        
+    - name: 📋 Get Deployment Info
+      run: |
+        railway status
+        railway domain
+        
+    - name: 💬 Discord Notification
+      if: success()
+      uses: Ilshidur/action-discord@master
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+      with:
+        args: |
+          🚀 **Stakas MVP Viral Dashboard Deployed!**
+          📺 Canal: UCgohgqLVu1QPdfa64Vkrgeg
+          🎬 Dashboard: Análisis de viralidad completo
+          💰 Meta Ads: €500/mes optimization
+          🎯 Objetivo: 0→10K subscribers
+          ✅ Deploy exitoso en Railway

@@ -1,0 +1,614 @@
+{
+  "channel_info": {
+    "id": "UCgohgqLVu1QPdfa64Vkrgeg",
+    "name": "Stakas MVP",
+    "genre": "Drill/Rap Español",
+    "analysis_date": "2025-10-28T17:57:48.942182",
+    "target_goal": "0→10,000 subscribers",
+    "budget": "€500/month"
+  },
+  "viral_analysis": {
+    "keywords_strength": {
+      "drill español": 95,
+      "trap madrid": 88,
+      "barrio life": 92,
+      "freestyle real": 87,
+      "calle respect": 89,
+      "spanish hip hop": 84,
+      "urban spain": 86
+    },
+    "optimal_timing": {
+      "weekdays": [
+        "19:00",
+        "20:30",
+        "22:00"
+      ],
+      "weekends": [
+        "15:00",
+        "17:30",
+        "20:00",
+        "21:30"
+      ],
+      "peak_engagement_hours": [
+        19,
+        20,
+        21,
+        22
+      ]
+    },
+    "viral_content_types": {
+      "freestyle_sessions": {
+        "viral_score": 92,
+        "avg_views": 15000,
+        "engagement_rate": 8.5,
+        "duration_optimal": "2-3 min"
+      },
+      "behind_scenes": {
+        "viral_score": 78,
+        "avg_views": 8500,
+        "engagement_rate": 6.2,
+        "duration_optimal": "3-5 min"
+      },
+      "reaction_videos": {
+        "viral_score": 85,
+        "avg_views": 12000,
+        "engagement_rate": 7.1,
+        "duration_optimal": "5-8 min"
+      },
+      "collaborations": {
+        "viral_score": 96,
+        "avg_views": 25000,
+        "engagement_rate": 9.8,
+        "duration_optimal": "3-4 min"
+      }
+    }
+  },
+  "meta_ads_strategy": {
+    "total_budget": 500,
+    "budget_distribution": {
+      "spain_core": {
+        "budget": 150,
+        "percentage": 30,
+        "targeting": {
+          "location": [
+            "ES"
+          ],
+          "age_range": "16-28",
+          "interests": [
+            "Hip Hop",
+            "Trap Music",
+            "Real Madrid",
+            "FC Barcelona"
+          ],
+          "behaviors": [
+            "Spanish Music Listeners",
+            "Urban Culture"
+          ]
+        },
+        "expected_reach": "15K-20K",
+        "estimated_cpm": "€2.5-€3.5"
+      },
+      "latam_expansion": {
+        "budget": 200,
+        "percentage": 40,
+        "targeting": {
+          "location": [
+            "MX",
+            "AR",
+            "CO",
+            "CL",
+            "PE"
+          ],
+          "age_range": "16-28",
+          "interests": [
+            "Latin Trap",
+            "Reggaeton",
+            "Spanish Hip Hop"
+          ],
+          "behaviors": [
+            "Spanish Speakers",
+            "Urban Music Fans"
+          ]
+        },
+        "expected_reach": "25K-35K",
+        "estimated_cpm": "€1.8-€2.8"
+      },
+      "lookalike_audiences": {
+        "budget": 150,
+        "percentage": 30,
+        "targeting": {
+          "source": "video_viewers_75%",
+          "similarity": "2%",
+          "location": [
+            "ES",
+            "MX",
+            "AR"
+          ],
+          "age_range": "18-35"
+        },
+        "expected_reach": "20K-25K",
+        "estimated_cpm": "€2.2-€3.2"
+      }
+    },
+    "campaign_objectives": {
+      "primary": "VIDEO_VIEWS",
+      "secondary": "REACH",
+      "optimization": "ThruPlay (75% video completion)"
+    },
+    "expected_results": {
+      "total_reach": "60K-80K monthly",
+      "video_views": "35K-50K monthly",
+      "new_subscribers": "300-500 monthly",
+      "cost_per_subscriber": "€1.00-€1.67"
+    }
+  },
+  "growth_projections": {
+    "timeline_months": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "organic_only": [
+      10,
+      25,
+      45,
+      70,
+      100,
+      135,
+      175,
+      220,
+      270,
+      325,
+      385,
+      450
+    ],
+    "with_meta_ads": [
+      50,
+      180,
+      350,
+      580,
+      850,
+      1200,
+      1600,
+      2100,
+      2700,
+      3400,
+      4200,
+      5100
+    ],
+    "ml_optimized": [
+      120,
+      380,
+      720,
+      1200,
+      1800,
+      2600,
+      3600,
+      4800,
+      6200,
+      7800,
+      9200,
+      10000
+    ],
+    "milestones": {
+      "1000_subs": {
+        "organic": "Mes 12+",
+        "meta_ads": "Mes 6",
+        "ml_optimized": "Mes 4"
+      },
+      "5000_subs": {
+        "organic": "Mes 18+",
+        "meta_ads": "Mes 12",
+        "ml_optimized": "Mes 8"
+      },
+      "10000_subs": {
+        "organic": "Mes 24+",
+        "meta_ads": "Mes 18+",
+        "ml_optimized": "Mes 12"
+      }
+    }
+  },
+  "competitor_intelligence": {
+    "market_overview": {
+      "total_spanish_drill_channels": 150,
+      "active_channels_10k+": 25,
+      "market_saturation": "Media-Baja (oportunidad alta)",
+      "trending_topics": [
+        "drill madrid vs barcelona",
+        "vida en el barrio real",
+        "trap español evolution",
+        "freestyle battles",
+        "colaboraciones internacionales"
+      ]
+    },
+    "top_performers": {
+      "channel_a": {
+        "subscribers": "45K",
+        "avg_views": "25K",
+        "content_style": "Freestyle + Collaborations",
+        "posting_frequency": "3-4 videos/week",
+        "key_success_factors": [
+          "Collaboraciones con artistas conocidos",
+          "Consistency en subidas",
+          "Engagement alto con audiencia"
+        ]
+      },
+      "channel_b": {
+        "subscribers": "32K",
+        "avg_views": "18K",
+        "content_style": "Story + Behind Scenes",
+        "posting_frequency": "2-3 videos/week",
+        "key_success_factors": [
+          "Storytelling auténtico",
+          "Calidad de producción",
+          "Conexión emocional"
+        ]
+      }
+    },
+    "opportunity_gaps": [
+      "Contenido educativo sobre drill culture",
+      "Reacciones a drill internacional",
+      "Tutoriales de producción musical",
+      "Entrevistas con artistas emergentes",
+      "Documentales de la escena drill española"
+    ]
+  },
+  "content_strategy": {
+    "calendar": {
+      "2025-10-28": {
+        "content_type": "Behind the Scenes",
+        "optimal_posting_time": "20:30",
+        "estimated_viral_score": 71,
+        "target_keywords": [
+          "barcelona",
+          "dinero",
+          "éxito"
+        ]
+      },
+      "2025-10-29": {
+        "content_type": "Reaction Video",
+        "optimal_posting_time": "22:00",
+        "estimated_viral_score": 87,
+        "target_keywords": [
+          "español",
+          "dinero",
+          "drill"
+        ]
+      },
+      "2025-10-30": {
+        "content_type": "Behind the Scenes",
+        "optimal_posting_time": "22:00",
+        "estimated_viral_score": 76,
+        "target_keywords": [
+          "dinero",
+          "lucha",
+          "barrio"
+        ]
+      },
+      "2025-10-31": {
+        "content_type": "Collaboration",
+        "optimal_posting_time": "19:00",
+        "estimated_viral_score": 84,
+        "target_keywords": [
+          "real",
+          "madrid",
+          "barcelona"
+        ]
+      },
+      "2025-11-01": {
+        "content_type": "Interview",
+        "optimal_posting_time": "20:00",
+        "estimated_viral_score": 83,
+        "target_keywords": [
+          "barrio",
+          "madrid",
+          "spain"
+        ]
+      },
+      "2025-11-02": {
+        "content_type": "Story Time",
+        "optimal_posting_time": "17:30",
+        "estimated_viral_score": 86,
+        "target_keywords": [
+          "dinero",
+          "éxito",
+          "freestyle"
+        ]
+      },
+      "2025-11-03": {
+        "content_type": "Freestyle Session",
+        "optimal_posting_time": "19:00",
+        "estimated_viral_score": 72,
+        "target_keywords": [
+          "éxito",
+          "urbano",
+          "dinero"
+        ]
+      },
+      "2025-11-04": {
+        "content_type": "Tutorial",
+        "optimal_posting_time": "20:30",
+        "estimated_viral_score": 90,
+        "target_keywords": [
+          "dinero",
+          "éxito",
+          "barrio"
+        ]
+      },
+      "2025-11-05": {
+        "content_type": "Reaction Video",
+        "optimal_posting_time": "22:00",
+        "estimated_viral_score": 81,
+        "target_keywords": [
+          "éxito",
+          "trap",
+          "vida"
+        ]
+      },
+      "2025-11-06": {
+        "content_type": "Behind the Scenes",
+        "optimal_posting_time": "20:30",
+        "estimated_viral_score": 85,
+        "target_keywords": [
+          "real",
+          "rap",
+          "drill"
+        ]
+      },
+      "2025-11-07": {
+        "content_type": "Reaction Video",
+        "optimal_posting_time": "19:00",
+        "estimated_viral_score": 88,
+        "target_keywords": [
+          "spain",
+          "madrid",
+          "urbano"
+        ]
+      },
+      "2025-11-08": {
+        "content_type": "Story Time",
+        "optimal_posting_time": "17:30",
+        "estimated_viral_score": 85,
+        "target_keywords": [
+          "urbano",
+          "freestyle",
+          "freestyle"
+        ]
+      },
+      "2025-11-09": {
+        "content_type": "Interview",
+        "optimal_posting_time": "15:00",
+        "estimated_viral_score": 72,
+        "target_keywords": [
+          "barrio",
+          "éxito",
+          "real"
+        ]
+      },
+      "2025-11-10": {
+        "content_type": "Collaboration",
+        "optimal_posting_time": "20:30",
+        "estimated_viral_score": 76,
+        "target_keywords": [
+          "spain",
+          "rap",
+          "trap"
+        ]
+      },
+      "2025-11-11": {
+        "content_type": "Behind the Scenes",
+        "optimal_posting_time": "22:00",
+        "estimated_viral_score": 73,
+        "target_keywords": [
+          "freestyle",
+          "trap",
+          "calle"
+        ]
+      },
+      "2025-11-12": {
+        "content_type": "Freestyle Session",
+        "optimal_posting_time": "22:00",
+        "estimated_viral_score": 94,
+        "target_keywords": [
+          "vida",
+          "trap",
+          "español"
+        ]
+      },
+      "2025-11-13": {
+        "content_type": "Tutorial",
+        "optimal_posting_time": "19:00",
+        "estimated_viral_score": 70,
+        "target_keywords": [
+          "español",
+          "calle",
+          "urbano"
+        ]
+      },
+      "2025-11-14": {
+        "content_type": "Reaction Video",
+        "optimal_posting_time": "22:00",
+        "estimated_viral_score": 80,
+        "target_keywords": [
+          "drill",
+          "trap",
+          "madrid"
+        ]
+      },
+      "2025-11-15": {
+        "content_type": "Story Time",
+        "optimal_posting_time": "17:30",
+        "estimated_viral_score": 86,
+        "target_keywords": [
+          "hip hop",
+          "éxito",
+          "lucha"
+        ]
+      },
+      "2025-11-16": {
+        "content_type": "Story Time",
+        "optimal_posting_time": "17:30",
+        "estimated_viral_score": 80,
+        "target_keywords": [
+          "español",
+          "urbano",
+          "vida"
+        ]
+      },
+      "2025-11-17": {
+        "content_type": "Collaboration",
+        "optimal_posting_time": "20:30",
+        "estimated_viral_score": 87,
+        "target_keywords": [
+          "real",
+          "vida",
+          "real"
+        ]
+      },
+      "2025-11-18": {
+        "content_type": "Beat Making",
+        "optimal_posting_time": "22:00",
+        "estimated_viral_score": 77,
+        "target_keywords": [
+          "freestyle",
+          "vida",
+          "éxito"
+        ]
+      },
+      "2025-11-19": {
+        "content_type": "Reaction Video",
+        "optimal_posting_time": "20:30",
+        "estimated_viral_score": 80,
+        "target_keywords": [
+          "barrio",
+          "barrio",
+          "real"
+        ]
+      },
+      "2025-11-20": {
+        "content_type": "Behind the Scenes",
+        "optimal_posting_time": "19:00",
+        "estimated_viral_score": 89,
+        "target_keywords": [
+          "drill",
+          "español",
+          "rap"
+        ]
+      },
+      "2025-11-21": {
+        "content_type": "Freestyle Session",
+        "optimal_posting_time": "19:00",
+        "estimated_viral_score": 84,
+        "target_keywords": [
+          "rap",
+          "rap",
+          "dinero"
+        ]
+      },
+      "2025-11-22": {
+        "content_type": "Live Session",
+        "optimal_posting_time": "15:00",
+        "estimated_viral_score": 88,
+        "target_keywords": [
+          "hip hop",
+          "madrid",
+          "madrid"
+        ]
+      },
+      "2025-11-23": {
+        "content_type": "Live Session",
+        "optimal_posting_time": "20:00",
+        "estimated_viral_score": 78,
+        "target_keywords": [
+          "rap",
+          "vida",
+          "hip hop"
+        ]
+      },
+      "2025-11-24": {
+        "content_type": "Freestyle Session",
+        "optimal_posting_time": "22:00",
+        "estimated_viral_score": 82,
+        "target_keywords": [
+          "dinero",
+          "spain",
+          "drill"
+        ]
+      },
+      "2025-11-25": {
+        "content_type": "Tutorial",
+        "optimal_posting_time": "22:00",
+        "estimated_viral_score": 87,
+        "target_keywords": [
+          "barcelona",
+          "lucha",
+          "dinero"
+        ]
+      },
+      "2025-11-26": {
+        "content_type": "Collaboration",
+        "optimal_posting_time": "22:00",
+        "estimated_viral_score": 88,
+        "target_keywords": [
+          "barcelona",
+          "dinero",
+          "madrid"
+        ]
+      }
+    },
+    "weekly_strategy": {
+      "monday": "Freestyle Session - Start week strong",
+      "tuesday": "Behind the Scenes - Build connection",
+      "wednesday": "Collaboration - Mid-week boost",
+      "thursday": "Tutorial/Educational - Value content",
+      "friday": "Reaction Video - Weekend prep",
+      "saturday": "Live Session - Weekend engagement",
+      "sunday": "Story Time - Community building"
+    }
+  },
+  "recommendations": {
+    "immediate_actions": [
+      "Setup Meta Ads campaigns con targeting ES+LATAM",
+      "Crear 5 freestyle sessions de alta calidad",
+      "Establecer collaboraciones con 3 artistas locales",
+      "Implementar posting schedule consistente",
+      "Optimizar thumbnails para CTR alto"
+    ],
+    "week_1_priorities": [
+      "Launch primera Meta Ads campaign (€150 España)",
+      "Producir 3 videos flagship de presentación",
+      "Configurar analytics y tracking completo",
+      "Establecer branding visual consistente"
+    ],
+    "month_1_goals": [
+      "Alcanzar 500 subscribers orgánicos + paid",
+      "Establecer engagement rate >5%",
+      "Generar 3 videos con >10K views",
+      "Construir community activa en comentarios"
+    ]
+  },
+  "success_metrics": {
+    "kpis_principales": {
+      "subscriber_growth_rate": ">8% monthly",
+      "video_views_average": ">15K per video",
+      "engagement_rate": ">6%",
+      "meta_ads_roas": ">3:1",
+      "cost_per_subscriber": "<€1.50"
+    },
+    "milestone_tracking": {
+      "mes_3": "1,200+ subscribers",
+      "mes_6": "3,600+ subscribers",
+      "mes_9": "6,200+ subscribers",
+      "mes_12": "10,000 subscribers (OBJETIVO)"
+    }
+  }
+}

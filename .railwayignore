@@ -1,0 +1,143 @@
+# 🚀 Railway ignore file for Stakas MVP Viral System
+# Optimizes build by excluding unnecessary files
+
+# Git and version control
+.git/
+.github/
+.gitignore
+*.orig
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Testing
+.pytest_cache/
+.coverage
+.nyc_output
+coverage/
+*.cover
+.hypothesis/
+
+# Documentation
+docs/
+*.md
+!requirements*.txt
+
+# Docker (we want the Dockerfile but not compose files)
+docker-compose*.yml
+.dockerignore
+
+# Examples and tests (not needed in production)
+examples/
+tests/
+test_*
+
+# Local development
+.env.local
+.env.development
+.env.test
+config/secrets/
+*.key
+*.pem
+*.p12
+
+# Node modules (if any)
+node_modules/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+cache/
+
+# Database files (if any local SQLite)
+*.db
+*.sqlite
+*.sqlite3
+
+# Model files (large files that should be downloaded)
+*.pt
+*.pkl
+*.h5
+*.weights
+
+# Media files
+*.mp4
+*.avi
+*.mov
+*.jpg
+*.jpeg
+*.png
+*.gif
+!data/stakas_growth_projection.png
+
+# Jupyter notebooks
+*.ipynb
+.ipynb_checkpoints/
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Large data directories
+data/models/
+data/raw/
+data/processed/
+!data/viral_study_stakas_mvp.json
+
+# Monitoring and profiling
+.profile
+*.prof

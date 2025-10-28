@@ -1,75 +1,61 @@
-# Dockerfile Optimizado para Producción - Stakas MVP Viral System
-# Multi-stage build con mejores prácticas de seguridad y performance
-
-# ==============================================================================
-# STAGE 1: Base Dependencies
-# ==============================================================================
-FROM python:3.11-slim as base
+# 🚀 Stakas MVP Viral Dashboard - Railway Production
+FROM python:3.11-slim
 
 # Metadata
-LABEL maintainer="Stakas MVP Team"
-LABEL description="Stakas MVP Viral System - TikTok Automation 24/7"
-LABEL version="1.0.0"
+LABEL app="stakas-mvp-viral-dashboard"
+LABEL channel="UCgohgqLVu1QPdfa64Vkrgeg" 
+LABEL version="1.0"
 
-# Configurar timezone
-ENV TZ=Europe/Madrid
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
-# Variables de entorno para Python
-ENV PYTHONUNBUFFERED=1 \
-    PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONPATH=/app \
-    PIP_NO_CACHE_DIR=1 \
-    PIP_DISABLE_PIP_VERSION_CHECK=1 \
-    PORT=8080 \
-    STREAMLIT_SERVER_PORT=8080 \
-    STREAMLIT_SERVER_ADDRESS=0.0.0.0 \
-    STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
-
+# Set working directory
 WORKDIR /app
 
-# System dependencies optimizadas
-RUN apt-get update && apt-get install -y --no-install-recommends \
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
     curl \
-    gcc \
-    g++ \
     git \
-    build-essential \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
-    && rm -rf /tmp/* \
-    && rm -rf /var/tmp/*
+    && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements and install Python dependencies
-COPY requirements.txt requirements-railway.txt requirements-dummy.txt ./
-RUN pip install --upgrade pip setuptools wheel && \
+# Copy requirements first for better caching
+COPY requirements*.txt ./
+
+# Install Python dependencies
+RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt && \
-    pip install --no-cache-dir -r requirements-railway.txt && \
-    pip install --no-cache-dir -r requirements-dummy.txt
+    pip install --no-cache-dir \
+        streamlit==1.50.0 \
+        matplotlib==3.10.7 \
+        seaborn==0.13.2 \
+        plotly==6.3.1 \
+        pandas==2.3.2 \
+        numpy==2.3.2
 
 # Copy application code
 COPY . .
 
-# Create necessary directories with correct permissions
-RUN mkdir -p /app/data/models/production /app/logs /app/config/secrets && \
-    mkdir -p /app/uploads /app/cache
+# Create directories
+RUN mkdir -p data logs cache uploads
 
-# Create non-root user for security
-RUN groupadd -r stakas && useradd -r -g stakas -s /bin/false stakas && \
-    chown -R stakas:stakas /app
+# Set environment variables for production
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV STREAMLIT_SERVER_HEADLESS=true
+ENV STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
+ENV STREAMLIT_SERVER_ENABLE_CORS=false
+ENV STREAMLIT_SERVER_ENABLE_XSRF_PROTECTION=false
 
-# Install application if setup.py exists
-RUN if [ -f "setup.py" ]; then pip install --no-cache-dir -e .; fi
+# Expose port (Railway will set PORT env var)
+EXPOSE $PORT
 
-# Switch to non-root user
-USER stakas
+# Health check
+HEALTHCHECK --interval=60s --timeout=30s --start-period=120s --retries=3 \
+    CMD curl -f http://localhost:$PORT/_stcore/health || exit 1
 
-# Health check optimizado
-HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
-    CMD curl -f http://localhost:${PORT}/health || exit 1
-
-# Expose port
-EXPOSE 8080
-
-# Start the Streamlit application
-CMD ["streamlit", "run", "railway_main.py", "--server.port", "8080", "--server.address", "0.0.0.0", "--server.headless", "true"]
+# Start Streamlit dashboard
+CMD streamlit run scripts/viral_study_analysis.py \
+    --server.port $PORT \
+    --server.address 0.0.0.0 \
+    --server.headless true \
+    --server.enableCORS false \
+    --server.enableXsrfProtection false \
+    --browser.gatherUsageStats false
