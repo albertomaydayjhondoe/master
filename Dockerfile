@@ -40,12 +40,9 @@ ENV STREAMLIT_SERVER_ENABLE_XSRF_PROTECTION=false
 # Expose default port (Railway will override with PORT env var)
 EXPOSE 8501
 
-# Health check with dynamic port
+# Health check with dynamic port  
 HEALTHCHECK --interval=60s --timeout=30s --start-period=120s --retries=3 \
-    CMD curl -f http://localhost:${PORT:-8501}/_stcore/health || exit 1
+    CMD curl -f http://localhost:8501/_stcore/health || exit 1
 
-# Make startup script executable
-RUN chmod +x /app/start.sh
-
-# Start using the script
-CMD ["./start.sh"]
+# Use ENTRYPOINT for proper variable expansion
+ENTRYPOINT ["sh", "-c", "echo 'Starting Stakas MVP on port ${PORT:-8501}' && exec streamlit run scripts/viral_study_analysis.py --server.port ${PORT:-8501} --server.address 0.0.0.0 --server.headless true --server.enableCORS false --server.enableXsrfProtection false --browser.gatherUsageStats false"]
