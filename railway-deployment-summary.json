@@ -1,0 +1,73 @@
+{
+  "repository": "albertomaydayjhondoe/master",
+  "total_branches": 9,
+  "deployed_branches": [
+    "main",
+    "Meta",
+    "completo",
+    "device-farm-v5-integration",
+    "micro-services",
+    "production/stable",
+    "feature/ml-optimization",
+    "feature/meta-cbo-campaigns",
+    "operational/meta-youtube"
+  ],
+  "services": {
+    "main": {
+      "service_name": "stakas-mvp-main",
+      "description": "Dashboard principal de viralidad",
+      "dockerfile": "Dockerfile.main",
+      "health_endpoint": "/_stcore/health"
+    },
+    "Meta": {
+      "service_name": "stakas-mvp-meta",
+      "description": "Meta Ads optimization system",
+      "dockerfile": "Dockerfile.Meta",
+      "health_endpoint": "/health"
+    },
+    "completo": {
+      "service_name": "stakas-mvp-completo",
+      "description": "Sistema completo integrado",
+      "dockerfile": "Dockerfile.completo",
+      "health_endpoint": "/health"
+    },
+    "device-farm-v5-integration": {
+      "service_name": "stakas-mvp-devicefarm",
+      "description": "Device Farm automation system",
+      "dockerfile": "Dockerfile.device-farm-v5-integration",
+      "health_endpoint": "/health"
+    },
+    "micro-services": {
+      "service_name": "stakas-mvp-microservices",
+      "description": "Microservices architecture",
+      "dockerfile": "Dockerfile.micro-services",
+      "health_endpoint": "/health"
+    },
+    "production/stable": {
+      "service_name": "stakas-mvp-main",
+      "description": "Dashboard principal de viralidad",
+      "dockerfile": "Dockerfile.production-stable",
+      "health_endpoint": "/_stcore/health"
+    },
+    "feature/ml-optimization": {
+      "service_name": "stakas-mvp-main",
+      "description": "Dashboard principal de viralidad",
+      "dockerfile": "Dockerfile.feature-ml-optimization",
+      "health_endpoint": "/_stcore/health"
+    },
+    "feature/meta-cbo-campaigns": {
+      "service_name": "stakas-mvp-main",
+      "description": "Dashboard principal de viralidad",
+      "dockerfile": "Dockerfile.feature-meta-cbo-campaigns",
+      "health_endpoint": "/_stcore/health"
+    },
+    "operational/meta-youtube": {
+      "service_name": "stakas-mvp-main",
+      "description": "Dashboard principal de viralidad",
+      "dockerfile": "Dockerfile.operational-meta-youtube",
+      "health_endpoint": "/_stcore/health"
+    }
+  },
+  "deployment_date": "2025-10-28",
+  "channel_target": "UCgohgqLVu1QPdfa64Vkrgeg"
+}
