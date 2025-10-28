@@ -1,0 +1,43 @@
+# 🚀 Stakas MVP - Ultra Lightweight for Railway
+FROM python:3.11-alpine
+
+# Metadata
+LABEL app="stakas-mvp-lightweight" 
+LABEL channel="UCgohgqLVu1QPdfa64Vkrgeg"
+LABEL optimization="minimal-bandwidth"
+
+# Set working directory
+WORKDIR /app
+
+# Install only essential system dependencies (minimal)
+RUN apk add --no-cache curl
+
+# Copy only essential requirements
+COPY requirements-minimal.txt ./
+
+# Install minimal Python packages
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements-minimal.txt
+
+# Copy only essential files
+COPY app.py ./
+COPY scripts/viral_study_analysis.py ./scripts/
+COPY config/ ./config/
+COPY data/ ./data/
+
+# Environment variables for production
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV STREAMLIT_SERVER_HEADLESS=true
+ENV STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
+ENV STREAMLIT_SERVER_MAX_UPLOAD_SIZE=5
+
+# Expose port
+EXPOSE 8501
+
+# Lightweight health check
+HEALTHCHECK --interval=2m --timeout=10s --start-period=1m --retries=2 \
+    CMD curl -f http://localhost:${PORT:-8501}/_stcore/health || exit 1
+
+# Start with minimal launcher
+CMD ["python", "app.py"]

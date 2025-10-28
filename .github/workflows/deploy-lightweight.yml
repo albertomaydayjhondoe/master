@@ -1,0 +1,94 @@
+name: 🚀 Railway Deploy - Lightweight Bandwidth Optimized
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'scripts/viral_study_analysis_lightweight.py'
+      - 'railway-lightweight.json'
+      - 'Dockerfile.lightweight'
+      - 'requirements-minimal.txt'
+      - 'app-lightweight.py'
+  workflow_dispatch:
+    inputs:
+      optimization:
+        description: 'Deployment optimization'
+        required: true
+        default: 'bandwidth'
+        type: choice
+        options:
+          - bandwidth
+          - performance
+
+env:
+  RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
+jobs:
+  deploy-lightweight:
+    name: ⚡ Deploy Bandwidth Optimized
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout Repository
+      uses: actions/checkout@v4
+      
+    - name: 🐍 Setup Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: 📦 Install Minimal Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements-minimal.txt --no-deps --disable-pip-version-check
+        
+    - name: 🧪 Test Lightweight Dashboard
+      run: |
+        python -c "
+        import sys
+        sys.path.append('scripts')
+        import viral_study_analysis_lightweight
+        print('✅ Lightweight dashboard test passed')
+        "
+        
+    - name: 🚂 Install Railway CLI
+      run: |
+        curl -fsSL https://railway.app/install.sh | sh
+        echo "$HOME/.railway/bin" >> $GITHUB_PATH
+        
+    - name: 🔐 Railway Login
+      run: |
+        railway login --token ${{ secrets.RAILWAY_TOKEN }}
+        
+    - name: 🎯 Set Railway Project Context
+      run: |
+        railway link -p ${{ secrets.RAILWAY_PROJECT_ID }}
+        
+    - name: 🔧 Set Lightweight Environment Variables
+      run: |
+        railway variables set APP_ENV=production
+        railway variables set OPTIMIZATION=bandwidth
+        railway variables set CHANNEL_ID=UCgohgqLVu1QPdfa64Vkrgeg
+        railway variables set STREAMLIT_SERVER_HEADLESS=true
+        railway variables set STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
+        railway variables set STREAMLIT_SERVER_MAX_UPLOAD_SIZE=5
+        railway variables set STREAMLIT_SERVER_FILE_WATCHER_TYPE=none
+        
+    - name: 🚀 Deploy Lightweight Version
+      run: |
+        cp railway-lightweight.json railway.json
+        railway up --detach
+        
+    - name: 📋 Get Deployment Info
+      run: |
+        railway status
+        railway domain
+        
+    - name: 💬 Success Notification
+      if: success()
+      run: |
+        echo "⚡ Lightweight deployment successful!"
+        echo "📺 Canal: UCgohgqLVu1QPdfa64Vkrgeg"
+        echo "🎯 Optimization: Minimal bandwidth usage"
+        echo "💾 Resources: 512MB RAM, 0.5 CPU"
+        echo "📱 Features: Essential viral analysis only"

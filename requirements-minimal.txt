@@ -1,0 +1,24 @@
+# 🚀 Minimal Requirements - Bandwidth Optimized
+# Core Streamlit (lightweight version)
+streamlit==1.29.0
+
+# Essential Data Processing (minimal)
+pandas==2.0.3
+numpy==1.24.4
+
+# Minimal Visualization
+matplotlib==3.7.2
+
+# Essential Web Framework
+fastapi==0.103.2
+uvicorn==0.23.2
+
+# Minimal Environment
+python-dotenv==1.0.0
+
+# Essential HTTP
+requests==2.31.0
+httpx==0.25.1
+
+# Minimal Utils
+Pillow==10.0.1
