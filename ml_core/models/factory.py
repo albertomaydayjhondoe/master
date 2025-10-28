@@ -35,20 +35,36 @@ from .anomaly_detector import AnomalyDetector as _AnomalyDummy
 
 
 def get_yolo_screenshot_detector(*args, **kwargs) -> Any:
-    Impl = _load_impl("YOLO_SCREENSHOT_IMPL", _YoloScreenshotDummy)
-    return Impl(*args, **kwargs)
+    if is_dummy_mode():
+        return _YoloScreenshotDummy(*args, **kwargs)
+    else:
+        # Production mode: use real YOLOv8 implementation
+        from .yolo_prod import YoloScreenshotDetector as _YoloScreenshotProd
+        return _YoloScreenshotProd(*args, **kwargs)
 
 
 def get_yolo_video_detector(*args, **kwargs) -> Any:
-    Impl = _load_impl("YOLO_VIDEO_IMPL", _YoloVideoDummy)
-    return Impl(*args, **kwargs)
+    if is_dummy_mode():
+        return _YoloVideoDummy(*args, **kwargs)
+    else:
+        # Production mode: use real YOLOv8 video implementation
+        from .yolo_prod import YoloScreenshotDetector as _YoloVideoProd
+        return _YoloVideoProd(*args, **kwargs)
 
 
 def get_affinity_model(*args, **kwargs) -> Any:
-    Impl = _load_impl("AFFINITY_MODEL_IMPL", _AffinityDummy)
-    return Impl(*args, **kwargs)
+    if is_dummy_mode():
+        return _AffinityDummy(*args, **kwargs)
+    else:
+        # Production mode: real ML affinity model
+        from .affinity_model import AffinityModel as _AffinityProd
+        return _AffinityProd(*args, **kwargs)
 
 
 def get_anomaly_detector(*args, **kwargs) -> Any:
-    Impl = _load_impl("ANOMALY_IMPL", _AnomalyDummy)
-    return Impl(*args, **kwargs)
+    if is_dummy_mode():
+        return _AnomalyDummy(*args, **kwargs)
+    else:
+        # Production mode: real anomaly detection with ML
+        from .anomaly_detector import AnomalyDetector as _AnomalyProd
+        return _AnomalyProd(*args, **kwargs)

@@ -20,13 +20,14 @@ on:
           - bandwidth
           - performance
 
-env:
-  RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-
 jobs:
   deploy-lightweight:
     name: ⚡ Deploy Bandwidth Optimized
     runs-on: ubuntu-latest
+    
+    env:
+      RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+      RAILWAY_PROJECT_ID: ${{ secrets.RAILWAY_PROJECT_ID }}
     
     steps:
     - name: 📥 Checkout Repository
@@ -53,16 +54,15 @@ jobs:
         
     - name: 🚂 Install Railway CLI
       run: |
-        curl -fsSL https://railway.app/install.sh | sh
-        echo "$HOME/.railway/bin" >> $GITHUB_PATH
+        npm install -g @railway/cli
         
     - name: 🔐 Railway Login
       run: |
-        railway login --token ${{ secrets.RAILWAY_TOKEN }}
+        railway login --token $RAILWAY_TOKEN
         
     - name: 🎯 Set Railway Project Context
       run: |
-        railway link -p ${{ secrets.RAILWAY_PROJECT_ID }}
+        railway link -p $RAILWAY_PROJECT_ID
         
     - name: 🔧 Set Lightweight Environment Variables
       run: |

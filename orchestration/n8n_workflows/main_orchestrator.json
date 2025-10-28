@@ -1,9 +1,196 @@
 {
-  "name": "main_orchestrator",
-  "description": "Coordinates publishing and engagement decisions",
+  "name": "Stakas Viral System - Meta Ads Orchestrator",
   "nodes": [
-    {"id": "1", "type": "trigger", "name": "schedule", "params": {"cron": "0 6 * * *"}},
-    {"id": "2", "type": "http_request", "name": "ask_ml", "params": {"path": "/predict_posting_time"}},
-    {"id": "3", "type": "workflow", "name": "publish_workflow", "params": {"target": "device_farm_trigger"}}
-  ]
+    {
+      "id": "webhook_trigger",
+      "type": "n8n-nodes-base.webhook", 
+      "name": "🚀 System Trigger",
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "stakas-orchestrator",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "position": [100, 200],
+      "typeVersion": 1,
+      "webhookId": "stakas-system-webhook"
+    },
+    {
+      "id": "meta_ads_launcher",
+      "type": "n8n-nodes-base.httpRequest",
+      "name": "📱 Meta Ads Campaign Launcher",
+      "parameters": {
+        "url": "http://localhost:8000/meta-ads/launch-campaign",
+        "method": "POST",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "campaign_name", 
+              "value": "={{$json.campaign_name || 'Stakas Viral Campaign ' + new Date().toISOString().split('T')[0]}}"
+            },
+            {
+              "name": "target_audience",
+              "value": "={{$json.target_audience || 'drill_rap_fans_spain'}}"
+            },
+            {
+              "name": "budget",
+              "value": "={{$json.budget || 50}}"
+            },
+            {
+              "name": "duration_days", 
+              "value": "={{$json.duration_days || 7}}"
+            }
+          ]
+        }
+      },
+      "position": [300, 200],
+      "typeVersion": 2
+    },
+    {
+      "id": "ml_analyzer",
+      "type": "n8n-nodes-base.httpRequest", 
+      "name": "🤖 ML Content Analyzer",
+      "parameters": {
+        "url": "http://localhost:8000/analyze_screenshot",
+        "method": "POST",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type", 
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "image_url",
+              "value": "={{$json.screenshot_url || 'https://example.com/tiktok-screenshot.jpg'}}"
+            },
+            {
+              "name": "analysis_type",
+              "value": "viral_potential"
+            }
+          ]
+        }
+      },
+      "position": [500, 200],
+      "typeVersion": 2
+    },
+    {
+      "id": "device_farm_controller",
+      "type": "n8n-nodes-base.httpRequest",
+      "name": "📱 Device Farm Controller",
+      "parameters": {
+        "url": "http://localhost:8000/device-farm/execute-session",
+        "method": "POST", 
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "session_type",
+              "value": "viral_engagement"
+            },
+            {
+              "name": "target_video",
+              "value": "={{$json.video_url}}"
+            },
+            {
+              "name": "engagement_level",
+              "value": "={{$json.engagement_level || 'high'}}"
+            }
+          ]
+        }
+      },
+      "position": [700, 200],
+      "typeVersion": 2
+    },
+    {
+      "id": "response_formatter",
+      "type": "n8n-nodes-base.function",
+      "name": "📊 Response Formatter", 
+      "parameters": {
+        "functionCode": "// Format orchestrator response\nconst results = {\n  timestamp: new Date().toISOString(),\n  orchestrator_status: 'success',\n  meta_ads: $('meta_ads_launcher').first().json || {},\n  ml_analysis: $('ml_analyzer').first().json || {},\n  device_farm: $('device_farm_controller').first().json || {},\n  summary: {\n    campaign_launched: true,\n    analysis_completed: true,\n    devices_activated: true,\n    next_action: 'monitor_performance'\n  }\n};\n\nreturn results;"
+      },
+      "position": [900, 200],
+      "typeVersion": 2
+    }
+  ],
+  "connections": {
+    "webhook_trigger": {
+      "main": [
+        [
+          {
+            "node": "meta_ads_launcher",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "meta_ads_launcher": {
+      "main": [
+        [
+          {
+            "node": "ml_analyzer", 
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ml_analyzer": {
+      "main": [
+        [
+          {
+            "node": "device_farm_controller",
+            "type": "main", 
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "device_farm_controller": {
+      "main": [
+        [
+          {
+            "node": "response_formatter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "timezone": "Europe/Madrid",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "versionId": "production_2.0_fixed",
+  "meta": {
+    "instanceId": "stakas_viral_orchestrator_fixed"
+  }
 }

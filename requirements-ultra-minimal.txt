@@ -1,0 +1,23 @@
+# ⚡ ULTRA MINIMAL - Solo esenciales para Railway
+# Optimizado para Alpine Linux sin compilación
+
+# Streamlit (binario disponible)
+streamlit==1.28.1
+
+# Data handling - Sin numpy/pandas pesados
+polars==0.19.12
+requests==2.31.0
+
+# FastAPI liviano
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+
+# Utilities esenciales
+python-dotenv==1.0.0
+pydantic==2.5.0
+
+# Plotting liviano (sin matplotlib)
+plotly==5.17.0
+
+# Supabase client liviano
+supabase==2.0.3

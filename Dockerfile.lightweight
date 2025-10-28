@@ -13,17 +13,24 @@ WORKDIR /app
 RUN apk add --no-cache curl
 
 # Copy only essential requirements
-COPY requirements-minimal.txt ./
+COPY requirements-ultra-minimal.txt ./
 
-# Install minimal Python packages
+# Install minimal Python packages (no compilation needed)
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements-minimal.txt
+    pip install --no-cache-dir -r requirements-ultra-minimal.txt
 
-# Copy only essential files
+# Copy production system files
+COPY unified_system_production.py ./
+COPY meta_ads_centric_system.py ./
 COPY app.py ./
-COPY scripts/viral_study_analysis.py ./scripts/
+COPY scripts/ ./scripts/
 COPY config/ ./config/
 COPY data/ ./data/
+COPY ml_core/ ./ml_core/
+COPY device_farm/ ./device_farm/
+COPY gologin_automation/ ./gologin_automation/
+COPY monitoring/ ./monitoring/
+COPY orchestration/ ./orchestration/
 
 # Environment variables for production
 ENV PYTHONUNBUFFERED=1
@@ -39,5 +46,8 @@ EXPOSE 8501
 HEALTHCHECK --interval=2m --timeout=10s --start-period=1m --retries=2 \
     CMD curl -f http://localhost:${PORT:-8501}/_stcore/health || exit 1
 
-# Start with minimal launcher
-CMD ["python", "app.py"]
+# Create production startup script
+COPY startup_production.py ./
+
+# Start with production system
+CMD ["python", "startup_production.py"]

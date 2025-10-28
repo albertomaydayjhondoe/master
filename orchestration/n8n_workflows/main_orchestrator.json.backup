@@ -1,0 +1,446 @@
+{
+  "name": "🎯 Meta Ads Centric Orchestrator - Production",
+  "description": "Orquesta campañas Meta Ads con ML insights y automation completa",
+  "version": "2.0.0",
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "nodes": [
+    {
+      "id": "trigger_schedule",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "name": "🕒 Daily Viral Campaign Trigger",
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 6
+            }
+          ]
+        }
+      },
+      "position": [100, 200],
+      "typeVersion": 1.1
+    },
+    {
+      "id": "ml_analysis",
+      "type": "n8n-nodes-base.httpRequest", 
+      "name": "🧠 ML Viral Analysis",
+      "parameters": {
+        "url": "{{$env.ML_API_URL}}/analyze_viral_potential",
+        "method": "POST",
+        "authentication": "none",
+        "requestMethod": "POST",
+        "jsonParameters": true,
+        "options": {
+          "timeout": 30000,
+          "retry": {
+            "enabled": true,
+            "maxRetries": 3
+          }
+        },
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "channel_id",
+              "value": "{{$env.YOUTUBE_CHANNEL_ID}}"
+            },
+            {
+              "name": "content_type", 
+              "value": "drill_rap_espanol"
+            },
+            {
+              "name": "analysis_type",
+              "value": "full_viral_analysis"
+            }
+          ]
+        }
+      },
+      "position": [300, 200],
+      "typeVersion": 4.1
+    },
+    {
+      "id": "meta_campaign_creator",
+      "type": "n8n-nodes-base.httpRequest",
+      "name": "🎯 Meta Ads Campaign Creator", 
+      "parameters": {
+        "url": "https://graph.facebook.com/v18.0/act_{{$env.META_ADS_ACCOUNT_ID}}/campaigns",
+        "method": "POST",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{$env.META_ACCESS_TOKEN}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "name",
+              "value": "Stakas_Viral_{{$now.format('YYYYMMDD_HHmm')}}"
+            },
+            {
+              "name": "objective", 
+              "value": "LINK_CLICKS"
+            },
+            {
+              "name": "status",
+              "value": "ACTIVE"
+            },
+            {
+              "name": "daily_budget",
+              "value": "{{Math.round(($json.ml_analysis.viral_score || 0.5) * 1667)}}"
+            },
+            {
+              "name": "bid_strategy",
+              "value": "LOWEST_COST_WITH_BID_CAP"
+            }
+          ]
+        }
+      },
+      "position": [500, 200],
+      "typeVersion": 4.1
+    },
+    {
+      "id": "device_farm_activation",
+      "type": "n8n-nodes-base.httpRequest",
+      "name": "🤖 Device Farm Viral Boost",
+      "parameters": {
+        "url": "{{$env.DEVICE_FARM_API_URL}}/start_viral_boost",
+        "method": "POST", 
+        "authentication": "none",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "video_url",
+              "value": "{{$json.target_video.url}}"
+            },
+            {
+              "name": "engagement_intensity", 
+              "value": "{{$json.ml_analysis.viral_score > 0.7 ? 'high' : 'medium'}}"
+            },
+            {
+              "name": "device_count",
+              "value": "{{Math.min(10, Math.round($json.ml_analysis.viral_score * 15))}}"
+            },
+            {
+              "name": "session_duration_minutes",
+              "value": "{{Math.round($json.ml_analysis.engagement_prediction.likes / 100)}}"
+            }
+          ]
+        }
+      },
+      "position": [700, 150],
+      "typeVersion": 4.1
+    },
+    {
+      "id": "gologin_browser_boost",
+      "type": "n8n-nodes-base.httpRequest", 
+      "name": "🌐 GoLogin Browser Automation",
+      "parameters": {
+        "url": "{{$env.GOLOGIN_API_URL}}/boost_video_engagement",
+        "method": "POST",
+        "authentication": "none",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "video_url",
+              "value": "{{$json.target_video.url}}"
+            },
+            {
+              "name": "profile_count",
+              "value": "{{Math.min(30, Math.round($json.ml_analysis.viral_score * 40))}}"
+            },
+            {
+              "name": "engagement_types",
+              "value": ["view", "like", "comment", "subscribe"]
+            },
+            {
+              "name": "geo_targeting",
+              "value": ["ES", "MX", "AR", "CO", "PE", "CL"]
+            }
+          ]
+        }
+      },
+      "position": [700, 250],
+      "typeVersion": 4.1
+    },
+    {
+      "id": "performance_monitor",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "name": "📊 Campaign Performance Monitor", 
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 15
+            }
+          ]
+        }
+      },
+      "position": [100, 400],
+      "typeVersion": 1.1
+    },
+    {
+      "id": "meta_insights_fetch",
+      "type": "n8n-nodes-base.httpRequest",
+      "name": "📈 Meta Ads Performance Data",
+      "parameters": {
+        "url": "https://graph.facebook.com/v18.0/{{$json.campaign_id}}/insights",
+        "method": "GET",
+        "authentication": "none", 
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "access_token",
+              "value": "{{$env.META_ACCESS_TOKEN}}"
+            },
+            {
+              "name": "fields",
+              "value": "impressions,clicks,spend,ctr,cpc,actions,video_views,cost_per_action_type"
+            },
+            {
+              "name": "time_range",
+              "value": "{'since':'{{$now.minus({hours: 6}).format('YYYY-MM-DD')}}','until':'{{$now.format('YYYY-MM-DD')}}'}"
+            }
+          ]
+        }
+      },
+      "position": [300, 400],
+      "typeVersion": 4.1
+    },
+    {
+      "id": "roi_calculator", 
+      "type": "n8n-nodes-base.function",
+      "name": "💰 ROI Calculator & Optimizer",
+      "parameters": {
+        "functionCode": "// Calculate campaign ROI and optimize\nconst performance = $input.first().json;\nconst spend = parseFloat(performance.spend || 0);\nconst clicks = parseInt(performance.clicks || 0);\nconst impressions = parseInt(performance.impressions || 0);\n\n// Estimate conversion value (€0.50 per subscriber)\nconst conversionValue = 0.50;\nconst estimatedConversions = clicks * 0.02; // 2% conversion rate\nconst totalValue = estimatedConversions * conversionValue;\n\n// Calculate ROI\nconst roi = spend > 0 ? totalValue / spend : 0;\nconst ctr = impressions > 0 ? (clicks / impressions) * 100 : 0;\nconst cpc = clicks > 0 ? spend / clicks : 0;\n\n// Optimization recommendations\nlet optimizations = [];\nif (roi < 2.0) optimizations.push('increase_targeting_precision');\nif (ctr < 1.0) optimizations.push('improve_creative');\nif (cpc > 0.15) optimizations.push('reduce_bid');\n\nreturn {\n  campaign_id: performance.campaign_id,\n  roi: roi.toFixed(2),\n  ctr: ctr.toFixed(2),\n  cpc: cpc.toFixed(3),\n  spend: spend.toFixed(2),\n  estimated_value: totalValue.toFixed(2),\n  performance_grade: roi >= 3.0 ? 'excellent' : roi >= 2.0 ? 'good' : roi >= 1.0 ? 'acceptable' : 'poor',\n  optimizations: optimizations,\n  timestamp: new Date().toISOString()\n};"
+        }
+      },
+      "position": [500, 400],
+      "typeVersion": 2
+    },
+    {
+      "id": "campaign_optimizer",
+      "type": "n8n-nodes-base.switch",
+      "name": "🔧 Campaign Auto-Optimizer",
+      "parameters": {
+        "options": {
+          "rules": [
+            {
+              "conditions": {
+                "number": [
+                  {
+                    "value1": "={{$json.roi}}",
+                    "operation": "smaller",
+                    "value2": 1.5
+                  }
+                ]
+              },
+              "output": 0
+            },
+            {
+              "conditions": {
+                "number": [
+                  {
+                    "value1": "={{$json.roi}}", 
+                    "operation": "largerEqual",
+                    "value2": 3.0
+                  }
+                ]
+              },
+              "output": 1
+            }
+          ]
+        }
+      },
+      "position": [700, 400],
+      "typeVersion": 2
+    },
+    {
+      "id": "pause_poor_campaigns",
+      "type": "n8n-nodes-base.httpRequest",
+      "name": "⏸️ Pause Underperforming Campaigns",
+      "parameters": {
+        "url": "https://graph.facebook.com/v18.0/{{$json.campaign_id}}",
+        "method": "POST",
+        "authentication": "none",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "access_token", 
+              "value": "{{$env.META_ACCESS_TOKEN}}"
+            },
+            {
+              "name": "status",
+              "value": "PAUSED"
+            }
+          ]
+        }
+      },
+      "position": [900, 350],
+      "typeVersion": 4.1
+    },
+    {
+      "id": "scale_successful_campaigns",
+      "type": "n8n-nodes-base.httpRequest",
+      "name": "🚀 Scale High-ROI Campaigns", 
+      "parameters": {
+        "url": "https://graph.facebook.com/v18.0/act_{{$env.META_ADS_ACCOUNT_ID}}/adsets",
+        "method": "POST",
+        "authentication": "none",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "access_token",
+              "value": "{{$env.META_ACCESS_TOKEN}}"
+            },
+            {
+              "name": "campaign_id",
+              "value": "{{$json.campaign_id}}"
+            },
+            {
+              "name": "daily_budget", 
+              "value": "{{Math.round($json.spend * 1.5 * 100)}}"
+            },
+            {
+              "name": "optimization_goal",
+              "value": "LINK_CLICKS"
+            }
+          ]
+        }
+      },
+      "position": [900, 450],
+      "typeVersion": 4.1
+    },
+    {
+      "id": "discord_notification",
+      "type": "n8n-nodes-base.discord",
+      "name": "📢 Performance Notification",
+      "parameters": {
+        "webhook": "{{$env.DISCORD_WEBHOOK_URL}}",
+        "text": "🎯 **Stakas Viral Campaign Update**\n\n📊 **Performance:**\n• ROI: {{$json.roi}}x\n• CTR: {{$json.ctr}}%\n• Spend: €{{$json.spend}}\n• Grade: {{$json.performance_grade}}\n\n🔧 **Optimizations:** {{$json.optimizations.join(', ') || 'None needed'}}\n\n⏰ {{$json.timestamp}}"
+      },
+      "position": [700, 550],
+      "typeVersion": 1
+    }
+  ],
+  "connections": {
+    "trigger_schedule": {
+      "main": [
+        [
+          {
+            "node": "ml_analysis",
+            "type": "main", 
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ml_analysis": {
+      "main": [
+        [
+          {
+            "node": "meta_campaign_creator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "meta_campaign_creator": {
+      "main": [
+        [
+          {
+            "node": "device_farm_activation",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "gologin_browser_boost", 
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "performance_monitor": {
+      "main": [
+        [
+          {
+            "node": "meta_insights_fetch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "meta_insights_fetch": {
+      "main": [
+        [
+          {
+            "node": "roi_calculator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "roi_calculator": {
+      "main": [
+        [
+          {
+            "node": "campaign_optimizer",
+            "type": "main", 
+            "index": 0
+          },
+          {
+            "node": "discord_notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "campaign_optimizer": {
+      "main": [
+        [
+          {
+            "node": "pause_poor_campaigns",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "scale_successful_campaigns",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "timezone": "Europe/Madrid",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "versionId": "production_2.0",
+  "meta": {
+    "instanceId": "stakas_viral_orchestrator"
+  }
+}
