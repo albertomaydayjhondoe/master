@@ -44,21 +44,8 @@ EXPOSE 8501
 HEALTHCHECK --interval=60s --timeout=30s --start-period=120s --retries=3 \
     CMD curl -f http://localhost:${PORT:-8501}/_stcore/health || exit 1
 
-# Create startup script
-RUN echo '#!/bin/bash\n\
-if [ "$APP_TYPE" = "api" ]; then\n\
-    echo "Starting FastAPI server on port ${PORT:-8000}"\n\
-    exec uvicorn ml_core.api.main:app --host 0.0.0.0 --port ${PORT:-8000}\n\
-else\n\
-    echo "Starting Streamlit dashboard on port ${PORT:-8501}"\n\
-    exec streamlit run scripts/viral_study_analysis.py \\\n\
-        --server.port ${PORT:-8501} \\\n\
-        --server.address 0.0.0.0 \\\n\
-        --server.headless true \\\n\
-        --server.enableCORS false \\\n\
-        --server.enableXsrfProtection false \\\n\
-        --browser.gatherUsageStats false\n\
-fi' > /app/start.sh && chmod +x /app/start.sh
+# Make startup script executable
+RUN chmod +x /app/start.sh
 
 # Start using the script
-CMD ["/app/start.sh"]
+CMD ["./start.sh"]
