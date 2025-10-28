@@ -12,6 +12,15 @@ import subprocess
 import multiprocessing
 from concurrent.futures import ThreadPoolExecutor
 import logging
+import platform
+import shutil
+from pathlib import Path
+
+# Import cross-platform utilities (optional)
+try:
+    from cross_platform_launcher import CrossPlatformLauncher
+except ImportError:
+    CrossPlatformLauncher = None
 
 # Configure logging
 logging.basicConfig(
@@ -21,13 +30,15 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 class RailwayLauncher:
-    """Railway multi-service launcher"""
+    """Railway multi-service launcher with cross-platform support"""
     
     def __init__(self):
         self.port = int(os.getenv('PORT', 8501))
         self.host = '0.0.0.0'
         self.environment = os.getenv('ENVIRONMENT', 'production')
         self.dummy_mode = os.getenv('DUMMY_MODE', 'false').lower() == 'true'
+        self.cross_platform = CrossPlatformLauncher() if CrossPlatformLauncher else None
+        self.system_info = self.cross_platform.get_startup_info() if self.cross_platform else {}
         
         logger.info(f"🎯 Railway Launcher initialized - Port: {self.port}")
         logger.info(f"📊 Environment: {self.environment}")

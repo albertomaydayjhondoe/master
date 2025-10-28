@@ -38,7 +38,7 @@ class RailwayDeployment:
                               'iwr https://railway.app/install.ps1 | iex'], check=True)
             else:
                 # Para Unix/Linux/Mac
-                subprocess.run(['sh', '-c', 
+                subprocess.run([, '-c', 
                               'curl -fsSL https://railway.app/install.sh | sh'], check=True)
             
             print("✅ Railway CLI instalado correctamente")

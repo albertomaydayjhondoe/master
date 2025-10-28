@@ -98,7 +98,7 @@ class RailwayEnvSetup:
         """Guarda script de setup para Railway"""
         commands = self.generate_railway_commands()
         
-        script_content = f'''#!/bin/bash
+        script_content = f'''#!
 # 🚀 Railway Environment Variables Setup
 # Generated automatically for TikTok Viral ML System V3
 

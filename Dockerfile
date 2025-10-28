@@ -9,11 +9,12 @@ LABEL version="3.0-production"
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies
+# Install system dependencies compatible with Debian Trixie
 RUN apt-get update && apt-get install -y \
     git wget curl build-essential \
-    libgl1-mesa-glx libglib2.0-0 \
-    libsm6 libxext6 libxrender-dev libgomp1 \
+    libglib2.0-0 libsm6 libxext6 libxrender-dev \
+    libgomp1 libgl1-mesa-dev libglu1-mesa-dev \
+    libglfw3-dev libglew-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements
@@ -22,10 +23,14 @@ COPY requirements.txt requirements-ml.txt ./
 # Install Python dependencies
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt && \
-    pip install --no-cache-dir -r requirements-ml.txt
+    pip install --no-cache-dir streamlit plotly pandas numpy scikit-learn opencv-python-headless fastapi uvicorn
 
 # Copy application code
 COPY . .
+
+# Set proper permissions using setup script
+RUN chmod +x setup_debian_permissions.sh && \
+    ./setup_debian_permissions.sh
 
 # Create directories
 RUN mkdir -p data/models/production data/logs uploads cache
@@ -46,5 +51,5 @@ EXPOSE 8501
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
     CMD curl -f http://localhost:${PORT:-8501}/health || exit 1
 
-# Start Railway launcher
-CMD ["python", "railway_launcher.py"]
+# Start Railway simple launcher
+CMD ["python", "railway_simple_launcher.py"]

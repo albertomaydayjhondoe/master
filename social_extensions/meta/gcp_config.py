@@ -690,7 +690,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
 COPY . .
 
 # Create non-root user
-RUN useradd --create-home --shell /bin/bash appuser && \
+RUN useradd --create-home --shell  appuser && \
     chown -R appuser:appuser /app
 USER appuser
 
@@ -768,7 +768,7 @@ timeout: '1200s'
         scripts = {}
         
         # Setup script
-        scripts['setup_gcp.sh'] = '''#!/bin/bash
+        scripts['setup_gcp.sh'] = '''#!
 
 # Meta Ads GCP Setup Script
 set -e
@@ -834,11 +834,11 @@ echo "   export META_APP_SECRET=your_app_secret"
 echo "   export META_ACCESS_TOKEN=your_access_token"
 echo "   export DB_PASSWORD=your_db_password"
 echo "3. Run: terraform apply"
-echo "4. Build and deploy: ./deploy.sh"
+echo "4. Build and deploy: python scripts/cross_platform_runner.py"
 '''
 
         # Deploy script  
-        scripts['deploy.sh'] = '''#!/bin/bash
+        scripts['deploy.sh'] = '''#!
 
 # Meta Ads Deployment Script
 set -e
@@ -903,7 +903,7 @@ echo "📚 API docs: $SERVICE_URL/docs"
 '''
 
         # Monitoring setup
-        scripts['setup_monitoring.sh'] = '''#!/bin/bash
+        scripts['setup_monitoring.sh'] = '''#!
 
 # Meta Ads Monitoring Setup
 set -e

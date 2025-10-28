@@ -375,10 +375,10 @@ class CompleteViralSystem:
         st.subheader("📋 Quick Start Completo (5 minutos)")
         
         steps = [
-            "🔐 Configurar Credenciales: `./setup-credentials.sh`",
-            "🧠 Descargar Modelos YOLOv8: `./download-models.sh`", 
-            "🐳 Iniciar Docker V3: `./v3-docker.sh start`",
-            "🔄 Configurar n8n: `./n8n-setup.sh`",
+            "🔐 Configurar Credenciales: `python scripts/cross_platform_runner.py`",
+            "🧠 Descargar Modelos YOLOv8: `python scripts/cross_platform_runner.py`", 
+            "🐳 Iniciar Docker V3: `python scripts/cross_platform_runner.py start`",
+            "🔄 Configurar n8n: `python scripts/cross_platform_runner.py`",
             "🚀 Lanzar Campaña: Elegir modo Launch o Monitor"
         ]
         

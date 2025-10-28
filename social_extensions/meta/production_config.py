@@ -294,7 +294,7 @@ CACHE_TTL_SECONDS=3600
     def create_production_setup_script(self) -> str:
         """Create setup script for production deployment"""
         
-        script = """#!/bin/bash
+        script = """#!
 
 # Meta Ads Production Setup Script
 # This script helps set up the Meta Ads integration for production use

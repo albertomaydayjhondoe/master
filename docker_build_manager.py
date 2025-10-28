@@ -246,7 +246,7 @@ def create_docker_scripts():
     """Crear scripts helper adicionales"""
     
     # Script de desarrollo
-    dev_script = '''#!/bin/bash
+    dev_script = '''#!
 # Script de desarrollo Docker - Stakas MVP
 
 echo "🚀 Iniciando entorno de desarrollo Docker..."
@@ -272,7 +272,7 @@ docker run -it --rm \\
         f.write(dev_script)
     
     # Script de producción
-    prod_script = '''#!/bin/bash
+    prod_script = '''#!
 # Script de producción Docker - Stakas MVP
 
 echo "🚀 Iniciando entorno de producción Docker..."
@@ -348,11 +348,11 @@ def main():
             
         elif choice == '8':
             print("🐳 Ejecutando desarrollo local...")
-            subprocess.run(['bash', 'docker-dev.sh'])
+            subprocess.run([, 'docker-dev.sh'])
             
         elif choice == '9':
             print("📦 Ejecutando producción local...")
-            subprocess.run(['bash', 'docker-prod.sh'])
+            subprocess.run([, 'docker-prod.sh'])
             
         elif choice == '10':
             print("👋 ¡Hasta luego!")

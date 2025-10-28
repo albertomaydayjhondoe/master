@@ -167,7 +167,7 @@ CMD python -m uvicorn v2.meta_ads.meta_centric_orchestrator:app --host 0.0.0.0 -
 def generate_railway_deployment_script() -> str:
     """Generar script de deployment para Railway"""
     
-    return """#!/bin/bash
+    return """#!
 # Railway Meta Ads-Centric Deployment Script
 
 set -e

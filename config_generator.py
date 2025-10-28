@@ -537,7 +537,7 @@ def main():
     print(f"  • YAML: {yaml_path}")
     
     print("\n🚀 Ready to wake the system with:")
-    print("  ./wake.sh --mode full")
+    print("  python scripts/cross_platform_runner.py --mode full")
 
 
 if __name__ == "__main__":
