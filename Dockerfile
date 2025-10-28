@@ -16,19 +16,13 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements first for better caching
-COPY requirements*.txt ./
+# We'll install packages directly without requirements.txt to avoid conflicts
+# COPY requirements*.txt ./
 
-# Install Python dependencies
+# Copy and install only Streamlit requirements
+COPY requirements-streamlit.txt ./
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt && \
-    pip install --no-cache-dir \
-        streamlit==1.50.0 \
-        matplotlib==3.10.7 \
-        seaborn==0.13.2 \
-        plotly==6.3.1 \
-        pandas==2.3.2 \
-        numpy==2.3.2
+    pip install --no-cache-dir -r requirements-streamlit.txt
 
 # Copy application code
 COPY . .
