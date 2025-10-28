@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+"""
+Requerimientos adicionales para Railway deployment
+Packages específicos para funcionamiento 24/7 en producción
+"""
+
+# Railway-specific requirements
+flask==2.3.3
+gunicorn==21.2.0
+psutil==5.9.5
+requests==2.31.0
+
+# Monitoring and logging
+python-dotenv==1.0.0
+watchdog==3.0.0
+
+# Health checks and performance
+uvloop==0.17.0
+aiofiles==23.2.1
+
+# Database and cache (si se necesitan)
+redis==4.6.0
+sqlalchemy==2.0.21
+
+# Security
+cryptography==41.0.4
+pyjwt==2.8.0
+
+# Additional utilities
+click==8.1.7
+python-dateutil==2.8.2
+pytz==2023.3
+
+# Streamlit optimizations
+streamlit-option-menu==0.3.6
+streamlit-autorefresh==0.0.6

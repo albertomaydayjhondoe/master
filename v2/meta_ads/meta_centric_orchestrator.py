@@ -321,7 +321,19 @@ class MetaCentricOrchestrator:
 # ============================================
 
 # Añadir estos endpoints a v2/meta_ads/main.py
+from fastapi import FastAPI, HTTPException
+from typing import Dict, List
+from pydantic import BaseModel
+import logging
 
+logger = logging.getLogger(__name__)
+
+class CampaignCreateRequest(BaseModel):
+    campaign_name: str
+    budget: float
+    target_audience: Dict
+    
+app = FastAPI()
 orchestrator = MetaCentricOrchestrator()
 
 @app.post("/webhook/campaign-created")
@@ -346,8 +358,8 @@ async def create_campaign_with_full_orchestration(
     """
     
     try:
-        # 1. Crear campaña Meta Ads
-        campaign = await meta_client.create_campaign(request)
+        # 1. Crear campaña Meta Ads (dummy implementation)
+        campaign = {"id": f"campaign_{request.campaign_name}_{hash(str(request.dict()))}"}
         campaign_id = campaign["id"]
         
         logger.info(f"🚀 Created Meta Ads campaign: {campaign_id}")

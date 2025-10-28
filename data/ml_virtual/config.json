@@ -1,0 +1,376 @@
+{
+  "devices": [
+    {
+      "id": "virtual_device_01",
+      "platform": "YouTube",
+      "region": "Argentina",
+      "ml_profile": {
+        "engagement_style": "conservative",
+        "optimal_hours": [
+          8,
+          13,
+          16,
+          19,
+          20,
+          22
+        ],
+        "content_preferences": [
+          "niche",
+          "music"
+        ],
+        "interaction_rate": 0.34471281632884276
+      },
+      "performance_metrics": {
+        "daily_interactions": 0,
+        "success_rate": 0.8503441114869441,
+        "shadowban_risk": 0.054719113174008335,
+        "roi_multiplier": 3.669349350186571
+      },
+      "status": "ready",
+      "last_activity": "2025-10-28 12:49:19.728068"
+    },
+    {
+      "id": "virtual_device_02",
+      "platform": "TikTok",
+      "region": "M\u00e9xico",
+      "ml_profile": {
+        "engagement_style": "aggressive",
+        "optimal_hours": [
+          8,
+          10,
+          11,
+          15,
+          18,
+          20
+        ],
+        "content_preferences": [
+          "niche",
+          "viral"
+        ],
+        "interaction_rate": 0.3066385288987021
+      },
+      "performance_metrics": {
+        "daily_interactions": 0,
+        "success_rate": 0.8502803053181209,
+        "shadowban_risk": 0.09864833753456964,
+        "roi_multiplier": 2.377417624187647
+      },
+      "status": "ready",
+      "last_activity": "2025-10-28 12:49:19.728158"
+    },
+    {
+      "id": "virtual_device_03",
+      "platform": "TikTok",
+      "region": "Espa\u00f1a",
+      "ml_profile": {
+        "engagement_style": "moderate",
+        "optimal_hours": [
+          8,
+          9,
+          10,
+          11,
+          13,
+          15
+        ],
+        "content_preferences": [
+          "music",
+          "trending"
+        ],
+        "interaction_rate": 0.3163289182897457
+      },
+      "performance_metrics": {
+        "daily_interactions": 0,
+        "success_rate": 0.9206671854724504,
+        "shadowban_risk": 0.043053388561113196,
+        "roi_multiplier": 3.619673634225146
+      },
+      "status": "ready",
+      "last_activity": "2025-10-28 12:49:19.728181"
+    },
+    {
+      "id": "virtual_device_04",
+      "platform": "Instagram",
+      "region": "M\u00e9xico",
+      "ml_profile": {
+        "engagement_style": "moderate",
+        "optimal_hours": [
+          8,
+          11,
+          12,
+          13,
+          15,
+          21
+        ],
+        "content_preferences": [
+          "trending",
+          "music"
+        ],
+        "interaction_rate": 0.16653592417727342
+      },
+      "performance_metrics": {
+        "daily_interactions": 0,
+        "success_rate": 0.8902207127629854,
+        "shadowban_risk": 0.1178062851041893,
+        "roi_multiplier": 3.6063305302903554
+      },
+      "status": "ready",
+      "last_activity": "2025-10-28 12:49:19.728215"
+    },
+    {
+      "id": "virtual_device_05",
+      "platform": "Twitter",
+      "region": "Argentina",
+      "ml_profile": {
+        "engagement_style": "aggressive",
+        "optimal_hours": [
+          9,
+          11,
+          13,
+          14,
+          15,
+          17
+        ],
+        "content_preferences": [
+          "music",
+          "niche"
+        ],
+        "interaction_rate": 0.4434481499983559
+      },
+      "performance_metrics": {
+        "daily_interactions": 0,
+        "success_rate": 0.9343035117881583,
+        "shadowban_risk": 0.02530754717571098,
+        "roi_multiplier": 3.503390588989446
+      },
+      "status": "ready",
+      "last_activity": "2025-10-28 12:49:19.728228"
+    },
+    {
+      "id": "virtual_device_06",
+      "platform": "Twitter",
+      "region": "Espa\u00f1a",
+      "ml_profile": {
+        "engagement_style": "aggressive",
+        "optimal_hours": [
+          8,
+          11,
+          12,
+          15,
+          17,
+          21
+        ],
+        "content_preferences": [
+          "music",
+          "viral"
+        ],
+        "interaction_rate": 0.3202187956555317
+      },
+      "performance_metrics": {
+        "daily_interactions": 0,
+        "success_rate": 0.9278580481770028,
+        "shadowban_risk": 0.10785362846032266,
+        "roi_multiplier": 3.747458921251301
+      },
+      "status": "ready",
+      "last_activity": "2025-10-28 12:49:19.728241"
+    },
+    {
+      "id": "virtual_device_07",
+      "platform": "YouTube",
+      "region": "Chile",
+      "ml_profile": {
+        "engagement_style": "conservative",
+        "optimal_hours": [
+          8,
+          15,
+          16,
+          18,
+          19,
+          21
+        ],
+        "content_preferences": [
+          "trending",
+          "niche"
+        ],
+        "interaction_rate": 0.3219045833481813
+      },
+      "performance_metrics": {
+        "daily_interactions": 0,
+        "success_rate": 0.8642925367642151,
+        "shadowban_risk": 0.040564672475385616,
+        "roi_multiplier": 4.011552375219473
+      },
+      "status": "ready",
+      "last_activity": "2025-10-28 12:49:19.728273"
+    },
+    {
+      "id": "virtual_device_08",
+      "platform": "Instagram",
+      "region": "Espa\u00f1a",
+      "ml_profile": {
+        "engagement_style": "conservative",
+        "optimal_hours": [
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ],
+        "content_preferences": [
+          "trending",
+          "niche"
+        ],
+        "interaction_rate": 0.21722154594513732
+      },
+      "performance_metrics": {
+        "daily_interactions": 0,
+        "success_rate": 0.909004332531746,
+        "shadowban_risk": 0.03510601604396442,
+        "roi_multiplier": 4.517926341543923
+      },
+      "status": "ready",
+      "last_activity": "2025-10-28 12:49:19.728284"
+    },
+    {
+      "id": "virtual_device_09",
+      "platform": "YouTube",
+      "region": "Argentina",
+      "ml_profile": {
+        "engagement_style": "moderate",
+        "optimal_hours": [
+          8,
+          9,
+          16,
+          18,
+          19,
+          21
+        ],
+        "content_preferences": [
+          "music",
+          "niche"
+        ],
+        "interaction_rate": 0.4401188668657895
+      },
+      "performance_metrics": {
+        "daily_interactions": 0,
+        "success_rate": 0.8213786257683414,
+        "shadowban_risk": 0.022509382924888258,
+        "roi_multiplier": 3.946421640466829
+      },
+      "status": "ready",
+      "last_activity": "2025-10-28 12:49:19.728297"
+    },
+    {
+      "id": "virtual_device_10",
+      "platform": "Instagram",
+      "region": "M\u00e9xico",
+      "ml_profile": {
+        "engagement_style": "moderate",
+        "optimal_hours": [
+          8,
+          9,
+          11,
+          16,
+          20,
+          22
+        ],
+        "content_preferences": [
+          "viral",
+          "niche"
+        ],
+        "interaction_rate": 0.34013916812703576
+      },
+      "performance_metrics": {
+        "daily_interactions": 0,
+        "success_rate": 0.9140412843138807,
+        "shadowban_risk": 0.061480405940945435,
+        "roi_multiplier": 3.990016300433753
+      },
+      "status": "ready",
+      "last_activity": "2025-10-28 12:49:19.728308"
+    }
+  ],
+  "ml_models": {
+    "yolo_screenshot_analyzer": {
+      "precision": 0.924,
+      "elements_detected": [
+        "like_button",
+        "comment_box",
+        "share_icon",
+        "follow_btn",
+        "story_viewer",
+        "reel_player",
+        "hashtag_field",
+        "caption_area"
+      ],
+      "processing_time_ms": 380,
+      "confidence_threshold": 0.85
+    },
+    "engagement_predictor": {
+      "accuracy": 0.842,
+      "features": [
+        "time_of_day",
+        "content_type",
+        "audience_online",
+        "hashtag_trending"
+      ],
+      "viral_prediction_accuracy": 0.78,
+      "roi_prediction_accuracy": 0.83
+    },
+    "anomaly_detector": {
+      "shadowban_detection": 0.941,
+      "account_health_monitoring": 0.91,
+      "false_positive_rate": 0.03,
+      "early_warning_accuracy": 0.88
+    },
+    "behavioral_mimicker": {
+      "human_like_patterns": 0.96,
+      "scroll_simulation": 0.94,
+      "interaction_timing": 0.92,
+      "engagement_authenticity": 0.89
+    }
+  },
+  "last_analysis": {
+    "optimal_hour": 21,
+    "confidence": 0.8115339653215562,
+    "expected_engagement_boost": 1.4633750837661172,
+    "reasoning": "ML modelo detecta pico de audiencia music en Espa\u00f1a",
+    "alternative_times": [
+      18,
+      21,
+      23
+    ]
+  },
+  "roi_projection": {
+    "investment": 400,
+    "period_days": 90,
+    "base_roi_percentage": 180,
+    "ml_enhanced_roi_percentage": 321.9576506114487,
+    "expected_revenue": 1287.8306024457947,
+    "net_profit": 887.8306024457947,
+    "daily_profit": 9.864784471619942,
+    "ml_factors": {
+      "ml_optimization": "24%",
+      "cross_platform": "18%",
+      "region_targeting": "15%",
+      "viral_amplification": "6%"
+    },
+    "confidence_level": 0.8247861011543374
+  },
+  "dashboard_data": {
+    "virtual_devices": 10,
+    "total_interactions_24h": 5523,
+    "platforms_active": [
+      "TikTok",
+      "Instagram",
+      "YouTube",
+      "Twitter"
+    ],
+    "ml_models_running": 4,
+    "current_campaigns": 3,
+    "roi_current": 439.080597649654,
+    "viral_content_detected": 5,
+    "optimization_suggestions": 11
+  }
+}
