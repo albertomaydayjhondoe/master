@@ -1,0 +1,251 @@
+{
+  "name": "📊 Stakas MVP Channel Monitor & Auto-Optimizer",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "value": "0 */2 * * *"
+            }
+          ]
+        }
+      },
+      "id": "cron-channel-monitor",
+      "name": "Every 2 Hours Monitor",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "requestMethod": "GET",
+        "url": "https://www.googleapis.com/youtube/v3/channels",
+        "qs": {
+          "part": "statistics,snippet,contentDetails",
+          "id": "UCgohgqLVu1QPdfa64Vkrgeg",
+          "key": "{{ $credentials.youtube_api.key }}"
+        }
+      },
+      "id": "get-channel-analytics",
+      "name": "Get Channel Analytics", 
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [460, 300],
+      "credentials": {
+        "youTubeApi": {
+          "id": "youtube_api_key",
+          "name": "YouTube API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "requestMethod": "GET",
+        "url": "https://www.googleapis.com/youtube/v3/search",
+        "qs": {
+          "part": "snippet",
+          "channelId": "UCgohgqLVu1QPdfa64Vkrgeg",
+          "order": "date",
+          "maxResults": "5",
+          "key": "{{ $credentials.youtube_api.key }}"
+        }
+      },
+      "id": "get-recent-videos",
+      "name": "Get Recent Videos",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Analizar métricas del canal Stakas MVP\nconst channelData = $input.first().json.items[0];\nconst recentVideos = $input.all()[1].json.items;\n\n// Métricas actuales\nconst stats = channelData.statistics;\nconst currentSubs = parseInt(stats.subscriberCount);\nconst currentViews = parseInt(stats.viewCount);\nconst videoCount = parseInt(stats.videoCount);\n\n// Calcular métricas de rendimiento\nconst avgViewsPerVideo = currentViews / videoCount;\nconst subsGrowthTarget = 10000; // Meta para Stakas MVP\nconst subsProgress = (currentSubs / subsGrowthTarget) * 100;\n\n// Analizar videos recientes para patrones virales\nconst recentVideoAnalysis = recentVideos.map(video => {\n  const title = video.snippet.title;\n  const publishTime = new Date(video.snippet.publishedAt);\n  const hoursAgo = (new Date() - publishTime) / (1000 * 60 * 60);\n  \n  // Detectar palabras clave de drill/rap español\n  const viralKeywords = ['drill', 'trap', 'barrio', 'calle', 'real', 'freestyle'];\n  const keywordCount = viralKeywords.filter(keyword => \n    title.toLowerCase().includes(keyword)\n  ).length;\n  \n  return {\n    title,\n    publishTime,\n    hoursAgo,\n    viralScore: keywordCount * 20, // Score basado en keywords\n    videoId: video.id.videoId\n  };\n});\n\n// Determinar acciones recomendadas\nconst recommendations = [];\n\nif (subsProgress < 50) {\n  recommendations.push({\n    action: 'boost_meta_ads',\n    priority: 'high',\n    budget_increase: 50,\n    reason: 'Subscribers below 50% of target'\n  });\n}\n\nif (avgViewsPerVideo < 5000) {\n  recommendations.push({\n    action: 'optimize_content',\n    priority: 'medium', \n    focus: 'viral_keywords',\n    reason: 'Average views per video below threshold'\n  });\n}\n\n// Detectar horas peak de engagement\nconst currentHour = new Date().getHours();\nconst isPeakTime = currentHour >= 19 && currentHour <= 23; // 7pm-11pm España\n\nif (isPeakTime && recentVideoAnalysis.length === 0) {\n  recommendations.push({\n    action: 'schedule_content',\n    priority: 'urgent',\n    timing: 'now',\n    reason: 'Peak engagement hours with no recent content'\n  });\n}\n\nreturn {\n  channel_id: 'UCgohgqLVu1QPdfa64Vkrgeg',\n  channel_name: 'Stakas MVP',\n  genre: 'drill_rap_espanol',\n  timestamp: new Date().toISOString(),\n  \n  // Métricas actuales\n  metrics: {\n    subscribers: currentSubs,\n    total_views: currentViews,\n    video_count: videoCount,\n    avg_views_per_video: Math.round(avgViewsPerVideo),\n    subs_progress_percent: Math.round(subsProgress * 100) / 100\n  },\n  \n  // Análisis de videos recientes\n  recent_videos: recentVideoAnalysis,\n  \n  // Recomendaciones de optimización\n  recommendations,\n  \n  // Context para Meta Ads\n  meta_ads_context: {\n    current_budget: 500,\n    target_audience: 'ES+LATAM_16-28_drill_rap',\n    peak_time_active: isPeakTime,\n    optimization_needed: recommendations.length > 0\n  }\n};"
+      },
+      "id": "analyze-channel-performance",
+      "name": "Analyze Channel Performance",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "{{ $json.recommendations.length }}",
+              "operation": "larger",
+              "value2": 0
+            }
+          ]
+        }
+      },
+      "id": "check-optimization-needed", 
+      "name": "Check if Optimization Needed",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1120, 300]
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "https://graph.facebook.com/v18.0/act_{{ $credentials.meta_ads.account_id }}/campaigns",
+        "jsonParameters": true,
+        "bodyParametersJson": "{\n  \"name\": \"Stakas MVP Auto-Boost {{ new Date().toISOString().split('T')[0] }}\",\n  \"objective\": \"VIDEO_VIEWS\",\n  \"status\": \"PAUSED\",\n  \"special_ad_categories\": [],\n  \"access_token\": \"{{ $credentials.meta_ads.access_token }}\"\n}",
+        "options": {}
+      },
+      "id": "create-meta-ads-campaign",
+      "name": "Create Meta Ads Campaign",
+      "type": "n8n-nodes-base.httpRequest", 
+      "typeVersion": 3,
+      "position": [1340, 200],
+      "credentials": {
+        "metaApi": {
+          "id": "meta_ads_api",
+          "name": "Meta Ads API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "{{ $json.webhook_url || 'http://stakas-app:8080/api/content/optimize' }}",
+        "jsonParameters": true,
+        "bodyParametersJson": "{\n  \"channel_id\": \"{{ $json.channel_id }}\",\n  \"optimization_type\": \"viral_keywords\",\n  \"current_metrics\": {{ JSON.stringify($json.metrics) }},\n  \"recommendations\": {{ JSON.stringify($json.recommendations) }},\n  \"trigger_source\": \"n8n_monitor\"\n}"
+      },
+      "id": "trigger-content-optimization",
+      "name": "Trigger Content Optimization",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [1340, 400]
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "table": "channel_analytics",
+        "columns": "channel_id, subscribers, total_views, video_count, avg_views_per_video, recommendations_count, created_at",
+        "additionalFields": {}
+      },
+      "id": "store-analytics",
+      "name": "Store Analytics",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [900, 500],
+      "credentials": {
+        "postgres": {
+          "id": "stakas_postgres_db",
+          "name": "Stakas PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "📊 **Stakas MVP Analytics Update**\\n\\n📺 **Canal**: UCgohgqLVu1QPdfa64Vkrgeg\\n👥 **Subscribers**: {{ $json.metrics.subscribers }}\\n📹 **Videos**: {{ $json.metrics.video_count }}\\n👀 **Avg Views/Video**: {{ $json.metrics.avg_views_per_video }}\\n📈 **Progress to 10K**: {{ $json.metrics.subs_progress_percent }}%\\n\\n{{ $json.recommendations.length > 0 ? '🚀 **Optimizations Triggered**: ' + $json.recommendations.length : '✅ **Performance On Track**' }}\\n\\n💰 **Meta Ads Budget**: €500/month\\n🎯 **Target**: Drill/Rap Español 16-28",
+        "options": {}
+      },
+      "id": "analytics-notification",
+      "name": "Analytics Notification",
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 1,
+      "position": [1120, 500],
+      "credentials": {
+        "discordWebhookApi": {
+          "id": "stakas_discord_webhook",
+          "name": "Stakas Discord Webhook"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Every 2 Hours Monitor": {
+      "main": [
+        [
+          {
+            "node": "Get Channel Analytics",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Channel Analytics": {
+      "main": [
+        [
+          {
+            "node": "Get Recent Videos",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Store Analytics",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Recent Videos": {
+      "main": [
+        [
+          {
+            "node": "Analyze Channel Performance",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze Channel Performance": {
+      "main": [
+        [
+          {
+            "node": "Check if Optimization Needed",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Analytics Notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check if Optimization Needed": {
+      "main": [
+        [
+          {
+            "node": "Create Meta Ads Campaign",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Trigger Content Optimization", 
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "timezone": "Europe/Madrid"
+  },
+  "versionId": "stakas-monitor-v1.0", 
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "id": "stakas-channel-monitor",
+  "tags": [
+    {
+      "id": "stakas-mvp",
+      "name": "stakas-mvp"
+    },
+    {
+      "id": "analytics", 
+      "name": "analytics"
+    }
+  ]
+}

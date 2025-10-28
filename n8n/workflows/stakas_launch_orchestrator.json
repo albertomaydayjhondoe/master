@@ -1,0 +1,282 @@
+{
+  "name": "🚀 Stakas MVP Launch Orchestrator",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "webhook-launch-trigger",
+      "name": "Launch Trigger Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "webhookId": "stakas-launch-trigger"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "stakas-mvp-launch",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-response",
+      "name": "Launch Response",
+      "type": "n8n-nodes-base.webhookResponse",
+      "typeVersion": 1,
+      "position": [1200, 300]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "channel_id",
+              "value": "UCgohgqLVu1QPdfa64Vkrgeg"
+            },
+            {
+              "name": "launch_type", 
+              "value": "{{ $json.body.launch_type || 'manual' }}"
+            },
+            {
+              "name": "timestamp",
+              "value": "{{ new Date().toISOString() }}"
+            }
+          ]
+        }
+      },
+      "id": "set-launch-context",
+      "name": "Set Launch Context",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "{{ $json.launch_type }}",
+              "operation": "equal",
+              "value2": "github_push"
+            }
+          ]
+        }
+      },
+      "id": "check-launch-type",
+      "name": "Check Launch Type",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "requestMethod": "POST",
+        "url": "https://api.github.com/repos/albertomaydayjhondoe/master/actions/workflows/deploy-railway.yml/dispatches",
+        "jsonParameters": true,
+        "bodyParametersJson": "{\n  \"ref\": \"main\",\n  \"inputs\": {\n    \"deploy_to_railway\": \"true\",\n    \"channel_id\": \"{{ $json.channel_id }}\",\n    \"launch_source\": \"n8n_orchestrator\"\n  }\n}",
+        "options": {}
+      },
+      "id": "trigger-github-actions",
+      "name": "Trigger GitHub Actions",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [900, 200],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "github_token_auth",
+          "name": "GitHub Token Auth"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "requestMethod": "POST", 
+        "url": "https://backendapi.railway.app/graphql/v2",
+        "jsonParameters": true,
+        "bodyParametersJson": "{\n  \"query\": \"mutation { projectDeploy(input: { projectId: \\\"{{ $json.railway_project_id }}\\\", environmentId: \\\"production\\\" }) { id } }\"\n}",
+        "options": {}
+      },
+      "id": "trigger-railway-deploy",
+      "name": "Trigger Railway Deploy", 
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [900, 400],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "railway_token_auth",
+          "name": "Railway Token Auth"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "requestMethod": "GET",
+        "url": "https://www.googleapis.com/youtube/v3/channels",
+        "qs": {
+          "part": "statistics,snippet",
+          "id": "{{ $json.channel_id }}",
+          "key": "{{ $credentials.youtube_api.key }}"
+        },
+        "options": {}
+      },
+      "id": "get-channel-stats",
+      "name": "Get Channel Stats",
+      "type": "n8n-nodes-base.httpRequest", 
+      "typeVersion": 3,
+      "position": [680, 500],
+      "credentials": {
+        "youTubeApi": {
+          "id": "youtube_api_key",
+          "name": "YouTube API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "table": "launch_events",
+        "columns": "channel_id, launch_type, github_triggered, railway_triggered, channel_stats, created_at",
+        "additionalFields": {
+          "upsert": false
+        }
+      },
+      "id": "log-launch-event",
+      "name": "Log Launch Event",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [1020, 300],
+      "credentials": {
+        "postgres": {
+          "id": "stakas_postgres_db",
+          "name": "Stakas PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "🚀 **Stakas MVP Launch Triggered**\\n\\n📺 **Canal**: UCgohgqLVu1QPdfa64Vkrgeg\\n🎵 **Type**: {{ $json.launch_type }}\\n⏰ **Time**: {{ $json.timestamp }}\\n\\n✅ GitHub Actions: {{ $json.github_success ? 'Triggered' : 'Failed' }}\\n✅ Railway Deploy: {{ $json.railway_success ? 'Triggered' : 'Failed' }}\\n📊 **Subscribers**: {{ $json.channel_stats.subscriberCount }}\\n📹 **Videos**: {{ $json.channel_stats.videoCount }}\\n\\n🎯 Ready for viral content generation!",
+        "options": {}
+      },
+      "id": "discord-notification",
+      "name": "Discord Notification",
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 1,
+      "position": [900, 600],
+      "credentials": {
+        "discordWebhookApi": {
+          "id": "stakas_discord_webhook", 
+          "name": "Stakas Discord Webhook"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Launch Trigger Webhook": {
+      "main": [
+        [
+          {
+            "node": "Set Launch Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Launch Context": {
+      "main": [
+        [
+          {
+            "node": "Check Launch Type",
+            "type": "main", 
+            "index": 0
+          },
+          {
+            "node": "Get Channel Stats",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Launch Type": {
+      "main": [
+        [
+          {
+            "node": "Trigger GitHub Actions",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Trigger Railway Deploy", 
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Trigger GitHub Actions": {
+      "main": [
+        [
+          {
+            "node": "Log Launch Event",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Trigger Railway Deploy": {
+      "main": [
+        [
+          {
+            "node": "Log Launch Event",
+            "type": "main", 
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Channel Stats": {
+      "main": [
+        [
+          {
+            "node": "Discord Notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Launch Event": {
+      "main": [
+        [
+          {
+            "node": "Launch Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "timezone": "Europe/Madrid"
+  },
+  "versionId": "stakas-v1.0",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "id": "stakas-launch-orchestrator",
+  "tags": [
+    {
+      "createdAt": "2025-10-28T16:45:00.000Z",
+      "updatedAt": "2025-10-28T16:45:00.000Z", 
+      "id": "stakas-mvp",
+      "name": "stakas-mvp"
+    }
+  ]
+}

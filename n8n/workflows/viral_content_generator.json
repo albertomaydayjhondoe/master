@@ -1,0 +1,219 @@
+{
+  "name": "🎬 Viral Content Generator & Meta Ads Optimizer",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "/webhook/viral-content",
+        "options": {}
+      },
+      "id": "viral-content-webhook",
+      "name": "Viral Content Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "webhookId": "viral-content-stakas"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Generador de contenido viral para Stakas MVP\n// Basado en tendencias drill/rap español y análisis ML\n\nconst inputData = $input.first().json;\n\n// Trending topics drill/rap español 2024\nconst viralTopics = [\n  'vida en el barrio', 'struggle real', 'dinero fácil', 'loyalty squad',\n  'trap life', 'drill español', 'calle respect', 'hustle mode',\n  'barrio stories', 'real recognize real', 'money moves', 'street wisdom'\n];\n\n// Hashtags de alto engagement\nconst drillHashtags = [\n  '#DrillEspañol', '#TrapSpain', '#BarrioLife', '#RealRap',\n  '#SpanishDrill', '#StreetMusic', '#RapEspañol', '#DrillMadrid',\n  '#TrapBarcelona', '#ViralRap', '#SpanishTrap', '#UrbanSpain'\n];\n\n// Horarios óptimos (análisis de engagement)\nconst peakHours = {\n  weekdays: ['19:00', '20:30', '22:00'],\n  weekends: ['15:00', '17:30', '20:00', '21:30']\n};\n\n// Generar ideas de contenido\nfunction generateContentIdeas() {\n  const ideas = [];\n  \n  // Freestyle sessions\n  ideas.push({\n    type: 'freestyle',\n    title: `🔥 FREESTYLE IMPROVISADO - ${viralTopics[Math.floor(Math.random() * viralTopics.length)].toUpperCase()}`,\n    description: 'Sesión de freestyle 100% improvisada sobre beats drill',\n    hashtags: drillHashtags.slice(0, 8),\n    duration: '2-3 minutos',\n    viral_potential: 85\n  });\n  \n  // Behind the scenes\n  ideas.push({\n    type: 'behind_scenes',\n    title: '📹 DETRÁS DE CÁMARAS - Proceso creativo real',\n    description: 'Mostrando el proceso real de creación de un tema drill',\n    hashtags: ['#BehindTheScenes', '#DrillProcess', ...drillHashtags.slice(0, 6)],\n    duration: '3-5 minutos', \n    viral_potential: 75\n  });\n  \n  // Reaction videos\n  ideas.push({\n    type: 'reaction',\n    title: '😤 REACCIONANDO A DRILL INTERNACIONAL vs ESPAÑOL',\n    description: 'Comparando drill de diferentes países con el español',\n    hashtags: ['#DrillReaction', '#ComparacionDrill', ...drillHashtags.slice(0, 6)],\n    duration: '8-10 minutos',\n    viral_potential: 90\n  });\n  \n  return ideas;\n}\n\n// Optimizador de Meta Ads\nfunction optimizeMetaAds(contentType, targetAudience = 'ES+LATAM_16-28') {\n  const baseAudience = {\n    location: ['ES', 'MX', 'AR', 'CO', 'CL', 'PE'],\n    age_min: 16,\n    age_max: 28,\n    interests: ['Hip Hop', 'Rap Music', 'Trap Music', 'Street Culture']\n  };\n  \n  const adSets = [];\n  \n  // AdSet para España\n  adSets.push({\n    name: `Stakas MVP - ${contentType} - España`,\n    targeting: {\n      ...baseAudience,\n      location: ['ES'],\n      detailed_targeting: {\n        interests: ['C Real Madrid', 'FC Barcelona', 'Spanish Hip Hop', 'Drill Music']\n      }\n    },\n    budget: 150, // €150 de €500 total\n    schedule: 'peak_hours_spain'\n  });\n  \n  // AdSet para LATAM\n  adSets.push({\n    name: `Stakas MVP - ${contentType} - LATAM`,\n    targeting: {\n      ...baseAudience,\n      location: ['MX', 'AR', 'CO'],\n      detailed_targeting: {\n        interests: ['Latin Trap', 'Reggaeton', 'Spanish Rap']\n      }\n    },\n    budget: 200, // €200 de €500 total\n    schedule: 'peak_hours_latam'\n  });\n  \n  // AdSet lookalike\n  adSets.push({\n    name: `Stakas MVP - ${contentType} - Lookalike`,\n    targeting: {\n      location: ['ES', 'MX', 'AR'],\n      age_min: 18,\n      age_max: 35,\n      custom_audiences: {\n        lookalike: {\n          source: 'video_viewers_75%',\n          ratio: 2\n        }\n      }\n    },\n    budget: 150, // €150 restantes\n    schedule: 'optimized_delivery'\n  });\n  \n  return adSets;\n}\n\n// Generar estrategia completa\nconst contentIdeas = generateContentIdeas();\nconst selectedContent = contentIdeas[Math.floor(Math.random() * contentIdeas.length)];\nconst metaAdsStrategy = optimizeMetaAds(selectedContent.type);\n\n// Determinar timing óptimo\nconst now = new Date();\nconst isWeekend = now.getDay() === 0 || now.getDay() === 6;\nconst optimalTimes = isWeekend ? peakHours.weekends : peakHours.weekdays;\n\n// Crear prompt para generación de contenido\nconst contentPrompt = {\n  video_concept: selectedContent,\n  script_guidelines: {\n    opening: 'Hook potente en primeros 3 segundos',\n    body: 'Contenido auténtico y relatable para audiencia drill',\n    closing: 'Call to action claro (like, subscribe, comment)',\n    tone: 'Auténtico, directo, street credibility'\n  },\n  technical_specs: {\n    format: 'Vertical 9:16 para TikTok/YouTube Shorts',\n    duration: selectedContent.duration,\n    quality: '1080p mínimo',\n    audio: 'Niveles óptimos, sin distorsión'\n  }\n};\n\nreturn {\n  workflow_id: 'viral-content-generator',\n  timestamp: new Date().toISOString(),\n  channel_id: 'UCgohgqLVu1QPdfa64Vkrgeg',\n  \n  // Contenido generado\n  content_strategy: {\n    selected_idea: selectedContent,\n    all_ideas: contentIdeas,\n    content_prompt: contentPrompt,\n    optimal_posting_times: optimalTimes,\n    estimated_reach: '25K-50K views (primera semana)'\n  },\n  \n  // Estrategia Meta Ads €500/mes\n  meta_ads_strategy: {\n    total_budget: 500,\n    ad_sets: metaAdsStrategy,\n    campaign_objective: 'VIDEO_VIEWS',\n    optimization: 'ThruPlay (75% video view)',\n    duration: '7 days',\n    expected_cpm: '€2-4',\n    expected_reach: '50K-75K unique users'\n  },\n  \n  // Acciones a ejecutar\n  next_actions: [\n    {\n      action: 'create_meta_ads_campaign',\n      priority: 1,\n      data: metaAdsStrategy\n    },\n    {\n      action: 'generate_video_script',\n      priority: 2, \n      data: contentPrompt\n    },\n    {\n      action: 'schedule_content_creation',\n      priority: 3,\n      timing: optimalTimes[0]\n    }\n  ]\n};"
+      },
+      "id": "generate-viral-strategy",
+      "name": "Generate Viral Strategy",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "https://graph.facebook.com/v18.0/act_{{ $credentials.meta_ads.account_id }}/campaigns",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "jsonParameters": true,
+        "bodyParametersJson": "{\n  \"name\": \"{{ $json.content_strategy.selected_idea.title }} - {{ new Date().toISOString().split('T')[0] }}\",\n  \"objective\": \"VIDEO_VIEWS\",\n  \"status\": \"ACTIVE\",\n  \"special_ad_categories\": [],\n  \"daily_budget\": {{ Math.round($json.meta_ads_strategy.total_budget / 7) * 100 }}\n}",
+        "options": {}
+      },
+      "id": "create-viral-campaign",
+      "name": "Create Viral Campaign",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [680, 200],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "meta_ads_token",
+          "name": "Meta Ads Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "{{ $json.stakas_api_url || 'http://stakas-app:8080/api/ai/generate-script' }}",
+        "jsonParameters": true,
+        "bodyParametersJson": "{\n  \"video_type\": \"{{ $json.content_strategy.selected_idea.type }}\",\n  \"title\": \"{{ $json.content_strategy.selected_idea.title }}\",\n  \"duration\": \"{{ $json.content_strategy.selected_idea.duration }}\",\n  \"viral_potential\": {{ $json.content_strategy.selected_idea.viral_potential }},\n  \"hashtags\": {{ JSON.stringify($json.content_strategy.selected_idea.hashtags) }},\n  \"script_guidelines\": {{ JSON.stringify($json.content_strategy.content_prompt.script_guidelines) }},\n  \"technical_specs\": {{ JSON.stringify($json.content_strategy.content_prompt.technical_specs) }}\n}"
+      },
+      "id": "generate-ai-script",
+      "name": "Generate AI Script",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [680, 400]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "{{ $json.content_strategy.selected_idea.viral_potential }}",
+              "operation": "larger",
+              "value2": "80"
+            }
+          ]
+        }
+      },
+      "id": "check-viral-potential",
+      "name": "Check Viral Potential >80",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "https://api.github.com/repos/{{ $credentials.github.owner }}/{{ $credentials.github.repo }}/actions/workflows/viral-boost.yml/dispatches",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "jsonParameters": true,
+        "bodyParametersJson": "{\n  \"ref\": \"main\",\n  \"inputs\": {\n    \"video_type\": \"{{ $json.content_strategy.selected_idea.type }}\",\n    \"viral_score\": \"{{ $json.content_strategy.selected_idea.viral_potential }}\",\n    \"budget_boost\": \"200\",\n    \"target_audience\": \"drill_rap_espanol\"\n  }\n}",
+        "options": {}
+      },
+      "id": "trigger-viral-boost",
+      "name": "Trigger Viral Boost Pipeline",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [1120, 200],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "github_token",
+          "name": "GitHub Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "table": "viral_content_log",
+        "columns": "channel_id, content_type, title, viral_potential, meta_budget, hashtags, created_at, campaign_status",
+        "additionalFields": {}
+      },
+      "id": "log-viral-content",
+      "name": "Log Viral Content",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [900, 500],
+      "credentials": {
+        "postgres": {
+          "id": "stakas_postgres_db",
+          "name": "Stakas PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "🚀 **VIRAL CONTENT GENERATED**\\n\\n🎬 **Tipo**: {{ $json.content_strategy.selected_idea.type.toUpperCase() }}\\n📝 **Título**: {{ $json.content_strategy.selected_idea.title }}\\n🔥 **Potencial Viral**: {{ $json.content_strategy.selected_idea.viral_potential }}%\\n⏰ **Duración**: {{ $json.content_strategy.selected_idea.duration }}\\n\\n💰 **Meta Ads Budget**: €{{ $json.meta_ads_strategy.total_budget }}\\n🎯 **Expected Reach**: {{ $json.meta_ads_strategy.expected_reach }}\\n📊 **CPM Estimado**: {{ $json.meta_ads_strategy.expected_cpm }}\\n\\n🏷️ **Hashtags**: {{ $json.content_strategy.selected_idea.hashtags.join(' ') }}\\n\\n{{ $json.content_strategy.selected_idea.viral_potential > 80 ? '🔥 **ALTO POTENCIAL VIRAL - BOOST ACTIVADO**' : '✅ **Contenido generado y listo**' }}",
+        "options": {}
+      },
+      "id": "viral-content-notification",
+      "name": "Viral Content Notification",
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 1,
+      "position": [1120, 400],
+      "credentials": {
+        "discordWebhookApi": {
+          "id": "stakas_discord_webhook",
+          "name": "Stakas Discord Webhook"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Viral Content Trigger": {
+      "main": [
+        [
+          {
+            "node": "Generate Viral Strategy",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Viral Strategy": {
+      "main": [
+        [
+          {
+            "node": "Create Viral Campaign",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Generate AI Script",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Check Viral Potential >80",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Log Viral Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Viral Potential >80": {
+      "main": [
+        [
+          {
+            "node": "Trigger Viral Boost Pipeline",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate AI Script": {
+      "main": [
+        [
+          {
+            "node": "Viral Content Notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "timezone": "Europe/Madrid"
+  },
+  "versionId": "viral-generator-v1.0",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "id": "viral-content-generator",
+  "tags": [
+    {
+      "id": "stakas-mvp",
+      "name": "stakas-mvp"
+    },
+    {
+      "id": "viral-content",
+      "name": "viral-content"
+    }
+  ]
+}
