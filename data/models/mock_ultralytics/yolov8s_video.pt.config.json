@@ -1,0 +1,9 @@
+{
+  "type": "video",
+  "classes": [
+    "person",
+    "face",
+    "object",
+    "scene"
+  ]
+}

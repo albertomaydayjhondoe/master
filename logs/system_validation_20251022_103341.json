@@ -1,0 +1,208 @@
+{
+  "validation_timestamp": "2025-10-22T10:33:41.573593",
+  "project_root": "/workspaces/master",
+  "overall_status": "pass",
+  "summary": {
+    "total_categories": 10,
+    "passed": 10,
+    "warnings": 0,
+    "failed": 0,
+    "success_rate": 100.0
+  },
+  "categories": {
+    "Project Structure": {
+      "status": "pass",
+      "missing_files": [],
+      "missing_dirs": [],
+      "warnings": [],
+      "total_files_checked": 6,
+      "total_dirs_checked": 9
+    },
+    "Configuration Files": {
+      "status": "pass",
+      "results": {
+        ".env.universal": {
+          "total_lines": 319,
+          "env_variables": 163
+        },
+        "universal_config.json": {
+          "valid_json": true,
+          "entries": 9
+        }
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "Environment Variables": {
+      "status": "pass",
+      "total_env_vars": 163,
+      "missing_critical": [],
+      "warnings": [],
+      "dummy_mode_enabled": true
+    },
+    "Mock Databases": {
+      "status": "pass",
+      "databases": {
+        "postgresql.db": {
+          "type": "sqlite",
+          "tables": 13,
+          "valid": true
+        },
+        "mongodb_collections": {
+          "type": "directory",
+          "collections": 5,
+          "valid": true
+        },
+        "redis_cache.json": {
+          "type": "json",
+          "entries": 3,
+          "valid": true
+        }
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "ML Models": {
+      "status": "pass",
+      "models": {
+        "yolov8n_screenshot.pt": {
+          "exists": true,
+          "size": 76,
+          "has_config": true
+        },
+        "yolov8s_video.pt": {
+          "exists": true,
+          "size": 71,
+          "has_config": true
+        },
+        "yolov8m_detection.pt": {
+          "exists": true,
+          "size": 75,
+          "has_config": true
+        },
+        "custom_tiktok.pt": {
+          "exists": true,
+          "size": 71,
+          "has_config": true
+        }
+      },
+      "training_datasets": 3,
+      "warnings": []
+    },
+    "Scripts and Executables": {
+      "status": "pass",
+      "scripts": {
+        "awakener.py": {
+          "exists": true,
+          "executable": true,
+          "size": 27842
+        },
+        "wake.sh": {
+          "exists": true,
+          "executable": true,
+          "size": 8930
+        },
+        "config_generator.py": {
+          "exists": true,
+          "executable": false,
+          "size": 21636
+        },
+        "start.sh": {
+          "exists": true,
+          "executable": true,
+          "size": 335
+        }
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "Service Health": {
+      "status": "pass",
+      "services": {
+        "ml_api": {
+          "port": 8000,
+          "status": "available"
+        },
+        "meta_automation": {
+          "port": 8001,
+          "status": "available"
+        },
+        "telegram_automation": {
+          "port": 8002,
+          "status": "available"
+        }
+      },
+      "warnings": []
+    },
+    "API Endpoints": {
+      "status": "pass",
+      "endpoints": {
+        "http://localhost:8000/health": {
+          "reachable": false,
+          "error": "Cannot connect to host localhost:8000 ssl:default [Connect call failed ('127.0.0.1', 8000)]"
+        },
+        "http://localhost:8000/": {
+          "reachable": false,
+          "error": "Cannot connect to host localhost:8000 ssl:default [Connect call failed ('::1', 8000, 0, 0)]"
+        },
+        "http://localhost:8000/docs": {
+          "reachable": false,
+          "error": "Cannot connect to host localhost:8000 ssl:default [Connect call failed ('127.0.0.1', 8000)]"
+        }
+      },
+      "reachable_count": 0,
+      "total_endpoints": 3
+    },
+    "Branch Compatibility": {
+      "status": "pass",
+      "branches": {
+        "rama": {
+          "exists": true,
+          "missing_components": [],
+          "complete": true
+        },
+        "meta": {
+          "exists": true,
+          "missing_components": [
+            "main.py",
+            "telegram_monitor.py"
+          ],
+          "complete": false
+        },
+        "tele": {
+          "exists": true,
+          "missing_components": [],
+          "complete": true
+        }
+      },
+      "complete_branches": 2,
+      "total_branches": 3
+    },
+    "Documentation": {
+      "status": "pass",
+      "documentation": {
+        "README.md": {
+          "exists": true,
+          "size": 3467,
+          "lines": 110
+        },
+        "README_UNIVERSAL.md": {
+          "exists": true,
+          "size": 14806,
+          "lines": 459
+        },
+        "CHANGELOG.md": {
+          "exists": true,
+          "size": 2821,
+          "lines": 79
+        }
+      },
+      "warnings": []
+    }
+  },
+  "errors": [],
+  "warnings": [],
+  "recommendations": [
+    "\u2705 System is ready! Use 'make wake' to start"
+  ]
+}

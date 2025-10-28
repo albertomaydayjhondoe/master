@@ -1,0 +1,529 @@
+{
+  "overview": {
+    "total_views": 1172,
+    "unique_visitors": 76,
+    "avg_session_duration": 189.1500717329822,
+    "bounce_rate": 0.29279774493717714,
+    "search_queries": 207
+  },
+  "trends": [
+    {
+      "date": "2025-09-25",
+      "views": 57,
+      "unique_visitors": 28,
+      "search_queries": 8,
+      "avg_session_time": 185.821703385825
+    },
+    {
+      "date": "2025-09-26",
+      "views": 57,
+      "unique_visitors": 27,
+      "search_queries": 10,
+      "avg_session_time": 154.69902944803135
+    },
+    {
+      "date": "2025-09-27",
+      "views": 25,
+      "unique_visitors": 9,
+      "search_queries": 6,
+      "avg_session_time": 199.18224614073287
+    },
+    {
+      "date": "2025-09-28",
+      "views": 31,
+      "unique_visitors": 14,
+      "search_queries": 6,
+      "avg_session_time": 223.95488143951923
+    },
+    {
+      "date": "2025-09-29",
+      "views": 58,
+      "unique_visitors": 29,
+      "search_queries": 13,
+      "avg_session_time": 153.7022447959238
+    },
+    {
+      "date": "2025-09-30",
+      "views": 52,
+      "unique_visitors": 20,
+      "search_queries": 9,
+      "avg_session_time": 128.4562573261196
+    },
+    {
+      "date": "2025-10-01",
+      "views": 53,
+      "unique_visitors": 30,
+      "search_queries": 8,
+      "avg_session_time": 184.90499609518733
+    },
+    {
+      "date": "2025-10-02",
+      "views": 39,
+      "unique_visitors": 17,
+      "search_queries": 8,
+      "avg_session_time": 296.2571590241794
+    },
+    {
+      "date": "2025-10-03",
+      "views": 53,
+      "unique_visitors": 20,
+      "search_queries": 9,
+      "avg_session_time": 139.53304824717162
+    },
+    {
+      "date": "2025-10-04",
+      "views": 20,
+      "unique_visitors": 10,
+      "search_queries": 3,
+      "avg_session_time": 223.83471920036968
+    },
+    {
+      "date": "2025-10-05",
+      "views": 17,
+      "unique_visitors": 6,
+      "search_queries": 3,
+      "avg_session_time": 296.0179038078424
+    },
+    {
+      "date": "2025-10-06",
+      "views": 49,
+      "unique_visitors": 22,
+      "search_queries": 8,
+      "avg_session_time": 123.47862131727688
+    },
+    {
+      "date": "2025-10-07",
+      "views": 39,
+      "unique_visitors": 21,
+      "search_queries": 7,
+      "avg_session_time": 125.54545135594809
+    },
+    {
+      "date": "2025-10-08",
+      "views": 46,
+      "unique_visitors": 15,
+      "search_queries": 8,
+      "avg_session_time": 154.23331139902083
+    },
+    {
+      "date": "2025-10-09",
+      "views": 60,
+      "unique_visitors": 30,
+      "search_queries": 10,
+      "avg_session_time": 253.4409435370623
+    },
+    {
+      "date": "2025-10-10",
+      "views": 43,
+      "unique_visitors": 17,
+      "search_queries": 8,
+      "avg_session_time": 184.0949699879626
+    },
+    {
+      "date": "2025-10-11",
+      "views": 20,
+      "unique_visitors": 7,
+      "search_queries": 4,
+      "avg_session_time": 188.1015819087496
+    },
+    {
+      "date": "2025-10-12",
+      "views": 34,
+      "unique_visitors": 11,
+      "search_queries": 6,
+      "avg_session_time": 274.02216474340054
+    },
+    {
+      "date": "2025-10-13",
+      "views": 41,
+      "unique_visitors": 17,
+      "search_queries": 7,
+      "avg_session_time": 196.1697840756134
+    },
+    {
+      "date": "2025-10-14",
+      "views": 45,
+      "unique_visitors": 14,
+      "search_queries": 7,
+      "avg_session_time": 264.9172739741947
+    },
+    {
+      "date": "2025-10-15",
+      "views": 44,
+      "unique_visitors": 19,
+      "search_queries": 6,
+      "avg_session_time": 175.6308245991503
+    },
+    {
+      "date": "2025-10-16",
+      "views": 60,
+      "unique_visitors": 22,
+      "search_queries": 10,
+      "avg_session_time": 212.68161289941656
+    },
+    {
+      "date": "2025-10-17",
+      "views": 53,
+      "unique_visitors": 29,
+      "search_queries": 12,
+      "avg_session_time": 217.0021348798955
+    },
+    {
+      "date": "2025-10-18",
+      "views": 34,
+      "unique_visitors": 10,
+      "search_queries": 8,
+      "avg_session_time": 225.53107058255077
+    },
+    {
+      "date": "2025-10-19",
+      "views": 23,
+      "unique_visitors": 11,
+      "search_queries": 3,
+      "avg_session_time": 287.54048724903646
+    },
+    {
+      "date": "2025-10-20",
+      "views": 43,
+      "unique_visitors": 16,
+      "search_queries": 9,
+      "avg_session_time": 146.89549217472606
+    },
+    {
+      "date": "2025-10-21",
+      "views": 48,
+      "unique_visitors": 17,
+      "search_queries": 10,
+      "avg_session_time": 140.89267294269555
+    },
+    {
+      "date": "2025-10-22",
+      "views": 60,
+      "unique_visitors": 32,
+      "search_queries": 14,
+      "avg_session_time": 229.6907874965152
+    },
+    {
+      "date": "2025-10-23",
+      "views": 56,
+      "unique_visitors": 31,
+      "search_queries": 9,
+      "avg_session_time": 185.9418726479933
+    },
+    {
+      "date": "2025-10-24",
+      "views": 55,
+      "unique_visitors": 31,
+      "search_queries": 8,
+      "avg_session_time": 215.45654592050647
+    }
+  ],
+  "popular_documents": [
+    {
+      "name": "Ml Integration",
+      "filename": "ml_integration_README.md",
+      "views": 102,
+      "unique_visitors": 57,
+      "avg_time_seconds": 243.8689242679817,
+      "bounce_rate": 0.5728572866183204,
+      "last_updated": "2025-10-10",
+      "quality_score": 89.03356726516114
+    },
+    {
+      "name": "Monitoring System",
+      "filename": "monitoring_system_README.md",
+      "views": 91,
+      "unique_visitors": 50,
+      "avg_time_seconds": 95.11412089349987,
+      "bounce_rate": 0.3897287766884173,
+      "last_updated": "2025-09-25",
+      "quality_score": 86.8746153326803
+    },
+    {
+      "name": "Analytics Dashboard",
+      "filename": "analytics_dashboard_README.md",
+      "views": 75,
+      "unique_visitors": 39,
+      "avg_time_seconds": 270.0725961528516,
+      "bounce_rate": 0.3287252362397381,
+      "last_updated": "2025-10-09",
+      "quality_score": 75.90939359272973
+    },
+    {
+      "name": "Platform Publishing",
+      "filename": "platform_publishing_README.md",
+      "views": 74,
+      "unique_visitors": 37,
+      "avg_time_seconds": 246.70687732268138,
+      "bounce_rate": 0.27212913843095965,
+      "last_updated": "2025-10-15",
+      "quality_score": 78.57798835757399
+    },
+    {
+      "name": "Device Farm",
+      "filename": "device_farm_README.md",
+      "views": 73,
+      "unique_visitors": 30,
+      "avg_time_seconds": 256.9463521206628,
+      "bounce_rate": 0.4173338619164334,
+      "last_updated": "2025-09-28",
+      "quality_score": 82.19064025030075
+    },
+    {
+      "name": "Identity Management",
+      "filename": "identity_management_README.md",
+      "views": 70,
+      "unique_visitors": 44,
+      "avg_time_seconds": 221.39069786878855,
+      "bounce_rate": 0.5124023057579856,
+      "last_updated": "2025-10-21",
+      "quality_score": 92.18693096647324
+    },
+    {
+      "name": "Meta Ads Integration",
+      "filename": "meta_ads_integration_README.md",
+      "views": 64,
+      "unique_visitors": 26,
+      "avg_time_seconds": 287.1773960301698,
+      "bounce_rate": 0.3728994750326088,
+      "last_updated": "2025-09-24",
+      "quality_score": 81.40505108789712
+    },
+    {
+      "name": "Gologin Automation",
+      "filename": "gologin_automation_README.md",
+      "views": 56,
+      "unique_visitors": 25,
+      "avg_time_seconds": 269.30916258877227,
+      "bounce_rate": 0.5521318655231536,
+      "last_updated": "2025-10-18",
+      "quality_score": 81.68736189223355
+    }
+  ],
+  "search_trends": [
+    {
+      "query": "user management",
+      "count": 69,
+      "trend": "down",
+      "avg_results": 13,
+      "success_rate": 0.617769766031621
+    },
+    {
+      "query": "security settings",
+      "count": 51,
+      "trend": "down",
+      "avg_results": 10,
+      "success_rate": 0.6993616318180244
+    },
+    {
+      "query": "database connection",
+      "count": 48,
+      "trend": "up",
+      "avg_results": 11,
+      "success_rate": 0.6857006405148887
+    },
+    {
+      "query": "API authentication",
+      "count": 47,
+      "trend": "down",
+      "avg_results": 4,
+      "success_rate": 0.7599617743442698
+    },
+    {
+      "query": "device setup guide",
+      "count": 46,
+      "trend": "up",
+      "avg_results": 15,
+      "success_rate": 0.6685159538478044
+    },
+    {
+      "query": "automated testing",
+      "count": 42,
+      "trend": "stable",
+      "avg_results": 4,
+      "success_rate": 0.6842301085159062
+    },
+    {
+      "query": "error troubleshooting",
+      "count": 42,
+      "trend": "down",
+      "avg_results": 9,
+      "success_rate": 0.708166159701928
+    },
+    {
+      "query": "ML model configuration",
+      "count": 41,
+      "trend": "up",
+      "avg_results": 3,
+      "success_rate": 0.66931323962866
+    },
+    {
+      "query": "telegram bot setup",
+      "count": 40,
+      "trend": "down",
+      "avg_results": 9,
+      "success_rate": 0.8669974319683007
+    },
+    {
+      "query": "monitoring alerts",
+      "count": 20,
+      "trend": "down",
+      "avg_results": 5,
+      "success_rate": 0.659878344063078
+    }
+  ],
+  "section_heatmap": {
+    "values": [
+      [
+        78,
+        30,
+        46,
+        61,
+        24,
+        38,
+        28,
+        30
+      ],
+      [
+        47,
+        25,
+        20,
+        57,
+        35,
+        15,
+        14,
+        19
+      ],
+      [
+        56,
+        56,
+        41,
+        63,
+        39,
+        14,
+        31,
+        26
+      ],
+      [
+        56,
+        59,
+        53,
+        40,
+        32,
+        18,
+        39,
+        33
+      ],
+      [
+        43,
+        37,
+        52,
+        79,
+        24,
+        20,
+        12,
+        32
+      ],
+      [
+        49,
+        21,
+        45,
+        57,
+        36,
+        30,
+        24,
+        23
+      ]
+    ],
+    "documents": [
+      "monitoring_system",
+      "ml_integration",
+      "device_farm",
+      "analytics_dashboard",
+      "identity_management",
+      "platform_publishing"
+    ],
+    "sections": [
+      "Quick Start",
+      "API Reference",
+      "Configuration",
+      "Examples",
+      "Troubleshooting",
+      "Best Practices",
+      "Integration",
+      "Advanced Features"
+    ]
+  },
+  "user_behavior": {
+    "top_entry_pages": [
+      {
+        "page": "ML Integration",
+        "percentage": 28.5
+      },
+      {
+        "page": "Device Farm",
+        "percentage": 22.1
+      },
+      {
+        "page": "Analytics Dashboard",
+        "percentage": 18.7
+      },
+      {
+        "page": "Monitoring System",
+        "percentage": 15.3
+      },
+      {
+        "page": "Others",
+        "percentage": 15.4
+      }
+    ],
+    "common_paths": [
+      [
+        "Home",
+        "ML Integration",
+        "Examples",
+        "API Reference"
+      ],
+      [
+        "Search",
+        "Device Farm",
+        "Quick Start",
+        "Configuration"
+      ],
+      [
+        "Home",
+        "Analytics Dashboard",
+        "Installation",
+        "Troubleshooting"
+      ],
+      [
+        "Browse",
+        "Monitoring System",
+        "Telegram Setup",
+        "Best Practices"
+      ]
+    ],
+    "exit_pages": [
+      {
+        "page": "Examples",
+        "percentage": 25.2
+      },
+      {
+        "page": "API Reference",
+        "percentage": 19.8
+      },
+      {
+        "page": "Troubleshooting",
+        "percentage": 16.5
+      },
+      {
+        "page": "Configuration",
+        "percentage": 14.1
+      },
+      {
+        "page": "Others",
+        "percentage": 24.4
+      }
+    ]
+  }
+}

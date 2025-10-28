@@ -1,0 +1,15 @@
+{
+  "deployment_timestamp": "2025-10-28T14:56:58.555360",
+  "channel_id": "UCgohgqLVu1QPdfa64Vkrgeg",
+  "meta_ads_config": {
+    "campaign_active": true,
+    "daily_budget": 16.67,
+    "current_spend": 0.0,
+    "impressions_today": 0,
+    "clicks_today": 0,
+    "target_audience": "España 35% + LATAM 65%",
+    "campaign_start_time": "2025-10-28T14:56:58.555360"
+  },
+  "automation_status": {},
+  "deployment_version": "1.0"
+}

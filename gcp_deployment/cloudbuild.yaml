@@ -1,0 +1,94 @@
+# Cloud Build Configuration for Meta Ads
+steps:
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/meta-ads-api:$COMMIT_SHA'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/meta-ads-api:latest'
+      - '-f'
+      - 'gcp_deployment/Dockerfile'
+      - '.'
+    timeout: '600s'
+
+  # Push the container image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'gcr.io/$PROJECT_ID/meta-ads-api:$COMMIT_SHA'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'gcr.io/$PROJECT_ID/meta-ads-api:latest'
+
+  # Run tests in the container
+  - name: 'gcr.io/$PROJECT_ID/meta-ads-api:$COMMIT_SHA'
+    entrypoint: 'python'
+    args:
+      - '-m'
+      - 'pytest'
+      - 'tests/'
+      - '--tb=short'
+      - '-v'
+    env:
+      - 'DUMMY_MODE=true'
+      - 'DATABASE_URL=sqlite:///test.db'
+
+  # Deploy to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'meta-ads-api'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/meta-ads-api:$COMMIT_SHA'
+      - '--region'
+      - '$_REGION'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--set-env-vars'
+      - 'GCP_PROJECT_ID=$PROJECT_ID,ENVIRONMENT=$_ENVIRONMENT'
+      - '--memory'
+      - '2Gi'
+      - '--cpu'
+      - '2'
+      - '--concurrency'
+      - '100'
+      - '--max-instances'
+      - '10'
+      - '--min-instances'
+      - '1'
+      - '--timeout'
+      - '300'
+      - '--service-account'
+      - 'meta-ads-service@$PROJECT_ID.iam.gserviceaccount.com'
+
+# Build options
+options:
+  machineType: 'E2_HIGHCPU_8'
+  substitutionOption: 'ALLOW_LOOSE'
+  dynamic_substitutions: true
+
+# Substitutions (can be overridden)
+substitutions:
+  _REGION: 'us-central1'
+  _ENVIRONMENT: 'prod'
+
+# Build timeout
+timeout: '1200s'
+
+# Tags for the build
+tags:
+  - 'meta-ads'
+  - 'api'
+  - 'production'
+
+# Images to be stored
+images:
+  - 'gcr.io/$PROJECT_ID/meta-ads-api:$COMMIT_SHA'
+  - 'gcr.io/$PROJECT_ID/meta-ads-api:latest'

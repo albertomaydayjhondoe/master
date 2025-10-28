@@ -1,0 +1,157 @@
+version: '3.8'
+
+services:
+  tiktok-ml-v4:
+    build:
+      context: .
+      dockerfile: Dockerfile.v4
+    container_name: tiktok-ml-system-v4
+    restart: unless-stopped
+    
+    environment:
+      # Production mode
+      - PRODUCTION_MODE=true
+      - DEBUG=false
+      
+      # API Configuration
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - API_WORKERS=1
+      - API_SECRET_KEY=${API_SECRET_KEY}
+      - JWT_SECRET=${JWT_SECRET}
+      
+      # Supabase Configuration
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY}
+      - SUPABASE_SERVICE_KEY=${SUPABASE_SERVICE_KEY}
+      
+      # Meta Ads Configuration
+      - META_APP_ID=${META_APP_ID}
+      - META_APP_SECRET=${META_APP_SECRET}
+      - META_ACCESS_TOKEN=${META_ACCESS_TOKEN}
+      - META_PIXEL_ID=${META_PIXEL_ID}
+      
+      # YouTube Configuration
+      - YOUTUBE_API_KEY=${YOUTUBE_API_KEY}
+      - YOUTUBE_CHANNEL_IDS=${YOUTUBE_CHANNEL_IDS}
+      
+      # Spotify Configuration
+      - SPOTIFY_CLIENT_ID=${SPOTIFY_CLIENT_ID}
+      - SPOTIFY_CLIENT_SECRET=${SPOTIFY_CLIENT_SECRET}
+      - SPOTIFY_ARTIST_IDS=${SPOTIFY_ARTIST_IDS}
+      - SPOTIFY_PLAYLIST_IDS=${SPOTIFY_PLAYLIST_IDS}
+      
+      # Landing Page Configuration
+      - LANDING_PAGE_URLS=${LANDING_PAGE_URLS}
+      
+      # ML Configuration
+      - ULTRALYTICS_MODEL=${ULTRALYTICS_MODEL:-yolov8n.pt}
+      - ML_MODEL_PATH=/app/data/models
+      - MAX_UPLOAD_SIZE=${MAX_UPLOAD_SIZE:-52428800}
+      
+      # n8n Configuration
+      - N8N_WEBHOOK_BASE_URL=${N8N_WEBHOOK_BASE_URL}
+      - N8N_API_KEY=${N8N_API_KEY}
+      
+      # Database
+      - DATABASE_URL=${DATABASE_URL}
+      
+    ports:
+      - "8000:8000"
+    
+    volumes:
+      - ml_models:/app/data/models
+      - app_logs:/app/logs
+      - app_uploads:/app/uploads
+    
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.tiktok-ml-v4.rule=Host(`api.yourdomain.com`)"
+      - "traefik.http.routers.tiktok-ml-v4.tls=true"
+      - "traefik.http.routers.tiktok-ml-v4.tls.certresolver=letsencrypt"
+      - "traefik.http.services.tiktok-ml-v4.loadbalancer.server.port=8000"
+
+  # Optional: n8n service for workflow automation
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n-workflows
+    restart: unless-stopped
+    
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=${N8N_AUTH_USER:-admin}
+      - N8N_BASIC_AUTH_PASSWORD=${N8N_AUTH_PASSWORD}
+      - N8N_HOST=${N8N_HOST:-localhost}
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=${N8N_PROTOCOL:-http}
+      - WEBHOOK_URL=${N8N_WEBHOOK_BASE_URL}
+      - GENERIC_TIMEZONE=${TIMEZONE:-UTC}
+      
+    ports:
+      - "5678:5678"
+    
+    volumes:
+      - n8n_data:/home/node/.n8n
+    
+    depends_on:
+      - tiktok-ml-v4
+    
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.n8n.rule=Host(`workflows.yourdomain.com`)"
+      - "traefik.http.routers.n8n.tls=true"
+      - "traefik.http.routers.n8n.tls.certresolver=letsencrypt"
+
+  # Optional: Traefik reverse proxy
+  traefik:
+    image: traefik:v3.0
+    container_name: traefik
+    restart: unless-stopped
+    
+    command:
+      - --api.dashboard=true
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      - --certificatesresolvers.letsencrypt.acme.email=${ACME_EMAIL}
+      - --certificatesresolvers.letsencrypt.acme.storage=/acme.json
+      - --certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web
+    
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"  # Traefik dashboard
+    
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - traefik_acme:/acme.json
+    
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.yourdomain.com`)"
+      - "traefik.http.routers.traefik.tls=true"
+      - "traefik.http.routers.traefik.service=api@internal"
+
+volumes:
+  ml_models:
+    driver: local
+  app_logs:
+    driver: local
+  app_uploads:
+    driver: local
+  n8n_data:
+    driver: local
+  traefik_acme:
+    driver: local
+
+networks:
+  default:
+    name: tiktok-ml-network

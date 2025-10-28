@@ -1,0 +1,148 @@
+# Device Farm v5 + TikTok ML v4 Integration Configuration
+
+# ========== DEVICE FARM V5 CONFIGURATION ==========
+max_devices: 10
+log_level: "INFO"
+
+# Dashboard configuration
+dashboard:
+  enabled: true
+  host: "127.0.0.1"
+  port: 5000
+
+# Database configuration  
+database:
+  url: "sqlite:///device_farm_v5.db"
+  pool_size: 10
+  echo: false
+
+# ADB configuration
+adb:
+  scan_interval: 30
+  connection_timeout: 10
+  proxy:
+    test_url: "http://httpbin.org/ip"
+    timeout: 30
+
+# Appium configuration
+appium:
+  base_port: 4723
+  max_sessions: 10
+  server_timeout: 30
+  session_timeout: 300
+  capabilities:
+    platformName: "Android"
+    automationName: "UiAutomator2"
+    newCommandTimeout: 300
+
+# Gologin API configuration
+gologin:
+  api_token: "${GOLOGIN_API_TOKEN}"
+  api_base_url: "https://api.gologin.com"
+  cache_ttl: 300
+  max_retries: 3
+  retry_delay: 5
+
+# Task queue configuration
+task_queue:
+  max_concurrent_tasks: 5
+  default_timeout: 300
+  cleanup_interval: 3600
+  retention_days: 7
+
+# ========== TIKTOK ML V4 INTEGRATION ==========
+
+# Supabase configuration (shared with ML v4)
+supabase:
+  url: "${SUPABASE_URL}"
+  key: "${SUPABASE_KEY}"
+  
+# TikTok automation configuration
+tiktok:
+  engagement:
+    max_likes_per_hour: 30
+    max_follows_per_hour: 10
+    max_comments_per_hour: 5
+    max_shares_per_hour: 3
+    view_duration_range: [3, 10]  # seconds
+    human_delay_range: [1, 5]     # seconds
+  
+  risk_management:
+    max_risk_score: 0.7
+    anomaly_threshold: 0.8
+    cooldown_after_anomaly: 3600  # seconds
+    
+  ml_integration:
+    screenshot_analysis_enabled: true
+    anomaly_detection_enabled: true
+    behavior_prediction_enabled: true
+
+# ML model configuration (integration with existing ML v4)
+ml_models:
+  yolo_screenshot:
+    model_path: "data/models/production/yolo_screenshot_v4.pt"
+    confidence_threshold: 0.7
+    
+  anomaly_detector:
+    model_path: "data/models/production/anomaly_detector_v4.pkl"
+    threshold: 0.8
+    
+  affinity_model:
+    model_path: "data/models/production/affinity_model_v4.pkl"
+    
+# Analytics and monitoring (shared with ML v4)
+monitoring:
+  grafana:
+    enabled: true
+    host: "localhost"
+    port: 3000
+    
+  alerts:
+    discord_webhook: "${DISCORD_WEBHOOK_URL}"
+    email_notifications: true
+    
+  metrics:
+    collection_interval: 60
+    retention_days: 30
+
+# n8n integration (orchestration with ML v4)
+n8n:
+  webhook_base_url: "http://localhost:5678/webhook"
+  workflows:
+    device_farm_trigger: "device-farm-v5-trigger"
+    ml_decision_engine: "ml-decision-engine"
+    analytics_processor: "analytics-processor"
+
+# Security and authentication
+security:
+  api_key: "${DEVICE_FARM_API_KEY}"
+  jwt_secret: "${JWT_SECRET}"
+  rate_limiting:
+    requests_per_minute: 100
+    
+# Docker integration
+docker:
+  networks:
+    - tiktok-ml-network
+    
+  volumes:
+    - "./data:/app/data"
+    - "./logs:/app/logs"
+    - "/dev/bus/usb:/dev/bus/usb"
+    
+  environment:
+    - DUMMY_MODE=false
+    - SUPABASE_URL=${SUPABASE_URL}
+    - SUPABASE_KEY=${SUPABASE_KEY}
+    - GOLOGIN_API_TOKEN=${GOLOGIN_API_TOKEN}
+
+# Integration endpoints
+integration:
+  ml_api_base_url: "http://ml-api:8000"
+  device_farm_api_url: "http://device-farm-v5:5000"
+  
+  data_flow:
+    device_metrics_to_supabase: true
+    screenshots_to_ml_analysis: true
+    engagement_results_to_analytics: true
+    anomaly_alerts_to_monitoring: true

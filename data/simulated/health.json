@@ -1,0 +1,37 @@
+{
+  "overall_score": 90.39900614400128,
+  "components": {
+    "content_quality": 92.41906491645702,
+    "link_integrity": 97.03152177429905,
+    "freshness": 87.29467391154414,
+    "coverage": 84.78558828023478,
+    "searchability": 94.12907809161551
+  },
+  "issues": [
+    {
+      "type": "freshness",
+      "severity": "low",
+      "description": "Some documentation hasn't been updated in 60+ days",
+      "affected_files": [
+        "analytics_dashboard_README.md",
+        "monitoring_system_README.md",
+        "ml_integration_README.md"
+      ]
+    },
+    {
+      "type": "links",
+      "severity": "medium",
+      "description": "Few broken internal links detected",
+      "affected_files": [
+        "gologin_automation_README.md"
+      ]
+    }
+  ],
+  "recommendations": [
+    "Update outdated documentation sections",
+    "Add more code examples to configuration guides",
+    "Improve cross-linking between related documents",
+    "Standardize section structures across all docs"
+  ],
+  "last_check": "2025-10-24T12:05:32.143039"
+}

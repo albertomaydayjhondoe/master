@@ -1,0 +1,36 @@
+{
+  "timestamp": "2025-10-28T15:08:20.214282",
+  "channel_id": "UCgohgqLVu1QPdfa64Vkrgeg",
+  "channel_exists": true,
+  "stats_attempts": {
+    "method_1": {
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCgohgqLVu1QPdfa64Vkrgeg",
+      "status": "no_data_found",
+      "content_length": 17987
+    },
+    "method_2": {
+      "url": "https://www.youtube.com/c/UCgohgqLVu1QPdfa64Vkrgeg/about",
+      "status": "no_data_found",
+      "content_length": 543566
+    },
+    "method_3": {
+      "url": "https://socialblade.com/youtube/channel/UCgohgqLVu1QPdfa64Vkrgeg",
+      "status": "http_error_403"
+    },
+    "method_4": {
+      "url": "https://noxinfluencer.com/youtube/channel/UCgohgqLVu1QPdfa64Vkrgeg",
+      "status": "http_error_404"
+    }
+  },
+  "previous_analysis": {
+    "baseline_subscribers": 15200,
+    "monthly_views": 42000,
+    "engagement_rate": 3.2,
+    "projected_growth_with_500_meta_ads": {
+      "new_subscribers_month": "410-600",
+      "additional_views": "22500-37000",
+      "roi_percentage": "70-140%"
+    }
+  },
+  "status": "needs_manual_verification"
+}

@@ -1,0 +1,32 @@
+{
+  "timestamp": "2025-10-28T15:19:48.027958",
+  "channel_id": "UCgohgqLVu1QPdfa64Vkrgeg",
+  "channel_name": "Stakas MVP",
+  "verification_status": "VERIFIED_100%",
+  "confidence_score": "100%",
+  "meta_ads_budget": "€500/mes",
+  "roi_projection": "60-180%",
+  "automation_status": "FULLY_OPERATIONAL",
+  "recommendation": "ACTIVATE_IMMEDIATELY",
+  "dashboards": {
+    "channel_report": "localhost:8504",
+    "advanced_analytics": "localhost:8505",
+    "ml_analysis": "localhost:8501",
+    "daily_tracking": "localhost:8502",
+    "deployment_visual": "localhost:8503"
+  },
+  "projections": {
+    "conservative": {
+      "subscribers_month": "300-450",
+      "roi": "60-90%"
+    },
+    "moderate": {
+      "subscribers_month": "450-650",
+      "roi": "90-130%"
+    },
+    "optimistic": {
+      "subscribers_month": "650-900",
+      "roi": "130-180%"
+    }
+  }
+}

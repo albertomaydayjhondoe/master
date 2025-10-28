@@ -1,0 +1,187 @@
+# Docker Compose optimizado para Stakas MVP Development
+# Canal: UCgohgqLVu1QPdfa64Vkrgeg | €500/month Meta Ads Budget
+version: '3.8'
+
+services:
+  # Aplicación principal Stakas MVP
+  stakas-app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - CHANNEL_ID=UCgohgqLVu1QPdfa64Vkrgeg
+        - META_ADS_BUDGET=500
+        - ENVIRONMENT=development
+    container_name: stakas-mvp-app
+    ports:
+      - "8080:8080"
+    environment:
+      - ENVIRONMENT=development
+      - DUMMY_MODE=true
+      - CHANNEL_ID=UCgohgqLVu1QPdfa64Vkrgeg
+      - CHANNEL_NAME=Stakas MVP
+      - PORT=8080
+      - TZ=Europe/Madrid
+      - REDIS_URL=redis://redis:6379/0
+      - DATABASE_URL=postgresql://stakas:stakas2024@postgres:5432/stakas_mvp_db
+      - META_ADS_BUDGET=500
+      - DEBUG=true
+      - PYTHONPATH=/app
+      # ML Configuration
+      - ML_CORE_ENABLED=true
+      - YOLO_MODEL_PATH=/app/data/models/yolo_screenshot.pt
+      # Social Media APIs (dummy in development)
+      - META_ACCESS_TOKEN=dummy_token_dev
+      - YOUTUBE_API_KEY=dummy_key_dev
+      - TIKTOK_ACCESS_TOKEN=dummy_token_dev
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./uploads:/app/uploads
+      - ./config:/app/config
+      - ./.streamlit:/app/.streamlit
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    networks:
+      - stakas-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  # Redis para cache y sessions ML
+  redis:
+    image: redis:7-alpine
+    container_name: stakas-redis
+    ports:
+      - "6379:6379"
+    environment:
+      - REDIS_PASSWORD=stakas_redis_2024
+    volumes:
+      - redis_data:/data
+      - ./config/redis.conf:/usr/local/etc/redis/redis.conf:ro
+    networks:
+      - stakas-network
+    restart: unless-stopped
+    command: redis-server /usr/local/etc/redis/redis.conf --appendonly yes --requirepass stakas_redis_2024
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "stakas_redis_2024", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # PostgreSQL para analytics y ML data
+  postgres:
+    image: postgres:15-alpine
+    container_name: stakas-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=stakas_mvp_db
+      - POSTGRES_USER=stakas
+      - POSTGRES_PASSWORD=stakas2024
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/minimal_schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+      - ./database/seed_data.sql:/docker-entrypoint-initdb.d/02-seed.sql
+    networks:
+      - stakas-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U stakas -d stakas_mvp_db"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ML Model Server (opcional para desarrollo)
+  ml-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: base  # Usar stage base sin Streamlit
+    container_name: stakas-ml-server
+    ports:
+      - "8001:8001"
+    environment:
+      - ENVIRONMENT=development
+      - DUMMY_MODE=true
+      - ML_SERVER_PORT=8001
+      - REDIS_URL=redis://redis:6379/1
+    volumes:
+      - ./data/models:/app/data/models
+      - ./ml_core:/app/ml_core
+    depends_on:
+      - redis
+    networks:
+      - stakas-network
+    restart: unless-stopped
+    profiles:
+      - ml-development
+    command: python -m ml_core.api.main --port 8001
+
+  # Nginx proxy para producción local
+  nginx:
+    image: nginx:alpine
+    container_name: stakas-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./docker/nginx-dev.conf:/etc/nginx/nginx.conf:ro
+      - ./docker/ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - stakas-app
+    networks:
+      - stakas-network
+    restart: unless-stopped
+    profiles:
+      - production-local
+
+  # Monitoring con Grafana (opcional)
+  grafana:
+    image: grafana/grafana:latest
+    container_name: stakas-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=stakas2024
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources
+    networks:
+      - stakas-network
+    restart: unless-stopped
+    profiles:
+      - monitoring
+
+# Volumes persistentes
+volumes:
+  redis_data:
+    driver: local
+    name: stakas_redis_data
+  postgres_data:
+    driver: local
+    name: stakas_postgres_data
+  grafana_data:
+    driver: local
+    name: stakas_grafana_data
+
+# Red privada optimizada
+networks:
+  stakas-network:
+    driver: bridge
+    name: stakas_mvp_network
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16
+          gateway: 172.25.0.1
+    driver_opts:
+      com.docker.network.bridge.name: stakas-br0

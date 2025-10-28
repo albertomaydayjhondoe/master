@@ -1,0 +1,53 @@
+# Dockerfile para Railway - Stakas MVP Viral System 24/7
+FROM python:3.11-slim
+
+# Establecer variables de entorno
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PORT=8080
+ENV STREAMLIT_SERVER_PORT=8080
+ENV STREAMLIT_SERVER_ADDRESS=0.0.0.0
+ENV STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
+
+# Crear directorio de trabajo
+WORKDIR /app
+
+# Instalar dependencias del sistema
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    curl \
+    software-properties-common \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copiar archivos de requirements
+COPY requirements*.txt ./
+COPY pyproject.toml ./
+COPY setup.py ./
+
+# Instalar dependencias de Python
+RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements-dummy.txt
+RUN pip install --no-cache-dir streamlit plotly pandas numpy
+
+# Copiar código fuente
+COPY . .
+
+# Crear directorios necesarios
+RUN mkdir -p data/models/production
+RUN mkdir -p config/secrets
+RUN mkdir -p logs
+
+# Configurar permisos
+RUN chmod +x scripts/*.py
+RUN chmod +x *.py
+
+# Exponer puerto
+EXPOSE 8080
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:8080/health || exit 1
+
+# Comando de inicio
+CMD ["python", "railway_main.py"]

@@ -1,0 +1,9 @@
+{
+  "type": "tiktok",
+  "classes": [
+    "like_button",
+    "share_button",
+    "comment",
+    "profile"
+  ]
+}

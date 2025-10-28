@@ -1,0 +1,4407 @@
+{
+  "day_01": {
+    "date": "2025-10-28",
+    "day_name": "Tuesday",
+    "day_number": 1,
+    "meta_ads": {
+      "phase": "Launch",
+      "budget_today": "€16.67",
+      "actions": [
+        "Create campaign targeting España 35% + México 25%",
+        "Setup age targeting: 18-34 (80% audience)",
+        "Interest targeting: música, reggaeton, pop, entretenimiento",
+        "Ad creative: YouTube channel trailer/best content",
+        "Landing page: YouTube channel optimizado"
+      ],
+      "expected_results": "200-400 nuevas visitas canal"
+    },
+    "08:00_trending_check": {
+      "action": "Check trending hashtags",
+      "platforms": [
+        "TikTok",
+        "Twitter",
+        "Instagram"
+      ],
+      "focus": "Music trends España/LATAM",
+      "time_investment": "15 min",
+      "tools": "Trend analysis ML"
+    },
+    "09:00_morning_tweet": {
+      "action": "Publish morning music insight",
+      "platform": "Twitter",
+      "content_type": "Quote/Insight/Industry news",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist"
+      ],
+      "expected_engagement": "5-15 interactions"
+    },
+    "10:00_analytics_review": {
+      "action": "Review previous day performance",
+      "metrics_to_check": [
+        "YouTube channel analytics",
+        "Instagram insights",
+        "TikTok analytics",
+        "Twitter impressions",
+        "Meta Ads performance"
+      ],
+      "time_investment": "20 min"
+    },
+    "11:00_content_creation": {
+      "action": "Content creation session",
+      "focus": "Instagram content + YouTube community",
+      "deliverables": [
+        "Instagram post + stories",
+        "YouTube community post"
+      ],
+      "time_investment": "60 min"
+    },
+    "13:00_lunch_engagement": {
+      "action": "Twitter trending participation",
+      "focus": "Music hashtags trending",
+      "interactions": "2-3 tweets",
+      "engagement_targets": "Music community accounts"
+    },
+    "15:00_competitor_research": {
+      "action": "Research competitors and trends",
+      "focus": "Similar music channels España/LATAM",
+      "analysis": "Content performing well, timing, hashtags",
+      "time_investment": "30 min"
+    },
+    "17:00_meta_ads_check": {
+      "action": "Monitor and adjust Meta Ads",
+      "tasks": [
+        "Check CPC and reach",
+        "Adjust targeting if needed",
+        "Review landing page performance",
+        "Optimize budget allocation"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:00_instagram_post": {
+      "action": "Instagram feed post",
+      "content_type": "Behind the scenes video",
+      "optimal_time": "19:00",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist",
+        "#studio",
+        "#newmusic",
+        "#spain",
+        "#madrid",
+        "#mexico",
+        "#reggaeton",
+        "#pop"
+      ],
+      "expected_reach": "1,500-3,500 accounts",
+      "expected_engagement": "120-280 likes, 15-35 comments",
+      "stories_followup": "3-4 stories promoting the post"
+    },
+    "20:30_tiktok_post": {
+      "action": "TikTok video post",
+      "concept": "Studio behind the scenes",
+      "optimal_time": "20:30",
+      "hashtags": [
+        "#fyp",
+        "#music",
+        "#producer",
+        "#viral",
+        "#spain",
+        "#mexico",
+        "#reggaeton",
+        "#pop",
+        "#studio",
+        "#newmusic"
+      ],
+      "expected_views": "2,000-8,000 views",
+      "expected_engagement": "150-400 interactions",
+      "trending_sounds": "Use current trending audio"
+    },
+    "21:00_engagement_session": {
+      "action": "Cross-platform community engagement",
+      "duration": "60 minutes",
+      "breakdown": {
+        "instagram": "20 min - likes, comments, stories",
+        "tiktok": "15 min - comments, likes, follows",
+        "youtube": "15 min - comment responses, community",
+        "twitter": "10 min - replies, retweets, engagement"
+      },
+      "targets": "Music community, potential collaborators, fans"
+    },
+    "22:30_daily_planning": {
+      "action": "Review day and plan tomorrow",
+      "tasks": [
+        "Log performance metrics",
+        "Plan next day content",
+        "Note trending opportunities",
+        "Update content calendar"
+      ],
+      "time_investment": "15 min"
+    },
+    "18:00_youtube_community": {
+      "action": "YouTube community post",
+      "content": "Music poll or behind scenes update",
+      "expected_engagement": "50-150 interactions"
+    }
+  },
+  "day_02": {
+    "date": "2025-10-29",
+    "day_name": "Wednesday",
+    "day_number": 2,
+    "meta_ads": {
+      "phase": "Monitor & Adjust",
+      "budget_today": "€16.67",
+      "actions": [
+        "Review day 1 performance metrics",
+        "Adjust targeting if CPC > €0.15",
+        "A/B test ad creative variations",
+        "Monitor channel subscriber growth"
+      ],
+      "expected_results": "250-450 nuevas visitas canal"
+    },
+    "08:00_trending_check": {
+      "action": "Check trending hashtags",
+      "platforms": [
+        "TikTok",
+        "Twitter",
+        "Instagram"
+      ],
+      "focus": "Music trends España/LATAM",
+      "time_investment": "15 min",
+      "tools": "Trend analysis ML"
+    },
+    "09:00_morning_tweet": {
+      "action": "Publish morning music insight",
+      "platform": "Twitter",
+      "content_type": "Quote/Insight/Industry news",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist"
+      ],
+      "expected_engagement": "5-15 interactions"
+    },
+    "10:00_analytics_review": {
+      "action": "Review previous day performance",
+      "metrics_to_check": [
+        "YouTube channel analytics",
+        "Instagram insights",
+        "TikTok analytics",
+        "Twitter impressions",
+        "Meta Ads performance"
+      ],
+      "time_investment": "20 min"
+    },
+    "11:00_content_creation": {
+      "action": "Content creation session",
+      "focus": "Music content + YouTube Shorts",
+      "deliverables": [
+        "Original music snippet",
+        "YouTube Short"
+      ],
+      "time_investment": "45 min"
+    },
+    "13:00_lunch_engagement": {
+      "action": "Twitter trending participation",
+      "focus": "Music hashtags trending",
+      "interactions": "2-3 tweets",
+      "engagement_targets": "Music community accounts"
+    },
+    "15:00_competitor_research": {
+      "action": "Research competitors and trends",
+      "focus": "Similar music channels España/LATAM",
+      "analysis": "Content performing well, timing, hashtags",
+      "time_investment": "30 min"
+    },
+    "17:00_meta_ads_check": {
+      "action": "Monitor and adjust Meta Ads",
+      "tasks": [
+        "Check CPC and reach",
+        "Adjust targeting if needed",
+        "Review landing page performance",
+        "Optimize budget allocation"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:00_instagram_post": {
+      "action": "Instagram feed post",
+      "content_type": "Fan interaction/repost",
+      "optimal_time": "19:00",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist",
+        "#studio",
+        "#newmusic",
+        "#spain",
+        "#madrid",
+        "#mexico",
+        "#reggaeton",
+        "#pop"
+      ],
+      "expected_reach": "1,500-3,500 accounts",
+      "expected_engagement": "120-280 likes, 15-35 comments",
+      "stories_followup": "3-4 stories promoting the post"
+    },
+    "20:30_tiktok_post": {
+      "action": "TikTok video post",
+      "concept": "Music production process",
+      "optimal_time": "20:30",
+      "hashtags": [
+        "#fyp",
+        "#music",
+        "#producer",
+        "#viral",
+        "#spain",
+        "#mexico",
+        "#reggaeton",
+        "#pop",
+        "#studio",
+        "#newmusic"
+      ],
+      "expected_views": "2,000-8,000 views",
+      "expected_engagement": "150-400 interactions",
+      "trending_sounds": "Use current trending audio"
+    },
+    "21:00_engagement_session": {
+      "action": "Cross-platform community engagement",
+      "duration": "60 minutes",
+      "breakdown": {
+        "instagram": "20 min - likes, comments, stories",
+        "tiktok": "15 min - comments, likes, follows",
+        "youtube": "15 min - comment responses, community",
+        "twitter": "10 min - replies, retweets, engagement"
+      },
+      "targets": "Music community, potential collaborators, fans"
+    },
+    "22:30_daily_planning": {
+      "action": "Review day and plan tomorrow",
+      "tasks": [
+        "Log performance metrics",
+        "Plan next day content",
+        "Note trending opportunities",
+        "Update content calendar"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:30_youtube_short": {
+      "action": "Upload YouTube Short",
+      "content": "Studio session or music tip",
+      "expected_views": "800-2,500 views"
+    }
+  },
+  "day_03": {
+    "date": "2025-10-30",
+    "day_name": "Thursday",
+    "day_number": 3,
+    "meta_ads": {
+      "phase": "Optimize",
+      "budget_today": "€16.67",
+      "actions": [
+        "Optimize best performing audiences",
+        "Expand successful interest categories",
+        "Test video vs. image ads performance",
+        "Setup retargeting for channel visitors"
+      ],
+      "expected_results": "300-500 nuevas visitas canal"
+    },
+    "08:00_trending_check": {
+      "action": "Check trending hashtags",
+      "platforms": [
+        "TikTok",
+        "Twitter",
+        "Instagram"
+      ],
+      "focus": "Music trends España/LATAM",
+      "time_investment": "15 min",
+      "tools": "Trend analysis ML"
+    },
+    "09:00_morning_tweet": {
+      "action": "Publish morning music insight",
+      "platform": "Twitter",
+      "content_type": "Quote/Insight/Industry news",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist"
+      ],
+      "expected_engagement": "5-15 interactions"
+    },
+    "10:00_analytics_review": {
+      "action": "Review previous day performance",
+      "metrics_to_check": [
+        "YouTube channel analytics",
+        "Instagram insights",
+        "TikTok analytics",
+        "Twitter impressions",
+        "Meta Ads performance"
+      ],
+      "time_investment": "20 min"
+    },
+    "11:00_content_creation": {
+      "action": "Content creation session",
+      "focus": "Behind scenes + Community content",
+      "deliverables": [
+        "Instagram stories series",
+        "YouTube community post"
+      ],
+      "time_investment": "30 min"
+    },
+    "13:00_lunch_engagement": {
+      "action": "Twitter trending participation",
+      "focus": "Music hashtags trending",
+      "interactions": "2-3 tweets",
+      "engagement_targets": "Music community accounts"
+    },
+    "15:00_competitor_research": {
+      "action": "Research competitors and trends",
+      "focus": "Similar music channels España/LATAM",
+      "analysis": "Content performing well, timing, hashtags",
+      "time_investment": "30 min"
+    },
+    "17:00_meta_ads_check": {
+      "action": "Monitor and adjust Meta Ads",
+      "tasks": [
+        "Check CPC and reach",
+        "Adjust targeting if needed",
+        "Review landing page performance",
+        "Optimize budget allocation"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:00_instagram_post": {
+      "action": "Instagram feed post",
+      "content_type": "Music quote graphic",
+      "optimal_time": "19:00",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist",
+        "#studio",
+        "#newmusic",
+        "#spain",
+        "#madrid",
+        "#mexico",
+        "#reggaeton",
+        "#pop"
+      ],
+      "expected_reach": "1,500-3,500 accounts",
+      "expected_engagement": "120-280 likes, 15-35 comments",
+      "stories_followup": "3-4 stories promoting the post"
+    },
+    "20:30_tiktok_post": {
+      "action": "TikTok video post",
+      "concept": "Fan interaction response",
+      "optimal_time": "20:30",
+      "hashtags": [
+        "#fyp",
+        "#music",
+        "#producer",
+        "#viral",
+        "#spain",
+        "#mexico",
+        "#reggaeton",
+        "#pop",
+        "#studio",
+        "#newmusic"
+      ],
+      "expected_views": "2,000-8,000 views",
+      "expected_engagement": "150-400 interactions",
+      "trending_sounds": "Use current trending audio"
+    },
+    "21:00_engagement_session": {
+      "action": "Cross-platform community engagement",
+      "duration": "60 minutes",
+      "breakdown": {
+        "instagram": "20 min - likes, comments, stories",
+        "tiktok": "15 min - comments, likes, follows",
+        "youtube": "15 min - comment responses, community",
+        "twitter": "10 min - replies, retweets, engagement"
+      },
+      "targets": "Music community, potential collaborators, fans"
+    },
+    "22:30_daily_planning": {
+      "action": "Review day and plan tomorrow",
+      "tasks": [
+        "Log performance metrics",
+        "Plan next day content",
+        "Note trending opportunities",
+        "Update content calendar"
+      ],
+      "time_investment": "15 min"
+    },
+    "18:00_youtube_community": {
+      "action": "YouTube community post",
+      "content": "Fan question response or music update",
+      "expected_engagement": "50-150 interactions"
+    }
+  },
+  "day_04": {
+    "date": "2025-10-31",
+    "day_name": "Friday",
+    "day_number": 4,
+    "meta_ads": {
+      "phase": "Optimization Week 1",
+      "budget_today": "€16.67",
+      "actions": [
+        "Monitor CPC and adjust bids",
+        "Refresh ad creative if frequency > 2.5",
+        "Test new audience interests",
+        "Analyze conversion to subscribers"
+      ],
+      "expected_results": "280-480 nuevas visitas canal (semana 1)"
+    },
+    "08:00_trending_check": {
+      "action": "Check trending hashtags",
+      "platforms": [
+        "TikTok",
+        "Twitter",
+        "Instagram"
+      ],
+      "focus": "Music trends España/LATAM",
+      "time_investment": "15 min",
+      "tools": "Trend analysis ML"
+    },
+    "09:00_morning_tweet": {
+      "action": "Publish morning music insight",
+      "platform": "Twitter",
+      "content_type": "Quote/Insight/Industry news",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist"
+      ],
+      "expected_engagement": "5-15 interactions"
+    },
+    "10:00_analytics_review": {
+      "action": "Review previous day performance",
+      "metrics_to_check": [
+        "YouTube channel analytics",
+        "Instagram insights",
+        "TikTok analytics",
+        "Twitter impressions",
+        "Meta Ads performance"
+      ],
+      "time_investment": "20 min"
+    },
+    "11:00_content_creation": {
+      "action": "Content creation session",
+      "focus": "Main YouTube video preparation",
+      "deliverables": [
+        "YouTube main video edit/upload prep"
+      ],
+      "time_investment": "90 min"
+    },
+    "13:00_lunch_engagement": {
+      "action": "Twitter trending participation",
+      "focus": "Music hashtags trending",
+      "interactions": "2-3 tweets",
+      "engagement_targets": "Music community accounts"
+    },
+    "15:00_competitor_research": {
+      "action": "Research competitors and trends",
+      "focus": "Similar music channels España/LATAM",
+      "analysis": "Content performing well, timing, hashtags",
+      "time_investment": "30 min"
+    },
+    "17:00_meta_ads_check": {
+      "action": "Monitor and adjust Meta Ads",
+      "tasks": [
+        "Check CPC and reach",
+        "Adjust targeting if needed",
+        "Review landing page performance",
+        "Optimize budget allocation"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:00_instagram_post": {
+      "action": "Instagram feed post",
+      "content_type": "Lifestyle/personal moment",
+      "optimal_time": "19:00",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist",
+        "#studio",
+        "#newmusic",
+        "#spain",
+        "#madrid",
+        "#mexico",
+        "#reggaeton",
+        "#pop"
+      ],
+      "expected_reach": "1,500-3,500 accounts",
+      "expected_engagement": "120-280 likes, 15-35 comments",
+      "stories_followup": "3-4 stories promoting the post"
+    },
+    "20:30_tiktok_post": {
+      "action": "TikTok video post",
+      "concept": "Trending challenge participation",
+      "optimal_time": "20:30",
+      "hashtags": [
+        "#fyp",
+        "#music",
+        "#producer",
+        "#viral",
+        "#spain",
+        "#mexico",
+        "#reggaeton",
+        "#pop",
+        "#studio",
+        "#newmusic"
+      ],
+      "expected_views": "2,000-8,000 views",
+      "expected_engagement": "150-400 interactions",
+      "trending_sounds": "Use current trending audio"
+    },
+    "21:00_engagement_session": {
+      "action": "Cross-platform community engagement",
+      "duration": "60 minutes",
+      "breakdown": {
+        "instagram": "20 min - likes, comments, stories",
+        "tiktok": "15 min - comments, likes, follows",
+        "youtube": "15 min - comment responses, community",
+        "twitter": "10 min - replies, retweets, engagement"
+      },
+      "targets": "Music community, potential collaborators, fans"
+    },
+    "22:30_daily_planning": {
+      "action": "Review day and plan tomorrow",
+      "tasks": [
+        "Log performance metrics",
+        "Plan next day content",
+        "Note trending opportunities",
+        "Update content calendar"
+      ],
+      "time_investment": "15 min"
+    },
+    "20:00_youtube_main": {
+      "action": "Upload main YouTube video",
+      "content": "Main music content/video/collab",
+      "expected_views": "1,500-4,000 views primera semana"
+    },
+    "19:30_youtube_short": {
+      "action": "Upload YouTube Short",
+      "content": "Friday music vibes",
+      "expected_views": "1,200-3,500 views"
+    }
+  },
+  "day_05": {
+    "date": "2025-11-01",
+    "day_name": "Saturday",
+    "day_number": 5,
+    "meta_ads": {
+      "phase": "Optimization Week 1",
+      "budget_today": "€16.67",
+      "actions": [
+        "Monitor CPC and adjust bids",
+        "Refresh ad creative if frequency > 2.5",
+        "Test new audience interests",
+        "Analyze conversion to subscribers"
+      ],
+      "expected_results": "280-480 nuevas visitas canal (semana 1)"
+    },
+    "08:00_trending_check": {
+      "action": "Check trending hashtags",
+      "platforms": [
+        "TikTok",
+        "Twitter",
+        "Instagram"
+      ],
+      "focus": "Music trends España/LATAM",
+      "time_investment": "15 min",
+      "tools": "Trend analysis ML"
+    },
+    "09:00_morning_tweet": {
+      "action": "Publish morning music insight",
+      "platform": "Twitter",
+      "content_type": "Quote/Insight/Industry news",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist"
+      ],
+      "expected_engagement": "5-15 interactions"
+    },
+    "10:00_analytics_review": {
+      "action": "Review previous day performance",
+      "metrics_to_check": [
+        "YouTube channel analytics",
+        "Instagram insights",
+        "TikTok analytics",
+        "Twitter impressions",
+        "Meta Ads performance"
+      ],
+      "time_investment": "20 min"
+    },
+    "11:00_content_creation": {
+      "action": "Content creation session",
+      "focus": "Weekend content + Collaboration prep",
+      "deliverables": [
+        "Weekend casual content",
+        "Outreach messages"
+      ],
+      "time_investment": "45 min"
+    },
+    "13:00_lunch_engagement": {
+      "action": "Twitter trending participation",
+      "focus": "Music hashtags trending",
+      "interactions": "2-3 tweets",
+      "engagement_targets": "Music community accounts"
+    },
+    "15:00_competitor_research": {
+      "action": "Research competitors and trends",
+      "focus": "Similar music channels España/LATAM",
+      "analysis": "Content performing well, timing, hashtags",
+      "time_investment": "30 min"
+    },
+    "17:00_meta_ads_check": {
+      "action": "Monitor and adjust Meta Ads",
+      "tasks": [
+        "Check CPC and reach",
+        "Adjust targeting if needed",
+        "Review landing page performance",
+        "Optimize budget allocation"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:00_instagram_post": {
+      "action": "Instagram feed post",
+      "content_type": "Music equipment/setup",
+      "optimal_time": "19:00",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist",
+        "#studio",
+        "#newmusic",
+        "#spain",
+        "#madrid",
+        "#mexico",
+        "#reggaeton",
+        "#pop"
+      ],
+      "expected_reach": "1,500-3,500 accounts",
+      "expected_engagement": "120-280 likes, 15-35 comments",
+      "stories_followup": "3-4 stories promoting the post"
+    },
+    "20:30_tiktok_post": {
+      "action": "TikTok video post",
+      "concept": "Music tutorial/tips",
+      "optimal_time": "20:30",
+      "hashtags": [
+        "#fyp",
+        "#music",
+        "#producer",
+        "#viral",
+        "#spain",
+        "#mexico",
+        "#reggaeton",
+        "#pop",
+        "#studio",
+        "#newmusic"
+      ],
+      "expected_views": "2,000-8,000 views",
+      "expected_engagement": "150-400 interactions",
+      "trending_sounds": "Use current trending audio"
+    },
+    "21:00_engagement_session": {
+      "action": "Cross-platform community engagement",
+      "duration": "60 minutes",
+      "breakdown": {
+        "instagram": "20 min - likes, comments, stories",
+        "tiktok": "15 min - comments, likes, follows",
+        "youtube": "15 min - comment responses, community",
+        "twitter": "10 min - replies, retweets, engagement"
+      },
+      "targets": "Music community, potential collaborators, fans"
+    },
+    "22:30_daily_planning": {
+      "action": "Review day and plan tomorrow",
+      "tasks": [
+        "Log performance metrics",
+        "Plan next day content",
+        "Note trending opportunities",
+        "Update content calendar"
+      ],
+      "time_investment": "15 min"
+    },
+    "weekend_engagement": {
+      "action": "Enhanced weekend community engagement",
+      "focus": "More personal interaction with fans",
+      "time_investment": "Extra 30 min",
+      "platforms": "All platforms - casual interactions"
+    }
+  },
+  "day_06": {
+    "date": "2025-11-02",
+    "day_name": "Sunday",
+    "day_number": 6,
+    "meta_ads": {
+      "phase": "Optimization Week 1",
+      "budget_today": "€16.67",
+      "actions": [
+        "Monitor CPC and adjust bids",
+        "Refresh ad creative if frequency > 2.5",
+        "Test new audience interests",
+        "Analyze conversion to subscribers"
+      ],
+      "expected_results": "280-480 nuevas visitas canal (semana 1)"
+    },
+    "08:00_trending_check": {
+      "action": "Check trending hashtags",
+      "platforms": [
+        "TikTok",
+        "Twitter",
+        "Instagram"
+      ],
+      "focus": "Music trends España/LATAM",
+      "time_investment": "15 min",
+      "tools": "Trend analysis ML"
+    },
+    "09:00_morning_tweet": {
+      "action": "Publish morning music insight",
+      "platform": "Twitter",
+      "content_type": "Quote/Insight/Industry news",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist"
+      ],
+      "expected_engagement": "5-15 interactions"
+    },
+    "10:00_analytics_review": {
+      "action": "Review previous day performance",
+      "metrics_to_check": [
+        "YouTube channel analytics",
+        "Instagram insights",
+        "TikTok analytics",
+        "Twitter impressions",
+        "Meta Ads performance"
+      ],
+      "time_investment": "20 min"
+    },
+    "11:00_content_creation": {
+      "action": "Content creation session",
+      "focus": "Week review + Next week planning",
+      "deliverables": [
+        "Content calendar update",
+        "Performance analysis"
+      ],
+      "time_investment": "60 min"
+    },
+    "13:00_lunch_engagement": {
+      "action": "Twitter trending participation",
+      "focus": "Music hashtags trending",
+      "interactions": "2-3 tweets",
+      "engagement_targets": "Music community accounts"
+    },
+    "15:00_competitor_research": {
+      "action": "Research competitors and trends",
+      "focus": "Similar music channels España/LATAM",
+      "analysis": "Content performing well, timing, hashtags",
+      "time_investment": "30 min"
+    },
+    "17:00_meta_ads_check": {
+      "action": "Monitor and adjust Meta Ads",
+      "tasks": [
+        "Check CPC and reach",
+        "Adjust targeting if needed",
+        "Review landing page performance",
+        "Optimize budget allocation"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:00_instagram_post": {
+      "action": "Instagram feed post",
+      "content_type": "Collaboration announcement",
+      "optimal_time": "19:00",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist",
+        "#studio",
+        "#newmusic",
+        "#spain",
+        "#madrid",
+        "#mexico",
+        "#reggaeton",
+        "#pop"
+      ],
+      "expected_reach": "1,500-3,500 accounts",
+      "expected_engagement": "120-280 likes, 15-35 comments",
+      "stories_followup": "3-4 stories promoting the post"
+    },
+    "20:30_tiktok_post": {
+      "action": "TikTok video post",
+      "concept": "Day in the life of musician",
+      "optimal_time": "20:30",
+      "hashtags": [
+        "#fyp",
+        "#music",
+        "#producer",
+        "#viral",
+        "#spain",
+        "#mexico",
+        "#reggaeton",
+        "#pop",
+        "#studio",
+        "#newmusic"
+      ],
+      "expected_views": "2,000-8,000 views",
+      "expected_engagement": "150-400 interactions",
+      "trending_sounds": "Use current trending audio"
+    },
+    "21:00_engagement_session": {
+      "action": "Cross-platform community engagement",
+      "duration": "60 minutes",
+      "breakdown": {
+        "instagram": "20 min - likes, comments, stories",
+        "tiktok": "15 min - comments, likes, follows",
+        "youtube": "15 min - comment responses, community",
+        "twitter": "10 min - replies, retweets, engagement"
+      },
+      "targets": "Music community, potential collaborators, fans"
+    },
+    "22:30_daily_planning": {
+      "action": "Review day and plan tomorrow",
+      "tasks": [
+        "Log performance metrics",
+        "Plan next day content",
+        "Note trending opportunities",
+        "Update content calendar"
+      ],
+      "time_investment": "15 min"
+    },
+    "weekend_engagement": {
+      "action": "Enhanced weekend community engagement",
+      "focus": "More personal interaction with fans",
+      "time_investment": "Extra 30 min",
+      "platforms": "All platforms - casual interactions"
+    }
+  },
+  "day_07": {
+    "date": "2025-11-03",
+    "day_name": "Monday",
+    "day_number": 7,
+    "meta_ads": {
+      "phase": "Optimization Week 1",
+      "budget_today": "€16.67",
+      "actions": [
+        "Monitor CPC and adjust bids",
+        "Refresh ad creative if frequency > 2.5",
+        "Test new audience interests",
+        "Analyze conversion to subscribers"
+      ],
+      "expected_results": "280-480 nuevas visitas canal (semana 1)"
+    },
+    "08:00_trending_check": {
+      "action": "Check trending hashtags",
+      "platforms": [
+        "TikTok",
+        "Twitter",
+        "Instagram"
+      ],
+      "focus": "Music trends España/LATAM",
+      "time_investment": "15 min",
+      "tools": "Trend analysis ML"
+    },
+    "09:00_morning_tweet": {
+      "action": "Publish morning music insight",
+      "platform": "Twitter",
+      "content_type": "Quote/Insight/Industry news",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist"
+      ],
+      "expected_engagement": "5-15 interactions"
+    },
+    "10:00_analytics_review": {
+      "action": "Review previous day performance",
+      "metrics_to_check": [
+        "YouTube channel analytics",
+        "Instagram insights",
+        "TikTok analytics",
+        "Twitter impressions",
+        "Meta Ads performance"
+      ],
+      "time_investment": "20 min"
+    },
+    "11:00_content_creation": {
+      "action": "Content creation session",
+      "focus": "TikTok challenge research + YouTube Shorts",
+      "deliverables": [
+        "TikTok video script",
+        "YouTube Short edit"
+      ],
+      "time_investment": "45 min"
+    },
+    "13:00_lunch_engagement": {
+      "action": "Twitter trending participation",
+      "focus": "Music hashtags trending",
+      "interactions": "2-3 tweets",
+      "engagement_targets": "Music community accounts"
+    },
+    "15:00_competitor_research": {
+      "action": "Research competitors and trends",
+      "focus": "Similar music channels España/LATAM",
+      "analysis": "Content performing well, timing, hashtags",
+      "time_investment": "30 min"
+    },
+    "17:00_meta_ads_check": {
+      "action": "Monitor and adjust Meta Ads",
+      "tasks": [
+        "Check CPC and reach",
+        "Adjust targeting if needed",
+        "Review landing page performance",
+        "Optimize budget allocation"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:00_instagram_post": {
+      "action": "Instagram feed post",
+      "content_type": "Music studio session photo",
+      "optimal_time": "19:00",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist",
+        "#studio",
+        "#newmusic",
+        "#spain",
+        "#madrid",
+        "#mexico",
+        "#reggaeton",
+        "#pop"
+      ],
+      "expected_reach": "1,500-3,500 accounts",
+      "expected_engagement": "120-280 likes, 15-35 comments",
+      "stories_followup": "3-4 stories promoting the post"
+    },
+    "20:30_tiktok_post": {
+      "action": "TikTok video post",
+      "concept": "Music snippet with trending sound",
+      "optimal_time": "20:30",
+      "hashtags": [
+        "#fyp",
+        "#music",
+        "#producer",
+        "#viral",
+        "#spain",
+        "#mexico",
+        "#reggaeton",
+        "#pop",
+        "#studio",
+        "#newmusic"
+      ],
+      "expected_views": "2,000-8,000 views",
+      "expected_engagement": "150-400 interactions",
+      "trending_sounds": "Use current trending audio"
+    },
+    "21:00_engagement_session": {
+      "action": "Cross-platform community engagement",
+      "duration": "60 minutes",
+      "breakdown": {
+        "instagram": "20 min - likes, comments, stories",
+        "tiktok": "15 min - comments, likes, follows",
+        "youtube": "15 min - comment responses, community",
+        "twitter": "10 min - replies, retweets, engagement"
+      },
+      "targets": "Music community, potential collaborators, fans"
+    },
+    "22:30_daily_planning": {
+      "action": "Review day and plan tomorrow",
+      "tasks": [
+        "Log performance metrics",
+        "Plan next day content",
+        "Note trending opportunities",
+        "Update content calendar"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:30_youtube_short": {
+      "action": "Upload YouTube Short",
+      "content": "Music Monday - trending song snippet",
+      "expected_views": "800-2,500 views"
+    }
+  },
+  "day_08": {
+    "date": "2025-11-04",
+    "day_name": "Tuesday",
+    "day_number": 8,
+    "meta_ads": {
+      "phase": "Optimization Week 2",
+      "budget_today": "€16.67",
+      "actions": [
+        "Monitor CPC and adjust bids",
+        "Refresh ad creative if frequency > 2.5",
+        "Test new audience interests",
+        "Analyze conversion to subscribers"
+      ],
+      "expected_results": "280-480 nuevas visitas canal (semana 2)"
+    },
+    "08:00_trending_check": {
+      "action": "Check trending hashtags",
+      "platforms": [
+        "TikTok",
+        "Twitter",
+        "Instagram"
+      ],
+      "focus": "Music trends España/LATAM",
+      "time_investment": "15 min",
+      "tools": "Trend analysis ML"
+    },
+    "09:00_morning_tweet": {
+      "action": "Publish morning music insight",
+      "platform": "Twitter",
+      "content_type": "Quote/Insight/Industry news",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist"
+      ],
+      "expected_engagement": "5-15 interactions"
+    },
+    "10:00_analytics_review": {
+      "action": "Review previous day performance",
+      "metrics_to_check": [
+        "YouTube channel analytics",
+        "Instagram insights",
+        "TikTok analytics",
+        "Twitter impressions",
+        "Meta Ads performance"
+      ],
+      "time_investment": "20 min"
+    },
+    "11:00_content_creation": {
+      "action": "Content creation session",
+      "focus": "Instagram content + YouTube community",
+      "deliverables": [
+        "Instagram post + stories",
+        "YouTube community post"
+      ],
+      "time_investment": "60 min"
+    },
+    "13:00_lunch_engagement": {
+      "action": "Twitter trending participation",
+      "focus": "Music hashtags trending",
+      "interactions": "2-3 tweets",
+      "engagement_targets": "Music community accounts"
+    },
+    "15:00_competitor_research": {
+      "action": "Research competitors and trends",
+      "focus": "Similar music channels España/LATAM",
+      "analysis": "Content performing well, timing, hashtags",
+      "time_investment": "30 min"
+    },
+    "17:00_meta_ads_check": {
+      "action": "Monitor and adjust Meta Ads",
+      "tasks": [
+        "Check CPC and reach",
+        "Adjust targeting if needed",
+        "Review landing page performance",
+        "Optimize budget allocation"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:00_instagram_post": {
+      "action": "Instagram feed post",
+      "content_type": "Behind the scenes video",
+      "optimal_time": "19:00",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist",
+        "#studio",
+        "#newmusic",
+        "#spain",
+        "#madrid",
+        "#mexico",
+        "#reggaeton",
+        "#pop"
+      ],
+      "expected_reach": "1,500-3,500 accounts",
+      "expected_engagement": "120-280 likes, 15-35 comments",
+      "stories_followup": "3-4 stories promoting the post"
+    },
+    "20:30_tiktok_post": {
+      "action": "TikTok video post",
+      "concept": "Studio behind the scenes",
+      "optimal_time": "20:30",
+      "hashtags": [
+        "#fyp",
+        "#music",
+        "#producer",
+        "#viral",
+        "#spain",
+        "#mexico",
+        "#reggaeton",
+        "#pop",
+        "#studio",
+        "#newmusic"
+      ],
+      "expected_views": "2,000-8,000 views",
+      "expected_engagement": "150-400 interactions",
+      "trending_sounds": "Use current trending audio"
+    },
+    "21:00_engagement_session": {
+      "action": "Cross-platform community engagement",
+      "duration": "60 minutes",
+      "breakdown": {
+        "instagram": "20 min - likes, comments, stories",
+        "tiktok": "15 min - comments, likes, follows",
+        "youtube": "15 min - comment responses, community",
+        "twitter": "10 min - replies, retweets, engagement"
+      },
+      "targets": "Music community, potential collaborators, fans"
+    },
+    "22:30_daily_planning": {
+      "action": "Review day and plan tomorrow",
+      "tasks": [
+        "Log performance metrics",
+        "Plan next day content",
+        "Note trending opportunities",
+        "Update content calendar"
+      ],
+      "time_investment": "15 min"
+    },
+    "18:00_youtube_community": {
+      "action": "YouTube community post",
+      "content": "Music poll or behind scenes update",
+      "expected_engagement": "50-150 interactions"
+    }
+  },
+  "day_09": {
+    "date": "2025-11-05",
+    "day_name": "Wednesday",
+    "day_number": 9,
+    "meta_ads": {
+      "phase": "Optimization Week 2",
+      "budget_today": "€16.67",
+      "actions": [
+        "Monitor CPC and adjust bids",
+        "Refresh ad creative if frequency > 2.5",
+        "Test new audience interests",
+        "Analyze conversion to subscribers"
+      ],
+      "expected_results": "280-480 nuevas visitas canal (semana 2)"
+    },
+    "08:00_trending_check": {
+      "action": "Check trending hashtags",
+      "platforms": [
+        "TikTok",
+        "Twitter",
+        "Instagram"
+      ],
+      "focus": "Music trends España/LATAM",
+      "time_investment": "15 min",
+      "tools": "Trend analysis ML"
+    },
+    "09:00_morning_tweet": {
+      "action": "Publish morning music insight",
+      "platform": "Twitter",
+      "content_type": "Quote/Insight/Industry news",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist"
+      ],
+      "expected_engagement": "5-15 interactions"
+    },
+    "10:00_analytics_review": {
+      "action": "Review previous day performance",
+      "metrics_to_check": [
+        "YouTube channel analytics",
+        "Instagram insights",
+        "TikTok analytics",
+        "Twitter impressions",
+        "Meta Ads performance"
+      ],
+      "time_investment": "20 min"
+    },
+    "11:00_content_creation": {
+      "action": "Content creation session",
+      "focus": "Music content + YouTube Shorts",
+      "deliverables": [
+        "Original music snippet",
+        "YouTube Short"
+      ],
+      "time_investment": "45 min"
+    },
+    "13:00_lunch_engagement": {
+      "action": "Twitter trending participation",
+      "focus": "Music hashtags trending",
+      "interactions": "2-3 tweets",
+      "engagement_targets": "Music community accounts"
+    },
+    "15:00_competitor_research": {
+      "action": "Research competitors and trends",
+      "focus": "Similar music channels España/LATAM",
+      "analysis": "Content performing well, timing, hashtags",
+      "time_investment": "30 min"
+    },
+    "17:00_meta_ads_check": {
+      "action": "Monitor and adjust Meta Ads",
+      "tasks": [
+        "Check CPC and reach",
+        "Adjust targeting if needed",
+        "Review landing page performance",
+        "Optimize budget allocation"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:00_instagram_post": {
+      "action": "Instagram feed post",
+      "content_type": "Fan interaction/repost",
+      "optimal_time": "19:00",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist",
+        "#studio",
+        "#newmusic",
+        "#spain",
+        "#madrid",
+        "#mexico",
+        "#reggaeton",
+        "#pop"
+      ],
+      "expected_reach": "1,500-3,500 accounts",
+      "expected_engagement": "120-280 likes, 15-35 comments",
+      "stories_followup": "3-4 stories promoting the post"
+    },
+    "20:30_tiktok_post": {
+      "action": "TikTok video post",
+      "concept": "Music production process",
+      "optimal_time": "20:30",
+      "hashtags": [
+        "#fyp",
+        "#music",
+        "#producer",
+        "#viral",
+        "#spain",
+        "#mexico",
+        "#reggaeton",
+        "#pop",
+        "#studio",
+        "#newmusic"
+      ],
+      "expected_views": "2,000-8,000 views",
+      "expected_engagement": "150-400 interactions",
+      "trending_sounds": "Use current trending audio"
+    },
+    "21:00_engagement_session": {
+      "action": "Cross-platform community engagement",
+      "duration": "60 minutes",
+      "breakdown": {
+        "instagram": "20 min - likes, comments, stories",
+        "tiktok": "15 min - comments, likes, follows",
+        "youtube": "15 min - comment responses, community",
+        "twitter": "10 min - replies, retweets, engagement"
+      },
+      "targets": "Music community, potential collaborators, fans"
+    },
+    "22:30_daily_planning": {
+      "action": "Review day and plan tomorrow",
+      "tasks": [
+        "Log performance metrics",
+        "Plan next day content",
+        "Note trending opportunities",
+        "Update content calendar"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:30_youtube_short": {
+      "action": "Upload YouTube Short",
+      "content": "Studio session or music tip",
+      "expected_views": "800-2,500 views"
+    }
+  },
+  "day_10": {
+    "date": "2025-11-06",
+    "day_name": "Thursday",
+    "day_number": 10,
+    "meta_ads": {
+      "phase": "Optimization Week 2",
+      "budget_today": "€16.67",
+      "actions": [
+        "Monitor CPC and adjust bids",
+        "Refresh ad creative if frequency > 2.5",
+        "Test new audience interests",
+        "Analyze conversion to subscribers"
+      ],
+      "expected_results": "280-480 nuevas visitas canal (semana 2)"
+    },
+    "08:00_trending_check": {
+      "action": "Check trending hashtags",
+      "platforms": [
+        "TikTok",
+        "Twitter",
+        "Instagram"
+      ],
+      "focus": "Music trends España/LATAM",
+      "time_investment": "15 min",
+      "tools": "Trend analysis ML"
+    },
+    "09:00_morning_tweet": {
+      "action": "Publish morning music insight",
+      "platform": "Twitter",
+      "content_type": "Quote/Insight/Industry news",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist"
+      ],
+      "expected_engagement": "5-15 interactions"
+    },
+    "10:00_analytics_review": {
+      "action": "Review previous day performance",
+      "metrics_to_check": [
+        "YouTube channel analytics",
+        "Instagram insights",
+        "TikTok analytics",
+        "Twitter impressions",
+        "Meta Ads performance"
+      ],
+      "time_investment": "20 min"
+    },
+    "11:00_content_creation": {
+      "action": "Content creation session",
+      "focus": "Behind scenes + Community content",
+      "deliverables": [
+        "Instagram stories series",
+        "YouTube community post"
+      ],
+      "time_investment": "30 min"
+    },
+    "13:00_lunch_engagement": {
+      "action": "Twitter trending participation",
+      "focus": "Music hashtags trending",
+      "interactions": "2-3 tweets",
+      "engagement_targets": "Music community accounts"
+    },
+    "15:00_competitor_research": {
+      "action": "Research competitors and trends",
+      "focus": "Similar music channels España/LATAM",
+      "analysis": "Content performing well, timing, hashtags",
+      "time_investment": "30 min"
+    },
+    "17:00_meta_ads_check": {
+      "action": "Monitor and adjust Meta Ads",
+      "tasks": [
+        "Check CPC and reach",
+        "Adjust targeting if needed",
+        "Review landing page performance",
+        "Optimize budget allocation"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:00_instagram_post": {
+      "action": "Instagram feed post",
+      "content_type": "Music quote graphic",
+      "optimal_time": "19:00",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist",
+        "#studio",
+        "#newmusic",
+        "#spain",
+        "#madrid",
+        "#mexico",
+        "#reggaeton",
+        "#pop"
+      ],
+      "expected_reach": "1,500-3,500 accounts",
+      "expected_engagement": "120-280 likes, 15-35 comments",
+      "stories_followup": "3-4 stories promoting the post"
+    },
+    "20:30_tiktok_post": {
+      "action": "TikTok video post",
+      "concept": "Fan interaction response",
+      "optimal_time": "20:30",
+      "hashtags": [
+        "#fyp",
+        "#music",
+        "#producer",
+        "#viral",
+        "#spain",
+        "#mexico",
+        "#reggaeton",
+        "#pop",
+        "#studio",
+        "#newmusic"
+      ],
+      "expected_views": "2,000-8,000 views",
+      "expected_engagement": "150-400 interactions",
+      "trending_sounds": "Use current trending audio"
+    },
+    "21:00_engagement_session": {
+      "action": "Cross-platform community engagement",
+      "duration": "60 minutes",
+      "breakdown": {
+        "instagram": "20 min - likes, comments, stories",
+        "tiktok": "15 min - comments, likes, follows",
+        "youtube": "15 min - comment responses, community",
+        "twitter": "10 min - replies, retweets, engagement"
+      },
+      "targets": "Music community, potential collaborators, fans"
+    },
+    "22:30_daily_planning": {
+      "action": "Review day and plan tomorrow",
+      "tasks": [
+        "Log performance metrics",
+        "Plan next day content",
+        "Note trending opportunities",
+        "Update content calendar"
+      ],
+      "time_investment": "15 min"
+    },
+    "18:00_youtube_community": {
+      "action": "YouTube community post",
+      "content": "Fan question response or music update",
+      "expected_engagement": "50-150 interactions"
+    }
+  },
+  "day_11": {
+    "date": "2025-11-07",
+    "day_name": "Friday",
+    "day_number": 11,
+    "meta_ads": {
+      "phase": "Optimization Week 2",
+      "budget_today": "€16.67",
+      "actions": [
+        "Monitor CPC and adjust bids",
+        "Refresh ad creative if frequency > 2.5",
+        "Test new audience interests",
+        "Analyze conversion to subscribers"
+      ],
+      "expected_results": "280-480 nuevas visitas canal (semana 2)"
+    },
+    "08:00_trending_check": {
+      "action": "Check trending hashtags",
+      "platforms": [
+        "TikTok",
+        "Twitter",
+        "Instagram"
+      ],
+      "focus": "Music trends España/LATAM",
+      "time_investment": "15 min",
+      "tools": "Trend analysis ML"
+    },
+    "09:00_morning_tweet": {
+      "action": "Publish morning music insight",
+      "platform": "Twitter",
+      "content_type": "Quote/Insight/Industry news",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist"
+      ],
+      "expected_engagement": "5-15 interactions"
+    },
+    "10:00_analytics_review": {
+      "action": "Review previous day performance",
+      "metrics_to_check": [
+        "YouTube channel analytics",
+        "Instagram insights",
+        "TikTok analytics",
+        "Twitter impressions",
+        "Meta Ads performance"
+      ],
+      "time_investment": "20 min"
+    },
+    "11:00_content_creation": {
+      "action": "Content creation session",
+      "focus": "Main YouTube video preparation",
+      "deliverables": [
+        "YouTube main video edit/upload prep"
+      ],
+      "time_investment": "90 min"
+    },
+    "13:00_lunch_engagement": {
+      "action": "Twitter trending participation",
+      "focus": "Music hashtags trending",
+      "interactions": "2-3 tweets",
+      "engagement_targets": "Music community accounts"
+    },
+    "15:00_competitor_research": {
+      "action": "Research competitors and trends",
+      "focus": "Similar music channels España/LATAM",
+      "analysis": "Content performing well, timing, hashtags",
+      "time_investment": "30 min"
+    },
+    "17:00_meta_ads_check": {
+      "action": "Monitor and adjust Meta Ads",
+      "tasks": [
+        "Check CPC and reach",
+        "Adjust targeting if needed",
+        "Review landing page performance",
+        "Optimize budget allocation"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:00_instagram_post": {
+      "action": "Instagram feed post",
+      "content_type": "Lifestyle/personal moment",
+      "optimal_time": "19:00",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist",
+        "#studio",
+        "#newmusic",
+        "#spain",
+        "#madrid",
+        "#mexico",
+        "#reggaeton",
+        "#pop"
+      ],
+      "expected_reach": "1,500-3,500 accounts",
+      "expected_engagement": "120-280 likes, 15-35 comments",
+      "stories_followup": "3-4 stories promoting the post"
+    },
+    "20:30_tiktok_post": {
+      "action": "TikTok video post",
+      "concept": "Trending challenge participation",
+      "optimal_time": "20:30",
+      "hashtags": [
+        "#fyp",
+        "#music",
+        "#producer",
+        "#viral",
+        "#spain",
+        "#mexico",
+        "#reggaeton",
+        "#pop",
+        "#studio",
+        "#newmusic"
+      ],
+      "expected_views": "2,000-8,000 views",
+      "expected_engagement": "150-400 interactions",
+      "trending_sounds": "Use current trending audio"
+    },
+    "21:00_engagement_session": {
+      "action": "Cross-platform community engagement",
+      "duration": "60 minutes",
+      "breakdown": {
+        "instagram": "20 min - likes, comments, stories",
+        "tiktok": "15 min - comments, likes, follows",
+        "youtube": "15 min - comment responses, community",
+        "twitter": "10 min - replies, retweets, engagement"
+      },
+      "targets": "Music community, potential collaborators, fans"
+    },
+    "22:30_daily_planning": {
+      "action": "Review day and plan tomorrow",
+      "tasks": [
+        "Log performance metrics",
+        "Plan next day content",
+        "Note trending opportunities",
+        "Update content calendar"
+      ],
+      "time_investment": "15 min"
+    },
+    "20:00_youtube_main": {
+      "action": "Upload main YouTube video",
+      "content": "Main music content/video/collab",
+      "expected_views": "1,500-4,000 views primera semana"
+    },
+    "19:30_youtube_short": {
+      "action": "Upload YouTube Short",
+      "content": "Friday music vibes",
+      "expected_views": "1,200-3,500 views"
+    }
+  },
+  "day_12": {
+    "date": "2025-11-08",
+    "day_name": "Saturday",
+    "day_number": 12,
+    "meta_ads": {
+      "phase": "Optimization Week 2",
+      "budget_today": "€16.67",
+      "actions": [
+        "Monitor CPC and adjust bids",
+        "Refresh ad creative if frequency > 2.5",
+        "Test new audience interests",
+        "Analyze conversion to subscribers"
+      ],
+      "expected_results": "280-480 nuevas visitas canal (semana 2)"
+    },
+    "08:00_trending_check": {
+      "action": "Check trending hashtags",
+      "platforms": [
+        "TikTok",
+        "Twitter",
+        "Instagram"
+      ],
+      "focus": "Music trends España/LATAM",
+      "time_investment": "15 min",
+      "tools": "Trend analysis ML"
+    },
+    "09:00_morning_tweet": {
+      "action": "Publish morning music insight",
+      "platform": "Twitter",
+      "content_type": "Quote/Insight/Industry news",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist"
+      ],
+      "expected_engagement": "5-15 interactions"
+    },
+    "10:00_analytics_review": {
+      "action": "Review previous day performance",
+      "metrics_to_check": [
+        "YouTube channel analytics",
+        "Instagram insights",
+        "TikTok analytics",
+        "Twitter impressions",
+        "Meta Ads performance"
+      ],
+      "time_investment": "20 min"
+    },
+    "11:00_content_creation": {
+      "action": "Content creation session",
+      "focus": "Weekend content + Collaboration prep",
+      "deliverables": [
+        "Weekend casual content",
+        "Outreach messages"
+      ],
+      "time_investment": "45 min"
+    },
+    "13:00_lunch_engagement": {
+      "action": "Twitter trending participation",
+      "focus": "Music hashtags trending",
+      "interactions": "2-3 tweets",
+      "engagement_targets": "Music community accounts"
+    },
+    "15:00_competitor_research": {
+      "action": "Research competitors and trends",
+      "focus": "Similar music channels España/LATAM",
+      "analysis": "Content performing well, timing, hashtags",
+      "time_investment": "30 min"
+    },
+    "17:00_meta_ads_check": {
+      "action": "Monitor and adjust Meta Ads",
+      "tasks": [
+        "Check CPC and reach",
+        "Adjust targeting if needed",
+        "Review landing page performance",
+        "Optimize budget allocation"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:00_instagram_post": {
+      "action": "Instagram feed post",
+      "content_type": "Music equipment/setup",
+      "optimal_time": "19:00",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist",
+        "#studio",
+        "#newmusic",
+        "#spain",
+        "#madrid",
+        "#mexico",
+        "#reggaeton",
+        "#pop"
+      ],
+      "expected_reach": "1,500-3,500 accounts",
+      "expected_engagement": "120-280 likes, 15-35 comments",
+      "stories_followup": "3-4 stories promoting the post"
+    },
+    "20:30_tiktok_post": {
+      "action": "TikTok video post",
+      "concept": "Music tutorial/tips",
+      "optimal_time": "20:30",
+      "hashtags": [
+        "#fyp",
+        "#music",
+        "#producer",
+        "#viral",
+        "#spain",
+        "#mexico",
+        "#reggaeton",
+        "#pop",
+        "#studio",
+        "#newmusic"
+      ],
+      "expected_views": "2,000-8,000 views",
+      "expected_engagement": "150-400 interactions",
+      "trending_sounds": "Use current trending audio"
+    },
+    "21:00_engagement_session": {
+      "action": "Cross-platform community engagement",
+      "duration": "60 minutes",
+      "breakdown": {
+        "instagram": "20 min - likes, comments, stories",
+        "tiktok": "15 min - comments, likes, follows",
+        "youtube": "15 min - comment responses, community",
+        "twitter": "10 min - replies, retweets, engagement"
+      },
+      "targets": "Music community, potential collaborators, fans"
+    },
+    "22:30_daily_planning": {
+      "action": "Review day and plan tomorrow",
+      "tasks": [
+        "Log performance metrics",
+        "Plan next day content",
+        "Note trending opportunities",
+        "Update content calendar"
+      ],
+      "time_investment": "15 min"
+    },
+    "weekend_engagement": {
+      "action": "Enhanced weekend community engagement",
+      "focus": "More personal interaction with fans",
+      "time_investment": "Extra 30 min",
+      "platforms": "All platforms - casual interactions"
+    }
+  },
+  "day_13": {
+    "date": "2025-11-09",
+    "day_name": "Sunday",
+    "day_number": 13,
+    "meta_ads": {
+      "phase": "Optimization Week 2",
+      "budget_today": "€16.67",
+      "actions": [
+        "Monitor CPC and adjust bids",
+        "Refresh ad creative if frequency > 2.5",
+        "Test new audience interests",
+        "Analyze conversion to subscribers"
+      ],
+      "expected_results": "280-480 nuevas visitas canal (semana 2)"
+    },
+    "08:00_trending_check": {
+      "action": "Check trending hashtags",
+      "platforms": [
+        "TikTok",
+        "Twitter",
+        "Instagram"
+      ],
+      "focus": "Music trends España/LATAM",
+      "time_investment": "15 min",
+      "tools": "Trend analysis ML"
+    },
+    "09:00_morning_tweet": {
+      "action": "Publish morning music insight",
+      "platform": "Twitter",
+      "content_type": "Quote/Insight/Industry news",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist"
+      ],
+      "expected_engagement": "5-15 interactions"
+    },
+    "10:00_analytics_review": {
+      "action": "Review previous day performance",
+      "metrics_to_check": [
+        "YouTube channel analytics",
+        "Instagram insights",
+        "TikTok analytics",
+        "Twitter impressions",
+        "Meta Ads performance"
+      ],
+      "time_investment": "20 min"
+    },
+    "11:00_content_creation": {
+      "action": "Content creation session",
+      "focus": "Week review + Next week planning",
+      "deliverables": [
+        "Content calendar update",
+        "Performance analysis"
+      ],
+      "time_investment": "60 min"
+    },
+    "13:00_lunch_engagement": {
+      "action": "Twitter trending participation",
+      "focus": "Music hashtags trending",
+      "interactions": "2-3 tweets",
+      "engagement_targets": "Music community accounts"
+    },
+    "15:00_competitor_research": {
+      "action": "Research competitors and trends",
+      "focus": "Similar music channels España/LATAM",
+      "analysis": "Content performing well, timing, hashtags",
+      "time_investment": "30 min"
+    },
+    "17:00_meta_ads_check": {
+      "action": "Monitor and adjust Meta Ads",
+      "tasks": [
+        "Check CPC and reach",
+        "Adjust targeting if needed",
+        "Review landing page performance",
+        "Optimize budget allocation"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:00_instagram_post": {
+      "action": "Instagram feed post",
+      "content_type": "Collaboration announcement",
+      "optimal_time": "19:00",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist",
+        "#studio",
+        "#newmusic",
+        "#spain",
+        "#madrid",
+        "#mexico",
+        "#reggaeton",
+        "#pop"
+      ],
+      "expected_reach": "1,500-3,500 accounts",
+      "expected_engagement": "120-280 likes, 15-35 comments",
+      "stories_followup": "3-4 stories promoting the post"
+    },
+    "20:30_tiktok_post": {
+      "action": "TikTok video post",
+      "concept": "Day in the life of musician",
+      "optimal_time": "20:30",
+      "hashtags": [
+        "#fyp",
+        "#music",
+        "#producer",
+        "#viral",
+        "#spain",
+        "#mexico",
+        "#reggaeton",
+        "#pop",
+        "#studio",
+        "#newmusic"
+      ],
+      "expected_views": "2,000-8,000 views",
+      "expected_engagement": "150-400 interactions",
+      "trending_sounds": "Use current trending audio"
+    },
+    "21:00_engagement_session": {
+      "action": "Cross-platform community engagement",
+      "duration": "60 minutes",
+      "breakdown": {
+        "instagram": "20 min - likes, comments, stories",
+        "tiktok": "15 min - comments, likes, follows",
+        "youtube": "15 min - comment responses, community",
+        "twitter": "10 min - replies, retweets, engagement"
+      },
+      "targets": "Music community, potential collaborators, fans"
+    },
+    "22:30_daily_planning": {
+      "action": "Review day and plan tomorrow",
+      "tasks": [
+        "Log performance metrics",
+        "Plan next day content",
+        "Note trending opportunities",
+        "Update content calendar"
+      ],
+      "time_investment": "15 min"
+    },
+    "weekend_engagement": {
+      "action": "Enhanced weekend community engagement",
+      "focus": "More personal interaction with fans",
+      "time_investment": "Extra 30 min",
+      "platforms": "All platforms - casual interactions"
+    }
+  },
+  "day_14": {
+    "date": "2025-11-10",
+    "day_name": "Monday",
+    "day_number": 14,
+    "meta_ads": {
+      "phase": "Optimization Week 2",
+      "budget_today": "€16.67",
+      "actions": [
+        "Monitor CPC and adjust bids",
+        "Refresh ad creative if frequency > 2.5",
+        "Test new audience interests",
+        "Analyze conversion to subscribers"
+      ],
+      "expected_results": "280-480 nuevas visitas canal (semana 2)"
+    },
+    "08:00_trending_check": {
+      "action": "Check trending hashtags",
+      "platforms": [
+        "TikTok",
+        "Twitter",
+        "Instagram"
+      ],
+      "focus": "Music trends España/LATAM",
+      "time_investment": "15 min",
+      "tools": "Trend analysis ML"
+    },
+    "09:00_morning_tweet": {
+      "action": "Publish morning music insight",
+      "platform": "Twitter",
+      "content_type": "Quote/Insight/Industry news",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist"
+      ],
+      "expected_engagement": "5-15 interactions"
+    },
+    "10:00_analytics_review": {
+      "action": "Review previous day performance",
+      "metrics_to_check": [
+        "YouTube channel analytics",
+        "Instagram insights",
+        "TikTok analytics",
+        "Twitter impressions",
+        "Meta Ads performance"
+      ],
+      "time_investment": "20 min"
+    },
+    "11:00_content_creation": {
+      "action": "Content creation session",
+      "focus": "TikTok challenge research + YouTube Shorts",
+      "deliverables": [
+        "TikTok video script",
+        "YouTube Short edit"
+      ],
+      "time_investment": "45 min"
+    },
+    "13:00_lunch_engagement": {
+      "action": "Twitter trending participation",
+      "focus": "Music hashtags trending",
+      "interactions": "2-3 tweets",
+      "engagement_targets": "Music community accounts"
+    },
+    "15:00_competitor_research": {
+      "action": "Research competitors and trends",
+      "focus": "Similar music channels España/LATAM",
+      "analysis": "Content performing well, timing, hashtags",
+      "time_investment": "30 min"
+    },
+    "17:00_meta_ads_check": {
+      "action": "Monitor and adjust Meta Ads",
+      "tasks": [
+        "Check CPC and reach",
+        "Adjust targeting if needed",
+        "Review landing page performance",
+        "Optimize budget allocation"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:00_instagram_post": {
+      "action": "Instagram feed post",
+      "content_type": "Music studio session photo",
+      "optimal_time": "19:00",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist",
+        "#studio",
+        "#newmusic",
+        "#spain",
+        "#madrid",
+        "#mexico",
+        "#reggaeton",
+        "#pop"
+      ],
+      "expected_reach": "1,500-3,500 accounts",
+      "expected_engagement": "120-280 likes, 15-35 comments",
+      "stories_followup": "3-4 stories promoting the post"
+    },
+    "20:30_tiktok_post": {
+      "action": "TikTok video post",
+      "concept": "Music snippet with trending sound",
+      "optimal_time": "20:30",
+      "hashtags": [
+        "#fyp",
+        "#music",
+        "#producer",
+        "#viral",
+        "#spain",
+        "#mexico",
+        "#reggaeton",
+        "#pop",
+        "#studio",
+        "#newmusic"
+      ],
+      "expected_views": "2,000-8,000 views",
+      "expected_engagement": "150-400 interactions",
+      "trending_sounds": "Use current trending audio"
+    },
+    "21:00_engagement_session": {
+      "action": "Cross-platform community engagement",
+      "duration": "60 minutes",
+      "breakdown": {
+        "instagram": "20 min - likes, comments, stories",
+        "tiktok": "15 min - comments, likes, follows",
+        "youtube": "15 min - comment responses, community",
+        "twitter": "10 min - replies, retweets, engagement"
+      },
+      "targets": "Music community, potential collaborators, fans"
+    },
+    "22:30_daily_planning": {
+      "action": "Review day and plan tomorrow",
+      "tasks": [
+        "Log performance metrics",
+        "Plan next day content",
+        "Note trending opportunities",
+        "Update content calendar"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:30_youtube_short": {
+      "action": "Upload YouTube Short",
+      "content": "Music Monday - trending song snippet",
+      "expected_views": "800-2,500 views"
+    }
+  },
+  "day_15": {
+    "date": "2025-11-11",
+    "day_name": "Tuesday",
+    "day_number": 15,
+    "meta_ads": {
+      "phase": "Optimization Week 3",
+      "budget_today": "€16.67",
+      "actions": [
+        "Monitor CPC and adjust bids",
+        "Refresh ad creative if frequency > 2.5",
+        "Test new audience interests",
+        "Analyze conversion to subscribers"
+      ],
+      "expected_results": "280-480 nuevas visitas canal (semana 3)"
+    },
+    "08:00_trending_check": {
+      "action": "Check trending hashtags",
+      "platforms": [
+        "TikTok",
+        "Twitter",
+        "Instagram"
+      ],
+      "focus": "Music trends España/LATAM",
+      "time_investment": "15 min",
+      "tools": "Trend analysis ML"
+    },
+    "09:00_morning_tweet": {
+      "action": "Publish morning music insight",
+      "platform": "Twitter",
+      "content_type": "Quote/Insight/Industry news",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist"
+      ],
+      "expected_engagement": "5-15 interactions"
+    },
+    "10:00_analytics_review": {
+      "action": "Review previous day performance",
+      "metrics_to_check": [
+        "YouTube channel analytics",
+        "Instagram insights",
+        "TikTok analytics",
+        "Twitter impressions",
+        "Meta Ads performance"
+      ],
+      "time_investment": "20 min"
+    },
+    "11:00_content_creation": {
+      "action": "Content creation session",
+      "focus": "Instagram content + YouTube community",
+      "deliverables": [
+        "Instagram post + stories",
+        "YouTube community post"
+      ],
+      "time_investment": "60 min"
+    },
+    "13:00_lunch_engagement": {
+      "action": "Twitter trending participation",
+      "focus": "Music hashtags trending",
+      "interactions": "2-3 tweets",
+      "engagement_targets": "Music community accounts"
+    },
+    "15:00_competitor_research": {
+      "action": "Research competitors and trends",
+      "focus": "Similar music channels España/LATAM",
+      "analysis": "Content performing well, timing, hashtags",
+      "time_investment": "30 min"
+    },
+    "17:00_meta_ads_check": {
+      "action": "Monitor and adjust Meta Ads",
+      "tasks": [
+        "Check CPC and reach",
+        "Adjust targeting if needed",
+        "Review landing page performance",
+        "Optimize budget allocation"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:00_instagram_post": {
+      "action": "Instagram feed post",
+      "content_type": "Behind the scenes video",
+      "optimal_time": "19:00",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist",
+        "#studio",
+        "#newmusic",
+        "#spain",
+        "#madrid",
+        "#mexico",
+        "#reggaeton",
+        "#pop"
+      ],
+      "expected_reach": "1,500-3,500 accounts",
+      "expected_engagement": "120-280 likes, 15-35 comments",
+      "stories_followup": "3-4 stories promoting the post"
+    },
+    "20:30_tiktok_post": {
+      "action": "TikTok video post",
+      "concept": "Studio behind the scenes",
+      "optimal_time": "20:30",
+      "hashtags": [
+        "#fyp",
+        "#music",
+        "#producer",
+        "#viral",
+        "#spain",
+        "#mexico",
+        "#reggaeton",
+        "#pop",
+        "#studio",
+        "#newmusic"
+      ],
+      "expected_views": "2,000-8,000 views",
+      "expected_engagement": "150-400 interactions",
+      "trending_sounds": "Use current trending audio"
+    },
+    "21:00_engagement_session": {
+      "action": "Cross-platform community engagement",
+      "duration": "60 minutes",
+      "breakdown": {
+        "instagram": "20 min - likes, comments, stories",
+        "tiktok": "15 min - comments, likes, follows",
+        "youtube": "15 min - comment responses, community",
+        "twitter": "10 min - replies, retweets, engagement"
+      },
+      "targets": "Music community, potential collaborators, fans"
+    },
+    "22:30_daily_planning": {
+      "action": "Review day and plan tomorrow",
+      "tasks": [
+        "Log performance metrics",
+        "Plan next day content",
+        "Note trending opportunities",
+        "Update content calendar"
+      ],
+      "time_investment": "15 min"
+    },
+    "18:00_youtube_community": {
+      "action": "YouTube community post",
+      "content": "Music poll or behind scenes update",
+      "expected_engagement": "50-150 interactions"
+    }
+  },
+  "day_16": {
+    "date": "2025-11-12",
+    "day_name": "Wednesday",
+    "day_number": 16,
+    "meta_ads": {
+      "phase": "Optimization Week 3",
+      "budget_today": "€16.67",
+      "actions": [
+        "Monitor CPC and adjust bids",
+        "Refresh ad creative if frequency > 2.5",
+        "Test new audience interests",
+        "Analyze conversion to subscribers"
+      ],
+      "expected_results": "280-480 nuevas visitas canal (semana 3)"
+    },
+    "08:00_trending_check": {
+      "action": "Check trending hashtags",
+      "platforms": [
+        "TikTok",
+        "Twitter",
+        "Instagram"
+      ],
+      "focus": "Music trends España/LATAM",
+      "time_investment": "15 min",
+      "tools": "Trend analysis ML"
+    },
+    "09:00_morning_tweet": {
+      "action": "Publish morning music insight",
+      "platform": "Twitter",
+      "content_type": "Quote/Insight/Industry news",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist"
+      ],
+      "expected_engagement": "5-15 interactions"
+    },
+    "10:00_analytics_review": {
+      "action": "Review previous day performance",
+      "metrics_to_check": [
+        "YouTube channel analytics",
+        "Instagram insights",
+        "TikTok analytics",
+        "Twitter impressions",
+        "Meta Ads performance"
+      ],
+      "time_investment": "20 min"
+    },
+    "11:00_content_creation": {
+      "action": "Content creation session",
+      "focus": "Music content + YouTube Shorts",
+      "deliverables": [
+        "Original music snippet",
+        "YouTube Short"
+      ],
+      "time_investment": "45 min"
+    },
+    "13:00_lunch_engagement": {
+      "action": "Twitter trending participation",
+      "focus": "Music hashtags trending",
+      "interactions": "2-3 tweets",
+      "engagement_targets": "Music community accounts"
+    },
+    "15:00_competitor_research": {
+      "action": "Research competitors and trends",
+      "focus": "Similar music channels España/LATAM",
+      "analysis": "Content performing well, timing, hashtags",
+      "time_investment": "30 min"
+    },
+    "17:00_meta_ads_check": {
+      "action": "Monitor and adjust Meta Ads",
+      "tasks": [
+        "Check CPC and reach",
+        "Adjust targeting if needed",
+        "Review landing page performance",
+        "Optimize budget allocation"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:00_instagram_post": {
+      "action": "Instagram feed post",
+      "content_type": "Fan interaction/repost",
+      "optimal_time": "19:00",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist",
+        "#studio",
+        "#newmusic",
+        "#spain",
+        "#madrid",
+        "#mexico",
+        "#reggaeton",
+        "#pop"
+      ],
+      "expected_reach": "1,500-3,500 accounts",
+      "expected_engagement": "120-280 likes, 15-35 comments",
+      "stories_followup": "3-4 stories promoting the post"
+    },
+    "20:30_tiktok_post": {
+      "action": "TikTok video post",
+      "concept": "Music production process",
+      "optimal_time": "20:30",
+      "hashtags": [
+        "#fyp",
+        "#music",
+        "#producer",
+        "#viral",
+        "#spain",
+        "#mexico",
+        "#reggaeton",
+        "#pop",
+        "#studio",
+        "#newmusic"
+      ],
+      "expected_views": "2,000-8,000 views",
+      "expected_engagement": "150-400 interactions",
+      "trending_sounds": "Use current trending audio"
+    },
+    "21:00_engagement_session": {
+      "action": "Cross-platform community engagement",
+      "duration": "60 minutes",
+      "breakdown": {
+        "instagram": "20 min - likes, comments, stories",
+        "tiktok": "15 min - comments, likes, follows",
+        "youtube": "15 min - comment responses, community",
+        "twitter": "10 min - replies, retweets, engagement"
+      },
+      "targets": "Music community, potential collaborators, fans"
+    },
+    "22:30_daily_planning": {
+      "action": "Review day and plan tomorrow",
+      "tasks": [
+        "Log performance metrics",
+        "Plan next day content",
+        "Note trending opportunities",
+        "Update content calendar"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:30_youtube_short": {
+      "action": "Upload YouTube Short",
+      "content": "Studio session or music tip",
+      "expected_views": "800-2,500 views"
+    }
+  },
+  "day_17": {
+    "date": "2025-11-13",
+    "day_name": "Thursday",
+    "day_number": 17,
+    "meta_ads": {
+      "phase": "Optimization Week 3",
+      "budget_today": "€16.67",
+      "actions": [
+        "Monitor CPC and adjust bids",
+        "Refresh ad creative if frequency > 2.5",
+        "Test new audience interests",
+        "Analyze conversion to subscribers"
+      ],
+      "expected_results": "280-480 nuevas visitas canal (semana 3)"
+    },
+    "08:00_trending_check": {
+      "action": "Check trending hashtags",
+      "platforms": [
+        "TikTok",
+        "Twitter",
+        "Instagram"
+      ],
+      "focus": "Music trends España/LATAM",
+      "time_investment": "15 min",
+      "tools": "Trend analysis ML"
+    },
+    "09:00_morning_tweet": {
+      "action": "Publish morning music insight",
+      "platform": "Twitter",
+      "content_type": "Quote/Insight/Industry news",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist"
+      ],
+      "expected_engagement": "5-15 interactions"
+    },
+    "10:00_analytics_review": {
+      "action": "Review previous day performance",
+      "metrics_to_check": [
+        "YouTube channel analytics",
+        "Instagram insights",
+        "TikTok analytics",
+        "Twitter impressions",
+        "Meta Ads performance"
+      ],
+      "time_investment": "20 min"
+    },
+    "11:00_content_creation": {
+      "action": "Content creation session",
+      "focus": "Behind scenes + Community content",
+      "deliverables": [
+        "Instagram stories series",
+        "YouTube community post"
+      ],
+      "time_investment": "30 min"
+    },
+    "13:00_lunch_engagement": {
+      "action": "Twitter trending participation",
+      "focus": "Music hashtags trending",
+      "interactions": "2-3 tweets",
+      "engagement_targets": "Music community accounts"
+    },
+    "15:00_competitor_research": {
+      "action": "Research competitors and trends",
+      "focus": "Similar music channels España/LATAM",
+      "analysis": "Content performing well, timing, hashtags",
+      "time_investment": "30 min"
+    },
+    "17:00_meta_ads_check": {
+      "action": "Monitor and adjust Meta Ads",
+      "tasks": [
+        "Check CPC and reach",
+        "Adjust targeting if needed",
+        "Review landing page performance",
+        "Optimize budget allocation"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:00_instagram_post": {
+      "action": "Instagram feed post",
+      "content_type": "Music quote graphic",
+      "optimal_time": "19:00",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist",
+        "#studio",
+        "#newmusic",
+        "#spain",
+        "#madrid",
+        "#mexico",
+        "#reggaeton",
+        "#pop"
+      ],
+      "expected_reach": "1,500-3,500 accounts",
+      "expected_engagement": "120-280 likes, 15-35 comments",
+      "stories_followup": "3-4 stories promoting the post"
+    },
+    "20:30_tiktok_post": {
+      "action": "TikTok video post",
+      "concept": "Fan interaction response",
+      "optimal_time": "20:30",
+      "hashtags": [
+        "#fyp",
+        "#music",
+        "#producer",
+        "#viral",
+        "#spain",
+        "#mexico",
+        "#reggaeton",
+        "#pop",
+        "#studio",
+        "#newmusic"
+      ],
+      "expected_views": "2,000-8,000 views",
+      "expected_engagement": "150-400 interactions",
+      "trending_sounds": "Use current trending audio"
+    },
+    "21:00_engagement_session": {
+      "action": "Cross-platform community engagement",
+      "duration": "60 minutes",
+      "breakdown": {
+        "instagram": "20 min - likes, comments, stories",
+        "tiktok": "15 min - comments, likes, follows",
+        "youtube": "15 min - comment responses, community",
+        "twitter": "10 min - replies, retweets, engagement"
+      },
+      "targets": "Music community, potential collaborators, fans"
+    },
+    "22:30_daily_planning": {
+      "action": "Review day and plan tomorrow",
+      "tasks": [
+        "Log performance metrics",
+        "Plan next day content",
+        "Note trending opportunities",
+        "Update content calendar"
+      ],
+      "time_investment": "15 min"
+    },
+    "18:00_youtube_community": {
+      "action": "YouTube community post",
+      "content": "Fan question response or music update",
+      "expected_engagement": "50-150 interactions"
+    }
+  },
+  "day_18": {
+    "date": "2025-11-14",
+    "day_name": "Friday",
+    "day_number": 18,
+    "meta_ads": {
+      "phase": "Optimization Week 3",
+      "budget_today": "€16.67",
+      "actions": [
+        "Monitor CPC and adjust bids",
+        "Refresh ad creative if frequency > 2.5",
+        "Test new audience interests",
+        "Analyze conversion to subscribers"
+      ],
+      "expected_results": "280-480 nuevas visitas canal (semana 3)"
+    },
+    "08:00_trending_check": {
+      "action": "Check trending hashtags",
+      "platforms": [
+        "TikTok",
+        "Twitter",
+        "Instagram"
+      ],
+      "focus": "Music trends España/LATAM",
+      "time_investment": "15 min",
+      "tools": "Trend analysis ML"
+    },
+    "09:00_morning_tweet": {
+      "action": "Publish morning music insight",
+      "platform": "Twitter",
+      "content_type": "Quote/Insight/Industry news",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist"
+      ],
+      "expected_engagement": "5-15 interactions"
+    },
+    "10:00_analytics_review": {
+      "action": "Review previous day performance",
+      "metrics_to_check": [
+        "YouTube channel analytics",
+        "Instagram insights",
+        "TikTok analytics",
+        "Twitter impressions",
+        "Meta Ads performance"
+      ],
+      "time_investment": "20 min"
+    },
+    "11:00_content_creation": {
+      "action": "Content creation session",
+      "focus": "Main YouTube video preparation",
+      "deliverables": [
+        "YouTube main video edit/upload prep"
+      ],
+      "time_investment": "90 min"
+    },
+    "13:00_lunch_engagement": {
+      "action": "Twitter trending participation",
+      "focus": "Music hashtags trending",
+      "interactions": "2-3 tweets",
+      "engagement_targets": "Music community accounts"
+    },
+    "15:00_competitor_research": {
+      "action": "Research competitors and trends",
+      "focus": "Similar music channels España/LATAM",
+      "analysis": "Content performing well, timing, hashtags",
+      "time_investment": "30 min"
+    },
+    "17:00_meta_ads_check": {
+      "action": "Monitor and adjust Meta Ads",
+      "tasks": [
+        "Check CPC and reach",
+        "Adjust targeting if needed",
+        "Review landing page performance",
+        "Optimize budget allocation"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:00_instagram_post": {
+      "action": "Instagram feed post",
+      "content_type": "Lifestyle/personal moment",
+      "optimal_time": "19:00",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist",
+        "#studio",
+        "#newmusic",
+        "#spain",
+        "#madrid",
+        "#mexico",
+        "#reggaeton",
+        "#pop"
+      ],
+      "expected_reach": "1,500-3,500 accounts",
+      "expected_engagement": "120-280 likes, 15-35 comments",
+      "stories_followup": "3-4 stories promoting the post"
+    },
+    "20:30_tiktok_post": {
+      "action": "TikTok video post",
+      "concept": "Trending challenge participation",
+      "optimal_time": "20:30",
+      "hashtags": [
+        "#fyp",
+        "#music",
+        "#producer",
+        "#viral",
+        "#spain",
+        "#mexico",
+        "#reggaeton",
+        "#pop",
+        "#studio",
+        "#newmusic"
+      ],
+      "expected_views": "2,000-8,000 views",
+      "expected_engagement": "150-400 interactions",
+      "trending_sounds": "Use current trending audio"
+    },
+    "21:00_engagement_session": {
+      "action": "Cross-platform community engagement",
+      "duration": "60 minutes",
+      "breakdown": {
+        "instagram": "20 min - likes, comments, stories",
+        "tiktok": "15 min - comments, likes, follows",
+        "youtube": "15 min - comment responses, community",
+        "twitter": "10 min - replies, retweets, engagement"
+      },
+      "targets": "Music community, potential collaborators, fans"
+    },
+    "22:30_daily_planning": {
+      "action": "Review day and plan tomorrow",
+      "tasks": [
+        "Log performance metrics",
+        "Plan next day content",
+        "Note trending opportunities",
+        "Update content calendar"
+      ],
+      "time_investment": "15 min"
+    },
+    "20:00_youtube_main": {
+      "action": "Upload main YouTube video",
+      "content": "Main music content/video/collab",
+      "expected_views": "1,500-4,000 views primera semana"
+    },
+    "19:30_youtube_short": {
+      "action": "Upload YouTube Short",
+      "content": "Friday music vibes",
+      "expected_views": "1,200-3,500 views"
+    }
+  },
+  "day_19": {
+    "date": "2025-11-15",
+    "day_name": "Saturday",
+    "day_number": 19,
+    "meta_ads": {
+      "phase": "Optimization Week 3",
+      "budget_today": "€16.67",
+      "actions": [
+        "Monitor CPC and adjust bids",
+        "Refresh ad creative if frequency > 2.5",
+        "Test new audience interests",
+        "Analyze conversion to subscribers"
+      ],
+      "expected_results": "280-480 nuevas visitas canal (semana 3)"
+    },
+    "08:00_trending_check": {
+      "action": "Check trending hashtags",
+      "platforms": [
+        "TikTok",
+        "Twitter",
+        "Instagram"
+      ],
+      "focus": "Music trends España/LATAM",
+      "time_investment": "15 min",
+      "tools": "Trend analysis ML"
+    },
+    "09:00_morning_tweet": {
+      "action": "Publish morning music insight",
+      "platform": "Twitter",
+      "content_type": "Quote/Insight/Industry news",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist"
+      ],
+      "expected_engagement": "5-15 interactions"
+    },
+    "10:00_analytics_review": {
+      "action": "Review previous day performance",
+      "metrics_to_check": [
+        "YouTube channel analytics",
+        "Instagram insights",
+        "TikTok analytics",
+        "Twitter impressions",
+        "Meta Ads performance"
+      ],
+      "time_investment": "20 min"
+    },
+    "11:00_content_creation": {
+      "action": "Content creation session",
+      "focus": "Weekend content + Collaboration prep",
+      "deliverables": [
+        "Weekend casual content",
+        "Outreach messages"
+      ],
+      "time_investment": "45 min"
+    },
+    "13:00_lunch_engagement": {
+      "action": "Twitter trending participation",
+      "focus": "Music hashtags trending",
+      "interactions": "2-3 tweets",
+      "engagement_targets": "Music community accounts"
+    },
+    "15:00_competitor_research": {
+      "action": "Research competitors and trends",
+      "focus": "Similar music channels España/LATAM",
+      "analysis": "Content performing well, timing, hashtags",
+      "time_investment": "30 min"
+    },
+    "17:00_meta_ads_check": {
+      "action": "Monitor and adjust Meta Ads",
+      "tasks": [
+        "Check CPC and reach",
+        "Adjust targeting if needed",
+        "Review landing page performance",
+        "Optimize budget allocation"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:00_instagram_post": {
+      "action": "Instagram feed post",
+      "content_type": "Music equipment/setup",
+      "optimal_time": "19:00",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist",
+        "#studio",
+        "#newmusic",
+        "#spain",
+        "#madrid",
+        "#mexico",
+        "#reggaeton",
+        "#pop"
+      ],
+      "expected_reach": "1,500-3,500 accounts",
+      "expected_engagement": "120-280 likes, 15-35 comments",
+      "stories_followup": "3-4 stories promoting the post"
+    },
+    "20:30_tiktok_post": {
+      "action": "TikTok video post",
+      "concept": "Music tutorial/tips",
+      "optimal_time": "20:30",
+      "hashtags": [
+        "#fyp",
+        "#music",
+        "#producer",
+        "#viral",
+        "#spain",
+        "#mexico",
+        "#reggaeton",
+        "#pop",
+        "#studio",
+        "#newmusic"
+      ],
+      "expected_views": "2,000-8,000 views",
+      "expected_engagement": "150-400 interactions",
+      "trending_sounds": "Use current trending audio"
+    },
+    "21:00_engagement_session": {
+      "action": "Cross-platform community engagement",
+      "duration": "60 minutes",
+      "breakdown": {
+        "instagram": "20 min - likes, comments, stories",
+        "tiktok": "15 min - comments, likes, follows",
+        "youtube": "15 min - comment responses, community",
+        "twitter": "10 min - replies, retweets, engagement"
+      },
+      "targets": "Music community, potential collaborators, fans"
+    },
+    "22:30_daily_planning": {
+      "action": "Review day and plan tomorrow",
+      "tasks": [
+        "Log performance metrics",
+        "Plan next day content",
+        "Note trending opportunities",
+        "Update content calendar"
+      ],
+      "time_investment": "15 min"
+    },
+    "weekend_engagement": {
+      "action": "Enhanced weekend community engagement",
+      "focus": "More personal interaction with fans",
+      "time_investment": "Extra 30 min",
+      "platforms": "All platforms - casual interactions"
+    }
+  },
+  "day_20": {
+    "date": "2025-11-16",
+    "day_name": "Sunday",
+    "day_number": 20,
+    "meta_ads": {
+      "phase": "Optimization Week 3",
+      "budget_today": "€16.67",
+      "actions": [
+        "Monitor CPC and adjust bids",
+        "Refresh ad creative if frequency > 2.5",
+        "Test new audience interests",
+        "Analyze conversion to subscribers"
+      ],
+      "expected_results": "280-480 nuevas visitas canal (semana 3)"
+    },
+    "08:00_trending_check": {
+      "action": "Check trending hashtags",
+      "platforms": [
+        "TikTok",
+        "Twitter",
+        "Instagram"
+      ],
+      "focus": "Music trends España/LATAM",
+      "time_investment": "15 min",
+      "tools": "Trend analysis ML"
+    },
+    "09:00_morning_tweet": {
+      "action": "Publish morning music insight",
+      "platform": "Twitter",
+      "content_type": "Quote/Insight/Industry news",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist"
+      ],
+      "expected_engagement": "5-15 interactions"
+    },
+    "10:00_analytics_review": {
+      "action": "Review previous day performance",
+      "metrics_to_check": [
+        "YouTube channel analytics",
+        "Instagram insights",
+        "TikTok analytics",
+        "Twitter impressions",
+        "Meta Ads performance"
+      ],
+      "time_investment": "20 min"
+    },
+    "11:00_content_creation": {
+      "action": "Content creation session",
+      "focus": "Week review + Next week planning",
+      "deliverables": [
+        "Content calendar update",
+        "Performance analysis"
+      ],
+      "time_investment": "60 min"
+    },
+    "13:00_lunch_engagement": {
+      "action": "Twitter trending participation",
+      "focus": "Music hashtags trending",
+      "interactions": "2-3 tweets",
+      "engagement_targets": "Music community accounts"
+    },
+    "15:00_competitor_research": {
+      "action": "Research competitors and trends",
+      "focus": "Similar music channels España/LATAM",
+      "analysis": "Content performing well, timing, hashtags",
+      "time_investment": "30 min"
+    },
+    "17:00_meta_ads_check": {
+      "action": "Monitor and adjust Meta Ads",
+      "tasks": [
+        "Check CPC and reach",
+        "Adjust targeting if needed",
+        "Review landing page performance",
+        "Optimize budget allocation"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:00_instagram_post": {
+      "action": "Instagram feed post",
+      "content_type": "Collaboration announcement",
+      "optimal_time": "19:00",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist",
+        "#studio",
+        "#newmusic",
+        "#spain",
+        "#madrid",
+        "#mexico",
+        "#reggaeton",
+        "#pop"
+      ],
+      "expected_reach": "1,500-3,500 accounts",
+      "expected_engagement": "120-280 likes, 15-35 comments",
+      "stories_followup": "3-4 stories promoting the post"
+    },
+    "20:30_tiktok_post": {
+      "action": "TikTok video post",
+      "concept": "Day in the life of musician",
+      "optimal_time": "20:30",
+      "hashtags": [
+        "#fyp",
+        "#music",
+        "#producer",
+        "#viral",
+        "#spain",
+        "#mexico",
+        "#reggaeton",
+        "#pop",
+        "#studio",
+        "#newmusic"
+      ],
+      "expected_views": "2,000-8,000 views",
+      "expected_engagement": "150-400 interactions",
+      "trending_sounds": "Use current trending audio"
+    },
+    "21:00_engagement_session": {
+      "action": "Cross-platform community engagement",
+      "duration": "60 minutes",
+      "breakdown": {
+        "instagram": "20 min - likes, comments, stories",
+        "tiktok": "15 min - comments, likes, follows",
+        "youtube": "15 min - comment responses, community",
+        "twitter": "10 min - replies, retweets, engagement"
+      },
+      "targets": "Music community, potential collaborators, fans"
+    },
+    "22:30_daily_planning": {
+      "action": "Review day and plan tomorrow",
+      "tasks": [
+        "Log performance metrics",
+        "Plan next day content",
+        "Note trending opportunities",
+        "Update content calendar"
+      ],
+      "time_investment": "15 min"
+    },
+    "weekend_engagement": {
+      "action": "Enhanced weekend community engagement",
+      "focus": "More personal interaction with fans",
+      "time_investment": "Extra 30 min",
+      "platforms": "All platforms - casual interactions"
+    }
+  },
+  "day_21": {
+    "date": "2025-11-17",
+    "day_name": "Monday",
+    "day_number": 21,
+    "meta_ads": {
+      "phase": "Optimization Week 3",
+      "budget_today": "€16.67",
+      "actions": [
+        "Monitor CPC and adjust bids",
+        "Refresh ad creative if frequency > 2.5",
+        "Test new audience interests",
+        "Analyze conversion to subscribers"
+      ],
+      "expected_results": "280-480 nuevas visitas canal (semana 3)"
+    },
+    "08:00_trending_check": {
+      "action": "Check trending hashtags",
+      "platforms": [
+        "TikTok",
+        "Twitter",
+        "Instagram"
+      ],
+      "focus": "Music trends España/LATAM",
+      "time_investment": "15 min",
+      "tools": "Trend analysis ML"
+    },
+    "09:00_morning_tweet": {
+      "action": "Publish morning music insight",
+      "platform": "Twitter",
+      "content_type": "Quote/Insight/Industry news",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist"
+      ],
+      "expected_engagement": "5-15 interactions"
+    },
+    "10:00_analytics_review": {
+      "action": "Review previous day performance",
+      "metrics_to_check": [
+        "YouTube channel analytics",
+        "Instagram insights",
+        "TikTok analytics",
+        "Twitter impressions",
+        "Meta Ads performance"
+      ],
+      "time_investment": "20 min"
+    },
+    "11:00_content_creation": {
+      "action": "Content creation session",
+      "focus": "TikTok challenge research + YouTube Shorts",
+      "deliverables": [
+        "TikTok video script",
+        "YouTube Short edit"
+      ],
+      "time_investment": "45 min"
+    },
+    "13:00_lunch_engagement": {
+      "action": "Twitter trending participation",
+      "focus": "Music hashtags trending",
+      "interactions": "2-3 tweets",
+      "engagement_targets": "Music community accounts"
+    },
+    "15:00_competitor_research": {
+      "action": "Research competitors and trends",
+      "focus": "Similar music channels España/LATAM",
+      "analysis": "Content performing well, timing, hashtags",
+      "time_investment": "30 min"
+    },
+    "17:00_meta_ads_check": {
+      "action": "Monitor and adjust Meta Ads",
+      "tasks": [
+        "Check CPC and reach",
+        "Adjust targeting if needed",
+        "Review landing page performance",
+        "Optimize budget allocation"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:00_instagram_post": {
+      "action": "Instagram feed post",
+      "content_type": "Music studio session photo",
+      "optimal_time": "19:00",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist",
+        "#studio",
+        "#newmusic",
+        "#spain",
+        "#madrid",
+        "#mexico",
+        "#reggaeton",
+        "#pop"
+      ],
+      "expected_reach": "1,500-3,500 accounts",
+      "expected_engagement": "120-280 likes, 15-35 comments",
+      "stories_followup": "3-4 stories promoting the post"
+    },
+    "20:30_tiktok_post": {
+      "action": "TikTok video post",
+      "concept": "Music snippet with trending sound",
+      "optimal_time": "20:30",
+      "hashtags": [
+        "#fyp",
+        "#music",
+        "#producer",
+        "#viral",
+        "#spain",
+        "#mexico",
+        "#reggaeton",
+        "#pop",
+        "#studio",
+        "#newmusic"
+      ],
+      "expected_views": "2,000-8,000 views",
+      "expected_engagement": "150-400 interactions",
+      "trending_sounds": "Use current trending audio"
+    },
+    "21:00_engagement_session": {
+      "action": "Cross-platform community engagement",
+      "duration": "60 minutes",
+      "breakdown": {
+        "instagram": "20 min - likes, comments, stories",
+        "tiktok": "15 min - comments, likes, follows",
+        "youtube": "15 min - comment responses, community",
+        "twitter": "10 min - replies, retweets, engagement"
+      },
+      "targets": "Music community, potential collaborators, fans"
+    },
+    "22:30_daily_planning": {
+      "action": "Review day and plan tomorrow",
+      "tasks": [
+        "Log performance metrics",
+        "Plan next day content",
+        "Note trending opportunities",
+        "Update content calendar"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:30_youtube_short": {
+      "action": "Upload YouTube Short",
+      "content": "Music Monday - trending song snippet",
+      "expected_views": "800-2,500 views"
+    }
+  },
+  "day_22": {
+    "date": "2025-11-18",
+    "day_name": "Tuesday",
+    "day_number": 22,
+    "meta_ads": {
+      "phase": "Optimization Week 4",
+      "budget_today": "€16.67",
+      "actions": [
+        "Monitor CPC and adjust bids",
+        "Refresh ad creative if frequency > 2.5",
+        "Test new audience interests",
+        "Analyze conversion to subscribers"
+      ],
+      "expected_results": "280-480 nuevas visitas canal (semana 4)"
+    },
+    "08:00_trending_check": {
+      "action": "Check trending hashtags",
+      "platforms": [
+        "TikTok",
+        "Twitter",
+        "Instagram"
+      ],
+      "focus": "Music trends España/LATAM",
+      "time_investment": "15 min",
+      "tools": "Trend analysis ML"
+    },
+    "09:00_morning_tweet": {
+      "action": "Publish morning music insight",
+      "platform": "Twitter",
+      "content_type": "Quote/Insight/Industry news",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist"
+      ],
+      "expected_engagement": "5-15 interactions"
+    },
+    "10:00_analytics_review": {
+      "action": "Review previous day performance",
+      "metrics_to_check": [
+        "YouTube channel analytics",
+        "Instagram insights",
+        "TikTok analytics",
+        "Twitter impressions",
+        "Meta Ads performance"
+      ],
+      "time_investment": "20 min"
+    },
+    "11:00_content_creation": {
+      "action": "Content creation session",
+      "focus": "Instagram content + YouTube community",
+      "deliverables": [
+        "Instagram post + stories",
+        "YouTube community post"
+      ],
+      "time_investment": "60 min"
+    },
+    "13:00_lunch_engagement": {
+      "action": "Twitter trending participation",
+      "focus": "Music hashtags trending",
+      "interactions": "2-3 tweets",
+      "engagement_targets": "Music community accounts"
+    },
+    "15:00_competitor_research": {
+      "action": "Research competitors and trends",
+      "focus": "Similar music channels España/LATAM",
+      "analysis": "Content performing well, timing, hashtags",
+      "time_investment": "30 min"
+    },
+    "17:00_meta_ads_check": {
+      "action": "Monitor and adjust Meta Ads",
+      "tasks": [
+        "Check CPC and reach",
+        "Adjust targeting if needed",
+        "Review landing page performance",
+        "Optimize budget allocation"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:00_instagram_post": {
+      "action": "Instagram feed post",
+      "content_type": "Behind the scenes video",
+      "optimal_time": "19:00",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist",
+        "#studio",
+        "#newmusic",
+        "#spain",
+        "#madrid",
+        "#mexico",
+        "#reggaeton",
+        "#pop"
+      ],
+      "expected_reach": "1,500-3,500 accounts",
+      "expected_engagement": "120-280 likes, 15-35 comments",
+      "stories_followup": "3-4 stories promoting the post"
+    },
+    "20:30_tiktok_post": {
+      "action": "TikTok video post",
+      "concept": "Studio behind the scenes",
+      "optimal_time": "20:30",
+      "hashtags": [
+        "#fyp",
+        "#music",
+        "#producer",
+        "#viral",
+        "#spain",
+        "#mexico",
+        "#reggaeton",
+        "#pop",
+        "#studio",
+        "#newmusic"
+      ],
+      "expected_views": "2,000-8,000 views",
+      "expected_engagement": "150-400 interactions",
+      "trending_sounds": "Use current trending audio"
+    },
+    "21:00_engagement_session": {
+      "action": "Cross-platform community engagement",
+      "duration": "60 minutes",
+      "breakdown": {
+        "instagram": "20 min - likes, comments, stories",
+        "tiktok": "15 min - comments, likes, follows",
+        "youtube": "15 min - comment responses, community",
+        "twitter": "10 min - replies, retweets, engagement"
+      },
+      "targets": "Music community, potential collaborators, fans"
+    },
+    "22:30_daily_planning": {
+      "action": "Review day and plan tomorrow",
+      "tasks": [
+        "Log performance metrics",
+        "Plan next day content",
+        "Note trending opportunities",
+        "Update content calendar"
+      ],
+      "time_investment": "15 min"
+    },
+    "18:00_youtube_community": {
+      "action": "YouTube community post",
+      "content": "Music poll or behind scenes update",
+      "expected_engagement": "50-150 interactions"
+    }
+  },
+  "day_23": {
+    "date": "2025-11-19",
+    "day_name": "Wednesday",
+    "day_number": 23,
+    "meta_ads": {
+      "phase": "Optimization Week 4",
+      "budget_today": "€16.67",
+      "actions": [
+        "Monitor CPC and adjust bids",
+        "Refresh ad creative if frequency > 2.5",
+        "Test new audience interests",
+        "Analyze conversion to subscribers"
+      ],
+      "expected_results": "280-480 nuevas visitas canal (semana 4)"
+    },
+    "08:00_trending_check": {
+      "action": "Check trending hashtags",
+      "platforms": [
+        "TikTok",
+        "Twitter",
+        "Instagram"
+      ],
+      "focus": "Music trends España/LATAM",
+      "time_investment": "15 min",
+      "tools": "Trend analysis ML"
+    },
+    "09:00_morning_tweet": {
+      "action": "Publish morning music insight",
+      "platform": "Twitter",
+      "content_type": "Quote/Insight/Industry news",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist"
+      ],
+      "expected_engagement": "5-15 interactions"
+    },
+    "10:00_analytics_review": {
+      "action": "Review previous day performance",
+      "metrics_to_check": [
+        "YouTube channel analytics",
+        "Instagram insights",
+        "TikTok analytics",
+        "Twitter impressions",
+        "Meta Ads performance"
+      ],
+      "time_investment": "20 min"
+    },
+    "11:00_content_creation": {
+      "action": "Content creation session",
+      "focus": "Music content + YouTube Shorts",
+      "deliverables": [
+        "Original music snippet",
+        "YouTube Short"
+      ],
+      "time_investment": "45 min"
+    },
+    "13:00_lunch_engagement": {
+      "action": "Twitter trending participation",
+      "focus": "Music hashtags trending",
+      "interactions": "2-3 tweets",
+      "engagement_targets": "Music community accounts"
+    },
+    "15:00_competitor_research": {
+      "action": "Research competitors and trends",
+      "focus": "Similar music channels España/LATAM",
+      "analysis": "Content performing well, timing, hashtags",
+      "time_investment": "30 min"
+    },
+    "17:00_meta_ads_check": {
+      "action": "Monitor and adjust Meta Ads",
+      "tasks": [
+        "Check CPC and reach",
+        "Adjust targeting if needed",
+        "Review landing page performance",
+        "Optimize budget allocation"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:00_instagram_post": {
+      "action": "Instagram feed post",
+      "content_type": "Fan interaction/repost",
+      "optimal_time": "19:00",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist",
+        "#studio",
+        "#newmusic",
+        "#spain",
+        "#madrid",
+        "#mexico",
+        "#reggaeton",
+        "#pop"
+      ],
+      "expected_reach": "1,500-3,500 accounts",
+      "expected_engagement": "120-280 likes, 15-35 comments",
+      "stories_followup": "3-4 stories promoting the post"
+    },
+    "20:30_tiktok_post": {
+      "action": "TikTok video post",
+      "concept": "Music production process",
+      "optimal_time": "20:30",
+      "hashtags": [
+        "#fyp",
+        "#music",
+        "#producer",
+        "#viral",
+        "#spain",
+        "#mexico",
+        "#reggaeton",
+        "#pop",
+        "#studio",
+        "#newmusic"
+      ],
+      "expected_views": "2,000-8,000 views",
+      "expected_engagement": "150-400 interactions",
+      "trending_sounds": "Use current trending audio"
+    },
+    "21:00_engagement_session": {
+      "action": "Cross-platform community engagement",
+      "duration": "60 minutes",
+      "breakdown": {
+        "instagram": "20 min - likes, comments, stories",
+        "tiktok": "15 min - comments, likes, follows",
+        "youtube": "15 min - comment responses, community",
+        "twitter": "10 min - replies, retweets, engagement"
+      },
+      "targets": "Music community, potential collaborators, fans"
+    },
+    "22:30_daily_planning": {
+      "action": "Review day and plan tomorrow",
+      "tasks": [
+        "Log performance metrics",
+        "Plan next day content",
+        "Note trending opportunities",
+        "Update content calendar"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:30_youtube_short": {
+      "action": "Upload YouTube Short",
+      "content": "Studio session or music tip",
+      "expected_views": "800-2,500 views"
+    }
+  },
+  "day_24": {
+    "date": "2025-11-20",
+    "day_name": "Thursday",
+    "day_number": 24,
+    "meta_ads": {
+      "phase": "Optimization Week 4",
+      "budget_today": "€16.67",
+      "actions": [
+        "Monitor CPC and adjust bids",
+        "Refresh ad creative if frequency > 2.5",
+        "Test new audience interests",
+        "Analyze conversion to subscribers"
+      ],
+      "expected_results": "280-480 nuevas visitas canal (semana 4)"
+    },
+    "08:00_trending_check": {
+      "action": "Check trending hashtags",
+      "platforms": [
+        "TikTok",
+        "Twitter",
+        "Instagram"
+      ],
+      "focus": "Music trends España/LATAM",
+      "time_investment": "15 min",
+      "tools": "Trend analysis ML"
+    },
+    "09:00_morning_tweet": {
+      "action": "Publish morning music insight",
+      "platform": "Twitter",
+      "content_type": "Quote/Insight/Industry news",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist"
+      ],
+      "expected_engagement": "5-15 interactions"
+    },
+    "10:00_analytics_review": {
+      "action": "Review previous day performance",
+      "metrics_to_check": [
+        "YouTube channel analytics",
+        "Instagram insights",
+        "TikTok analytics",
+        "Twitter impressions",
+        "Meta Ads performance"
+      ],
+      "time_investment": "20 min"
+    },
+    "11:00_content_creation": {
+      "action": "Content creation session",
+      "focus": "Behind scenes + Community content",
+      "deliverables": [
+        "Instagram stories series",
+        "YouTube community post"
+      ],
+      "time_investment": "30 min"
+    },
+    "13:00_lunch_engagement": {
+      "action": "Twitter trending participation",
+      "focus": "Music hashtags trending",
+      "interactions": "2-3 tweets",
+      "engagement_targets": "Music community accounts"
+    },
+    "15:00_competitor_research": {
+      "action": "Research competitors and trends",
+      "focus": "Similar music channels España/LATAM",
+      "analysis": "Content performing well, timing, hashtags",
+      "time_investment": "30 min"
+    },
+    "17:00_meta_ads_check": {
+      "action": "Monitor and adjust Meta Ads",
+      "tasks": [
+        "Check CPC and reach",
+        "Adjust targeting if needed",
+        "Review landing page performance",
+        "Optimize budget allocation"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:00_instagram_post": {
+      "action": "Instagram feed post",
+      "content_type": "Music quote graphic",
+      "optimal_time": "19:00",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist",
+        "#studio",
+        "#newmusic",
+        "#spain",
+        "#madrid",
+        "#mexico",
+        "#reggaeton",
+        "#pop"
+      ],
+      "expected_reach": "1,500-3,500 accounts",
+      "expected_engagement": "120-280 likes, 15-35 comments",
+      "stories_followup": "3-4 stories promoting the post"
+    },
+    "20:30_tiktok_post": {
+      "action": "TikTok video post",
+      "concept": "Fan interaction response",
+      "optimal_time": "20:30",
+      "hashtags": [
+        "#fyp",
+        "#music",
+        "#producer",
+        "#viral",
+        "#spain",
+        "#mexico",
+        "#reggaeton",
+        "#pop",
+        "#studio",
+        "#newmusic"
+      ],
+      "expected_views": "2,000-8,000 views",
+      "expected_engagement": "150-400 interactions",
+      "trending_sounds": "Use current trending audio"
+    },
+    "21:00_engagement_session": {
+      "action": "Cross-platform community engagement",
+      "duration": "60 minutes",
+      "breakdown": {
+        "instagram": "20 min - likes, comments, stories",
+        "tiktok": "15 min - comments, likes, follows",
+        "youtube": "15 min - comment responses, community",
+        "twitter": "10 min - replies, retweets, engagement"
+      },
+      "targets": "Music community, potential collaborators, fans"
+    },
+    "22:30_daily_planning": {
+      "action": "Review day and plan tomorrow",
+      "tasks": [
+        "Log performance metrics",
+        "Plan next day content",
+        "Note trending opportunities",
+        "Update content calendar"
+      ],
+      "time_investment": "15 min"
+    },
+    "18:00_youtube_community": {
+      "action": "YouTube community post",
+      "content": "Fan question response or music update",
+      "expected_engagement": "50-150 interactions"
+    }
+  },
+  "day_25": {
+    "date": "2025-11-21",
+    "day_name": "Friday",
+    "day_number": 25,
+    "meta_ads": {
+      "phase": "Optimization Week 4",
+      "budget_today": "€16.67",
+      "actions": [
+        "Monitor CPC and adjust bids",
+        "Refresh ad creative if frequency > 2.5",
+        "Test new audience interests",
+        "Analyze conversion to subscribers"
+      ],
+      "expected_results": "280-480 nuevas visitas canal (semana 4)"
+    },
+    "08:00_trending_check": {
+      "action": "Check trending hashtags",
+      "platforms": [
+        "TikTok",
+        "Twitter",
+        "Instagram"
+      ],
+      "focus": "Music trends España/LATAM",
+      "time_investment": "15 min",
+      "tools": "Trend analysis ML"
+    },
+    "09:00_morning_tweet": {
+      "action": "Publish morning music insight",
+      "platform": "Twitter",
+      "content_type": "Quote/Insight/Industry news",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist"
+      ],
+      "expected_engagement": "5-15 interactions"
+    },
+    "10:00_analytics_review": {
+      "action": "Review previous day performance",
+      "metrics_to_check": [
+        "YouTube channel analytics",
+        "Instagram insights",
+        "TikTok analytics",
+        "Twitter impressions",
+        "Meta Ads performance"
+      ],
+      "time_investment": "20 min"
+    },
+    "11:00_content_creation": {
+      "action": "Content creation session",
+      "focus": "Main YouTube video preparation",
+      "deliverables": [
+        "YouTube main video edit/upload prep"
+      ],
+      "time_investment": "90 min"
+    },
+    "13:00_lunch_engagement": {
+      "action": "Twitter trending participation",
+      "focus": "Music hashtags trending",
+      "interactions": "2-3 tweets",
+      "engagement_targets": "Music community accounts"
+    },
+    "15:00_competitor_research": {
+      "action": "Research competitors and trends",
+      "focus": "Similar music channels España/LATAM",
+      "analysis": "Content performing well, timing, hashtags",
+      "time_investment": "30 min"
+    },
+    "17:00_meta_ads_check": {
+      "action": "Monitor and adjust Meta Ads",
+      "tasks": [
+        "Check CPC and reach",
+        "Adjust targeting if needed",
+        "Review landing page performance",
+        "Optimize budget allocation"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:00_instagram_post": {
+      "action": "Instagram feed post",
+      "content_type": "Lifestyle/personal moment",
+      "optimal_time": "19:00",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist",
+        "#studio",
+        "#newmusic",
+        "#spain",
+        "#madrid",
+        "#mexico",
+        "#reggaeton",
+        "#pop"
+      ],
+      "expected_reach": "1,500-3,500 accounts",
+      "expected_engagement": "120-280 likes, 15-35 comments",
+      "stories_followup": "3-4 stories promoting the post"
+    },
+    "20:30_tiktok_post": {
+      "action": "TikTok video post",
+      "concept": "Trending challenge participation",
+      "optimal_time": "20:30",
+      "hashtags": [
+        "#fyp",
+        "#music",
+        "#producer",
+        "#viral",
+        "#spain",
+        "#mexico",
+        "#reggaeton",
+        "#pop",
+        "#studio",
+        "#newmusic"
+      ],
+      "expected_views": "2,000-8,000 views",
+      "expected_engagement": "150-400 interactions",
+      "trending_sounds": "Use current trending audio"
+    },
+    "21:00_engagement_session": {
+      "action": "Cross-platform community engagement",
+      "duration": "60 minutes",
+      "breakdown": {
+        "instagram": "20 min - likes, comments, stories",
+        "tiktok": "15 min - comments, likes, follows",
+        "youtube": "15 min - comment responses, community",
+        "twitter": "10 min - replies, retweets, engagement"
+      },
+      "targets": "Music community, potential collaborators, fans"
+    },
+    "22:30_daily_planning": {
+      "action": "Review day and plan tomorrow",
+      "tasks": [
+        "Log performance metrics",
+        "Plan next day content",
+        "Note trending opportunities",
+        "Update content calendar"
+      ],
+      "time_investment": "15 min"
+    },
+    "20:00_youtube_main": {
+      "action": "Upload main YouTube video",
+      "content": "Main music content/video/collab",
+      "expected_views": "1,500-4,000 views primera semana"
+    },
+    "19:30_youtube_short": {
+      "action": "Upload YouTube Short",
+      "content": "Friday music vibes",
+      "expected_views": "1,200-3,500 views"
+    }
+  },
+  "day_26": {
+    "date": "2025-11-22",
+    "day_name": "Saturday",
+    "day_number": 26,
+    "meta_ads": {
+      "phase": "Optimization Week 4",
+      "budget_today": "€16.67",
+      "actions": [
+        "Monitor CPC and adjust bids",
+        "Refresh ad creative if frequency > 2.5",
+        "Test new audience interests",
+        "Analyze conversion to subscribers"
+      ],
+      "expected_results": "280-480 nuevas visitas canal (semana 4)"
+    },
+    "08:00_trending_check": {
+      "action": "Check trending hashtags",
+      "platforms": [
+        "TikTok",
+        "Twitter",
+        "Instagram"
+      ],
+      "focus": "Music trends España/LATAM",
+      "time_investment": "15 min",
+      "tools": "Trend analysis ML"
+    },
+    "09:00_morning_tweet": {
+      "action": "Publish morning music insight",
+      "platform": "Twitter",
+      "content_type": "Quote/Insight/Industry news",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist"
+      ],
+      "expected_engagement": "5-15 interactions"
+    },
+    "10:00_analytics_review": {
+      "action": "Review previous day performance",
+      "metrics_to_check": [
+        "YouTube channel analytics",
+        "Instagram insights",
+        "TikTok analytics",
+        "Twitter impressions",
+        "Meta Ads performance"
+      ],
+      "time_investment": "20 min"
+    },
+    "11:00_content_creation": {
+      "action": "Content creation session",
+      "focus": "Weekend content + Collaboration prep",
+      "deliverables": [
+        "Weekend casual content",
+        "Outreach messages"
+      ],
+      "time_investment": "45 min"
+    },
+    "13:00_lunch_engagement": {
+      "action": "Twitter trending participation",
+      "focus": "Music hashtags trending",
+      "interactions": "2-3 tweets",
+      "engagement_targets": "Music community accounts"
+    },
+    "15:00_competitor_research": {
+      "action": "Research competitors and trends",
+      "focus": "Similar music channels España/LATAM",
+      "analysis": "Content performing well, timing, hashtags",
+      "time_investment": "30 min"
+    },
+    "17:00_meta_ads_check": {
+      "action": "Monitor and adjust Meta Ads",
+      "tasks": [
+        "Check CPC and reach",
+        "Adjust targeting if needed",
+        "Review landing page performance",
+        "Optimize budget allocation"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:00_instagram_post": {
+      "action": "Instagram feed post",
+      "content_type": "Music equipment/setup",
+      "optimal_time": "19:00",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist",
+        "#studio",
+        "#newmusic",
+        "#spain",
+        "#madrid",
+        "#mexico",
+        "#reggaeton",
+        "#pop"
+      ],
+      "expected_reach": "1,500-3,500 accounts",
+      "expected_engagement": "120-280 likes, 15-35 comments",
+      "stories_followup": "3-4 stories promoting the post"
+    },
+    "20:30_tiktok_post": {
+      "action": "TikTok video post",
+      "concept": "Music tutorial/tips",
+      "optimal_time": "20:30",
+      "hashtags": [
+        "#fyp",
+        "#music",
+        "#producer",
+        "#viral",
+        "#spain",
+        "#mexico",
+        "#reggaeton",
+        "#pop",
+        "#studio",
+        "#newmusic"
+      ],
+      "expected_views": "2,000-8,000 views",
+      "expected_engagement": "150-400 interactions",
+      "trending_sounds": "Use current trending audio"
+    },
+    "21:00_engagement_session": {
+      "action": "Cross-platform community engagement",
+      "duration": "60 minutes",
+      "breakdown": {
+        "instagram": "20 min - likes, comments, stories",
+        "tiktok": "15 min - comments, likes, follows",
+        "youtube": "15 min - comment responses, community",
+        "twitter": "10 min - replies, retweets, engagement"
+      },
+      "targets": "Music community, potential collaborators, fans"
+    },
+    "22:30_daily_planning": {
+      "action": "Review day and plan tomorrow",
+      "tasks": [
+        "Log performance metrics",
+        "Plan next day content",
+        "Note trending opportunities",
+        "Update content calendar"
+      ],
+      "time_investment": "15 min"
+    },
+    "weekend_engagement": {
+      "action": "Enhanced weekend community engagement",
+      "focus": "More personal interaction with fans",
+      "time_investment": "Extra 30 min",
+      "platforms": "All platforms - casual interactions"
+    }
+  },
+  "day_27": {
+    "date": "2025-11-23",
+    "day_name": "Sunday",
+    "day_number": 27,
+    "meta_ads": {
+      "phase": "Optimization Week 4",
+      "budget_today": "€16.67",
+      "actions": [
+        "Monitor CPC and adjust bids",
+        "Refresh ad creative if frequency > 2.5",
+        "Test new audience interests",
+        "Analyze conversion to subscribers"
+      ],
+      "expected_results": "280-480 nuevas visitas canal (semana 4)"
+    },
+    "08:00_trending_check": {
+      "action": "Check trending hashtags",
+      "platforms": [
+        "TikTok",
+        "Twitter",
+        "Instagram"
+      ],
+      "focus": "Music trends España/LATAM",
+      "time_investment": "15 min",
+      "tools": "Trend analysis ML"
+    },
+    "09:00_morning_tweet": {
+      "action": "Publish morning music insight",
+      "platform": "Twitter",
+      "content_type": "Quote/Insight/Industry news",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist"
+      ],
+      "expected_engagement": "5-15 interactions"
+    },
+    "10:00_analytics_review": {
+      "action": "Review previous day performance",
+      "metrics_to_check": [
+        "YouTube channel analytics",
+        "Instagram insights",
+        "TikTok analytics",
+        "Twitter impressions",
+        "Meta Ads performance"
+      ],
+      "time_investment": "20 min"
+    },
+    "11:00_content_creation": {
+      "action": "Content creation session",
+      "focus": "Week review + Next week planning",
+      "deliverables": [
+        "Content calendar update",
+        "Performance analysis"
+      ],
+      "time_investment": "60 min"
+    },
+    "13:00_lunch_engagement": {
+      "action": "Twitter trending participation",
+      "focus": "Music hashtags trending",
+      "interactions": "2-3 tweets",
+      "engagement_targets": "Music community accounts"
+    },
+    "15:00_competitor_research": {
+      "action": "Research competitors and trends",
+      "focus": "Similar music channels España/LATAM",
+      "analysis": "Content performing well, timing, hashtags",
+      "time_investment": "30 min"
+    },
+    "17:00_meta_ads_check": {
+      "action": "Monitor and adjust Meta Ads",
+      "tasks": [
+        "Check CPC and reach",
+        "Adjust targeting if needed",
+        "Review landing page performance",
+        "Optimize budget allocation"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:00_instagram_post": {
+      "action": "Instagram feed post",
+      "content_type": "Collaboration announcement",
+      "optimal_time": "19:00",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist",
+        "#studio",
+        "#newmusic",
+        "#spain",
+        "#madrid",
+        "#mexico",
+        "#reggaeton",
+        "#pop"
+      ],
+      "expected_reach": "1,500-3,500 accounts",
+      "expected_engagement": "120-280 likes, 15-35 comments",
+      "stories_followup": "3-4 stories promoting the post"
+    },
+    "20:30_tiktok_post": {
+      "action": "TikTok video post",
+      "concept": "Day in the life of musician",
+      "optimal_time": "20:30",
+      "hashtags": [
+        "#fyp",
+        "#music",
+        "#producer",
+        "#viral",
+        "#spain",
+        "#mexico",
+        "#reggaeton",
+        "#pop",
+        "#studio",
+        "#newmusic"
+      ],
+      "expected_views": "2,000-8,000 views",
+      "expected_engagement": "150-400 interactions",
+      "trending_sounds": "Use current trending audio"
+    },
+    "21:00_engagement_session": {
+      "action": "Cross-platform community engagement",
+      "duration": "60 minutes",
+      "breakdown": {
+        "instagram": "20 min - likes, comments, stories",
+        "tiktok": "15 min - comments, likes, follows",
+        "youtube": "15 min - comment responses, community",
+        "twitter": "10 min - replies, retweets, engagement"
+      },
+      "targets": "Music community, potential collaborators, fans"
+    },
+    "22:30_daily_planning": {
+      "action": "Review day and plan tomorrow",
+      "tasks": [
+        "Log performance metrics",
+        "Plan next day content",
+        "Note trending opportunities",
+        "Update content calendar"
+      ],
+      "time_investment": "15 min"
+    },
+    "weekend_engagement": {
+      "action": "Enhanced weekend community engagement",
+      "focus": "More personal interaction with fans",
+      "time_investment": "Extra 30 min",
+      "platforms": "All platforms - casual interactions"
+    }
+  },
+  "day_28": {
+    "date": "2025-11-24",
+    "day_name": "Monday",
+    "day_number": 28,
+    "meta_ads": {
+      "phase": "Optimization Week 4",
+      "budget_today": "€16.67",
+      "actions": [
+        "Monitor CPC and adjust bids",
+        "Refresh ad creative if frequency > 2.5",
+        "Test new audience interests",
+        "Analyze conversion to subscribers"
+      ],
+      "expected_results": "280-480 nuevas visitas canal (semana 4)"
+    },
+    "08:00_trending_check": {
+      "action": "Check trending hashtags",
+      "platforms": [
+        "TikTok",
+        "Twitter",
+        "Instagram"
+      ],
+      "focus": "Music trends España/LATAM",
+      "time_investment": "15 min",
+      "tools": "Trend analysis ML"
+    },
+    "09:00_morning_tweet": {
+      "action": "Publish morning music insight",
+      "platform": "Twitter",
+      "content_type": "Quote/Insight/Industry news",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist"
+      ],
+      "expected_engagement": "5-15 interactions"
+    },
+    "10:00_analytics_review": {
+      "action": "Review previous day performance",
+      "metrics_to_check": [
+        "YouTube channel analytics",
+        "Instagram insights",
+        "TikTok analytics",
+        "Twitter impressions",
+        "Meta Ads performance"
+      ],
+      "time_investment": "20 min"
+    },
+    "11:00_content_creation": {
+      "action": "Content creation session",
+      "focus": "TikTok challenge research + YouTube Shorts",
+      "deliverables": [
+        "TikTok video script",
+        "YouTube Short edit"
+      ],
+      "time_investment": "45 min"
+    },
+    "13:00_lunch_engagement": {
+      "action": "Twitter trending participation",
+      "focus": "Music hashtags trending",
+      "interactions": "2-3 tweets",
+      "engagement_targets": "Music community accounts"
+    },
+    "15:00_competitor_research": {
+      "action": "Research competitors and trends",
+      "focus": "Similar music channels España/LATAM",
+      "analysis": "Content performing well, timing, hashtags",
+      "time_investment": "30 min"
+    },
+    "17:00_meta_ads_check": {
+      "action": "Monitor and adjust Meta Ads",
+      "tasks": [
+        "Check CPC and reach",
+        "Adjust targeting if needed",
+        "Review landing page performance",
+        "Optimize budget allocation"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:00_instagram_post": {
+      "action": "Instagram feed post",
+      "content_type": "Music studio session photo",
+      "optimal_time": "19:00",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist",
+        "#studio",
+        "#newmusic",
+        "#spain",
+        "#madrid",
+        "#mexico",
+        "#reggaeton",
+        "#pop"
+      ],
+      "expected_reach": "1,500-3,500 accounts",
+      "expected_engagement": "120-280 likes, 15-35 comments",
+      "stories_followup": "3-4 stories promoting the post"
+    },
+    "20:30_tiktok_post": {
+      "action": "TikTok video post",
+      "concept": "Music snippet with trending sound",
+      "optimal_time": "20:30",
+      "hashtags": [
+        "#fyp",
+        "#music",
+        "#producer",
+        "#viral",
+        "#spain",
+        "#mexico",
+        "#reggaeton",
+        "#pop",
+        "#studio",
+        "#newmusic"
+      ],
+      "expected_views": "2,000-8,000 views",
+      "expected_engagement": "150-400 interactions",
+      "trending_sounds": "Use current trending audio"
+    },
+    "21:00_engagement_session": {
+      "action": "Cross-platform community engagement",
+      "duration": "60 minutes",
+      "breakdown": {
+        "instagram": "20 min - likes, comments, stories",
+        "tiktok": "15 min - comments, likes, follows",
+        "youtube": "15 min - comment responses, community",
+        "twitter": "10 min - replies, retweets, engagement"
+      },
+      "targets": "Music community, potential collaborators, fans"
+    },
+    "22:30_daily_planning": {
+      "action": "Review day and plan tomorrow",
+      "tasks": [
+        "Log performance metrics",
+        "Plan next day content",
+        "Note trending opportunities",
+        "Update content calendar"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:30_youtube_short": {
+      "action": "Upload YouTube Short",
+      "content": "Music Monday - trending song snippet",
+      "expected_views": "800-2,500 views"
+    }
+  },
+  "day_29": {
+    "date": "2025-11-25",
+    "day_name": "Tuesday",
+    "day_number": 29,
+    "meta_ads": {
+      "phase": "Optimization Week 5",
+      "budget_today": "€16.67",
+      "actions": [
+        "Monitor CPC and adjust bids",
+        "Refresh ad creative if frequency > 2.5",
+        "Test new audience interests",
+        "Analyze conversion to subscribers"
+      ],
+      "expected_results": "280-480 nuevas visitas canal (semana 5)"
+    },
+    "08:00_trending_check": {
+      "action": "Check trending hashtags",
+      "platforms": [
+        "TikTok",
+        "Twitter",
+        "Instagram"
+      ],
+      "focus": "Music trends España/LATAM",
+      "time_investment": "15 min",
+      "tools": "Trend analysis ML"
+    },
+    "09:00_morning_tweet": {
+      "action": "Publish morning music insight",
+      "platform": "Twitter",
+      "content_type": "Quote/Insight/Industry news",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist"
+      ],
+      "expected_engagement": "5-15 interactions"
+    },
+    "10:00_analytics_review": {
+      "action": "Review previous day performance",
+      "metrics_to_check": [
+        "YouTube channel analytics",
+        "Instagram insights",
+        "TikTok analytics",
+        "Twitter impressions",
+        "Meta Ads performance"
+      ],
+      "time_investment": "20 min"
+    },
+    "11:00_content_creation": {
+      "action": "Content creation session",
+      "focus": "Instagram content + YouTube community",
+      "deliverables": [
+        "Instagram post + stories",
+        "YouTube community post"
+      ],
+      "time_investment": "60 min"
+    },
+    "13:00_lunch_engagement": {
+      "action": "Twitter trending participation",
+      "focus": "Music hashtags trending",
+      "interactions": "2-3 tweets",
+      "engagement_targets": "Music community accounts"
+    },
+    "15:00_competitor_research": {
+      "action": "Research competitors and trends",
+      "focus": "Similar music channels España/LATAM",
+      "analysis": "Content performing well, timing, hashtags",
+      "time_investment": "30 min"
+    },
+    "17:00_meta_ads_check": {
+      "action": "Monitor and adjust Meta Ads",
+      "tasks": [
+        "Check CPC and reach",
+        "Adjust targeting if needed",
+        "Review landing page performance",
+        "Optimize budget allocation"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:00_instagram_post": {
+      "action": "Instagram feed post",
+      "content_type": "Behind the scenes video",
+      "optimal_time": "19:00",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist",
+        "#studio",
+        "#newmusic",
+        "#spain",
+        "#madrid",
+        "#mexico",
+        "#reggaeton",
+        "#pop"
+      ],
+      "expected_reach": "1,500-3,500 accounts",
+      "expected_engagement": "120-280 likes, 15-35 comments",
+      "stories_followup": "3-4 stories promoting the post"
+    },
+    "20:30_tiktok_post": {
+      "action": "TikTok video post",
+      "concept": "Studio behind the scenes",
+      "optimal_time": "20:30",
+      "hashtags": [
+        "#fyp",
+        "#music",
+        "#producer",
+        "#viral",
+        "#spain",
+        "#mexico",
+        "#reggaeton",
+        "#pop",
+        "#studio",
+        "#newmusic"
+      ],
+      "expected_views": "2,000-8,000 views",
+      "expected_engagement": "150-400 interactions",
+      "trending_sounds": "Use current trending audio"
+    },
+    "21:00_engagement_session": {
+      "action": "Cross-platform community engagement",
+      "duration": "60 minutes",
+      "breakdown": {
+        "instagram": "20 min - likes, comments, stories",
+        "tiktok": "15 min - comments, likes, follows",
+        "youtube": "15 min - comment responses, community",
+        "twitter": "10 min - replies, retweets, engagement"
+      },
+      "targets": "Music community, potential collaborators, fans"
+    },
+    "22:30_daily_planning": {
+      "action": "Review day and plan tomorrow",
+      "tasks": [
+        "Log performance metrics",
+        "Plan next day content",
+        "Note trending opportunities",
+        "Update content calendar"
+      ],
+      "time_investment": "15 min"
+    },
+    "18:00_youtube_community": {
+      "action": "YouTube community post",
+      "content": "Music poll or behind scenes update",
+      "expected_engagement": "50-150 interactions"
+    }
+  },
+  "day_30": {
+    "date": "2025-11-26",
+    "day_name": "Wednesday",
+    "day_number": 30,
+    "meta_ads": {
+      "phase": "Optimization Week 5",
+      "budget_today": "€16.67",
+      "actions": [
+        "Monitor CPC and adjust bids",
+        "Refresh ad creative if frequency > 2.5",
+        "Test new audience interests",
+        "Analyze conversion to subscribers"
+      ],
+      "expected_results": "280-480 nuevas visitas canal (semana 5)"
+    },
+    "08:00_trending_check": {
+      "action": "Check trending hashtags",
+      "platforms": [
+        "TikTok",
+        "Twitter",
+        "Instagram"
+      ],
+      "focus": "Music trends España/LATAM",
+      "time_investment": "15 min",
+      "tools": "Trend analysis ML"
+    },
+    "09:00_morning_tweet": {
+      "action": "Publish morning music insight",
+      "platform": "Twitter",
+      "content_type": "Quote/Insight/Industry news",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist"
+      ],
+      "expected_engagement": "5-15 interactions"
+    },
+    "10:00_analytics_review": {
+      "action": "Review previous day performance",
+      "metrics_to_check": [
+        "YouTube channel analytics",
+        "Instagram insights",
+        "TikTok analytics",
+        "Twitter impressions",
+        "Meta Ads performance"
+      ],
+      "time_investment": "20 min"
+    },
+    "11:00_content_creation": {
+      "action": "Content creation session",
+      "focus": "Music content + YouTube Shorts",
+      "deliverables": [
+        "Original music snippet",
+        "YouTube Short"
+      ],
+      "time_investment": "45 min"
+    },
+    "13:00_lunch_engagement": {
+      "action": "Twitter trending participation",
+      "focus": "Music hashtags trending",
+      "interactions": "2-3 tweets",
+      "engagement_targets": "Music community accounts"
+    },
+    "15:00_competitor_research": {
+      "action": "Research competitors and trends",
+      "focus": "Similar music channels España/LATAM",
+      "analysis": "Content performing well, timing, hashtags",
+      "time_investment": "30 min"
+    },
+    "17:00_meta_ads_check": {
+      "action": "Monitor and adjust Meta Ads",
+      "tasks": [
+        "Check CPC and reach",
+        "Adjust targeting if needed",
+        "Review landing page performance",
+        "Optimize budget allocation"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:00_instagram_post": {
+      "action": "Instagram feed post",
+      "content_type": "Fan interaction/repost",
+      "optimal_time": "19:00",
+      "hashtags": [
+        "#music",
+        "#producer",
+        "#artist",
+        "#studio",
+        "#newmusic",
+        "#spain",
+        "#madrid",
+        "#mexico",
+        "#reggaeton",
+        "#pop"
+      ],
+      "expected_reach": "1,500-3,500 accounts",
+      "expected_engagement": "120-280 likes, 15-35 comments",
+      "stories_followup": "3-4 stories promoting the post"
+    },
+    "20:30_tiktok_post": {
+      "action": "TikTok video post",
+      "concept": "Music production process",
+      "optimal_time": "20:30",
+      "hashtags": [
+        "#fyp",
+        "#music",
+        "#producer",
+        "#viral",
+        "#spain",
+        "#mexico",
+        "#reggaeton",
+        "#pop",
+        "#studio",
+        "#newmusic"
+      ],
+      "expected_views": "2,000-8,000 views",
+      "expected_engagement": "150-400 interactions",
+      "trending_sounds": "Use current trending audio"
+    },
+    "21:00_engagement_session": {
+      "action": "Cross-platform community engagement",
+      "duration": "60 minutes",
+      "breakdown": {
+        "instagram": "20 min - likes, comments, stories",
+        "tiktok": "15 min - comments, likes, follows",
+        "youtube": "15 min - comment responses, community",
+        "twitter": "10 min - replies, retweets, engagement"
+      },
+      "targets": "Music community, potential collaborators, fans"
+    },
+    "22:30_daily_planning": {
+      "action": "Review day and plan tomorrow",
+      "tasks": [
+        "Log performance metrics",
+        "Plan next day content",
+        "Note trending opportunities",
+        "Update content calendar"
+      ],
+      "time_investment": "15 min"
+    },
+    "19:30_youtube_short": {
+      "action": "Upload YouTube Short",
+      "content": "Studio session or music tip",
+      "expected_views": "800-2,500 views"
+    }
+  }
+}

@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+  # Servicio principal - Stakas MVP Dashboard
+  stakas-mvp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: stakas-mvp-dashboard
+    ports:
+      - "8080:8080"
+      - "8081:8081"  # Health check port
+    environment:
+      - ENVIRONMENT=production
+      - PORT=8080
+      - STREAMLIT_SERVER_PORT=8080
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+      - STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
+      - YOUTUBE_CHANNEL_ID=UCgohgqLVu1QPdfa64Vkrgeg
+      - CHANNEL_NAME=Stakas MVP
+      - DUMMY_MODE=false
+      - LOG_LEVEL=INFO
+      - AUTO_RESTART=true
+      - ENABLE_MONITORING=true
+      - HEALTH_CHECK_INTERVAL=300
+    volumes:
+      - ./logs:/app/logs
+      - ./data:/app/data
+      - ./config:/app/config
+    networks:
+      - stakas-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    depends_on:
+      - redis
+    labels:
+      - "com.stakasmvp.description=Stakas MVP Dashboard Principal"
+      - "com.stakasmvp.service=dashboard"
+
+  # Redis para cache y sessions
+  redis:
+    image: redis:7-alpine
+    container_name: stakas-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - stakas-network
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+# Volumes persistentes
+volumes:
+  redis_data:
+    driver: local
+
+# Network personalizada
+networks:
+  stakas-network:
+    driver: bridge

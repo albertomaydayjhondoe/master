@@ -1,7 +1,18 @@
+"""
+Device Manager - Machine Learning and Device Automation
+
+This module is part of the TikTok ML Branch system.
+Maintained as part of the universal automation platform.
+"""
+
 from typing import Dict, Any, List
 from .factory import get_adb_controller
 import threading
 import time
+
+
+__all__ = ['DeviceManager', 'list', 'perform_action', 'broadcast', 'health_check']
+
 
 
 class DeviceManager:

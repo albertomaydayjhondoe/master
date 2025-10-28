@@ -1,0 +1,48 @@
+# Device Farm v5 - ML Requirements
+# Enhanced requirements including Ultralytics for YOLO integration
+
+# Core ML and Computer Vision
+ultralytics==8.0.196
+torch>=2.0.0
+torchvision>=0.15.0
+opencv-python>=4.8.0
+pillow>=10.0.0
+numpy>=1.24.0
+
+# YOLO and Object Detection
+yolov5==7.0.13
+supervision>=0.15.0
+
+# Image Processing and Analysis
+imageio>=2.31.0
+scikit-image>=0.21.0
+albumentations>=1.3.0
+
+# Machine Learning Core
+scikit-learn>=1.3.0
+pandas>=2.0.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Deep Learning Utilities
+onnx>=1.14.0
+onnxruntime>=1.15.0
+tensorboard>=2.13.0
+
+# Async and Concurrency
+asyncio-throttle>=1.0.2
+aiofiles>=23.0.0
+
+# Logging and Monitoring
+loguru>=0.7.0
+wandb>=0.15.0  # For ML experiment tracking
+
+# Configuration and Utils
+pyyaml>=6.0
+python-dotenv>=1.0.0
+click>=8.1.0
+
+# Development and Testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+pytest-mock>=3.11.0

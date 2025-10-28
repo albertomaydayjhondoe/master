@@ -1,0 +1,171 @@
+{
+  "validation_timestamp": "2025-10-22T10:15:48.752533",
+  "project_root": "/workspaces/master",
+  "overall_status": "fail",
+  "summary": {
+    "total_categories": 10,
+    "passed": 7,
+    "warnings": 1,
+    "failed": 2,
+    "success_rate": 70.0
+  },
+  "categories": {
+    "Project Structure": {
+      "status": "fail",
+      "missing_files": [],
+      "missing_dirs": [
+        "data",
+        "logs"
+      ],
+      "warnings": [
+        "Optional directory missing: meta_automation",
+        "Optional directory missing: data/mock_databases",
+        "Optional directory missing: data/models"
+      ],
+      "total_files_checked": 6,
+      "total_dirs_checked": 9
+    },
+    "Configuration Files": {
+      "status": "pass",
+      "results": {
+        ".env.universal": {
+          "total_lines": 319,
+          "env_variables": 163
+        },
+        "universal_config.json": {
+          "valid_json": true,
+          "entries": 9
+        }
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "Environment Variables": {
+      "status": "pass",
+      "total_env_vars": 163,
+      "missing_critical": [],
+      "warnings": [],
+      "dummy_mode_enabled": true
+    },
+    "Mock Databases": {
+      "status": "fail",
+      "error": "Mock databases directory does not exist"
+    },
+    "ML Models": {
+      "status": "warning",
+      "warning": "ML models directory does not exist (will be created on first run)"
+    },
+    "Scripts and Executables": {
+      "status": "pass",
+      "scripts": {
+        "awakener.py": {
+          "exists": true,
+          "executable": true,
+          "size": 27842
+        },
+        "wake.sh": {
+          "exists": true,
+          "executable": true,
+          "size": 8930
+        },
+        "config_generator.py": {
+          "exists": true,
+          "executable": false,
+          "size": 21636
+        },
+        "start.sh": {
+          "exists": true,
+          "executable": true,
+          "size": 335
+        }
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "Service Health": {
+      "status": "pass",
+      "services": {
+        "ml_api": {
+          "port": 8000,
+          "status": "available"
+        },
+        "meta_automation": {
+          "port": 8001,
+          "status": "available"
+        },
+        "telegram_automation": {
+          "port": 8002,
+          "status": "available"
+        }
+      },
+      "warnings": []
+    },
+    "API Endpoints": {
+      "status": "pass",
+      "endpoints": {
+        "http://localhost:8000/health": {
+          "reachable": false,
+          "error": "Cannot connect to host localhost:8000 ssl:default [Multiple exceptions: [Errno 111] Connect call failed ('::1', 8000, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 8000)]"
+        },
+        "http://localhost:8000/": {
+          "reachable": false,
+          "error": "Cannot connect to host localhost:8000 ssl:default [Multiple exceptions: [Errno 111] Connect call failed ('127.0.0.1', 8000), [Errno 111] Connect call failed ('::1', 8000, 0, 0)]"
+        },
+        "http://localhost:8000/docs": {
+          "reachable": false,
+          "error": "Cannot connect to host localhost:8000 ssl:default [Multiple exceptions: [Errno 111] Connect call failed ('::1', 8000, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 8000)]"
+        }
+      },
+      "reachable_count": 0,
+      "total_endpoints": 3
+    },
+    "Branch Compatibility": {
+      "status": "pass",
+      "branches": {
+        "rama": {
+          "exists": true,
+          "missing_components": [],
+          "complete": true
+        },
+        "meta": {
+          "exists": false
+        },
+        "tele": {
+          "exists": true,
+          "missing_components": [],
+          "complete": true
+        }
+      },
+      "complete_branches": 2,
+      "total_branches": 3
+    },
+    "Documentation": {
+      "status": "pass",
+      "documentation": {
+        "README.md": {
+          "exists": true,
+          "size": 3467,
+          "lines": 110
+        },
+        "README_UNIVERSAL.md": {
+          "exists": true,
+          "size": 14806,
+          "lines": 459
+        },
+        "CHANGELOG.md": {
+          "exists": true,
+          "size": 2821,
+          "lines": 79
+        }
+      },
+      "warnings": []
+    }
+  },
+  "errors": [],
+  "warnings": [],
+  "recommendations": [
+    "Run 'python3 awakener.py --mode basic' to create mock databases",
+    "Mock ML models will be created automatically on first run",
+    "\u2705 System is ready! Use 'make wake' to start"
+  ]
+}

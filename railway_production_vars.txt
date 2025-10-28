@@ -1,0 +1,18 @@
+# Variables de entorno para Railway Deployment
+# Copia estas variables al dashboard de Railway
+
+# Sistema
+DUMMY_MODE=false
+ENVIRONMENT=production
+LOG_LEVEL=INFO
+DEBUG=false
+PORT=8000
+
+# Meta Ads (CONFIGURADO)
+META_ACCESS_TOKEN=EAAlZBjrH0WtYBP4jclDq2lVTOwh3gQiU3ZCsdOPzxi5FDhbZAIlbq01BDzUBUuWoSuOT6FpccPS1713fG6U7Mxnuovj6rDTsa90tEeCZADIHgZAURZAT3hpyiUSqfF1ckPSzxnSzWZAkuXSLhaZAIEBCBvbDZAV0N79CfmVcJeqb3nJBpQO7YSfN2NeU4fQ3msTf2wwZDZD
+
+# PENDIENTES (configura en Railway):
+# META_ADS_ACCOUNT_ID=act_your-account-id
+# SUPABASE_URL=https://your-project.supabase.co  
+# SUPABASE_SERVICE_KEY=your-service-key
+# YOUTUBE_API_KEY=your-youtube-key

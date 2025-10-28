@@ -1,0 +1,37 @@
+{
+  "timestamp": "2025-10-28T15:09:22.616009",
+  "channel_id": "UCgohgqLVu1QPdfa64Vkrgeg",
+  "confidence_score": 4,
+  "confidence_percentage": 100.0,
+  "confidence_factors": [
+    [
+      "Canal existe y es accesible",
+      true
+    ],
+    [
+      "Feed RSS disponible",
+      true
+    ],
+    [
+      "Format de ID válido",
+      true
+    ],
+    [
+      "Sin indicadores de terminación",
+      true
+    ]
+  ],
+  "previous_data": {
+    "subscribers": 15200,
+    "monthly_views": 42000,
+    "engagement_rate": 3.2,
+    "analysis_date": "Análisis anterior del sistema"
+  },
+  "recommendation": "proceed",
+  "analysis_summary": {
+    "channel_exists": true,
+    "format_valid": true,
+    "rss_accessible": true,
+    "no_termination_signs": true
+  }
+}

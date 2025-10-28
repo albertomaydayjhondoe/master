@@ -1,0 +1,173 @@
+{
+  "project_name": "Universal Multi-Branch Automation System",
+  "project_root": "/workspaces/master",
+  "dummy_mode": true,
+  "active_branches": [
+    "rama",
+    "tele"
+  ],
+  "global_settings": {
+    "dummy_mode": true,
+    "auto_wake_services": true,
+    "generate_test_data": true,
+    "simulation_level": "full",
+    "health_check_interval": 300,
+    "metrics_collection_enabled": true,
+    "cors_enabled": true,
+    "api_docs_enabled": true,
+    "debug_mode": true,
+    "hot_reload": true
+  },
+  "branch_configs": {
+    "rama": {
+      "name": "rama",
+      "description": "TikTok ML Automation System",
+      "main_directory": "/workspaces/master",
+      "services": [
+        "ml_api",
+        "device_farm",
+        "monitoring"
+      ],
+      "dependencies": [
+        "fastapi",
+        "uvicorn",
+        "ultralytics",
+        "selenium"
+      ],
+      "env_vars": {
+        "DUMMY_MODE": "true",
+        "LOG_LEVEL": "INFO",
+        "PROJECT_ROOT": "/workspaces/master",
+        "BRANCH_NAME": "rama",
+        "ML_API_PORT": "8000",
+        "ML_API_HOST": "0.0.0.0",
+        "DATABASE_URL": "postgresql://dummy:dummy@localhost:5432/tiktok_ml",
+        "REDIS_URL": "redis://localhost:6379/0",
+        "YOLO_SCREENSHOT_IMPL": "ml_core.models.yolo_screenshot.YoloScreenshotDetector",
+        "YOLO_VIDEO_IMPL": "ml_core.models.yolo_video.YoloVideoDetector",
+        "ADB_CONTROLLER_IMPL": "device_farm.controllers.adb_controller.ADBController",
+        "DEVICE_FARM_SIZE": "10",
+        "MONITORING_ENABLED": "true"
+      },
+      "startup_commands": [
+        "uvicorn ml_core.api.main:app --host 0.0.0.0 --port 8000 --reload"
+      ],
+      "health_checks": [
+        "http://localhost:8000/health"
+      ],
+      "database_requirements": [
+        "postgresql",
+        "redis"
+      ],
+      "ml_requirements": [
+        "yolo_screenshot",
+        "yolo_video",
+        "affinity_model"
+      ]
+    },
+    "tele": {
+      "name": "tele",
+      "description": "Like4Like Telegram Automation",
+      "main_directory": "/workspaces/master/telegram_automation",
+      "services": [
+        "telegram_bot",
+        "youtube_executor"
+      ],
+      "dependencies": [
+        "telethon",
+        "selenium",
+        "asyncpg"
+      ],
+      "env_vars": {
+        "DUMMY_MODE": "true",
+        "LOG_LEVEL": "INFO",
+        "PROJECT_ROOT": "/workspaces/master",
+        "BRANCH_NAME": "tele",
+        "TELEGRAM_API_ID": "12345",
+        "TELEGRAM_API_HASH": "dummy_hash",
+        "TELEGRAM_PHONE": "+1234567890",
+        "TELEGRAM_BOT_TOKEN": "dummy_bot_token",
+        "DATABASE_URL": "postgresql://dummy:dummy@localhost:5432/like4like_bot",
+        "GOLOGIN_API_TOKEN": "dummy_gologin_token",
+        "GOLOGIN_MAX_PROFILES": "5",
+        "YOUTUBE_MIN_WATCH_TIME": "30",
+        "YOUTUBE_MAX_WATCH_TIME": "300",
+        "YOUTUBE_MAX_ACTIONS_PER_DAY": "50",
+        "YOUTUBE_ENABLE_COMMENTS": "true",
+        "SECURITY_HUMAN_DELAYS": "true"
+      },
+      "startup_commands": [
+        "python main.py"
+      ],
+      "health_checks": [],
+      "database_requirements": [
+        "postgresql"
+      ],
+      "ml_requirements": []
+    }
+  },
+  "cloud_endpoints": {
+    "postgresql": "postgresql://dummy:dummy@localhost:5432",
+    "mongodb": "mongodb://dummy:dummy@localhost:27017",
+    "redis": "redis://localhost:6379",
+    "elasticsearch": "http://localhost:9200",
+    "prometheus": "http://localhost:9090",
+    "grafana": "http://localhost:3000",
+    "webhook_notifications": "http://localhost:3001/webhooks"
+  },
+  "monitoring_config": {
+    "enabled": true,
+    "health_checks": {
+      "interval": 300,
+      "timeout": 30,
+      "retries": 3
+    },
+    "metrics": {
+      "collection_interval": 60,
+      "retention_days": 30,
+      "enable_system_metrics": true,
+      "enable_application_metrics": true
+    },
+    "alerting": {
+      "enabled": true,
+      "channels": [
+        "console",
+        "file"
+      ],
+      "thresholds": {
+        "cpu_usage": 80,
+        "memory_usage": 85,
+        "disk_usage": 90,
+        "error_rate": 5
+      }
+    }
+  },
+  "security_config": {
+    "dummy_api_keys": {
+      "ml_api": "dummy_development_key",
+      "meta_ads": "dummy_meta_key",
+      "gologin": "dummy_gologin_key"
+    },
+    "rate_limiting": {
+      "enabled": true,
+      "requests_per_minute": 60,
+      "burst_limit": 10
+    },
+    "cors": {
+      "enabled": true,
+      "allowed_origins": [
+        "*"
+      ],
+      "allowed_methods": [
+        "*"
+      ],
+      "allowed_headers": [
+        "*"
+      ]
+    },
+    "authentication": {
+      "enabled": false,
+      "require_api_key": false
+    }
+  }
+}

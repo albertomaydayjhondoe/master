@@ -1,0 +1,8 @@
+{
+  "type": "detection",
+  "classes": [
+    "ui_element",
+    "popup",
+    "overlay"
+  ]
+}

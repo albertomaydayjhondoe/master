@@ -4,7 +4,7 @@ Cliente Python para el sistema de marketing musical automatizado.
 from typing import Dict, Any, List, Optional
 import httpx
 import asyncio
-from datetime import datetime
+from datetime import datetime, timedelta
 
 class MetaMarketingClient:
     """
@@ -38,13 +38,13 @@ class MetaMarketingClient:
     def __init__(
         self,
         base_url: str = "http://localhost:8000",
-        api_key: str = None,
+        api_key: Optional[str] = None,
         timeout: float = 30
     ):
         self.base_url = base_url.rstrip("/")
         self.api_key = api_key or "dummy_development_key"
         self.timeout = timeout
-        self._client = None
+        self._client: Optional[httpx.AsyncClient] = None
         
     async def __aenter__(self):
         self._client = httpx.AsyncClient(
@@ -55,11 +55,19 @@ class MetaMarketingClient:
         return self
         
     async def __aexit__(self, exc_type, exc, tb):
-        await self._client.aclose()
+        if self._client:
+            await self._client.aclose()
+            
+    def _ensure_client(self) -> httpx.AsyncClient:
+        """Ensure client is initialized and return it."""
+        if not self._client:
+            raise RuntimeError("Client not initialized. Use 'async with' context manager.")
+        return self._client
         
     async def analyze_video(self, video_id: str) -> Dict[str, Any]:
         """Analizar video y obtener segmentos sugeridos."""
-        response = await self._client.post(
+        client = self._ensure_client()
+        response = await client.post(
             "/api/v1/meta/analyze-video",
             params={"video_id": video_id}
         )
@@ -73,7 +81,8 @@ class MetaMarketingClient:
         count: int = 5
     ) -> Dict[str, Any]:
         """Generar variaciones de anuncios para un segmento."""
-        response = await self._client.post(
+        client = self._ensure_client()
+        response = await client.post(
             "/api/v1/meta/generate-variations",
             params={
                 "video_id": video_id,
@@ -92,7 +101,8 @@ class MetaMarketingClient:
         budget: float
     ) -> Dict[str, Any]:
         """Crear nueva campaña publicitaria."""
-        response = await self._client.post(
+        client = self._ensure_client()
+        response = await client.post(
             "/api/v1/meta/create-campaign",
             json={
                 "video_id": video_id,
@@ -117,7 +127,8 @@ class MetaMarketingClient:
                 "end": datetime.now().isoformat()
             }
             
-        response = await self._client.post(
+        client = self._ensure_client()
+        response = await client.post(
             "/api/v1/meta/optimize-campaign",
             json={
                 "campaign_id": campaign_id,

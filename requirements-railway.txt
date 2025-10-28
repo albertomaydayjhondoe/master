@@ -1,0 +1,20 @@
+# 🚀 Stakas MVP Viral Dashboard - Railway Requirements
+
+# Core framework
+streamlit==1.50.0
+pandas==2.3.2
+numpy==2.3.2
+
+# Visualization
+matplotlib==3.10.7
+seaborn==0.13.2
+plotly==6.3.1
+
+# Web requests
+requests==2.32.5
+
+# Data handling
+python-dateutil==2.9.0.post0
+
+# Optional performance
+cachetools==6.2.0

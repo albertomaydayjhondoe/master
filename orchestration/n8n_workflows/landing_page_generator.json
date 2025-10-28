@@ -1,0 +1,177 @@
+{
+  "name": "Meta Ads Landing Page Generator",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Webhook - Campaign Launch",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "webhookId": "landing-page-generator"
+    },
+    {
+      "parameters": {
+        "functionCode": "// Extract campaign data\nconst campaignData = $input.all()[0].json;\n\nreturn [\n  {\n    json: {\n      campaign_id: campaignData.campaign_id,\n      campaign_name: campaignData.campaign_name,\n      video_url: campaignData.video_url,\n      artist_name: $env.ARTIST_NAME || 'Artista Genérico',\n      artist_youtube: $env.ARTIST_YOUTUBE_CHANNEL,\n      artist_instagram: $env.ARTIST_INSTAGRAM,\n      artist_tiktok: $env.ARTIST_TIKTOK,\n      meta_pixel_id: $env.META_PIXEL_ID\n    }\n  }\n];"
+      },
+      "name": "Extract Campaign Data",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{$env.ML_CORE_URL}}/generate_landing_page",
+        "method": "POST",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "campaign_id",
+              "value": "={{$json.campaign_id}}"
+            },
+            {
+              "name": "campaign_name",
+              "value": "={{$json.campaign_name}}"
+            },
+            {
+              "name": "video_url",
+              "value": "={{$json.video_url}}"
+            },
+            {
+              "name": "artist_data",
+              "value": "={{JSON.stringify({\n  name: $json.artist_name,\n  youtube: $json.artist_youtube,\n  instagram: $json.artist_instagram,\n  tiktok: $json.artist_tiktok\n})}}"
+            },
+            {
+              "name": "meta_pixel_id",
+              "value": "={{$json.meta_pixel_id}}"
+            }
+          ]
+        }
+      },
+      "name": "Generate Landing Page HTML",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{$env.META_ADS_URL}}/campaigns/{{$json.campaign_id}}/landing_page",
+        "method": "PUT",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "landing_page_html",
+              "value": "={{$json.landing_page_html}}"
+            },
+            {
+              "name": "landing_page_url",
+              "value": "={{$json.landing_page_url}}"
+            }
+          ]
+        }
+      },
+      "name": "Update Meta Ads Campaign",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [850, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{$env.PIXEL_TRACKER_URL}}/events",
+        "method": "POST",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "event_name",
+              "value": "PageView"
+            },
+            {
+              "name": "campaign_id",
+              "value": "={{$json.campaign_id}}"
+            },
+            {
+              "name": "landing_page_url",
+              "value": "={{$json.landing_page_url}}"
+            }
+          ]
+        }
+      },
+      "name": "Track Pixel Event",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [1050, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "return [\n  {\n    json: {\n      status: 'success',\n      message: 'Landing page generated and campaign updated',\n      campaign_id: $json.campaign_id,\n      landing_page_url: $json.landing_page_url\n    }\n  }\n];"
+      },
+      "name": "Response",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [1250, 300]
+    }
+  ],
+  "connections": {
+    "Webhook - Campaign Launch": {
+      "main": [
+        [
+          {
+            "node": "Extract Campaign Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Campaign Data": {
+      "main": [
+        [
+          {
+            "node": "Generate Landing Page HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Landing Page HTML": {
+      "main": [
+        [
+          {
+            "node": "Update Meta Ads Campaign",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Meta Ads Campaign": {
+      "main": [
+        [
+          {
+            "node": "Track Pixel Event",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Track Pixel Event": {
+      "main": [
+        [
+          {
+            "node": "Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0
+}

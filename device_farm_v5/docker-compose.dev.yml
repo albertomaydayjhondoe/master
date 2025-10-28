@@ -1,0 +1,79 @@
+# Device Farm v5 - Development Docker Compose
+# Optimized for development with hot reloading and debugging
+
+version: '3.8'
+
+services:
+  # Development Device Farm service
+  device-farm-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development  # If we had multi-stage build
+    container_name: device-farm-v5-dev
+    restart: "no"
+    
+    # Development environment
+    environment:
+      - GOLOGIN_API_TOKEN=${GOLOGIN_API_TOKEN}
+      - ENVIRONMENT=development
+      - DEBUG=true
+      - LOG_LEVEL=DEBUG
+      - DASHBOARD_SECRET_KEY=dev-secret-key
+      - DASHBOARD_USERNAME=admin
+      - DASHBOARD_PASSWORD=admin
+      - API_SECRET_KEY=dev-api-key
+      - JWT_SECRET_KEY=dev-jwt-key
+    
+    # Port mappings
+    ports:
+      - "5000:5000"       # Dashboard
+      - "8000:8000"       # API
+      - "4723-4733:4723-4733"  # Appium servers
+    
+    # Volume mappings for development
+    volumes:
+      # Source code hot reload
+      - .:/app
+      
+      # Persistent dev data
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./screenshots:/app/screenshots
+      
+      # USB device access
+      - /dev/bus/usb:/dev/bus/usb
+      - /dev:/dev
+    
+    # Device access
+    devices:
+      - /dev/bus/usb
+    
+    privileged: true
+    
+    networks:
+      - device-farm-dev-network
+    
+    # Override command for development
+    command: ["python3", "-m", "src.main", "--debug"]
+    
+    depends_on:
+      - redis-dev
+
+  # Redis for development
+  redis-dev:
+    image: redis:7-alpine
+    container_name: device-farm-redis-dev
+    restart: "no"
+    
+    ports:
+      - "6379:6379"
+    
+    command: redis-server --requirepass dev123
+    
+    networks:
+      - device-farm-dev-network
+
+networks:
+  device-farm-dev-network:
+    driver: bridge

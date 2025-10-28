@@ -1,5 +1,16 @@
+"""
+Yolo Screenshot - Machine Learning and Device Automation
+
+This module is part of the TikTok ML Branch system.
+Maintained as part of the universal automation platform.
+"""
+
 from typing import Dict, Any, List
 import random
+
+
+__all__ = ['YoloScreenshotDetector', 'detect']
+
 
 class YoloScreenshotDetector:
     """Dummy wrapper for a YOLO-based screenshot detector.
