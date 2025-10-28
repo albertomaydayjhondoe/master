@@ -1,39 +1,25 @@
 #!/usr/bin/env python3
 """
-🚀 RAILWAY SIMPLE LAUNCHER - STAKAS VIRAL SYSTEM
-Launcher simplificado sin dependencias externas para Railway
+🚀 RAILWAY ULTRA-SIMPLE LAUNCHER - STAKAS VIRAL SYSTEM
+Launcher minimalista para Railway sin dependencias problemáticas
 """
 
 import os
-import sys
 import time
-import logging
-import subprocess
-from http.server import HTTPServer, SimpleHTTPRequestHandler
 import json
-import threading
-
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='🚀 %(asctime)s [RAILWAY] %(levelname)s: %(message)s'
-)
-logger = logging.getLogger(__name__)
+from http.server import HTTPServer, BaseHTTPRequestHandler
 
 class SimpleRailwayLauncher:
-    """Railway launcher simplificado"""
+    """Railway launcher ultra-simplificado"""
     
     def __init__(self):
         self.port = int(os.getenv('PORT', 8501))
         self.host = '0.0.0.0'
-        self.environment = os.getenv('ENVIRONMENT', 'production')
-        
-        logger.info(f"🎯 Simple Railway Launcher - Port: {self.port}")
-        logger.info(f"📊 Environment: {self.environment}")
+        print(f"🚀 Starting Stakas System on port {self.port}")
     
-    def start_health_server(self):
-        """Inicia servidor de health check"""
-        class HealthHandler(SimpleHTTPRequestHandler):
+    def create_health_server(self):
+        """Crea servidor de health check simple"""
+        class HealthHandler(BaseHTTPRequestHandler):
             def do_GET(self):
                 if self.path == '/health':
                     self.send_response(200)

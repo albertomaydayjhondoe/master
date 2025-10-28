@@ -18,19 +18,24 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements
-COPY requirements.txt requirements-ml.txt ./
+COPY requirements-railway.txt ./
 
 # Install Python dependencies
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt && \
-    pip install --no-cache-dir streamlit plotly pandas numpy scikit-learn opencv-python-headless fastapi uvicorn
+    pip install --no-cache-dir -r requirements-railway.txt
+
+# Install additional Railway-specific dependencies
+RUN pip install --no-cache-dir \
+    fastapi \
+    uvicorn \
+    python-multipart \
+    aiofiles
 
 # Copy application code
 COPY . .
 
-# Set proper permissions using setup script
-RUN chmod +x setup_debian_permissions.sh && \
-    ./setup_debian_permissions.sh
+# Set executable permissions for launcher
+RUN chmod +x railway_minimal_launcher.py
 
 # Create directories
 RUN mkdir -p data/models/production data/logs uploads cache
@@ -51,5 +56,5 @@ EXPOSE 8501
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
     CMD curl -f http://localhost:${PORT:-8501}/health || exit 1
 
-# Start Railway simple launcher
-CMD ["python", "railway_simple_launcher.py"]
+# Start Railway minimal launcher
+CMD ["python", "railway_minimal_launcher.py"]

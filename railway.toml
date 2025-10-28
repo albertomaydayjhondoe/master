@@ -16,7 +16,7 @@ APP_NAME = "stakas-mvp-viral"
 
 # Deployment configuration
 [deploy]
-startCommand = "python railway_simple_launcher.py"
+startCommand = "python railway_minimal_launcher.py"
 healthcheckPath = "/health"
 healthcheckTimeout = 300
 restartPolicyType = "ON_FAILURE"
