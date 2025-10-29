@@ -1,0 +1,16 @@
+{
+  "video_file": "path/to/video.mp4",
+  "release_date": "2025-11-10",
+  "title": "Nuevo Hit Viral",
+  "artist": "Artista Ejemplo",
+  "genre": "Urbano",
+  "budget": 300,
+  "audience_config": {
+    "countries": ["ES", "MX", "AR"],
+    "age_ranges": [[18, 24], [25, 34]],
+    "interests": ["música urbana", "reggaeton", "trap"]
+  },
+  "meta_api_credentials": "...",
+  "youtube_api_credentials": "...",
+  "spotify_api_credentials": "..."
+}

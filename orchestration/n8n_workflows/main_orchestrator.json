@@ -89,6 +89,18 @@
       "position": [500, 200],
       "typeVersion": 2
     },
+      {
+        "name": "Meta System V3.6 Webhook Integration",
+        "type": "webhook",
+        "endpoint": "/meta_system/webhook",
+        "method": "POST",
+        "onSuccess": [
+          {
+            "action": "trigger_meta_ads_campaign",
+            "input": "{{ $json }}"
+          }
+        ]
+      },
     {
       "id": "device_farm_controller",
       "type": "n8n-nodes-base.httpRequest",

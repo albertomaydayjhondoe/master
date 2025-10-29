@@ -82,7 +82,9 @@ try:
         screenshot_analysis,
         anomaly_detection,
         posting_predictor,
-        affinity_calculator
+        affinity_calculator,
+        meta_ads_optimizer,
+        feedback
     )
     from ml_core.meta_automation.api import endpoints as meta_endpoints
 
@@ -92,6 +94,8 @@ try:
     app.include_router(posting_predictor.router, prefix="/api/v1", tags=["Posting Time"])
     app.include_router(affinity_calculator.router, prefix="/api/v1", tags=["Affinity"])
     app.include_router(meta_endpoints.router, tags=["Meta Marketing Automation"])
+    app.include_router(meta_ads_optimizer.router, prefix="/api/v1", tags=["Meta Ads Optimizer"])
+    app.include_router(feedback.router, prefix="/api/v1", tags=["Feedback Integration"])
 except ImportError:
     # Endpoints not implemented yet - running in basic mode
     pass

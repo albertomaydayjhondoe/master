@@ -1,0 +1,9 @@
+LECCION 2 MANDATO OPTIMIZACION MATEMATICA DE PRESUPUESTO Y RENTABILIDAD
+
+OBJETIVO DEL MANDATO
+Establecer un sistema de límites matemáticos rigurosos que garantice la rentabilidad óptima en cada fase del lanzamiento. Este mandato define ecuaciones, umbrales y algoritmos de decisión basados en modelos cuantitativos para maximizar ROAS mientras se minimizan riesgos de pérdida presupuestaria.
+
+SECCION 1 MODELO MATEMATICO BASE
+... (contenido completo del mandato copiado del mensaje anterior) ...
+
+FIN DEL MANDATO DE OPTIMIZACION MATEMATICA

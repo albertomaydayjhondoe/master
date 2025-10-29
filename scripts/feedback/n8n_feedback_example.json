@@ -1,0 +1,40 @@
+{
+  "name": "Meta Ads Feedback to ML API",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "1",
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:8000/api/v1/feedback_update",
+        "method": "POST",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "{\n  \"timestamp\": \"={{$now}}\",\n  \"campaign_id\": 123,\n  \"cpa\": 2.1,\n  \"roas\": 3.2,\n  \"extra\": {\"fuente\": \"n8n demo\"}\n}"
+      },
+      "id": "2",
+      "name": "Enviar Feedback ML",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [500, 300]
+    }
+  ],
+  "connections": {
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Enviar Feedback ML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

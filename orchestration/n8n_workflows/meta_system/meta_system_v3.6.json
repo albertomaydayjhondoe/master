@@ -1,0 +1,26 @@
+{
+  "name": "Meta System V3.6 Viral Music Launch",
+  "description": "Workflow automatizado para lanzamientos musicales virales con ML, optimización bayesiana y distribución en Meta Ads, YouTube y Spotify.",
+  "triggers": [
+    {"type": "schedule", "days_before_release": 5},
+    {"type": "api", "endpoint": "/meta_system/trigger"},
+    {"type": "webhook", "endpoint": "/meta_system/webhook", "method": "POST"}
+  ],
+  "inputs": [
+    "video_file", "release_date", "title", "artist", "genre", "budget", "audience_config", "meta_api_credentials", "youtube_api_credentials", "spotify_api_credentials"
+  ],
+  "phases": [
+    "exploracion", "explotacion", "escalado"
+  ],
+  "outputs": [
+    "clip_ganador_id", "clip_ganador_file", "audiencia_ideal_json", "modelo_ml", "metricas_base_json", "zta_report_json", "dashboard_url", "roas_final_json"
+  ],
+  "error_handling": {
+    "yolo_fallback": true,
+    "min_clips_threshold": true,
+    "api_retry": 3,
+    "roas_pause_threshold": 0.5
+  },
+  "logs": true,
+  "output_format": "json"
+}
