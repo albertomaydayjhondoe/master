@@ -1,31 +1,19 @@
-# Model configuration for production use
-
+affinity:
+  device: cpu
+  model_path: C:\Users\ADM\Documents\GitHub\master\data\models\production\account_affinity.onnx
+anomaly:
+  device: cpu
+  model_path: C:\Users\ADM\Documents\GitHub\master\data\models\production\anomaly_detector.pt
 yolo_screenshot:
-  # Path to trained YOLOv8 weights
-  model_path: /app/data/models/production/tiktok_ui_detector.pt
-  
-  # Inference device (cuda/cpu)
-  device: cuda
-  
-  # Detection thresholds
   conf_threshold: 0.25
+  device: cpu
   iou_threshold: 0.45
-
-  # Training configuration
+  model_path: C:\Users\ADM\Documents\GitHub\master\data\models\production\tiktok_ui_detector.pt
   training:
-    data_yaml: /app/data/datasets/tiktok_ui/data.yaml
+    batch: 16
+    data_yaml: C:\Users\ADM\Documents\GitHub\master\data\datasets\tiktok_ui\data.yaml
     epochs: 100
     imgsz: 640
-    batch: 16
-    
 yolo_video:
-  model_path: /app/data/models/production/tiktok_video_analyzer.pt
-  device: cuda
-  
-affinity:
-  model_path: /app/data/models/production/account_affinity.onnx
-  device: cuda
-  
-anomaly:
-  model_path: /app/data/models/production/anomaly_detector.pt
-  device: cuda
+  device: cpu
+  model_path: C:\Users\ADM\Documents\GitHub\master\data\models\production\tiktok_video_analyzer.pt

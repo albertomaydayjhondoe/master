@@ -7,7 +7,14 @@ Launcher minimalista para Railway sin dependencias problemáticas
 import os
 import time
 import json
+import subprocess
+import threading
+import logging
 from http.server import HTTPServer, BaseHTTPRequestHandler
+
+# Configurar logger
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 class SimpleRailwayLauncher:
     """Railway launcher ultra-simplificado"""
