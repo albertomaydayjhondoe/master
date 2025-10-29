@@ -1,0 +1,91 @@
+{
+  "name": "Meta Ads Auto Campaign + ML Monitoring",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "/meta-ads-trigger",
+        "options": {}
+      },
+      "id": "meta-ads-webhook",
+      "name": "Meta Ads Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [200, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://ml-core-api:8002/analyze_screenshot",
+        "method": "POST",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "{\n  \"account_id\": \"1771115133833816\"\n}"
+      },
+      "id": "ml-monitor",
+      "name": "ML Shadowban/Anomaly Check",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://ml-core-api:8002/create_meta_campaign",
+        "method": "POST",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "{\n  \"account_id\": \"1771115133833816\",\n  \"budget\": 400,\n  \"objective\": \"OUTCOME_TRAFFIC\",\n  \"target\": \"youtube\"\n}"
+      },
+      "id": "create-campaign",
+      "name": "Create Meta Campaign",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [800, 300]
+    },
+    {
+      "parameters": {
+        "channel": "#meta-ads-alerts",
+        "text": "🚨 Meta Ads Campaign Triggered & ML Monitoring: {{$json}}"
+      },
+      "id": "discord-alert",
+      "name": "Discord Alert",
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 1,
+      "position": [1100, 300]
+    }
+  ],
+  "connections": {
+    "meta-ads-webhook": {
+      "main": [
+        [
+          {
+            "node": "ml-monitor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ml-monitor": {
+      "main": [
+        [
+          {
+            "node": "create-campaign",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "create-campaign": {
+      "main": [
+        [
+          {
+            "node": "discord-alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

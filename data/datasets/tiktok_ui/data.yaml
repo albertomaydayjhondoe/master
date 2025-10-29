@@ -1,0 +1,15 @@
+names:
+  0: like_button
+  1: follow_button
+  2: comment_button
+  3: video_player
+  4: profile_icon
+  5: share_button
+  6: text_overlay
+  7: thumbnail
+  8: user_avatar
+nc: 9
+path: C:\Users\ADM\Documents\GitHub\master\data\datasets\tiktok_ui
+test: test/images
+train: train/images
+val: val/images

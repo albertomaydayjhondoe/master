@@ -53,7 +53,7 @@ def check_meta_ads_status(config):
     ready = True
     
     if config['meta_access_token'] and 'EAAlZBjrH0WtYBP4' in config['meta_access_token']:
-        items.append("✅ ACCESS_TOKEN: Configurado y validado (Angel Garcia)")
+        items.append("✅ ACCESS_TOKEN: Configurado y validado (asampayo00@gmail.com)")
     else:
         items.append("❌ ACCESS_TOKEN: No configurado")
         ready = False

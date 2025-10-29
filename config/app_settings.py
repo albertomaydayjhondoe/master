@@ -6,6 +6,17 @@ dummy stubs. To switch to production implementations, set
 `DUMMY_MODE=false` and provide real implementations for the factories.
 """
 import os
+from pathlib import Path
+
+# Auto-load .env file if exists
+try:
+    from dotenv import load_dotenv
+    env_path = Path(__file__).parent.parent / ".env"
+    if env_path.exists():
+        load_dotenv(env_path)
+        print(f"✅ Loaded environment from: {env_path}")
+except ImportError:
+    pass  # dotenv not installed
 
 
 def is_dummy_mode() -> bool:

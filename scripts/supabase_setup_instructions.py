@@ -73,7 +73,7 @@ def generate_step_by_step_instructions():
     
     print("PASO 5️⃣ - Confirmar Datos de Prueba")
     print("   🔍 Ve a tabla 'accounts'")
-    print("   ✅ Debe haber 1 registro: Angel Garcia Meta Ads")
+    print("   ✅ Debe haber 1 registro: ASampayo Meta Ads")
     print("   🔍 Ve a tabla 'campaigns'")
     print("   ✅ Debe haber 1 registro: Test España-LATAM ML")
     print()

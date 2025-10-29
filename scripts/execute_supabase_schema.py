@@ -170,7 +170,7 @@ async def insert_test_data(supabase):
         # Insertar cuenta de prueba
         account_data = {
             'account_id': '1771115133833816',
-            'account_name': 'Angel Garcia Meta Ads',
+            'account_name': 'ASampayo Meta Ads',
             'access_token': 'EAAlZBjrH0WtYBP4...(token_truncated)',
             'daily_budget': 400.00
         }

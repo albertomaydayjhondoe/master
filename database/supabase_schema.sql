@@ -145,7 +145,7 @@ CREATE TRIGGER update_geographic_updated_at BEFORE UPDATE ON geographic_performa
 -- DATOS DE EJEMPLO PARA TESTING
 -- ============================================
 INSERT INTO accounts (account_id, account_name, access_token, daily_budget) VALUES 
-('1771115133833816', 'Angel Garcia Meta Ads', 'EAAlZBjrH0WtYBP4...', 400.00)
+('1771115133833816', 'ASampayo Meta Ads', 'EAAlZBjrH0WtYBP4...', 400.00)
 ON CONFLICT (account_id) DO NOTHING;
 
 INSERT INTO campaigns (campaign_id, account_id, campaign_name, daily_budget, total_budget) VALUES 

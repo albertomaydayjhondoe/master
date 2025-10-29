@@ -44,7 +44,7 @@ CREATE TABLE metrics (
 
 -- DATOS DE PRUEBA
 INSERT INTO accounts (account_id, account_name, daily_budget) VALUES 
-('1771115133833816', 'Angel Garcia Meta Ads', 400.00);
+('1771115133833816', 'ASampayo Meta Ads', 400.00);
 
 INSERT INTO campaigns (campaign_id, campaign_name, daily_budget) VALUES 
 ('test_campaign_001', 'España-LATAM Viral Campaign', 100.00);

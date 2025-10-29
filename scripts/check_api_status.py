@@ -11,7 +11,7 @@ configured_apis = {
     "Meta Ads": {
         "status": "✅ COMPLETAMENTE CONFIGURADO",
         "items": [
-            "✅ ACCESS_TOKEN: EAAlZBjrH0WtYBP4... (Validado para Angel Garcia)",
+            "✅ ACCESS_TOKEN: EAAlZBjrH0WtYBP4... (Validado para asampayo00@gmail.com)",
             "✅ AD_ACCOUNT_ID: 1771115133833816",
             "⚠️ PIXEL_ID: Opcional, no configurado"
         ],
