@@ -11,12 +11,12 @@ RUN apt-get update && apt-get install -y \
 
 # Python dependencies
 COPY requirements.txt requirements-ml.txt ./
-RUN pip3 install --no-cache-dir -r requirements.txt -r requirements-ml.txt
+RUN pip3 install --no-cache-dir -r requirements.txt -r requirements-ml.txt streamlit
 
 # Application code
 COPY ml_core /app/ml_core
 COPY config /app/config
-COPY scripts/download_coco_dataset.py /app/scripts/download_coco_dataset.py
+COPY scripts /app/scripts
 
 # Create necessary directories
 RUN mkdir -p /app/data/models/production \
@@ -26,4 +26,4 @@ RUN mkdir -p /app/data/models/production \
 # Descargar COCO automáticamente en build (puedes comentar si no lo necesitas siempre)
 RUN python3 /app/scripts/download_coco_dataset.py
 
-CMD ["uvicorn", "ml_core.api.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD streamlit run /app/scripts/conversational_dashboard.py --server.port 80 --server.headless true
