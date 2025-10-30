@@ -2,13 +2,14 @@
 # - Oficial: https://cocodataset.org/#download
 # - Ultralytics: https://docs.ultralytics.com/datasets/detect/coco/
 # Puedes descargarlo manualmente o lanzar el script /app/scripts/download_coco_dataset.py cuando lo necesites.
-# Descargar COCO automáticamente en build (puede fallar en cloud por tamaño/tiempo)
-RUN python /app/scripts/download_coco_dataset.py
 # Dockerfile.unified-railway
 # Imagen unificada: ML API + Dashboard Streamlit + dependencias completas
 
 
 FROM python:3.11-slim
+
+# Descargar COCO automáticamente en build (puede fallar en cloud por tamaño/tiempo)
+RUN python /app/scripts/download_coco_dataset.py
 
 WORKDIR /app
 
