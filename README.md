@@ -1,4 +1,5 @@
-# 🚀 TikTok Viral ML System V3 - Community Manager
+
+# 🚀 TikTok Viral ML System V3 - Community Manager (Despliegue Unificado)
 
 Sistema completo de **auto-viralización** para Community Managers de discográficas. Combina ML (YOLOv8), Device Farm, GoLogin, Meta Ads y YouTube para lanzar campañas virales automáticas.
 
@@ -40,7 +41,8 @@ Ver documentación completa: [`docs/MONITOR_CHANNEL_MODE.md`](docs/MONITOR_CHANN
 
 ---
 
-## 📋 **Quick Start (5 minutos)**
+
+## 📋 **Quick Start (Despliegue Unificado)**
 
 ### 1. **Configurar Credenciales**
 ```bash
@@ -72,10 +74,18 @@ python scripts/configure_apis.py
 ./download-models.sh
 ```
 
-### 3. **Iniciar Docker V3**
+
+### 3. **Build y despliegue Docker Unificado**
 ```bash
-./v3-docker.sh start
+# Build multiplataforma (requiere Docker Buildx)
+docker buildx build --platform linux/amd64,linux/arm64 -f docker/Dockerfile.unified-railway -t agora90/artista-dashboard:latest . --push
 ```
+La imagen incluye:
+- API ML (FastAPI/Uvicorn, puerto 8000)
+- Dashboard interactivo (Streamlit, puerto 8501)
+- Device Farm, Meta Ads, scripts y módulos principales
+- YOLOv8 listo para inferencia (yolov8m.pt)
+- Descarga automática de COCO (puedes comentar la línea en el Dockerfile si no lo necesitas)
 
 ### 4. **Configurar n8n**
 ```bash
@@ -307,18 +317,15 @@ PYTHONPATH=. pytest tests/e2e/
 
 ### **Access:**
 ```bash
-# Dashboard UI
-http://localhost:8501
 
-# Grafana
-http://localhost:3000
-User: admin
-Pass: viral_monitor_2025
+# Dashboard UI (Streamlit)
+http://localhost:8501 (local)
+o la URL pública de Railway
 
-# n8n
-http://localhost:5678
-User: admin
-Pass: viral_admin_2025
+
+# API ML (Swagger)
+http://localhost:8000/docs (local)
+o la URL pública de Railway `/docs`
 ```
 
 ---
@@ -388,7 +395,16 @@ python unified_system_v3.py \
   --max-campaigns-per-day 2
 ```
 
-**¡A ROMPER LAS RRSS! 🔥🎵🚀**
+
+---
+
+**Notas técnicas:**
+- El dashboard Streamlit es 100% interactivo y accesible desde cualquier navegador.
+- El build es cross-platform (amd64/arm64) y la imagen está lista para Railway, cloud o servidor propio.
+- El dataset COCO se descarga automáticamente durante el build (puedes desactivar la línea si falla en cloud o no lo necesitas).
+- Para solo inferencia con YOLOv8, no necesitas COCO, solo el modelo yolov8m.pt.
+
+---
 
 ---
 
