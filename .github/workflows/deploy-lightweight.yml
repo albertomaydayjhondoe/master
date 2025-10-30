@@ -61,7 +61,13 @@ jobs:
         
     - name: 🎯 Set Railway Project Context
       run: |
-        railway link -p ${{ secrets.RAILWAY_PROJECT_ID }}
+        if [ -n "${{ secrets.RAILWAY_PROJECT_ID }}" ]; then
+          railway link -p ${{ secrets.RAILWAY_PROJECT_ID }}
+        elif [ -n "$RAILWAY_PROJECT_ID" ]; then
+          railway link -p $RAILWAY_PROJECT_ID
+        else
+          echo "No Railway project ID found" && exit 1
+        fi
         
     - name: 🔧 Set Lightweight Environment Variables
       run: |
