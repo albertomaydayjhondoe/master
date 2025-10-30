@@ -38,16 +38,8 @@ else:
     user_input = st.text_input("¿En qué puedo ayudarte hoy?", "", key="input")
     if st.button("Enviar", key="send") and user_input:
         st.session_state["history"].append(("Artista", user_input))
-        try:
-            # Lógica de conversación adaptada a artista
-            payload = {"query": user_input, "role": "artist", "tech_level": "medium"}
-            response = requests.post(f"{API_URL}/recommendation", json=payload)
-            if response.ok:
-                answer = response.json().get("result", "Respuesta recibida.")
-            else:
-                answer = f"Error: {response.status_code} - {response.text}"
-        except Exception as e:
-            answer = f"Error de conexión: {e}"
+        # Respuesta dummy para funcionamiento sin backend
+        answer = "Respuesta de prueba: el backend no está disponible."
         st.session_state["history"].append(("Asesor ML", answer))
     for speaker, msg in st.session_state["history"]:
         st.markdown(f"**{speaker}:** {msg}")
