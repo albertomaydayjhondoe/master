@@ -32,7 +32,6 @@ python unified_system_v3.py \
 ```
 
 **Control de carga inteligente:**
-- ✅ Límite: 2 campañas/día (protege UTM)
 - ✅ Threshold: Solo videos con ML score > 0.70
 - ✅ Priorización: Por virality score (mejores primero)
 - ✅ Budget: $50 × 2 = $100/día max
@@ -41,14 +40,8 @@ Ver documentación completa: [`docs/MONITOR_CHANNEL_MODE.md`](docs/MONITOR_CHANN
 
 ---
 
-
-## 📋 **Quick Start (Despliegue Unificado)**
-
 ### 1. **Configurar Credenciales**
 ```bash
-./setup-credentials.sh
-```
-
 **🚀 NUEVO: Setup Automático con APIs**
 ```bash
 python scripts/configure_apis.py
@@ -59,24 +52,14 @@ python scripts/configure_apis.py
 
 - ✅ **YOLOv8**: 3 modelos listos para producción (77.5MB total)
 - ✅ **GoLogin**: Enterprise API configurada (1000 perfiles)
-- ✅ **Meta Ads**: Token + Account ID configurados (asampayo00@gmail.com)  
 - ✅ **Railway**: Deployment listo
 - ✅ **ML Core**: FastAPI operacional en puerto 8002  
 - ✅ **YouTube API**: Client ID + Secret + Channel ID configurados ✅
 - ✅ **YouTube Channel ID**: UCgohgqLVu1QPdfa64Vkrgeg ✅
 - ✅ **Supabase**: COMPLETAMENTE CONFIGURADO ✅ (ilsikngctkrmqnbutpuz.supabase.co)
 - ✅ **Sistema Meta ML**: Operativo al 100% 🧠
-
-**🔥 SISTEMA 100% COMPLETO**: Meta Ads €400 + ML España-LATAM + Analytics Real-Time **OPERATIVO**
-
-### 2. **Descargar Modelos YOLOv8**
-```bash
 ./download-models.sh
 ```
-
-
-### 3. **Build y despliegue Docker Unificado**
-```bash
 # Build multiplataforma (requiere Docker Buildx)
 docker buildx build --platform linux/amd64,linux/arm64 -f docker/Dockerfile.unified-railway -t agora90/artista-dashboard:latest . --push
 ```
@@ -92,7 +75,6 @@ La imagen incluye:
 ./n8n-setup.sh
 ```
 
-### 5. **Lanzar Campaña** 🚀
 
 #### **Opción A: Video Individual**
 ```bash
