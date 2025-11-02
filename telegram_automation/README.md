@@ -1,23 +1,44 @@
-# Like4Like Telegram Bot
+# Telegram Automation System
 
-A sophisticated automation system for managing like-for-like exchanges on Telegram, with automatic YouTube interactions via GoLogin profiles.
+A sophisticated multi-platform engagement exchange bot for Telegram that facilitates viral content detection, intelligent task execution, and automated social media growth through coordinated engagement.
+
+## 🎯 System Overview
+
+This system implements a comprehensive 6-module architecture for managing cross-platform social media engagement through Telegram:
+
+1. **Listener Module** - Monitors Telegram groups for viral content and engagement opportunities
+2. **Executor Module** - Executes engagement tasks across YouTube, Instagram, and TikTok
+3. **Priority Engine** - ML-based priority calculation for optimal task scheduling
+4. **Metrics Collector** - Analytics and performance monitoring
+5. **Message Generator** - Dynamic, contextual message generation
+6. **Multi-Account Manager** - Account health monitoring and rotation
 
 ## 🚀 Features
 
-- **Telegram Group Monitoring**: Automatically monitors Telegram groups for like4like requests
-- **Intelligent Conversation Handling**: State-machine based conversation flow with natural response classification
-- **YouTube Automation**: Automated video interactions (like, subscribe, comment, watch) using GoLogin browser profiles
-- **Database-Driven**: Comprehensive PostgreSQL database with contact management, exchange tracking, and analytics
-- **Rate Limiting & Security**: Built-in rate limiting, human-like behavior simulation, and ban detection
-- **Health Monitoring**: System-wide health monitoring and metrics collection
-- **Reliability Scoring**: Contact reliability tracking based on exchange completion rates
+### Viral Content Detection
+- Real-time monitoring of Telegram groups
+- ML-powered viral score calculation
+- Multi-platform content analysis
+- Engagement pattern recognition
+
+### Intelligent Task Execution
+- Cross-platform engagement automation
+- Priority-based task scheduling
+- Rate limiting and anti-detection
+- Retry logic with exponential backoff
+
+### ML-Based Prioritization
+- 7-factor priority calculation
+- User behavior learning
+- Optimal timing prediction
+- Dynamic threshold adjustment
 
 ## 📋 System Requirements
 
 - Python 3.9+
-- PostgreSQL 13+
-- Google Chrome/Chromium
-- GoLogin account and API token
+- FastAPI for REST API
+- Telethon for Telegram integration
+- scikit-learn for ML components
 - Telegram API credentials
 
 ## 🛠️ Installation

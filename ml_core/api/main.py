@@ -16,6 +16,8 @@ Maintained as part of the universal automation platform.
 from fastapi import FastAPI, Depends, HTTPException, Security
 from fastapi.security.api_key import APIKeyHeader
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from typing import Dict, Any, Optional
 import os
 
 api_key_header = APIKeyHeader(name="X-API-Key")
@@ -82,21 +84,21 @@ async def verify_api_key(api_key: str = Security(api_key_header)):
 
 # Import routers
 from ml_core.api.endpoints import (
-
-
-__all__ = ['ErrorResponse', 'Config', 'verify_api_key', 'root', 'health']
-
     screenshot_analysis,
     anomaly_detection,
     posting_predictor,
-    affinity_calculator
+    affinity_calculator,
+    coco_detection
 )
+
+__all__ = ['ErrorResponse', 'Config', 'verify_api_key', 'root', 'health']
 
 # Include routers
 app.include_router(screenshot_analysis.router, prefix="/api/v1", tags=["Screenshot Analysis"])
 app.include_router(anomaly_detection.router, prefix="/api/v1", tags=["Anomaly Detection"])
 app.include_router(posting_predictor.router, prefix="/api/v1", tags=["Posting Time"])
 app.include_router(affinity_calculator.router, prefix="/api/v1", tags=["Affinity"])
+app.include_router(coco_detection.router, prefix="/api/v1", tags=["COCO Detection"])
 
 @app.get("/")
 async def root():

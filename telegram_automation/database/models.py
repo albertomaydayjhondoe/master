@@ -1,7 +1,531 @@
 """
-Database models and connection management for Telegram automation
-Handles PostgreSQL operations for exchanges, contacts, and conversation tracking
+Database Models for Telegram Automation System
+Defines data structures for persistence and analytics.
 """
+
+from datetime import datetime, timedelta
+from typing import Dict, List, Optional, Any
+from dataclasses import dataclass, field
+from enum import Enum
+import json
+
+# Task and Exchange Models
+
+@dataclass
+class ExchangeTask:
+    """Represents an engagement exchange task."""
+    task_id: str
+    user_id: int
+    platform: str
+    account_info: str
+    content_url: str
+    exchange_type: str
+    priority: Any  # TaskPriority enum
+    status: Any  # TaskStatus enum
+    created_at: datetime
+    expires_at: datetime
+    retry_count: int = 0
+    max_retries: int = 3
+    assigned_account: Optional[str] = None
+    completed_at: Optional[datetime] = None
+    execution_details: Optional[Dict[str, Any]] = None
+
+@dataclass
+class TaskExecution:
+    """Represents the execution details of a task."""
+    execution_id: str
+    task_id: str
+    account_id: str
+    platform: str
+    actions_performed: List[str]
+    success: bool
+    execution_time: timedelta
+    error_message: Optional[str] = None
+    started_at: datetime = field(default_factory=datetime.now)
+    completed_at: Optional[datetime] = None
+    retry_attempt: int = 0
+
+# Account Management Models
+
+@dataclass
+class PlatformAccount:
+    """Represents a social media platform account."""
+    account_id: str
+    user_id: int
+    platform: str
+    username: str
+    account_type: str  # 'personal', 'business', 'creator'
+    status: str  # 'active', 'suspended', 'rate_limited', 'error'
+    credentials_encrypted: str
+    last_used: Optional[datetime] = None
+    daily_action_count: int = 0
+    monthly_action_count: int = 0
+    success_rate: float = 0.0
+    health_score: float = 100.0
+    created_at: datetime = field(default_factory=datetime.now)
+    updated_at: datetime = field(default_factory=datetime.now)
+
+@dataclass
+class AccountCredentials:
+    """Encrypted credentials for platform accounts."""
+    credential_id: str
+    account_id: str
+    platform: str
+    encrypted_data: str
+    encryption_method: str
+    created_at: datetime = field(default_factory=datetime.now)
+    expires_at: Optional[datetime] = None
+    last_validated: Optional[datetime] = None
+
+@dataclass
+class AccountMetrics:
+    """Performance metrics for platform accounts."""
+    metric_id: str
+    account_id: str
+    date: datetime
+    actions_performed: int
+    actions_successful: int
+    actions_failed: int
+    avg_response_time: float
+    rate_limit_hits: int
+    error_count: int
+    health_score: float
+
+@dataclass
+class AccountHealth:
+    """Health monitoring data for accounts."""
+    health_id: str
+    account_id: str
+    check_timestamp: datetime
+    status: str
+    response_time: float
+    error_rate: float
+    consecutive_failures: int
+    last_success: Optional[datetime] = None
+    alerts_sent: int = 0
+
+# Content and Engagement Models
+
+@dataclass
+class EngagementOpportunity:
+    """Represents a detected engagement opportunity."""
+    opportunity_id: str = ""
+    chat_id: int = 0
+    message_id: int = 0
+    platform: str = ""
+    content_url: str = ""
+    opportunity_type: str = ""  # 'cross_promotion', 'mutual_engagement', 'viral_content'
+    priority_score: float = 0.0
+    detected_at: datetime = field(default_factory=datetime.now)
+    expires_at: datetime = field(default_factory=lambda: datetime.now() + timedelta(hours=24))
+    processed: bool = False
+    assigned_to: Optional[int] = None
+
+@dataclass
+class ContentMetrics:
+    """Metrics for analyzed content."""
+    content_id: str
+    platform: str
+    content_url: str
+    author_info: str
+    engagement_score: float
+    viral_indicators: List[str]
+    view_count: int = 0
+    like_count: int = 0
+    comment_count: int = 0
+    share_count: int = 0
+    collected_at: datetime = field(default_factory=datetime.now)
+    updated_at: datetime = field(default_factory=datetime.now)
+
+@dataclass
+class ViralContentRecord:
+    """Record of detected viral content."""
+    record_id: str
+    chat_id: int
+    message_id: int
+    content_text: str
+    author_id: Optional[int]
+    platform_links: Dict[str, List[str]]
+    hashtags: List[str]
+    mentions: List[str]
+    engagement_score: float
+    viral_indicators: List[str]
+    detected_at: datetime = field(default_factory=datetime.now)
+    verified: bool = False
+
+# User and Activity Models
+
+@dataclass
+class User:
+    """Basic user information."""
+    user_id: int
+    username: Optional[str] = None
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    is_active: bool = True
+    is_premium: bool = False
+    join_date: datetime = field(default_factory=datetime.now)
+    last_seen: datetime = field(default_factory=datetime.now)
+    language_code: Optional[str] = None
+    settings: Dict[str, Any] = field(default_factory=dict)
+
+@dataclass
+class EngagementTask:
+    """Engagement task for user requests."""
+    task_id: str
+    user_id: int
+    platform: str
+    action_type: str
+    target_id: str
+    status: str
+    priority: float = 0.5
+    created_at: datetime = field(default_factory=datetime.now)
+    completed_at: Optional[datetime] = None
+    metadata: Dict[str, Any] = field(default_factory=dict)
+
+@dataclass
+class Metrics:
+    """Basic metrics record."""
+    user_id: int
+    platform: str
+    action: str
+    success: bool
+    timestamp: str
+    response_time: Optional[float] = None
+    metadata: Dict[str, Any] = field(default_factory=dict)
+
+@dataclass
+class UserMetrics:
+    """User performance and activity metrics."""
+    user_id: int
+    total_exchanges: int = 0
+    successful_exchanges: int = 0
+    failed_exchanges: int = 0
+    engagement_given: int = 0
+    engagement_received: int = 0
+    reciprocity_ratio: float = 0.0
+    avg_priority_score: float = 0.0
+    favorite_platform: Optional[str] = None
+    join_date: datetime = field(default_factory=datetime.now)
+    last_activity: datetime = field(default_factory=datetime.now)
+    total_points: int = 0
+    rank: int = 0
+    consistency_score: float = 0.0
+    avg_engagement_rate: float = 0.0
+
+@dataclass
+class UserActivity:
+    """Individual user activity record."""
+    activity_id: str
+    user_id: int
+    activity_type: str  # 'exchange_request', 'task_completion', 'account_added', etc.
+    platform: Optional[str]
+    details: Dict[str, Any]
+    timestamp: datetime = field(default_factory=datetime.now)
+    session_id: Optional[str] = None
+
+@dataclass
+class UserSession:
+    """User session data for conversation handling."""
+    session_id: str
+    user_id: int
+    session_type: str  # 'exchange_creation', 'account_setup', 'support'
+    state: str
+    data: Dict[str, Any]
+    started_at: datetime = field(default_factory=datetime.now)
+    last_activity: datetime = field(default_factory=datetime.now)
+    expires_at: datetime = field(default_factory=lambda: datetime.now() + timedelta(hours=1))
+
+# Analytics and Metrics Models
+
+@dataclass
+class EngagementMetric:
+    """System-wide engagement metrics."""
+    metric_id: str
+    metric_type: str  # 'user_interaction', 'task_execution', 'viral_detection', etc.
+    platform: Optional[str]
+    user_id: Optional[int]
+    value: float
+    metadata: Dict[str, Any]
+    timestamp: datetime = field(default_factory=datetime.now)
+    aggregation_period: Optional[str] = None  # 'hourly', 'daily', 'weekly'
+
+@dataclass
+class SystemMetric:
+    """System performance and health metrics."""
+    metric_id: str
+    metric_name: str
+    value: float
+    unit: str
+    category: str  # 'performance', 'health', 'usage'
+    timestamp: datetime = field(default_factory=datetime.now)
+    alert_threshold: Optional[float] = None
+    alert_triggered: bool = False
+
+@dataclass
+class DailyReport:
+    """Daily system report."""
+    report_id: str
+    date: datetime
+    total_users: int
+    active_users: int
+    total_exchanges: int
+    successful_exchanges: int
+    success_rate: float
+    platform_breakdown: Dict[str, Dict[str, int]]
+    viral_content_detected: int
+    top_users: List[Dict[str, Any]]
+    system_health: str
+    generated_at: datetime = field(default_factory=datetime.now)
+
+# Priority and ML Models
+
+@dataclass
+class PriorityScore:
+    """Priority calculation record."""
+    score_id: str
+    user_id: int
+    task_data: Dict[str, Any]
+    calculated_score: float
+    factors: Dict[str, float]
+    reasoning: List[str]
+    confidence: float
+    model_version: str
+    calculated_at: datetime = field(default_factory=datetime.now)
+    actual_outcome: Optional[bool] = None  # For learning
+
+@dataclass
+class MLModelMetric:
+    """Machine learning model performance metrics."""
+    metric_id: str
+    model_name: str
+    model_version: str
+    metric_type: str  # 'accuracy', 'precision', 'recall', 'f1_score'
+    value: float
+    test_set_size: int
+    calculated_at: datetime = field(default_factory=datetime.now)
+    metadata: Dict[str, Any] = field(default_factory=dict)
+
+# Configuration and Settings Models
+
+@dataclass
+class SystemConfiguration:
+    """System configuration record."""
+    config_id: str
+    config_key: str
+    config_value: Any
+    config_type: str  # 'string', 'integer', 'float', 'boolean', 'json'
+    description: str
+    created_at: datetime = field(default_factory=datetime.now)
+    updated_at: datetime = field(default_factory=datetime.now)
+    updated_by: Optional[int] = None
+
+@dataclass
+class UserPreferences:
+    """User-specific preferences and settings."""
+    user_id: int
+    preferences: Dict[str, Any]
+    notification_settings: Dict[str, bool]
+    privacy_settings: Dict[str, bool]
+    created_at: datetime = field(default_factory=datetime.now)
+    updated_at: datetime = field(default_factory=datetime.now)
+
+# Alert and Notification Models
+
+@dataclass
+class SystemAlert:
+    """System alerts and notifications."""
+    alert_id: str
+    alert_type: str  # 'error', 'warning', 'info', 'critical'
+    title: str
+    message: str
+    source: str  # Component that generated the alert
+    severity: int  # 1-5 scale
+    metadata: Dict[str, Any]
+    triggered_at: datetime = field(default_factory=datetime.now)
+    acknowledged: bool = False
+    acknowledged_by: Optional[int] = None
+    acknowledged_at: Optional[datetime] = None
+    resolved: bool = False
+    resolved_at: Optional[datetime] = None
+
+@dataclass
+class UserNotification:
+    """User-specific notifications."""
+    notification_id: str
+    user_id: int
+    notification_type: str
+    title: str
+    message: str
+    data: Dict[str, Any]
+    sent_at: datetime = field(default_factory=datetime.now)
+    read: bool = False
+    read_at: Optional[datetime] = None
+    action_required: bool = False
+    expires_at: Optional[datetime] = None
+
+# Helper functions for model serialization
+
+def serialize_dataclass(obj) -> Dict[str, Any]:
+    """Serialize a dataclass to dictionary."""
+    if not hasattr(obj, '__dataclass_fields__'):
+        return obj
+    
+    result = {}
+    for field_name, field_def in obj.__dataclass_fields__.items():
+        value = getattr(obj, field_name)
+        
+        if isinstance(value, datetime):
+            result[field_name] = value.isoformat()
+        elif isinstance(value, timedelta):
+            result[field_name] = value.total_seconds()
+        elif isinstance(value, (dict, list)):
+            result[field_name] = value
+        elif hasattr(value, '__dataclass_fields__'):
+            result[field_name] = serialize_dataclass(value)
+        else:
+            result[field_name] = value
+    
+    return result
+
+def deserialize_datetime(date_string: str) -> datetime:
+    """Deserialize ISO format datetime string."""
+    return datetime.fromisoformat(date_string)
+
+def deserialize_timedelta(seconds: float) -> timedelta:
+    """Deserialize timedelta from seconds."""
+    return timedelta(seconds=seconds)
+
+# Database schema creation helper (for SQLite/SQLAlchemy)
+
+def get_database_schema() -> List[str]:
+    """Get SQL schema for creating database tables."""
+    
+    schema_statements = [
+        # Users and Sessions
+        """
+        CREATE TABLE IF NOT EXISTS users (
+            user_id INTEGER PRIMARY KEY,
+            username TEXT,
+            first_name TEXT,
+            last_name TEXT,
+            joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            last_activity TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            is_active BOOLEAN DEFAULT TRUE
+        );
+        """,
+        
+        # Exchange Tasks
+        """
+        CREATE TABLE IF NOT EXISTS exchange_tasks (
+            task_id TEXT PRIMARY KEY,
+            user_id INTEGER,
+            platform TEXT NOT NULL,
+            account_info TEXT,
+            content_url TEXT,
+            exchange_type TEXT DEFAULT 'standard',
+            priority_score REAL DEFAULT 5.0,
+            status TEXT DEFAULT 'pending',
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            expires_at TIMESTAMP,
+            retry_count INTEGER DEFAULT 0,
+            completed_at TIMESTAMP,
+            FOREIGN KEY (user_id) REFERENCES users (user_id)
+        );
+        """,
+        
+        # Platform Accounts
+        """
+        CREATE TABLE IF NOT EXISTS platform_accounts (
+            account_id TEXT PRIMARY KEY,
+            user_id INTEGER,
+            platform TEXT NOT NULL,
+            username TEXT,
+            status TEXT DEFAULT 'inactive',
+            credentials_encrypted TEXT,
+            daily_action_count INTEGER DEFAULT 0,
+            monthly_action_count INTEGER DEFAULT 0,
+            success_rate REAL DEFAULT 0.0,
+            health_score REAL DEFAULT 100.0,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (user_id) REFERENCES users (user_id)
+        );
+        """,
+        
+        # Engagement Metrics
+        """
+        CREATE TABLE IF NOT EXISTS engagement_metrics (
+            metric_id TEXT PRIMARY KEY,
+            metric_type TEXT NOT NULL,
+            user_id INTEGER,
+            platform TEXT,
+            value REAL NOT NULL,
+            metadata TEXT,
+            timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+        """,
+        
+        # User Metrics
+        """
+        CREATE TABLE IF NOT EXISTS user_metrics (
+            user_id INTEGER PRIMARY KEY,
+            total_exchanges INTEGER DEFAULT 0,
+            successful_exchanges INTEGER DEFAULT 0,
+            engagement_given INTEGER DEFAULT 0,
+            engagement_received INTEGER DEFAULT 0,
+            reciprocity_ratio REAL DEFAULT 0.0,
+            favorite_platform TEXT,
+            total_points INTEGER DEFAULT 0,
+            rank INTEGER DEFAULT 0,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (user_id) REFERENCES users (user_id)
+        );
+        """,
+        
+        # System Configuration
+        """
+        CREATE TABLE IF NOT EXISTS system_config (
+            config_key TEXT PRIMARY KEY,
+            config_value TEXT,
+            config_type TEXT DEFAULT 'string',
+            description TEXT,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+        """,
+        
+        # Viral Content Records
+        """
+        CREATE TABLE IF NOT EXISTS viral_content (
+            record_id TEXT PRIMARY KEY,
+            chat_id INTEGER,
+            message_id INTEGER,
+            content_text TEXT,
+            author_id INTEGER,
+            engagement_score REAL,
+            viral_indicators TEXT,
+            detected_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            verified BOOLEAN DEFAULT FALSE
+        );
+        """,
+        
+        # System Alerts
+        """
+        CREATE TABLE IF NOT EXISTS system_alerts (
+            alert_id TEXT PRIMARY KEY,
+            alert_type TEXT NOT NULL,
+            title TEXT NOT NULL,
+            message TEXT,
+            source TEXT,
+            severity INTEGER DEFAULT 3,
+            triggered_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            acknowledged BOOLEAN DEFAULT FALSE,
+            resolved BOOLEAN DEFAULT FALSE
+        );
+        """
+    ]
+    
+    return schema_statements
 import os
 import logging
 from datetime import datetime, timedelta

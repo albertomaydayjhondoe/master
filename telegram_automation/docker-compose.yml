@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  telegram-bot:
+    build: .
+    environment:
+      - DUMMY_MODE=true
+      - LOG_LEVEL=INFO
+    volumes:
+      - .:/app
+      - ./data:/app/data
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    
+  postgres:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=telegram_automation
+      - POSTGRES_USER=telegram
+      - POSTGRES_PASSWORD=telegram123
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

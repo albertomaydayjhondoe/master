@@ -1,0 +1,252 @@
+# Configuración de modelos COCO preentrenados
+
+# Modelos YOLO disponibles (ordenados por velocidad/precisión)
+yolo_coco_models:
+  # Ultra-rápido - Para tiempo real
+  nano:
+    model_name: "yolov8n.pt"
+    description: "YOLOv8 Nano - Ultra rápido, menor precisión"
+    speed: "fastest"
+    accuracy: "lower"
+    size_mb: 6
+    recommended_use: "tiempo_real"
+    
+  # Pequeño - Balance velocidad/precisión  
+  small:
+    model_name: "yolov8s.pt"
+    description: "YOLOv8 Small - Rápido con buena precisión"
+    speed: "fast"
+    accuracy: "good" 
+    size_mb: 22
+    recommended_use: "produccion_ligera"
+    
+  # Mediano - Mejor balance
+  medium:
+    model_name: "yolov8m.pt"
+    description: "YOLOv8 Medium - Balance óptimo"
+    speed: "medium"
+    accuracy: "high"
+    size_mb: 52
+    recommended_use: "produccion_standard"
+    
+  # Grande - Alta precisión
+  large:
+    model_name: "yolov8l.pt"  
+    description: "YOLOv8 Large - Alta precisión"
+    speed: "slow"
+    accuracy: "very_high"
+    size_mb: 87
+    recommended_use: "analisis_detallado"
+    
+  # Extra grande - Máxima precisión
+  xlarge:
+    model_name: "yolov8x.pt"
+    description: "YOLOv8 XLarge - Máxima precisión"
+    speed: "slowest" 
+    accuracy: "highest"
+    size_mb: 136
+    recommended_use: "investigacion"
+
+# Configuración por caso de uso
+use_cases:
+  # TikTok análisis en tiempo real
+  tiktok_realtime:
+    model: "nano"
+    conf_threshold: 0.35
+    iou_threshold: 0.5
+    max_detections: 100
+    focus_classes: ["person", "cell phone", "tv", "laptop"]
+    
+  # Meta Ads analysis
+  meta_ads_analysis:
+    model: "small"
+    conf_threshold: 0.25
+    iou_threshold: 0.45
+    max_detections: 300
+    focus_classes: ["person", "car", "bicycle", "motorcycle", "cat", "dog"]
+    
+  # YouTube content analysis
+  youtube_analysis:
+    model: "medium"
+    conf_threshold: 0.3
+    iou_threshold: 0.4
+    max_detections: 500
+    focus_classes: ["person", "sports ball", "skateboard", "surfboard", "tennis racket"]
+    
+  # General screenshot analysis
+  screenshot_analysis:
+    model: "small"
+    conf_threshold: 0.25
+    iou_threshold: 0.45
+    max_detections: 1000
+    focus_classes: ["person", "cell phone", "laptop", "tv", "chair", "couch"]
+
+# Configuración de dispositivos
+device_config:
+  # Auto-detección
+  auto:
+    priority: ["cuda", "mps", "cpu"]
+    
+  # GPU NVIDIA
+  cuda:
+    device: "cuda"
+    batch_size: 16
+    precision: "fp16"  # Mixed precision para velocidad
+    
+  # CPU
+  cpu:
+    device: "cpu" 
+    batch_size: 1
+    precision: "fp32"
+    threads: 4
+    
+  # Apple Silicon
+  mps:
+    device: "mps"
+    batch_size: 8
+    precision: "fp16"
+
+# Clases COCO más relevantes para redes sociales
+social_media_relevant_classes:
+  # Personas y elementos humanos
+  human_related:
+    - 0   # person
+    - 24  # backpack
+    - 26  # handbag
+    - 27  # tie
+    - 28  # suitcase
+    
+  # Tecnología y dispositivos
+  technology:
+    - 62  # tv
+    - 63  # laptop
+    - 64  # mouse
+    - 65  # remote
+    - 66  # keyboard
+    - 67  # cell phone
+    
+  # Vehículos (lifestyle)
+  vehicles:
+    - 1   # bicycle
+    - 2   # car
+    - 3   # motorcycle
+    - 4   # airplane
+    - 5   # bus
+    - 8   # boat
+    
+  # Animales (viral content)
+  animals:
+    - 15  # cat
+    - 16  # dog
+    - 17  # horse
+    - 20  # elephant
+    - 21  # bear
+    - 22  # zebra
+    - 23  # giraffe
+    
+  # Deportes y actividades
+  sports_activities:
+    - 32  # sports ball
+    - 37  # skateboard
+    - 38  # surfboard
+    - 39  # tennis racket
+    
+  # Comida (lifestyle/viral)
+  food:
+    - 46  # banana
+    - 47  # apple
+    - 48  # sandwich
+    - 49  # orange
+    - 52  # hot dog
+    - 53  # pizza
+    - 54  # donut
+    - 55  # cake
+    
+  # Hogar y decoración
+  home_decor:
+    - 56  # chair
+    - 57  # couch
+    - 58  # potted plant
+    - 59  # bed
+    - 73  # book
+    - 74  # clock
+    - 75  # vase
+
+# Configuración de análisis específicos
+analysis_profiles:
+  # Detección de influencers
+  influencer_detection:
+    focus_objects: ["person", "cell phone", "laptop", "car", "handbag"]
+    min_confidence: 0.4
+    context_analysis: true
+    lifestyle_scoring: true
+    
+  # Análisis de contenido viral
+  viral_content_analysis:
+    focus_objects: ["person", "cat", "dog", "sports ball", "cake", "pizza"]
+    min_confidence: 0.3
+    emotion_context: true
+    engagement_potential: true
+    
+  # Detección de productos
+  product_detection:
+    focus_objects: ["cell phone", "laptop", "car", "handbag", "chair", "tv"]
+    min_confidence: 0.5
+    brand_analysis: false
+    commercial_potential: true
+    
+  # Análisis de lifestyle
+  lifestyle_analysis:
+    focus_objects: ["person", "car", "bicycle", "surfboard", "couch", "vase"]
+    min_confidence: 0.35
+    social_status_indicators: true
+    demographic_hints: true
+
+# Configuración de rendimiento
+performance:
+  # Batch processing
+  batch_processing:
+    enabled: true
+    batch_size: 8
+    max_queue_size: 100
+    timeout_seconds: 30
+    
+  # Caching
+  model_caching:
+    enabled: true
+    cache_size: 3  # Número de modelos en cache
+    warmup_on_load: true
+    
+  # Optimizaciones
+  optimizations:
+    # TensorRT para NVIDIA GPUs
+    tensorrt:
+      enabled: false  # Requiere compilación específica
+      precision: "fp16"
+      
+    # ONNX export para CPU optimizado  
+    onnx_export:
+      enabled: false
+      optimization_level: "all"
+      
+    # Compilación Torch
+    torch_compile:
+      enabled: false  # Experimental
+      mode: "reduce-overhead"
+
+# Logging y debugging
+logging:
+  level: "INFO"
+  log_detections: true
+  log_inference_time: true
+  log_model_loading: true
+  save_detection_images: false  # Para debugging
+  detection_images_path: "/tmp/yolo_detections"
+
+# Límites de seguridad
+safety_limits:
+  max_image_size_mb: 50
+  max_image_resolution: [4096, 4096]
+  max_concurrent_requests: 10
+  request_timeout_seconds: 30
+  memory_limit_gb: 4

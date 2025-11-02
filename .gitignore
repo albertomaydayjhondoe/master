@@ -41,3 +41,20 @@ ENV/
 
 # Docker state
 docker-compose.override.yml
+# Telegram Automation
+telegram_automation/.env
+telegram_automation/data/
+telegram_automation/*.db
+telegram_automation/*.session
+telegram_automation/logs/
+# ML Models
+*.pt
+*.onnx
+data/models/
+# GoLogin
+gologin_profiles/
+browser_profiles/
+# API Keys and Secrets
+*.key
+*.pem
+secrets/

@@ -373,42 +373,60 @@ def setup_signal_handlers(app: Like4LikeApplication):
     signal.signal(signal.SIGTERM, signal_handler)
 
 
+#!/usr/bin/env python3
+"""
+Main entry point for Telegram automation system.
+Coordinates all modules and provides the main bot interface.
+"""
+
+import asyncio
+import logging
+import os
+import sys
+from pathlib import Path
+
+# Add the parent directory to the Python path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from telegram_automation.bot.telegram_bot import TelegramBot
+from telegram_automation.config.telegram_config import load_config
+
+# Configure logging
+logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    level=logging.INFO
+)
+
+logger = logging.getLogger(__name__)
+
 async def main():
-    """Main application entry point"""
+    """Main entry point."""
     try:
         # Load configuration
         config = load_config()
         
-        # Add additional config from environment or config files
-        config.update({
-            'database': {
-                'host': 'localhost',
-                'port': 5432,
-                'name': 'like4like_bot',
-                'user': 'postgres',
-                'password': 'postgres'
-            },
-            'telegram': {
-                'api_id': 12345,  # Replace with actual values
-                'api_hash': 'your_api_hash',
-                'bot_token': 'your_bot_token',  # Optional
-                'phone': '+1234567890'
-            }
-        })
+        logger.info("Starting Telegram automation system...")
+        logger.info(f"Dummy mode: {config.enable_dummy_mode}")
         
-        # Create and initialize application
-        app = Like4LikeApplication(config)
+        # Create and initialize bot
+        bot = TelegramBot(config)
+        await bot.initialize()
         
-        # Setup signal handlers
-        setup_signal_handlers(app)
+        # Run bot
+        await bot.run()
         
-        # Initialize and run
-        await app.initialize()
-        await app.run()
-        
+    except KeyboardInterrupt:
+        logger.info("Received shutdown signal")
     except Exception as e:
-        logger.error(f"❌ Application failed to start: {e}")
-        sys.exit(1)
+        logger.error(f"Fatal error: {e}")
+        raise
+    finally:
+        if 'bot' in locals():
+            await bot.stop()
+        logger.info("Telegram automation system stopped")
+
+if __name__ == "__main__":
+    asyncio.run(main())
 
 
 if __name__ == "__main__":

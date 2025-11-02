@@ -1,0 +1,76 @@
+api_base_url: https://api.gologin.com
+api_max_retries: 3
+api_timeout: 30
+api_token: ''
+automation_engine: playwright
+browser:
+  disable_features:
+  - VizDisplayCompositor
+  - UseMojoVideoCapture
+  disable_images: false
+  disable_javascript: false
+  disable_plugins: false
+  disable_web_security: false
+  disable_webgl: false
+  do_not_track: false
+  hardware_concurrency: 4
+  memory: 8
+  platform: Win32
+  user_agent_mode: auto
+cache_ttl: 300
+debug_mode: false
+dummy_mode: true
+fingerprint:
+  audio_context: noise
+  canvas_mode: noise
+  client_rects: noise
+  geolocation_mode: auto
+  language_mode: auto
+  screen_mode: auto
+  timezone_mode: auto
+  webgl_mode: noise
+  webrtc_mode: altered
+headless_mode: false
+human_behavior:
+  back_button_probability: 0.1
+  interaction_delay_max: 1.0
+  interaction_delay_min: 0.2
+  max_action_delay: 2.0
+  min_action_delay: 0.5
+  mouse_movement_speed: 1.0
+  mouse_movement_steps: 5
+  random_pause_probability: 0.2
+  random_scroll_probability: 0.3
+  reading_pause_max: 5.0
+  reading_pause_min: 1.0
+  scroll_distance_max: 500
+  scroll_distance_min: 200
+  scroll_pause_max: 1.0
+  scroll_pause_min: 0.3
+  typing_speed_max: 0.15
+  typing_speed_min: 0.05
+logs_dir: logs/gologin
+max_active_sessions: 5
+max_profiles: 30
+profiles_dir: data/gologin_profiles
+proxy:
+  country: null
+  enabled: true
+  host: ''
+  password: null
+  port: 8080
+  rotation_interval: 3600
+  sticky_session: false
+  type: http
+  username: null
+screenshots_dir: logs/screenshots
+security:
+  auto_rotate_on_detection: true
+  detection_sensitivity: medium
+  element_wait_timeout: 10
+  max_concurrent_sessions: 5
+  max_profile_usage: 100
+  max_requests_per_minute: 60
+  page_load_timeout: 30
+  profile_rotation_interval: 7200
+  request_timeout: 30
