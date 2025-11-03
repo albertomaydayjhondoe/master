@@ -1,0 +1,214 @@
+# 🎵 CONFIGURACIÓN DE GÉNEROS MUSICALES PARA DISCOGRÁFICA ML
+# ===========================================================
+
+# Configuraciones específicas para cada género musical
+# Cada género tiene parámetros optimizados para maximizar engagement
+
+genres:
+  trap:
+    name: "Trap"
+    description: "Música urbana con beats pesados y lírica directa"
+    hashtags:
+      primary: ["#trap", "#trapmusic", "#urban", "#hiphop", "#streetmusic"]
+      secondary: ["#newmusic", "#fire", "#bars", "#beats", "#rap"]
+      viral: ["#trapviral", "#fyp", "#trending", "#viral", "#explore"]
+    posting_times:
+      optimal: ["20:00", "21:00", "22:00", "23:00"]
+      weekends: ["19:00", "20:00", "21:00", "22:00", "23:00"]
+    target_audience:
+      age_range: [16, 35]
+      interests: ["hip hop", "urban music", "rap", "street culture"]
+      locations: ["US", "MX", "CO", "AR", "ES", "PR"]
+    campaign_settings:
+      budget_multiplier: 1.2
+      engagement_target: 0.08
+      viral_threshold: 15000
+
+  reggaeton:
+    name: "Reggaeton"
+    description: "Música latina con ritmo pegajoso y baile"
+    hashtags:
+      primary: ["#reggaeton", "#latino", "#perreo", "#dembow", "#urbano"]
+      secondary: ["#bailar", "#fiesta", "#party", "#dance", "#musicalatina"]
+      viral: ["#perreoviral", "#fyp", "#baila", "#viral", "#trending"]
+    posting_times:
+      optimal: ["19:00", "20:00", "21:00", "22:00"]
+      weekends: ["18:00", "19:00", "20:00", "21:00", "22:00"]
+    target_audience:
+      age_range: [18, 40]
+      interests: ["reggaeton", "latin music", "dancing", "party"]
+      locations: ["PR", "MX", "CO", "VE", "DO", "US", "ES"]
+    campaign_settings:
+      budget_multiplier: 1.3
+      engagement_target: 0.10
+      viral_threshold: 20000
+
+  pop:
+    name: "Pop"
+    description: "Música popular mainstream con amplio alcance"
+    hashtags:
+      primary: ["#pop", "#popmusic", "#mainstream", "#catchy", "#radio"]
+      secondary: ["#newmusic", "#charts", "#top40", "#hits", "#music"]
+      viral: ["#popviral", "#fyp", "#trending", "#viral", "#catchy"]
+    posting_times:
+      optimal: ["17:00", "18:00", "19:00", "20:00"]
+      weekends: ["16:00", "17:00", "18:00", "19:00", "20:00"]
+    target_audience:
+      age_range: [13, 45]
+      interests: ["pop music", "mainstream", "radio hits", "charts"]
+      locations: ["US", "GB", "CA", "AU", "DE", "FR", "ES", "MX"]
+    campaign_settings:
+      budget_multiplier: 1.0
+      engagement_target: 0.06
+      viral_threshold: 25000
+
+  rock:
+    name: "Rock"
+    description: "Música rock con instrumentos en vivo y energía"
+    hashtags:
+      primary: ["#rock", "#rockmusic", "#livemusic", "#guitar", "#band"]
+      secondary: ["#indie", "#alternative", "#music", "#concert", "#live"]
+      viral: ["#rockviral", "#fyp", "#guitar", "#band", "#livemusic"]
+    posting_times:
+      optimal: ["18:00", "19:00", "20:00", "21:00"]
+      weekends: ["17:00", "18:00", "19:00", "20:00", "21:00"]
+    target_audience:
+      age_range: [16, 50]
+      interests: ["rock music", "live music", "guitars", "concerts"]
+      locations: ["US", "GB", "CA", "AU", "DE", "SE", "NO", "FI"]
+    campaign_settings:
+      budget_multiplier: 0.9
+      engagement_target: 0.05
+      viral_threshold: 12000
+
+  bachata:
+    name: "Bachata"
+    description: "Música romántica latina con guitarra y percusión"
+    hashtags:
+      primary: ["#bachata", "#romantic", "#latino", "#amor", "#guitar"]
+      secondary: ["#baile", "#dance", "#romance", "#love", "#musicalatina"]
+      viral: ["#bachataviral", "#fyp", "#romance", "#baila", "#amor"]
+    posting_times:
+      optimal: ["19:00", "20:00", "21:00", "22:00"]
+      weekends: ["18:00", "19:00", "20:00", "21:00", "22:00"]
+    target_audience:
+      age_range: [20, 50]
+      interests: ["bachata", "latin music", "romance", "dancing"]
+      locations: ["DO", "PR", "MX", "CO", "VE", "US", "ES"]
+    campaign_settings:
+      budget_multiplier: 1.1
+      engagement_target: 0.07
+      viral_threshold: 10000
+
+  electronic:
+    name: "Electronic/EDM"
+    description: "Música electrónica y dance para festivales y clubs"
+    hashtags:
+      primary: ["#edm", "#electronic", "#dance", "#festival", "#club"]
+      secondary: ["#rave", "#techno", "#house", "#dubstep", "#trance"]
+      viral: ["#edmviral", "#fyp", "#festival", "#rave", "#dance"]
+    posting_times:
+      optimal: ["21:00", "22:00", "23:00", "00:00"]
+      weekends: ["20:00", "21:00", "22:00", "23:00", "00:00"]
+    target_audience:
+      age_range: [16, 35]
+      interests: ["electronic music", "festivals", "clubs", "raves"]
+      locations: ["US", "NL", "BE", "DE", "GB", "SE", "AU"]
+    campaign_settings:
+      budget_multiplier: 1.4
+      engagement_target: 0.09
+      viral_threshold: 18000
+
+  salsa:
+    name: "Salsa"
+    description: "Música latina bailable con instrumentos tradicionales"
+    hashtags:
+      primary: ["#salsa", "#salsabaile", "#latino", "#orquesta", "#clave"]
+      secondary: ["#baile", "#dance", "#musicalatina", "#tradicion", "#cuba"]
+      viral: ["#salsaviral", "#fyp", "#baila", "#salsa", "#dancing"]
+    posting_times:
+      optimal: ["19:00", "20:00", "21:00", "22:00"]
+      weekends: ["18:00", "19:00", "20:00", "21:00", "22:00"]
+    target_audience:
+      age_range: [25, 60]
+      interests: ["salsa", "latin music", "dancing", "traditional music"]
+      locations: ["CU", "CO", "VE", "PR", "NY", "FL", "CA", "ES"]
+    campaign_settings:
+      budget_multiplier: 1.0
+      engagement_target: 0.06
+      viral_threshold: 8000
+
+  jazz:
+    name: "Jazz"
+    description: "Música sofisticada con improvisación y swing"
+    hashtags:
+      primary: ["#jazz", "#jazzmusic", "#swing", "#blues", "#improvisation"]
+      secondary: ["#livemusic", "#saxophone", "#piano", "#classic", "#smooth"]
+      viral: ["#jazzviral", "#fyp", "#smoothjazz", "#livemusic", "#classic"]
+    posting_times:
+      optimal: ["17:00", "18:00", "19:00", "20:00"]
+      weekends: ["16:00", "17:00", "18:00", "19:00", "20:00"]
+    target_audience:
+      age_range: [25, 65]
+      interests: ["jazz", "live music", "sophistication", "improvisation"]
+      locations: ["US", "FR", "GB", "CA", "JP", "DE", "NL"]
+    campaign_settings:
+      budget_multiplier: 0.8
+      engagement_target: 0.04
+      viral_threshold: 6000
+
+# Configuración global para todos los géneros
+global_settings:
+  default_campaign_duration: 30  # días
+  max_hashtags_per_post: 10
+  min_engagement_rate: 0.02
+  posting_frequency: 3  # posts por día máximo
+  content_types:
+    - "video_clip"
+    - "audio_preview" 
+    - "behind_scenes"
+    - "lyrics_video"
+    - "live_performance"
+    - "studio_session"
+
+# Configuraciones de plataforma por género
+platform_weights:
+  tiktok:
+    trap: 0.4
+    reggaeton: 0.4
+    pop: 0.3
+    rock: 0.2
+    electronic: 0.35
+    bachata: 0.25
+    salsa: 0.2
+    jazz: 0.15
+  
+  instagram:
+    trap: 0.3
+    reggaeton: 0.35
+    pop: 0.35
+    rock: 0.3
+    electronic: 0.3
+    bachata: 0.4
+    salsa: 0.35
+    jazz: 0.3
+  
+  youtube:
+    trap: 0.2
+    reggaeton: 0.2
+    pop: 0.25
+    rock: 0.35
+    electronic: 0.25
+    bachata: 0.25
+    salsa: 0.3
+    jazz: 0.4
+  
+  facebook:
+    trap: 0.1
+    reggaeton: 0.05
+    pop: 0.1
+    rock: 0.15
+    electronic: 0.1
+    bachata: 0.1
+    salsa: 0.15
+    jazz: 0.15
