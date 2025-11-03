@@ -92,7 +92,15 @@ show_help() {
     echo -e "   • Login con tu número y crea nueva aplicación"
     echo ""
     
-    echo -e "${GREEN}4. GOLOGIN (OPCIONAL)${NC}"
+    echo -e "${GREEN}4. LONGCAT-VIDEO${NC}"
+    echo -e "${BLUE}   Generación automática de videos:${NC}"
+    echo -e "   • Modelo open-source de 13.6B parámetros"
+    echo -e "   • GPU recomendada pero no requerida"
+    echo -e "   • Text-to-Video, Image-to-Video, Video Continuation"
+    echo -e "   • Integrado automáticamente en campañas"
+    echo ""
+    
+    echo -e "${GREEN}5. GOLOGIN (OPCIONAL)${NC}"
     echo -e "${BLUE}   Para automatización avanzada:${NC}"
     echo -e "   • Registrate en https://gologin.com/"
     echo -e "   • Ve a Settings > API → copia API Token"
@@ -168,8 +176,32 @@ else
     echo "# N8N_API_KEY=tu_api_key_opcional" >> "$ENV_FILE"
 fi
 
-# 5. CONFIGURACIONES ADICIONALES
-echo -e "${PURPLE}⚙️  5. CONFIGURACIONES ADICIONALES${NC}"
+# 5. LONGCAT-VIDEO CONFIGURATION
+echo -e "${PURPLE}🎬 5. LONGCAT-VIDEO CONFIGURATION${NC}"
+echo -e "${PURPLE}=================================${NC}"
+echo -e "${GREEN}Configurando generación de video automática...${NC}"
+echo ""
+
+echo "" >> "$ENV_FILE"
+echo "# LongCat-Video Configuration" >> "$ENV_FILE"
+echo "LONGCAT_VIDEO_ENABLED=true" >> "$ENV_FILE"
+echo "LONGCAT_VIDEO_DEVICE=cuda" >> "$ENV_FILE"
+echo "LONGCAT_VIDEO_RESOLUTION=720p" >> "$ENV_FILE"
+echo "LONGCAT_VIDEO_OUTPUT_DIR=data/generated_videos" >> "$ENV_FILE"
+echo "LONGCAT_VIDEO_MAX_CONCURRENT=3" >> "$ENV_FILE"
+
+echo -e "${YELLOW}❓ ¿Tienes GPU NVIDIA para acelerar generación? (y/N)${NC}"
+read -p "   " has_gpu
+if [[ $has_gpu =~ ^[Yy]$ ]]; then
+    echo "LONGCAT_VIDEO_DEVICE=cuda" >> "$ENV_FILE"
+    echo -e "${GREEN}   ✅ GPU habilitada para generación rápida${NC}"
+else
+    echo "LONGCAT_VIDEO_DEVICE=cpu" >> "$ENV_FILE"
+    echo -e "${YELLOW}   ⚠️  CPU mode - generación más lenta pero funcional${NC}"
+fi
+
+# 6. CONFIGURACIONES ADICIONALES
+echo -e "${PURPLE}⚙️  6. CONFIGURACIONES ADICIONALES${NC}"
 echo -e "${PURPLE}==================================${NC}"
 
 echo "" >> "$ENV_FILE"

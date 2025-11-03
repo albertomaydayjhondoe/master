@@ -296,8 +296,9 @@ class ProductionController:
             return {"success": False, "error": str(e)}
     
     def launch_viral_campaign(self, artist: str, song: str, genre: str, video_path: str, 
-                            budget: float, countries: str, platforms: str, 
-                            meta_ads: bool, device_farm: bool, youtube: bool) -> Tuple[str, str]:
+                              budget: float, countries: str, platforms: List[str],
+                              meta_ads: bool, device_farm: bool, youtube: bool,
+                              video_generation: bool = False, video_prompt: str = "") -> Tuple[str, str]:
         """Lanzar campaña viral completa"""
         try:
             # Crear configuración de campaña
@@ -339,6 +340,44 @@ class ProductionController:
                 workflow_name = "main_orchestrator"
                 expected_time = "15-30 minutos (real)"
             
+            # Generar video con LongCat si está habilitado
+            generated_video_path = video_path
+            video_generation_status = "❌ Disabled"
+            
+            if video_generation and video_prompt and self.video_generator:
+                try:
+                    # Generar video con LongCat
+                    def generate_video_async():
+                        loop = asyncio.new_event_loop()
+                        asyncio.set_event_loop(loop)
+                        return loop.run_until_complete(
+                            self.video_generator.generate_text_to_video(
+                                prompt=video_prompt,
+                                duration=10,  # 10 segundos por defecto
+                                output_name=f"{artist}_{song}_{campaign_id}"
+                            )
+                        )
+                    
+                    video_result = generate_video_async()
+                    if video_result.success:
+                        generated_video_path = video_result.output_path
+                        video_generation_status = "✅ Generated"
+                        
+                        # Actualizar ruta del video en la campaña
+                        with sqlite3.connect(self.db_path) as conn:
+                            conn.execute("""
+                                UPDATE campaigns SET video_path = ? WHERE id = ?
+                            """, (generated_video_path, campaign_id))
+                    else:
+                        video_generation_status = f"⚠️ Error: {video_result.error}"
+                        
+                except Exception as e:
+                    video_generation_status = f"❌ Failed: {str(e)[:100]}"
+            elif video_generation and not video_prompt:
+                video_generation_status = "❌ No prompt provided"
+            elif video_generation and not self.video_generator:
+                video_generation_status = "❌ Generator not ready"
+
             # Trigger N8N workflow via integration
             if self.n8n_integration:
                 try:
@@ -352,7 +391,7 @@ class ProductionController:
                                 "artist": artist,
                                 "song": song,
                                 "genre": genre,
-                                "video_path": video_path,
+                                "video_path": generated_video_path,  # Usar video generado
                                 "budget": budget,
                                 "platforms": platforms.split(','),
                                 "target_countries": countries.split(','),
@@ -388,6 +427,9 @@ class ProductionController:
 - **Presupuesto:** ${budget}
 - **Países:** {countries}
 - **Plataformas:** {platforms}
+
+**Video Generation:** {video_generation_status}
+**Video Path:** {generated_video_path}
 
 **Estado:** ✅ Ejecutándose
 **Modo:** {self.mode.value.upper()}
@@ -547,6 +589,24 @@ class ProductionController:
         except Exception as e:
             return f"❌ Error cambiando modo: {str(e)}"
 
+        # Inicializar sistema de video
+        from ml_core.video_generation import create_video_generator
+        self.video_generator = None
+        
+        # Inicializar generador de video en thread separado
+        def init_video_generator():
+            try:
+                self.video_generator = create_video_generator({
+                    "output_dir": "data/generated_videos",
+                    "models_dir": "data/models/longcat"
+                })
+                asyncio.run(self.video_generator.initialize())
+                logger.info("✅ LongCat Video Generator initialized")
+            except Exception as e:
+                logger.error(f"❌ Video Generator initialization failed: {e}")
+        
+        threading.Thread(target=init_video_generator, daemon=True).start()
+
 # Inicializar controlador
 controller = ProductionController()
 
@@ -643,6 +703,14 @@ def create_gradio_interface():
                     youtube_check = gr.Checkbox(label="📺 YouTube Upload", value=True)
                 
                 with gr.Row():
+                    video_generation_check = gr.Checkbox(label="🎬 LongCat Video Generation", value=True)
+                    video_prompt = gr.Textbox(
+                        label="🎨 Video Generation Prompt",
+                        placeholder="Ej: Artista de trap en estudio grabando, luces neón, ambiente urbano...",
+                        value=""
+                    )
+                
+                with gr.Row():
                     launch_btn = gr.Button("🚀 LANZAR CAMPAÑA VIRAL", variant="primary", size="lg")
                     emergency_btn = gr.Button("🚨 PARADA DE EMERGENCIA", variant="stop")
                 
@@ -732,7 +800,8 @@ def create_gradio_interface():
         launch_btn.click(
             launch_campaign_wrapper,
             inputs=[artist_input, song_input, genre_input, video_input, budget_input, 
-                   countries_input, platforms_input, meta_ads_check, device_farm_check, youtube_check],
+                   countries_input, platforms_input, meta_ads_check, device_farm_check, youtube_check,
+                   video_generation_check, video_prompt],
             outputs=campaign_output
         )
         

@@ -8,6 +8,7 @@ Este es el sistema completo de automatización para discográficas y artistas in
 
 **Discográfica ML System** es una plataforma completa que automatiza:
 - 📱 **Campañas virales** en TikTok, Instagram y YouTube
+- 🎬 **Generación de video automática** con LongCat-Video (13.6B parámetros)
 - 🤖 **Community management** automatizado con IA
 - 📊 **Analytics avanzados** con machine learning
 - 🎵 **Promoción musical** multi-plataforma
@@ -39,10 +40,11 @@ Este es el sistema completo de automatización para discográficas y artistas in
   - 🚨 Alertas de rendimiento
 
 ### 🤖 **Inteligencia Artificial**
+- **LongCat-Video (13.6B)** para generación automática de videos
 - **YOLO v8** para análisis de contenido visual
 - **ML Engine** para predicción de viralidad
 - **Pattern Recognition** para detección de tendencias
-- **Automated Content Generation** para posts
+- **Automated Content Generation** para posts y videos
 
 ---
 
@@ -97,13 +99,40 @@ python analytics_engine.py &
 
 ---
 
-## 🎵 CASOS DE USO ESPECÍFICOS
+## � GENERACIÓN DE VIDEO CON IA
+
+### 🚀 **LongCat-Video Engine**
+- **Text-to-Video**: Genera videos desde descripciones textuales
+- **Image-to-Video**: Anima imágenes estáticas en videos virales
+- **Video Continuation**: Extiende videos existentes con nuevas escenas
+- **13.6B parámetros**: Superior calidad vs modelos propietarios
+- **720p/480p**: Resoluciones optimizadas para redes sociales
+
+### 🎵 **Para Música**
+```bash
+# Ejemplo: Generar video para track de trap
+Prompt: "Artista de trap en estudio grabando, luces neón moradas, 
+         ambiente urbano nocturno, cámara cinematográfica"
+
+# Resultado: Video viral listo para TikTok/Instagram
+```
+
+### ⚡ **Integración Automática**
+- Generación durante lanzamiento de campaña
+- Sin intervención manual requerida
+- Optimizado para engagement máximo
+- Costos mínimos vs servicios externos
+
+---
+
+## �🎵 CASOS DE USO ESPECÍFICOS
 
 ### 🚀 **Lanzamiento de Sencillo**
 1. Subir el track al sistema
-2. Configurar campaña en Production Controller
-3. **¡BOTÓN ROJO!** → Campaña automática en todas las plataformas
-4. Monitoreo en tiempo real via Analytics Engine
+2. Escribir prompt para video (ej: "trap artist in neon studio")
+3. Configurar campaña en Production Controller
+4. **¡BOTÓN ROJO!** → Video + Campaña automática en todas las plataformas
+5. Monitoreo en tiempo real via Analytics Engine
 
 ### 📈 **Crecimiento Orgánico**
 - Engagement automático 24/7
@@ -119,13 +148,14 @@ python analytics_engine.py &
 
 ---
 
-## 🛠️ STACK TECNOLÓGICO
+### 🛠️ STACK TECNOLÓGICO
 
 ### 🧠 **Machine Learning**
+- **LongCat-Video (13.6B)** - Generación de video con IA
 - **Ultralytics YOLO v8** - Análisis visual
-- **FastAPI** - API de ML
+- **FastAPI** - API de ML y video generation
+- **Transformers/Diffusers** - Modelos de deep learning
 - **Scikit-learn** - Modelos predictivos
-- **TensorFlow** - Deep learning
 
 ### 🖥️ **Interfaces**
 - **Gradio** - Production Controller
@@ -250,9 +280,10 @@ python reset_system.py
 ### 🔮 **Roadmap Q1 2025**
 - 🎵 **Spotify API** integration
 - 🎬 **Instagram Reels** automation
-- 🤖 **AI-powered lyrics** generation
-- 📊 **Advanced analytics** dashboard
-- 🌍 **Multi-language** support
+- 🎥 **LongCat-Video Pro**: Videos hasta 10 minutos
+- 🤖 **AI-powered lyrics** generation sincronizada con video
+- 📊 **Advanced analytics** dashboard con métricas de video
+- 🌍 **Multi-language** support para prompts de video
 
 ---
 

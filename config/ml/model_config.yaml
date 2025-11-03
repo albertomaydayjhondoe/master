@@ -29,3 +29,27 @@ affinity:
 anomaly:
   model_path: /app/data/models/production/anomaly_detector.pt
   device: cuda
+
+# LongCat-Video Configuration
+longcat_video:
+  # Model configuration
+  model_name: "longcat-video-1.2"
+  model_path: /app/data/models/longcat/
+  device: cuda
+  
+  # Generation parameters
+  default_resolution: "720p"
+  max_frames: 300  # ~10 seconds at 30fps
+  default_fps: 30
+  num_inference_steps: 50
+  guidance_scale: 4.0
+  
+  # Output configuration
+  output_dir: /app/data/generated_videos/
+  output_format: "mp4"
+  quality: "high"
+  
+  # API configuration
+  api_prefix: "/api/v1/video"
+  max_concurrent_generations: 3
+  cleanup_days: 7

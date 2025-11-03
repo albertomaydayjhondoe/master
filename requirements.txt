@@ -7,10 +7,13 @@ gradio>=4.0.0
 # Analytics Engine  
 streamlit>=1.28.0
 
-# ML Core - Ultralytics
+# ML Core - Ultralytics + LongCat Video Generation
 ultralytics>=8.0.0
 torch>=2.0.0
 torchvision>=0.15.0
+transformers>=4.30.0  # HuggingFace para LongCat-Video
+diffusers>=0.20.0     # Diffusion models para video generation
+accelerate>=0.20.0    # Model acceleration para LongCat
 
 # Visualizaciones
 plotly>=5.17.0
@@ -19,6 +22,7 @@ pandas>=2.0.0
 # APIs y Comunicación
 requests>=2.31.0
 aiohttp>=3.8.0
+fastapi>=0.104.0      # Para LongCat Video API
 
 # Utilidades Básicas
 python-multipart>=0.0.18

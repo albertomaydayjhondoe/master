@@ -138,7 +138,10 @@ img2img>=1.0.0  # Image-to-image generation
 
 # Video generation para ads (compatible Python 3.12)
 video-diffusion>=1.0.0  # Video generation with AI
-runway-ml>=1.0.0  # Runway ML video tools
+torch>=2.0.0  # LongCat Video Generation
+transformers>=4.30.0  # HuggingFace models
+diffusers>=0.20.0  # Diffusion models
+accelerate>=0.20.0  # Model acceleration
 synthesia-api>=1.0.0  # Synthesia AI videos
 luma-ai>=1.0.0  # Luma AI video creation
 

@@ -140,6 +140,27 @@ else
 fi
 ((total_tokens++))
 
+echo -n "   🔍 LONGCAT-VIDEO: "
+if python3 -c "from ml_core.video_generation import create_video_generator; print('OK')" >/dev/null 2>&1; then
+    echo -e "${GREEN}✅ Generador de video disponible${NC}"
+    ((valid_tokens++))
+else
+    echo -e "${RED}❌ LongCat-Video no disponible${NC}"
+fi
+((total_tokens++))
+
+echo -n "   🔍 PYTORCH: "
+if python3 -c "import torch; print('CUDA:', torch.cuda.is_available())" 2>/dev/null | grep -q "True"; then
+    echo -e "${GREEN}✅ GPU aceleración disponible${NC}"
+    ((valid_tokens++))
+elif python3 -c "import torch; print('OK')" >/dev/null 2>&1; then
+    echo -e "${YELLOW}⚠️  Solo CPU (generación lenta)${NC}"
+    ((valid_tokens++))
+else
+    echo -e "${RED}❌ PyTorch no disponible${NC}"
+fi
+((total_tokens++))
+
 echo ""
 
 # RESUMEN FINAL
