@@ -1,0 +1,214 @@
+# Requirements para RAMA MAIN - TikTok ML Core + Device Farm + Módulo 7
+# Versión completa con todas las capacidades ML y automatización física
+
+# ====== CORE FRAMEWORK ======
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+python-dotenv==1.0.0
+pydantic==2.4.2
+aiohttp==3.9.0
+httpx==0.25.0
+aiofiles==23.2.0
+python-multipart==0.0.6
+
+# ====== DATABASE ======
+sqlalchemy==2.0.23
+psycopg2-binary==2.9.9
+redis==5.0.1
+aioredis==2.0.1
+
+# ====== DEVICE FARM & MOBILE AUTOMATION ======
+appium-python-client==3.1.0
+uiautomator2==3.0.3
+pure-python-adb==0.3.0.dev0
+scrcpy-client==0.3.5
+
+# ====== ULTRALYTICS + YOLO ECOSYSTEM ======
+ultralytics==8.0.196
+yolov5==7.0.13
+torch==2.1.0
+torchvision==0.16.0
+torch-audio==2.1.0
+
+# ====== COMPUTER VISION - ADVANCED ======
+opencv-python==4.8.1.78
+opencv-contrib-python==4.8.1.78
+pillow==10.1.0
+albumentations==1.3.1
+timm==0.9.8
+torchmetrics==1.2.0
+
+# ====== ML CORE STACK ======
+numpy==1.26.1
+pandas==2.1.2
+scikit-learn==1.3.2
+scipy==1.11.4
+matplotlib==3.8.1
+seaborn==0.13.0
+
+# ====== DEEP LEARNING FRAMEWORKS ======
+transformers==4.35.2
+sentence-transformers==2.2.2
+diffusers==0.24.0
+accelerate==0.24.1
+
+# ====== AUDIO PROCESSING - MÓDULO 7 ======
+librosa==0.10.1
+essentia==2.1b6.dev1110
+madmom==0.16.1
+pyaudio==0.2.11
+soundfile==1.0.0
+pydub==0.25.1
+speech-recognition==3.10.0
+
+# ====== VIDEO PROCESSING - MÓDULO 7 ======
+moviepy==1.0.3
+ffmpeg-python==0.2.0
+imageio==2.31.6
+imageio-ffmpeg==0.4.9
+decord==0.6.0
+
+# ====== ML EXPERIMENT TRACKING ======
+mlflow==2.8.0
+tensorboard==2.14.1
+wandb==0.16.0
+optuna==3.4.0
+
+# ====== TIKTOK SPECIFIC ======
+TikTokApi==5.9.0
+tiktok-downloader==2.1.0
+yt-dlp==2023.11.16
+
+# ====== SOCIAL MEDIA APIs ======
+instagrapi==1.19.0
+tweepy==4.14.0
+linkedin-api==2.0.0
+
+# ====== WEB AUTOMATION ======
+selenium==4.15.0
+playwright==1.40.0
+beautifulsoup4==4.12.0
+scrapy==2.11.0
+requests==2.31.0
+
+# ====== MOBILE TESTING FRAMEWORKS ======
+pytest-appium==1.2.0
+robotframework==6.1.1
+robotframework-appiumlibrary==2.0.0
+
+# ====== PERFORMANCE & MONITORING ======
+prometheus-client==0.18.0
+grafana-api==1.0.3
+python-json-logger==2.0.7
+loguru==0.7.2
+psutil==5.9.6
+nvidia-ml-py3==7.352.0
+
+# ====== DATA PROCESSING ======
+dask[complete]==2023.11.0
+polars==0.19.14
+pyarrow==14.0.1
+h5py==3.10.0
+zarr==2.16.3
+
+# ====== NETWORKING & PROTOCOLS ======
+websockets==12.0
+socketio-client==0.5.6
+paramiko==3.3.1
+fabric==3.2.2
+
+# ====== CLOUD & STORAGE ======
+boto3==1.34.0
+google-cloud-storage==2.10.0
+azure-storage-blob==12.19.0
+minio==7.2.0
+
+# ====== CONFIGURATION & SERIALIZATION ======
+pyyaml==6.0.1
+toml==0.10.2
+orjson==3.9.10
+msgpack==1.0.7
+protobuf==4.25.1
+
+# ====== ASYNC & CONCURRENCY ======
+asyncpg==0.29.0
+asyncio-mqtt==0.13.0
+celery==5.3.4
+
+# ====== SECURITY ======
+cryptography==41.0.7
+bcrypt==4.1.1
+jwt==1.3.1
+pyotp==2.9.0
+
+# ====== TIME & SCHEDULING ======
+python-dateutil==2.8.2
+pytz==2023.3
+croniter==1.4.1
+schedule==1.2.0
+apscheduler==3.10.4
+
+# ====== NATURAL LANGUAGE PROCESSING ======
+spacy==3.7.2
+nltk==3.8.1
+textblob==0.17.1
+langdetect==1.0.9
+
+# ====== IMAGE ENHANCEMENT ======
+wand==0.6.13
+rawpy==0.19.0
+rasterio==1.3.9
+
+# ====== TESTING FRAMEWORK ======
+pytest==7.4.3
+pytest-asyncio==0.21.1
+pytest-cov==4.1.0
+pytest-mock==3.12.0
+pytest-xdist==3.5.0
+
+# ====== DEVICE COMMUNICATION ======
+pyserial==3.5
+bluetooth-utils==0.3.4
+zeroconf==0.128.4
+
+# ====== METRICS & STATISTICS ======
+statsmodels==0.14.0
+pingouin==0.5.3
+
+# ====== API DEVELOPMENT ======
+strawberry-graphql==0.215.1
+fastapi-users==12.1.2
+fastapi-limiter==0.1.5
+
+# ====== OPTIMIZATION LIBRARIES ======
+numba==0.58.1
+cython==3.0.6
+
+# ====== DEVICE FARM SPECIFIC ======
+# Android debugging
+adb-shell==0.4.4
+android-backup==0.2.0
+
+# iOS support (requires additional setup)
+pymobiledevice3==1.42.5
+libimobiledevice==1.3.0
+
+# ====== SPECIALIZED ML MODELS ======
+# Object detection extensions
+detectron2 @ git+https://github.com/facebookresearch/detectron2.git
+segment-anything @ git+https://github.com/facebookresearch/segment-anything.git
+
+# ====== PERFORMANCE ACCELERATORS ======
+# Uncomment for production
+# uvloop==0.19.0  # Linux/macOS only
+# cupy-cuda12x==12.3.0  # CUDA 12.x support
+# tensorrt==8.6.1  # NVIDIA TensorRT
+
+# ====== SYSTEM REQUIREMENTS NOTES ======
+# - Requires Python 3.9-3.11
+# - CUDA toolkit for GPU acceleration
+# - FFmpeg system installation for video processing
+# - Android SDK for device farm operations
+# - iOS development requires macOS + Xcode
+# - Some audio libraries need system audio drivers
+# - Large download size due to ML models (~10GB+)

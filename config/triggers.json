@@ -1,0 +1,83 @@
+{
+  "triggers": [
+    {
+      "name": "health_check_api",
+      "type": "webhook",
+      "url": "http://localhost:8000/health",
+      "method": "GET",
+      "payload": {},
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "schedule": "*/5 * * * *",
+      "enabled": true,
+      "last_run": null,
+      "success_count": 0,
+      "error_count": 0
+    },
+    {
+      "name": "coco_test_detection",
+      "type": "manual",
+      "url": "http://localhost:8000/api/v1/coco_test",
+      "method": "GET",
+      "payload": {},
+      "headers": {
+        "Content-Type": "application/json",
+        "X-API-Key": "dummy_development_key"
+      },
+      "schedule": null,
+      "enabled": true,
+      "last_run": null,
+      "success_count": 0,
+      "error_count": 0
+    },
+    {
+      "name": "device_farm_status",
+      "type": "webhook",
+      "url": "http://localhost:8000/api/v1/devices/status",
+      "method": "GET",
+      "payload": {},
+      "headers": {
+        "Content-Type": "application/json",
+        "X-API-Key": "dummy_development_key"
+      },
+      "schedule": "0 */1 * * *",
+      "enabled": false,
+      "last_run": null,
+      "success_count": 0,
+      "error_count": 0
+    },
+    {
+      "name": "gologin_profile_check",
+      "type": "webhook", 
+      "url": "http://localhost:8000/api/v1/gologin/profiles",
+      "method": "GET",
+      "payload": {},
+      "headers": {
+        "Content-Type": "application/json",
+        "X-API-Key": "dummy_development_key"
+      },
+      "schedule": "0 */6 * * *",
+      "enabled": false,
+      "last_run": null,
+      "success_count": 0,
+      "error_count": 0
+    },
+    {
+      "name": "telegram_bot_status",
+      "type": "webhook",
+      "url": "http://localhost:8000/api/v1/telegram/status", 
+      "method": "GET",
+      "payload": {},
+      "headers": {
+        "Content-Type": "application/json",
+        "X-API-Key": "dummy_development_key"
+      },
+      "schedule": "0 */2 * * *",
+      "enabled": false,
+      "last_run": null,
+      "success_count": 0,
+      "error_count": 0
+    }
+  ]
+}

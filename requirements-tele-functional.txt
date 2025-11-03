@@ -1,0 +1,83 @@
+# 💬 RAMA TELE - Telegram Like4Like + Social Networks (Python 3.12 Funcional)
+# Solo paquetes verificados y disponibles para Python 3.12
+
+# ====== API CORE ======
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+python-dotenv==1.0.0
+pydantic==2.4.2
+aiohttp==3.9.0
+httpx==0.25.0
+aiofiles==23.2.0
+python-multipart==0.0.6
+
+# ====== DATABASE ======
+sqlalchemy==2.0.23
+psycopg2-binary==2.9.9
+
+# ====== TELEGRAM AUTOMATION ======
+telethon==1.41.0
+python-telegram-bot==20.7
+pyrogram==2.0.106
+tgcrypto==1.2.5
+
+# ====== BASIC ML (Solo funcionales Python 3.12) ======
+torch>=2.2.0
+torchvision>=0.17.0
+opencv-python>=4.8.0
+scikit-learn>=1.3.0
+scipy>=1.11.0
+
+# ====== MÓDULO 7 BÁSICO ======
+# Audio Analysis básico
+soundfile>=0.12.1
+# Video Processing básico
+moviepy>=1.0.3
+ffmpeg-python>=0.2.0
+imageio>=2.34.0
+
+# ====== SOCIAL MEDIA BÁSICO ======
+# Instagram
+instagrapi>=2.0.0
+# Twitter
+tweepy>=4.14.0
+# Facebook básico
+facebook-sdk>=3.1.0
+
+# ====== WEB AUTOMATION BÁSICO ======
+selenium>=4.15.0
+playwright>=1.40.0
+fake-useragent>=1.4.0
+
+# ====== SOCIAL MEDIA UTILITIES ======
+textblob>=0.18.0
+langdetect>=1.0.9
+emoji>=2.8.0
+validators>=0.20.0
+
+# ====== NETWORKING ======
+requests>=2.31.0
+requests-oauthlib>=1.3.0
+aiohttp-socks>=0.8.0
+
+# ====== DATA PROCESSING ======
+numpy>=1.24.0
+pandas>=2.0.0
+matplotlib>=3.7.0
+
+# ====== DEVELOPMENT TOOLS ======
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+pytest-cov>=4.1.0
+pytest-mock>=3.11.0
+ipython>=8.12.0
+
+# ====== LOGGING & MONITORING ======
+loguru>=0.7.0
+python-json-logger>=2.0.0
+
+# ====== UTILITIES ======
+click>=8.1.0
+rich>=13.0.0
+tqdm>=4.65.0
+pyyaml>=6.0.0

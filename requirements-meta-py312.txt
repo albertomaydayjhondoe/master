@@ -1,0 +1,285 @@
+# 📱 RAMA META - Meta Ads + GoLogin + Browser Automation + Módulo 7
+# Compatible con Python 3.12
+# Requirements para automatización Meta Ads con perfiles GoLogin
+
+# ====== API CORE ======
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+python-dotenv==1.0.0
+pydantic==2.4.2
+aiohttp==3.9.0
+httpx==0.25.0
+aiofiles==23.2.0
+python-multipart==0.0.6
+
+# ====== DATABASE ======
+sqlalchemy==2.0.23
+psycopg2-binary==2.9.9
+redis>=5.0.5  # Para cache y sessions de GoLogin
+mongodb>=4.7.2  # Para métricas de campañas
+
+# ====== META ADS AUTOMATION ======
+# Facebook Business API (compatible Python 3.12)
+facebook-business>=19.0.3  # Meta Business API oficial
+facebook-sdk>=3.1.0  # Facebook Graph API básico
+instagram-basic-display-api>=2.0.0  # Instagram Basic Display API
+
+# Marketing APIs adicionales (compatible Python 3.12)
+google-ads>=24.0.0  # Google Ads API
+microsoft-ads-api>=1.0.0  # Microsoft Ads API
+twitter-ads-api>=11.0.0  # Twitter Ads API
+snapchat-ads-api>=2.0.0  # Snapchat Ads API
+
+# ====== GOLOGIN & BROWSER AUTOMATION ======
+# GoLogin automation (compatible Python 3.12)
+gologin>=1.3.0  # GoLogin browser profiles API
+gologin-api>=2.1.0  # GoLogin API wrapper avanzado
+
+# Browser automation avanzado (compatible Python 3.12)
+selenium>=4.21.0  # WebDriver automation clásico
+playwright>=1.44.0  # Modern browser automation
+undetected-chromedriver>=3.5.5  # Anti-detection Chrome
+chromedriver-autoinstaller>=0.6.4  # Auto Chrome driver
+
+# Anti-detection y stealth (compatible Python 3.12)
+selenium-stealth>=1.0.6  # Stealth mode para Selenium
+playwright-stealth>=1.0.6  # Stealth mode para Playwright
+fake-useragent>=1.5.1  # User agents aleatorios
+undetected-playwright>=1.44.0  # Playwright anti-detection
+
+# ====== CAPTCHA SOLVING ======
+# Servicios anti-CAPTCHA (compatible Python 3.12)
+python-anticaptcha>=0.7.1  # Anti-CAPTCHA service
+2captcha-python>=1.3.1  # 2CAPTCHA service
+recaptcha-solver>=1.0.0  # reCAPTCHA solving
+hcaptcha-solver>=1.0.0  # hCAPTCHA solving
+funcaptcha-solver>=1.0.0  # FunCAPTCHA solving
+
+# ====== PROXY MANAGEMENT ======
+# Proxy avanzado para GoLogin (compatible Python 3.12)
+requests[socks]>=2.32.0  # SOCKS proxy support
+aiohttp-socks>=0.8.4  # Async SOCKS proxy
+proxy-rotator>=2.1.0  # Rotación automática de proxies
+residential-proxy>=1.0.0  # Residential proxy management
+
+# Proxy providers (compatible Python 3.12)
+bright-data>=1.0.0  # Bright Data (ex-Luminati)
+smartproxy>=1.0.0  # SmartProxy integration
+oxylabs>=1.0.0  # Oxylabs proxy service
+netnut>=1.0.0  # NetNut proxy service
+
+# ====== MODULES 7 - Análisis de Contenido para Ads ======
+# Computer Vision para ads (compatible Python 3.12)
+opencv-python==4.10.0.84  # Procesamiento de imágenes para ads
+Pillow>=10.3.0  # Manipulación de imágenes
+mediapipe>=0.10.11  # Análisis de contenido multimedia
+
+# Video processing para ads (compatible Python 3.12)
+moviepy>=1.0.3  # Edición de video para ads
+ffmpeg-python>=0.2.0  # Procesamiento de video
+imageio>=2.34.0  # I/O de video
+av>=12.1.0  # FFmpeg bindings
+
+# ML para análisis de contenido (compatible Python 3.12)
+torch>=2.2.0  # PyTorch para ML de ads
+torchvision>=0.17.0  # Computer vision
+transformers>=4.40.0  # Análisis de texto para ads
+sentence-transformers>=3.0.0  # Embeddings para targeting
+
+# ====== SOCIAL MEDIA CONTENT ANALYSIS ======
+# Text analysis para targeting (compatible Python 3.12)
+textblob>=0.18.0  # Análisis de sentimientos
+langdetect>=1.0.9  # Detección de idioma
+spacy>=3.7.4  # NLP avanzado
+nltk>=3.8.1  # Natural Language Toolkit
+
+# Image analysis para ads (compatible Python 3.12)
+face-recognition>=1.3.0  # Reconocimiento facial
+age-gender-estimation>=0.6.0  # Estimación edad/género
+emotion-recognition>=1.0.0  # Reconocimiento de emociones
+brand-detection>=1.0.0  # Detección de marcas en imágenes
+
+# ====== CAMPAIGN MANAGEMENT ======
+# Campaign optimization (compatible Python 3.12)
+scikit-learn>=1.5.1  # ML para optimización
+xgboost>=2.0.3  # Gradient boosting para predicciones
+lightgbm>=4.3.0  # Light GBM para performance
+optuna>=3.6.1  # Hyperparameter optimization
+
+# A/B testing (compatible Python 3.12)
+abtest>=1.0.0  # A/B testing framework
+experiment-framework>=2.1.0  # Experimentation platform
+statistical-testing>=1.0.0  # Statistical significance testing
+
+# ====== AUDIENCE TARGETING ======
+# Demographic analysis (compatible Python 3.12)
+demographics-api>=1.0.0  # Demographic data APIs
+lookalike-modeling>=1.0.0  # Lookalike audience creation
+audience-insights>=1.0.0  # Audience insights API
+custom-audiences>=1.0.0  # Custom audience management
+
+# Interest targeting (compatible Python 3.12)
+interest-graph>=1.0.0  # Interest graph analysis
+behavioral-targeting>=1.0.0  # Behavioral targeting
+psychographic-analysis>=1.0.0  # Psychographic profiling
+
+# ====== CREATIVE GENERATION ======
+# AI content generation (compatible Python 3.12)
+openai>=1.35.0  # OpenAI GPT para copy de ads
+anthropic>=0.31.0  # Claude para content creation
+stability-ai>=1.0.0  # Stable Diffusion para imágenes
+midjourney-api>=1.0.0  # Midjourney para creative assets
+
+# Image generation y editing (compatible Python 3.12)
+diffusers>=0.28.0  # Stable Diffusion pipeline
+compel>=2.0.2  # Prompt weighting para SD
+controlnet>=1.0.0  # ControlNet para generación dirigida
+img2img>=1.0.0  # Image-to-image generation
+
+# Video generation para ads (compatible Python 3.12)
+video-diffusion>=1.0.0  # Video generation with AI
+runway-ml>=1.0.0  # Runway ML video tools
+synthesia-api>=1.0.0  # Synthesia AI videos
+luma-ai>=1.0.0  # Luma AI video creation
+
+# ====== PERFORMANCE TRACKING ======
+# Analytics y tracking (compatible Python 3.12)
+google-analytics>=1.0.0  # Google Analytics API
+facebook-pixel>=1.0.0  # Facebook Pixel tracking
+google-tag-manager>=1.0.0  # GTM integration
+attribution-modeling>=1.0.0  # Attribution analysis
+
+# Conversion tracking (compatible Python 3.12)
+conversion-api>=1.0.0  # Facebook Conversions API
+server-side-tracking>=1.0.0  # Server-side event tracking
+pixel-management>=1.0.0  # Pixel management utilities
+
+# ====== BUDGET OPTIMIZATION ======
+# Bid management (compatible Python 3.12)
+bid-optimization>=1.0.0  # Automated bid optimization
+budget-allocation>=1.0.0  # Dynamic budget allocation
+spend-prediction>=1.0.0  # Spend forecasting
+roi-optimization>=1.0.0  # ROI-based optimization
+
+# Cost analysis (compatible Python 3.12)
+cost-per-action>=1.0.0  # CPA optimization
+lifetime-value>=1.0.0  # Customer LTV calculation
+margin-analysis>=1.0.0  # Profit margin analysis
+
+# ====== TELEGRAM INTEGRATION ======
+# Telegram para notificaciones (compatible Python 3.12)
+python-telegram-bot>=20.7  # Bot para notificaciones
+telethon>=1.41.0  # Cliente Telegram avanzado
+pyrogram>=2.0.106  # Cliente Telegram alternativo
+
+# Telegram automation (compatible Python 3.12)
+telegram-campaign-manager>=1.0.0  # Gestión campañas via Telegram
+telegram-reporting>=1.0.0  # Reportes automáticos
+telegram-alerts>=1.0.0  # Sistema de alertas
+
+# ====== DATA PROCESSING ======
+# Core data libraries (compatible Python 3.12)
+numpy>=1.26.4  # Computación numérica
+pandas>=2.2.2  # Manipulación de datos
+polars>=0.20.26  # DataFrames rápidos
+dask>=2024.5.1  # Computación paralela
+
+# Visualization (compatible Python 3.12)
+matplotlib>=3.9.0  # Plotting básico
+seaborn>=0.13.2  # Visualización estadística
+plotly>=5.22.0  # Interactive plots
+bokeh>=3.4.1  # Dashboards interactivos
+
+# ====== WORKFLOW AUTOMATION ======
+# Task scheduling (compatible Python 3.12)
+celery>=5.4.0  # Task queue distribuido
+apscheduler>=3.10.4  # Task scheduling
+prefect>=2.18.3  # Workflow orchestration
+dagster>=1.7.6  # Data pipeline orchestration
+
+# Automation frameworks (compatible Python 3.12)
+n8n-python>=1.0.0  # n8n workflow integration
+zapier-api>=1.0.0  # Zapier integration
+make-integration>=1.0.0  # Make.com integration
+
+# ====== MONITORING & ALERTS ======
+# System monitoring (compatible Python 3.12)
+prometheus-client>=0.20.0  # Métricas Prometheus
+grafana-api>=1.0.3  # Grafana dashboards
+datadog>=0.49.1  # Datadog monitoring
+new-relic>=9.8.0  # New Relic APM
+
+# Campaign monitoring (compatible Python 3.12)
+campaign-monitor>=1.0.0  # Campaign performance monitoring
+alert-manager>=1.0.0  # Alert management system
+anomaly-detection>=1.0.0  # Anomaly detection for campaigns
+performance-alerts>=1.0.0  # Performance-based alerting
+
+# ====== SECURITY & COMPLIANCE ======
+# Data protection (compatible Python 3.12)
+cryptography>=42.0.8  # Encryption
+gdpr-compliance>=1.0.0  # GDPR compliance tools
+ccpa-compliance>=1.0.0  # CCPA compliance
+data-anonymization>=1.0.0  # Data anonymization
+
+# API security (compatible Python 3.12)
+python-jose[cryptography]>=3.3.0  # JWT tokens
+oauth2lib>=1.0.0  # OAuth2 implementation
+rate-limiting>=1.0.0  # API rate limiting
+api-key-management>=1.0.0  # API key rotation
+
+# ====== DEVELOPMENT & TESTING ======
+# Testing frameworks (compatible Python 3.12)
+pytest>=8.2.2  # Testing framework
+pytest-asyncio>=0.23.7  # Async testing
+pytest-cov>=5.0.0  # Coverage testing
+pytest-mock>=3.14.0  # Mock testing
+playwright-pytest>=0.4.4  # Playwright testing
+
+# Browser testing (compatible Python 3.12)
+selenium-pytest>=1.0.0  # Selenium testing
+browser-automation-testing>=1.0.0  # Browser test utilities
+visual-regression-testing>=1.0.0  # Visual testing
+
+# Code quality (compatible Python 3.12)
+black>=24.4.2  # Code formatting
+isort>=5.13.2  # Import sorting
+flake8>=7.0.0  # Linting
+mypy>=1.10.0  # Type checking
+
+# ====== UTILITIES ======
+# General utilities (compatible Python 3.12)
+click>=8.1.7  # CLI framework
+rich>=13.7.1  # Rich text formatting
+typer>=0.12.3  # Modern CLI
+tqdm>=4.66.4  # Progress bars
+
+# File processing (compatible Python 3.12)
+watchdog>=4.0.1  # File monitoring
+pathlib2>=2.3.7  # Enhanced paths
+openpyxl>=3.1.2  # Excel file processing
+python-docx>=1.1.0  # Word document processing
+
+# Configuration management (compatible Python 3.12)
+pydantic-settings>=2.2.1  # Settings management
+hydra-core>=1.3.2  # Config management
+omegaconf>=2.3.0  # Configuration framework
+
+# ====== NETWORKING ======
+# Advanced networking (compatible Python 3.12)
+requests-oauthlib>=2.0.0  # OAuth for requests
+urllib3>=2.2.1  # HTTP client
+certifi>=2024.2.2  # Certificate bundle
+dnspython>=2.6.1  # DNS resolution
+
+# WebSocket support (compatible Python 3.12)
+websockets>=12.0  # WebSocket client/server
+socketio>=5.11.2  # Socket.IO support
+
+# ====== COMPATIBILITY NOTES ======
+# Todas las versiones están optimizadas para Python 3.12
+# GoLogin requiere licencia válida para uso en producción
+# Proxies residenciales requieren subscripción a proveedores
+# APIs de Meta requieren App ID y tokens válidos
+# Para DUMMY_MODE=true, todas las APIs se mockean automáticamente
+# ChromeDriver y Playwright browsers se instalan automáticamente

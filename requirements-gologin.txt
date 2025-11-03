@@ -1,0 +1,51 @@
+# Requirements específicos para GoLogin Browser Automation
+# Úsalo junto con requirements-meta.txt para funcionalidad completa
+
+# ====== GOLOGIN CORE ======
+# GoLogin no tiene SDK oficial Python, pero usamos estas librerías:
+
+# Browser automation core
+selenium==4.15.0
+seleniumwire==5.1.0
+undetected-chromedriver==3.5.3
+webdriver-manager==4.0.1
+
+# Advanced browser control
+playwright==1.40.0
+pyautogui==0.9.54
+
+# Proxy management
+requests[socks]==2.31.0
+pysocks==1.7.1
+rotating-proxies==0.6.2
+
+# Browser fingerprinting
+fake-useragent==1.4.0
+fake-headers==1.0.2
+browser-cookie3==0.19.1
+
+# Chrome DevTools Protocol
+pychrome==0.2.3
+chromedriver-autoinstaller==0.6.2
+
+# ====== CAPTCHA SOLVING ======
+2captcha-python==1.1.3
+anticaptchaofficial==1.0.46
+
+# ====== OCR & IMAGE PROCESSING ======
+pytesseract==0.3.10
+easyocr==1.7.0
+
+# ====== NETWORKING UTILITIES ======
+ping3==4.0.4
+speedtest-cli==2.1.3
+
+# ====== SISTEMA DE ARCHIVOS ======
+openpyxl==3.1.2
+xlsxwriter==3.1.9
+
+# ====== NOTAS DE INSTALACIÓN ======
+# 1. Instalar Chrome/Chromium manualmente
+# 2. Configurar proxies residenciales/datacenter  
+# 3. Obtener API keys para solving de captchas
+# 4. GoLogin profiles deben configurarse via web interface
