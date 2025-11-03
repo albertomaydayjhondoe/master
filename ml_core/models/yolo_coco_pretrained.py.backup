@@ -14,13 +14,13 @@ from PIL import Image
 import io
 
 try:
-    from ultralytics import YOLO
-    # YOLO = None
+    # from ultralytics import YOLO  # Disabled
+    YOLO = None
     import torch
-    ULTRALYTICS_AVAILABLE = True
+    ULTRALYTICS_AVAILABLE = False  # Disabled for compatibility
 except ImportError:
-    ULTRALYTICS_AVAILABLE = True
-    # YOLO = None
+    ULTRALYTICS_AVAILABLE = False
+    YOLO = None
     torch = None
 
 import os

@@ -1,0 +1,33 @@
+{
+  "artist_profile": {
+    "name": "TrapStar_Artist",
+    "genre": "trap",
+    "style": "aggressive_beats",
+    "target_audience": "16-25",
+    "preferred_platforms": ["tiktok", "instagram", "youtube"],
+    "posting_schedule": {
+      "peak_hours": ["19:00", "21:00", "23:00"],
+      "frequency": "daily",
+      "content_types": ["video_clips", "stories", "reels"]
+    }
+  },
+  "campaign_settings": {
+    "viral_triggers": ["trending_sounds", "challenges", "hashtag_waves"],
+    "engagement_targets": {
+      "views": 100000,
+      "likes": 10000,
+      "shares": 2000,
+      "comments": 500
+    },
+    "budget_allocation": {
+      "meta_ads": 70,
+      "influencer_partnerships": 20,
+      "organic_boost": 10
+    }
+  },
+  "ml_preferences": {
+    "content_analysis": "aggressive_beats_detection",
+    "viral_prediction": "trap_specific_model",
+    "audience_targeting": "trap_demographics"
+  }
+}
