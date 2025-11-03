@@ -16,7 +16,10 @@ from typing import Dict, Any, List
 import io
 from PIL import Image
 import torch
-from ultralytics import YOLO
+try:
+    from ultralytics import YOLO
+except ImportError:
+    YOLO = None
 
 
 class YoloScreenshotDetector:

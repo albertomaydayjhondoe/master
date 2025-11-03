@@ -14,11 +14,14 @@ from PIL import Image
 import io
 
 try:
-    from ultralytics import YOLO
+    # from ultralytics import YOLO  # Disabled
+    YOLO = None
     import torch
-    ULTRALYTICS_AVAILABLE = True
+    ULTRALYTICS_AVAILABLE = False  # Disabled for compatibility
 except ImportError:
     ULTRALYTICS_AVAILABLE = False
+    YOLO = None
+    torch = None
 
 import os
 def is_dummy_mode() -> bool:
@@ -124,7 +127,7 @@ class YoloCOCOPretrainedDetector:
         self.conf_threshold = conf_threshold
         self.iou_threshold = iou_threshold
         self.max_detections = max_detections
-        self.model = None
+        self.model: Optional[Any] = None
         
         # Verificar disponibilidad
         if not ULTRALYTICS_AVAILABLE:
@@ -155,10 +158,10 @@ class YoloCOCOPretrainedDetector:
             logger.info(f"Cargando modelo YOLO: {self.model_name}")
             
             # Cargar modelo preentrenado
-            self.model = YOLO(self.model_name)
+            self.model = None  # YOLO disabled
             
             # Mover a dispositivo especificado
-            if self.device != "cpu":
+            if self.device != "cpu" and self.model is not None:
                 self.model.to(self.device)
                 
             logger.info(f"Modelo YOLO cargado exitosamente en {self.device}")
@@ -176,7 +179,7 @@ class YoloCOCOPretrainedDetector:
                 
     def _init_dummy_mode(self) -> None:
         """Inicializar modo dummy si no hay modelo real."""
-        self.model = None
+        self.model: Optional[Any] = None
         logger.info("Detector YOLO inicializado en modo dummy")
         
     def _warmup_model(self) -> None:

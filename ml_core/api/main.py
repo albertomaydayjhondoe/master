@@ -1,20 +1,23 @@
 """
-# MCP Auto-Fix: Imports Dummy para DUMMY_MODE
+Main - Machine Learning and Device Automation API
+
+This module is part of the TikTok ML Branch system.
+Maintained as part of the universal automation platform.
+"""
+
+import logging
 import os
+from typing import Dict, Any, Optional, List, Union
+from fastapi import FastAPI, HTTPException, UploadFile, File, Depends, Security
+from fastapi.security.api_key import APIKeyHeader
+
+# MCP Auto-Fix: Imports Dummy para DUMMY_MODE
 if os.getenv("DUMMY_MODE", "true").lower() == "true":
     try:
         from mcp_server.dummy_implementations import install_dummy_modules
         install_dummy_modules()
     except ImportError:
         pass  # MCP server no disponible
-Main - Machine Learning and Device Automation
-
-This module is part of the TikTok ML Branch system.
-Maintained as part of the universal automation platform.
-"""
-
-from fastapi import FastAPI, Depends, HTTPException, Security
-from fastapi.security.api_key import APIKeyHeader
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Dict, Any, Optional
@@ -91,6 +94,14 @@ from ml_core.api.endpoints import (
     coco_detection
 )
 
+# Import Module 7 - Video Generation
+try:
+    from social_extensions.video_generation.api_gateway_module7 import router as module7_router
+    MODULE7_AVAILABLE = True
+except ImportError:
+    MODULE7_AVAILABLE = False
+    print("⚠️ Module 7 (Video Generation) not available")
+
 __all__ = ['ErrorResponse', 'Config', 'verify_api_key', 'root', 'health']
 
 # Include routers
@@ -100,12 +111,24 @@ app.include_router(posting_predictor.router, prefix="/api/v1", tags=["Posting Ti
 app.include_router(affinity_calculator.router, prefix="/api/v1", tags=["Affinity"])
 app.include_router(coco_detection.router, prefix="/api/v1", tags=["COCO Detection"])
 
+# Include Module 7 - Viral Video Generation
+if MODULE7_AVAILABLE:
+    app.include_router(module7_router, prefix="/api/v1", tags=["Viral Generation Module 7"])
+
 @app.get("/")
 async def root():
     return {
         "status": "ok",
         "version": "0.1.0",
-        "mode": "dummy"
+        "mode": "dummy",
+        "modules": {
+            "screenshot_analysis": True,
+            "anomaly_detection": True,
+            "posting_predictor": True,
+            "affinity_calculator": True,
+            "coco_detection": True,
+            "viral_generation_module7": MODULE7_AVAILABLE
+        }
     }
 
 

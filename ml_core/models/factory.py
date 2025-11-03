@@ -4,7 +4,7 @@ This module provides factory functions to create ML model instances,
 supporting both dummy implementations for development/testing and
 production implementations via environment variable configuration.
 """
-from typing import Any
+from typing import Any, Optional
 import os
 
 def is_dummy_mode() -> bool:
@@ -21,7 +21,8 @@ __all__ = [
     'get_yolo_video_detector', 
     'get_affinity_model',
     'get_anomaly_detector',
-    'get_yolo_coco_detector'
+    'get_yolo_coco_detector',
+    'create_yolo_detector'  # Alias para compatibilidad
 ]
 
 
@@ -44,30 +45,36 @@ from .anomaly_detector import AnomalyDetector as _AnomalyDummy
 from .yolo_coco_pretrained import YoloCOCOPretrainedDetector as _YoloCOCOPretrained
 
 
-def get_yolo_screenshot_detector(*args, **kwargs) -> Any:
+def get_yolo_screenshot_detector(*args: Any, **kwargs: Any) -> Any:
     # Si DUMMY_MODE=false y no hay implementación específica, usar COCO pretrained
-    if not is_dummy_mode() and not get_env("YOLO_SCREENSHOT_IMPL"):
+    if not is_dummy_mode() and not get_env("YOLO_SCREENSHOT_IMPL", None):
         return _YoloCOCOPretrained(*args, **kwargs)
     
     Impl = _load_impl("YOLO_SCREENSHOT_IMPL", _YoloScreenshotDummy)
     return Impl(*args, **kwargs)
 
 
-def get_yolo_coco_detector(*args, **kwargs) -> Any:
+def get_yolo_coco_detector(*args: Any, **kwargs: Any) -> Any:
     """Factory específica para detector COCO."""
     return _YoloCOCOPretrained(*args, **kwargs)
 
 
-def get_yolo_video_detector(*args, **kwargs) -> Any:
+def get_yolo_video_detector(*args: Any, **kwargs: Any) -> Any:
     Impl = _load_impl("YOLO_VIDEO_IMPL", _YoloVideoDummy)
     return Impl(*args, **kwargs)
 
 
-def get_affinity_model(*args, **kwargs) -> Any:
+def get_affinity_model(*args: Any, **kwargs: Any) -> Any:
     Impl = _load_impl("AFFINITY_MODEL_IMPL", _AffinityDummy)
     return Impl(*args, **kwargs)
 
 
-def get_anomaly_detector(*args, **kwargs) -> Any:
+def get_anomaly_detector(*args: Any, **kwargs: Any) -> Any:
     Impl = _load_impl("ANOMALY_IMPL", _AnomalyDummy)
     return Impl(*args, **kwargs)
+
+
+# Alias para compatibilidad con interfaz
+def create_yolo_detector(*args: Any, **kwargs: Any) -> Any:
+    """Alias para get_yolo_screenshot_detector para compatibilidad."""
+    return get_yolo_screenshot_detector(*args, **kwargs)

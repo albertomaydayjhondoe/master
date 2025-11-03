@@ -1,0 +1,7 @@
+ERROR:n8n_integration:❌ N8N health check failed: Cannot connect to host localhost:5678 ssl:default [Connect call failed ('127.0.0.1', 5678)]
+INFO:n8n_integration:🔍 Started execution monitoring thread
+INFO:n8n_integration:N8N Integration Client initialized successfully
+INFO:__main__:✅ N8N Integration initialized
+INFO:httpx:HTTP Request: GET http://localhost:7860/gradio_api/startup-events "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: HEAD http://localhost:7860/ "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"

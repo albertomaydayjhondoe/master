@@ -1,0 +1,43 @@
+DASHBOARDS TIKTOK VIRAL ML SYSTEM - ENLACES FUNCIONALES
+========================================================
+
+FECHA: 2025-11-02
+ESTADO: TODOS LOS SERVICIOS ACTIVOS (200 OK)
+
+ENLACES DE ACCESO:
+==================
+
+1. GRADIO TRIGGER MANAGER
+   URL: https://redesigned-space-enigma-7vjrrwq57gq42pp7q-7860.app.github.dev
+   Puerto: 7860
+   Funcionalidad: Gestión de triggers y monitorización del sistema
+   Status: OPERATIVO
+
+2. STREAMLIT COCO ANALYTICS
+   URL: https://redesigned-space-enigma-7vjrrwq57gq42pp7q-8501.app.github.dev
+   Puerto: 8501
+   Funcionalidad: Analytics de modelos YOLO/COCO
+   Status: OPERATIVO
+
+3. ML API
+   URL: https://redesigned-space-enigma-7vjrrwq57gq42pp7q-8000.app.github.dev
+   Puerto: 8000
+   Funcionalidad: API de machine learning
+   Status: OPERATIVO
+
+ENLACES LOCALES (BACKUP):
+=========================
+
+- Gradio: http://localhost:7860
+- Streamlit: http://localhost:8501
+- ML API: http://localhost:8000
+
+COMANDOS DE GESTION:
+====================
+
+Estado: ./launch_dual_system.sh status
+Reiniciar: ./launch_dual_system.sh restart
+Logs: ./launch_dual_system.sh logs all
+
+VERIFICACION: 2025-11-02 21:38:00 UTC
+TODOS LOS SERVICIOS FUNCIONANDO CORRECTAMENTE
