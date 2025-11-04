@@ -1,0 +1,47 @@
+"""
+🔧 EXTENSIONES AVANZADAS - REQUIREMENTS
+
+Dependencias adicionales para las tres extensiones:
+- Feedback Sentiment Engine
+- Cultural Trend Miner  
+- Network Growth Simulator
+"""
+
+# NLP y Sentiment Analysis
+transformers==4.35.2
+torch==2.1.1
+torchvision==0.16.1
+bertopic==0.15.0
+sentence-transformers==2.2.2
+spacy==3.7.2
+
+# Web Scraping
+selenium==4.15.2
+beautifulsoup4==4.12.2
+playwright==1.40.0
+praw==7.7.1
+
+# APIs
+spotipy==2.22.1
+google-api-python-client==2.108.0
+googleapiclient==1.7.11
+
+# Data Science y ML
+scikit-learn==1.3.2
+scipy==1.11.4
+pandas==2.1.3
+numpy==1.25.2
+joblib==1.3.2
+
+# Visualization y Stats
+matplotlib==3.8.2
+seaborn==0.13.0
+plotly==5.17.0
+
+# Database adicional
+psycopg2-binary==2.9.9
+redis==5.0.1
+
+# Async y HTTP
+aiohttp==3.9.1
+asyncio-mqtt==0.16.1

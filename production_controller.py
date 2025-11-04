@@ -826,9 +826,14 @@ if __name__ == "__main__":
     
     # Crear y lanzar interfaz
     demo = create_gradio_interface()
+    
+    # Obtener puerto de variable de entorno o usar 7860 por defecto
+    import os
+    server_port = int(os.getenv("GRADIO_SERVER_PORT", "7860"))
+    
     demo.launch(
         server_name="0.0.0.0",
-        server_port=7860,
+        server_port=server_port,
         share=False,
         show_error=True,
         show_api=False,
