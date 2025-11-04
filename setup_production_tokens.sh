@@ -66,7 +66,16 @@ show_help() {
     echo -e "${PURPLE}===========================${NC}"
     echo ""
     
-    echo -e "${GREEN}1. META ADS API TOKENS${NC}"
+    echo -e "${GREEN}1. YOUTUBE DATA API (PRIORIDAD)${NC}"
+    echo -e "${BLUE}   Pasos para obtener:${NC}"
+    echo -e "   • Ve a https://console.cloud.google.com/"
+    echo -e "   • Crea proyecto nuevo o selecciona existente"
+    echo -e "   • Habilita YouTube Data API v3"
+    echo -e "   • Ve a Credentials > Create Credentials > OAuth 2.0"
+    echo -e "   • Descarga JSON y usa OAuth2 flow para obtener tokens"
+    echo ""
+    
+    echo -e "${GREEN}2. META ADS API TOKENS${NC}"
     echo -e "${BLUE}   Pasos para obtener:${NC}"
     echo -e "   • Ve a https://developers.facebook.com/"
     echo -e "   • Crea una nueva App (tipo Business)"
@@ -74,15 +83,6 @@ show_help() {
     echo -e "   • Ve a Tools > Graph API Explorer"
     echo -e "   • Selecciona tu app y genera User Access Token"
     echo -e "   • Usa Access Token Debugger para convertir a Long-lived"
-    echo ""
-    
-    echo -e "${GREEN}2. YOUTUBE DATA API${NC}"
-    echo -e "${BLUE}   Pasos para obtener:${NC}"
-    echo -e "   • Ve a https://console.cloud.google.com/"
-    echo -e "   • Crea proyecto nuevo o selecciona existente"
-    echo -e "   • Habilita YouTube Data API v3"
-    echo -e "   • Ve a Credentials > Create Credentials > OAuth 2.0"
-    echo -e "   • Descarga JSON y usa OAuth2 flow para obtener tokens"
     echo ""
     
     echo -e "${GREEN}3. TELEGRAM BOT API${NC}"
@@ -137,19 +137,19 @@ EOF
 echo -e "${GREEN}✅ Archivo base creado${NC}"
 echo ""
 
-# 1. META ADS TOKENS
-echo -e "${PURPLE}🎯 1. META ADS API CONFIGURATION${NC}"
-echo -e "${PURPLE}================================${NC}"
-read_token "META_ACCESS_TOKEN" "Long-lived User Access Token de Meta Business" "^EAAG.*" "https://developers.facebook.com/"
-read_token "META_APP_ID" "Application ID de tu app Meta" "^[0-9]{15,20}$" ""
-read_token "META_APP_SECRET" "Application Secret de tu app Meta" "^[a-f0-9]{32}$" ""
-
-# 2. YOUTUBE TOKENS
-echo -e "${PURPLE}📺 2. YOUTUBE DATA API CONFIGURATION${NC}"
+# 1. YOUTUBE TOKENS (PRIORIDAD)
+echo -e "${PURPLE}📺 1. YOUTUBE DATA API CONFIGURATION${NC}"
 echo -e "${PURPLE}====================================${NC}"
 read_token "YOUTUBE_CLIENT_ID" "OAuth 2.0 Client ID" ".*\.apps\.googleusercontent\.com" "https://console.cloud.google.com/"
 read_token "YOUTUBE_CLIENT_SECRET" "OAuth 2.0 Client Secret" "^GOCSPX-.*" ""
 read_token "YOUTUBE_REFRESH_TOKEN" "OAuth 2.0 Refresh Token" "^1//.*" ""
+
+# 2. META ADS TOKENS
+echo -e "${PURPLE}🎯 2. META ADS API CONFIGURATION${NC}"
+echo -e "${PURPLE}================================${NC}"
+read_token "META_ACCESS_TOKEN" "Long-lived User Access Token de Meta Business" "^EAA.*" "https://developers.facebook.com/"
+read_token "META_APP_ID" "Application ID de tu app Meta" "^[0-9]{15,20}$" ""
+read_token "META_APP_SECRET" "Application Secret de tu app Meta" "^[a-f0-9]{32}$" ""
 
 # 3. TELEGRAM TOKENS
 echo -e "${PURPLE}💬 3. TELEGRAM BOT API CONFIGURATION${NC}"

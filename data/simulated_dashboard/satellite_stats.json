@@ -1,0 +1,722 @@
+{
+  "stats": {
+    "total_satellites": 5,
+    "active_satellites": 5,
+    "total_uploads": 84,
+    "total_views": 61068,
+    "pending_uploads": 0,
+    "satellites": [
+      {
+        "id": "satellite_01",
+        "name": "Trap Central",
+        "uploads": 21,
+        "views": 17738,
+        "last_upload": null
+      },
+      {
+        "id": "satellite_02",
+        "name": "Urban Beats",
+        "uploads": 14,
+        "views": 11460,
+        "last_upload": null
+      },
+      {
+        "id": "satellite_03",
+        "name": "Rap Underground",
+        "uploads": 14,
+        "views": 10920,
+        "last_upload": null
+      },
+      {
+        "id": "satellite_04",
+        "name": "Latin Vibes",
+        "uploads": 21,
+        "views": 14901,
+        "last_upload": null
+      },
+      {
+        "id": "satellite_05",
+        "name": "Street Sessions",
+        "uploads": 14,
+        "views": 6049,
+        "last_upload": null
+      }
+    ],
+    "simulated_tasks_count": 84,
+    "simulated_period_days": 7
+  },
+  "tasks": [
+    {
+      "satellite": "satellite_01",
+      "name": "Trap Central",
+      "video_path": "data/generated_videos/text-to-video_20251103_215320.mp4",
+      "scheduled_time": "2025-11-04T12:00:00",
+      "status": "completed",
+      "views": 1220
+    },
+    {
+      "satellite": "satellite_01",
+      "name": "Trap Central",
+      "video_path": "data/generated_videos/text-to-video_20251103_215323.mp4",
+      "scheduled_time": "2025-11-04T18:00:00",
+      "status": "completed",
+      "views": 593
+    },
+    {
+      "satellite": "satellite_01",
+      "name": "Trap Central",
+      "video_path": "data/generated_videos/text-to-video_20251103_215326.mp4",
+      "scheduled_time": "2025-11-03T22:00:00",
+      "status": "completed",
+      "views": 1046
+    },
+    {
+      "satellite": "satellite_02",
+      "name": "Urban Beats",
+      "video_path": "data/generated_videos/text-to-video_20251103_215329.mp4",
+      "scheduled_time": "2025-11-04T14:00:00",
+      "status": "completed",
+      "views": 117
+    },
+    {
+      "satellite": "satellite_02",
+      "name": "Urban Beats",
+      "video_path": "data/generated_videos/text-to-video_20251103_215332.mp4",
+      "scheduled_time": "2025-11-04T20:00:00",
+      "status": "completed",
+      "views": 227
+    },
+    {
+      "satellite": "satellite_03",
+      "name": "Rap Underground",
+      "video_path": "data/generated_videos/text-to-video_20251103_215335.mp4",
+      "scheduled_time": "2025-11-04T16:00:00",
+      "status": "completed",
+      "views": 1307
+    },
+    {
+      "satellite": "satellite_03",
+      "name": "Rap Underground",
+      "video_path": "data/generated_videos/text-to-video_20251103_215338.mp4",
+      "scheduled_time": "2025-11-03T23:00:00",
+      "status": "completed",
+      "views": 611
+    },
+    {
+      "satellite": "satellite_04",
+      "name": "Latin Vibes",
+      "video_path": "data/generated_videos/text-to-video_20251103_215341.mp4",
+      "scheduled_time": "2025-11-04T11:00:00",
+      "status": "completed",
+      "views": 1002
+    },
+    {
+      "satellite": "satellite_04",
+      "name": "Latin Vibes",
+      "video_path": "data/generated_videos/text-to-video_20251103_215344.mp4",
+      "scheduled_time": "2025-11-04T17:00:00",
+      "status": "completed",
+      "views": 510
+    },
+    {
+      "satellite": "satellite_04",
+      "name": "Latin Vibes",
+      "video_path": "data/generated_videos/text-to-video_20251103_215347.mp4",
+      "scheduled_time": "2025-11-04T21:00:00",
+      "status": "completed",
+      "views": 1011
+    },
+    {
+      "satellite": "satellite_05",
+      "name": "Street Sessions",
+      "video_path": "data/generated_videos/text-to-video_20251103_215350.mp4",
+      "scheduled_time": "2025-11-04T15:00:00",
+      "status": "completed",
+      "views": 1243
+    },
+    {
+      "satellite": "satellite_05",
+      "name": "Street Sessions",
+      "video_path": "data/generated_videos/text-to-video_20251103_215353.mp4",
+      "scheduled_time": "2025-11-04T19:00:00",
+      "status": "completed",
+      "views": 846
+    },
+    {
+      "satellite": "satellite_01",
+      "name": "Trap Central",
+      "video_path": "data/generated_videos/text-to-video_20251103_215356.mp4",
+      "scheduled_time": "2025-11-05T12:00:00",
+      "status": "completed",
+      "views": 766
+    },
+    {
+      "satellite": "satellite_01",
+      "name": "Trap Central",
+      "video_path": "data/generated_videos/text-to-video_20251103_215359.mp4",
+      "scheduled_time": "2025-11-05T12:00:00",
+      "status": "completed",
+      "views": 1058
+    },
+    {
+      "satellite": "satellite_01",
+      "name": "Trap Central",
+      "video_path": "data/generated_videos/text-to-video_20251103_215402.mp4",
+      "scheduled_time": "2025-11-05T12:00:00",
+      "status": "completed",
+      "views": 1132
+    },
+    {
+      "satellite": "satellite_02",
+      "name": "Urban Beats",
+      "video_path": "data/generated_videos/text-to-video_20251103_215405.mp4",
+      "scheduled_time": "2025-11-05T14:00:00",
+      "status": "completed",
+      "views": 838
+    },
+    {
+      "satellite": "satellite_02",
+      "name": "Urban Beats",
+      "video_path": "data/generated_videos/text-to-video_20251103_215408.mp4",
+      "scheduled_time": "2025-11-05T14:00:00",
+      "status": "completed",
+      "views": 489
+    },
+    {
+      "satellite": "satellite_03",
+      "name": "Rap Underground",
+      "video_path": "data/generated_videos/text-to-video_20251103_215411.mp4",
+      "scheduled_time": "2025-11-05T16:00:00",
+      "status": "completed",
+      "views": 621
+    },
+    {
+      "satellite": "satellite_03",
+      "name": "Rap Underground",
+      "video_path": "data/generated_videos/text-to-video_20251103_215414.mp4",
+      "scheduled_time": "2025-11-05T16:00:00",
+      "status": "completed",
+      "views": 142
+    },
+    {
+      "satellite": "satellite_04",
+      "name": "Latin Vibes",
+      "video_path": "data/generated_videos/text-to-video_20251103_215417.mp4",
+      "scheduled_time": "2025-11-05T11:00:00",
+      "status": "completed",
+      "views": 317
+    },
+    {
+      "satellite": "satellite_04",
+      "name": "Latin Vibes",
+      "video_path": "data/generated_videos/text-to-video_20251103_215420.mp4",
+      "scheduled_time": "2025-11-05T11:00:00",
+      "status": "completed",
+      "views": 821
+    },
+    {
+      "satellite": "satellite_04",
+      "name": "Latin Vibes",
+      "video_path": "data/generated_videos/text-to-video_20251103_215423.mp4",
+      "scheduled_time": "2025-11-05T11:00:00",
+      "status": "completed",
+      "views": 345
+    },
+    {
+      "satellite": "satellite_05",
+      "name": "Street Sessions",
+      "video_path": "data/generated_videos/text-to-video_20251103_215426.mp4",
+      "scheduled_time": "2025-11-05T15:00:00",
+      "status": "completed",
+      "views": 258
+    },
+    {
+      "satellite": "satellite_05",
+      "name": "Street Sessions",
+      "video_path": "data/generated_videos/text-to-video_20251103_215429.mp4",
+      "scheduled_time": "2025-11-05T15:00:00",
+      "status": "completed",
+      "views": 437
+    },
+    {
+      "satellite": "satellite_01",
+      "name": "Trap Central",
+      "video_path": "data/generated_videos/text-to-video_20251103_215432.mp4",
+      "scheduled_time": "2025-11-06T12:00:00",
+      "status": "completed",
+      "views": 1072
+    },
+    {
+      "satellite": "satellite_01",
+      "name": "Trap Central",
+      "video_path": "data/generated_videos/text-to-video_20251103_215435.mp4",
+      "scheduled_time": "2025-11-06T12:00:00",
+      "status": "completed",
+      "views": 1046
+    },
+    {
+      "satellite": "satellite_01",
+      "name": "Trap Central",
+      "video_path": "data/generated_videos/text-to-video_20251103_215438.mp4",
+      "scheduled_time": "2025-11-06T12:00:00",
+      "status": "completed",
+      "views": 405
+    },
+    {
+      "satellite": "satellite_02",
+      "name": "Urban Beats",
+      "video_path": "data/generated_videos/text-to-video_20251103_215441.mp4",
+      "scheduled_time": "2025-11-06T14:00:00",
+      "status": "completed",
+      "views": 1036
+    },
+    {
+      "satellite": "satellite_02",
+      "name": "Urban Beats",
+      "video_path": "data/generated_videos/text-to-video_20251103_215444.mp4",
+      "scheduled_time": "2025-11-06T14:00:00",
+      "status": "completed",
+      "views": 502
+    },
+    {
+      "satellite": "satellite_03",
+      "name": "Rap Underground",
+      "video_path": "data/generated_videos/text-to-video_20251103_215447.mp4",
+      "scheduled_time": "2025-11-06T16:00:00",
+      "status": "completed",
+      "views": 1548
+    },
+    {
+      "satellite": "satellite_03",
+      "name": "Rap Underground",
+      "video_path": "data/generated_videos/text-to-video_20251103_215450.mp4",
+      "scheduled_time": "2025-11-06T16:00:00",
+      "status": "completed",
+      "views": 316
+    },
+    {
+      "satellite": "satellite_04",
+      "name": "Latin Vibes",
+      "video_path": "data/generated_videos/text-to-video_20251103_215453.mp4",
+      "scheduled_time": "2025-11-06T11:00:00",
+      "status": "completed",
+      "views": 624
+    },
+    {
+      "satellite": "satellite_04",
+      "name": "Latin Vibes",
+      "video_path": "data/generated_videos/text-to-video_20251103_215456.mp4",
+      "scheduled_time": "2025-11-06T11:00:00",
+      "status": "completed",
+      "views": 962
+    },
+    {
+      "satellite": "satellite_04",
+      "name": "Latin Vibes",
+      "video_path": "data/generated_videos/text-to-video_20251103_215459.mp4",
+      "scheduled_time": "2025-11-06T11:00:00",
+      "status": "completed",
+      "views": 525
+    },
+    {
+      "satellite": "satellite_05",
+      "name": "Street Sessions",
+      "video_path": "data/generated_videos/text-to-video_20251103_215502.mp4",
+      "scheduled_time": "2025-11-06T15:00:00",
+      "status": "completed",
+      "views": 431
+    },
+    {
+      "satellite": "satellite_05",
+      "name": "Street Sessions",
+      "video_path": "data/generated_videos/text-to-video_20251103_215505.mp4",
+      "scheduled_time": "2025-11-06T15:00:00",
+      "status": "completed",
+      "views": 241
+    },
+    {
+      "satellite": "satellite_01",
+      "name": "Trap Central",
+      "video_path": "data/generated_videos/text-to-video_20251103_215508.mp4",
+      "scheduled_time": "2025-11-07T12:00:00",
+      "status": "completed",
+      "views": 885
+    },
+    {
+      "satellite": "satellite_01",
+      "name": "Trap Central",
+      "video_path": "data/generated_videos/text-to-video_20251103_215511.mp4",
+      "scheduled_time": "2025-11-07T12:00:00",
+      "status": "completed",
+      "views": 1114
+    },
+    {
+      "satellite": "satellite_01",
+      "name": "Trap Central",
+      "video_path": "data/generated_videos/text-to-video_20251103_215514.mp4",
+      "scheduled_time": "2025-11-07T12:00:00",
+      "status": "completed",
+      "views": 705
+    },
+    {
+      "satellite": "satellite_02",
+      "name": "Urban Beats",
+      "video_path": "data/generated_videos/text-to-video_20251103_215517.mp4",
+      "scheduled_time": "2025-11-07T14:00:00",
+      "status": "completed",
+      "views": 1083
+    },
+    {
+      "satellite": "satellite_02",
+      "name": "Urban Beats",
+      "video_path": "data/generated_videos/text-to-video_20251103_215520.mp4",
+      "scheduled_time": "2025-11-07T14:00:00",
+      "status": "completed",
+      "views": 1391
+    },
+    {
+      "satellite": "satellite_03",
+      "name": "Rap Underground",
+      "video_path": "data/generated_videos/text-to-video_20251103_215523.mp4",
+      "scheduled_time": "2025-11-07T16:00:00",
+      "status": "completed",
+      "views": 1001
+    },
+    {
+      "satellite": "satellite_03",
+      "name": "Rap Underground",
+      "video_path": "data/generated_videos/text-to-video_20251103_215526.mp4",
+      "scheduled_time": "2025-11-07T16:00:00",
+      "status": "completed",
+      "views": 1065
+    },
+    {
+      "satellite": "satellite_04",
+      "name": "Latin Vibes",
+      "video_path": "data/generated_videos/text-to-video_20251103_215529.mp4",
+      "scheduled_time": "2025-11-07T11:00:00",
+      "status": "completed",
+      "views": 929
+    },
+    {
+      "satellite": "satellite_04",
+      "name": "Latin Vibes",
+      "video_path": "data/generated_videos/text-to-video_20251103_215532.mp4",
+      "scheduled_time": "2025-11-07T11:00:00",
+      "status": "completed",
+      "views": 1098
+    },
+    {
+      "satellite": "satellite_04",
+      "name": "Latin Vibes",
+      "video_path": "data/generated_videos/text-to-video_20251103_215535.mp4",
+      "scheduled_time": "2025-11-07T11:00:00",
+      "status": "completed",
+      "views": 807
+    },
+    {
+      "satellite": "satellite_05",
+      "name": "Street Sessions",
+      "video_path": "data/generated_videos/text-to-video_20251103_215538.mp4",
+      "scheduled_time": "2025-11-07T15:00:00",
+      "status": "completed",
+      "views": 523
+    },
+    {
+      "satellite": "satellite_05",
+      "name": "Street Sessions",
+      "video_path": "data/generated_videos/text-to-video_20251103_215541.mp4",
+      "scheduled_time": "2025-11-07T15:00:00",
+      "status": "completed",
+      "views": 167
+    },
+    {
+      "satellite": "satellite_01",
+      "name": "Trap Central",
+      "video_path": "data/generated_videos/text-to-video_20251103_215544.mp4",
+      "scheduled_time": "2025-11-08T12:00:00",
+      "status": "completed",
+      "views": 574
+    },
+    {
+      "satellite": "satellite_01",
+      "name": "Trap Central",
+      "video_path": "data/generated_videos/text-to-video_20251103_215547.mp4",
+      "scheduled_time": "2025-11-08T12:00:00",
+      "status": "completed",
+      "views": 515
+    },
+    {
+      "satellite": "satellite_01",
+      "name": "Trap Central",
+      "video_path": "data/generated_videos/text-to-video_20251103_215550.mp4",
+      "scheduled_time": "2025-11-08T12:00:00",
+      "status": "completed",
+      "views": 760
+    },
+    {
+      "satellite": "satellite_02",
+      "name": "Urban Beats",
+      "video_path": "data/generated_videos/text-to-video_20251103_215553.mp4",
+      "scheduled_time": "2025-11-08T14:00:00",
+      "status": "completed",
+      "views": 679
+    },
+    {
+      "satellite": "satellite_02",
+      "name": "Urban Beats",
+      "video_path": "data/generated_videos/text-to-video_20251103_215556.mp4",
+      "scheduled_time": "2025-11-08T14:00:00",
+      "status": "completed",
+      "views": 1381
+    },
+    {
+      "satellite": "satellite_03",
+      "name": "Rap Underground",
+      "video_path": "data/generated_videos/text-to-video_20251103_215559.mp4",
+      "scheduled_time": "2025-11-08T16:00:00",
+      "status": "completed",
+      "views": 318
+    },
+    {
+      "satellite": "satellite_03",
+      "name": "Rap Underground",
+      "video_path": "data/generated_videos/text-to-video_20251103_215602.mp4",
+      "scheduled_time": "2025-11-08T16:00:00",
+      "status": "completed",
+      "views": 170
+    },
+    {
+      "satellite": "satellite_04",
+      "name": "Latin Vibes",
+      "video_path": "data/generated_videos/text-to-video_20251103_215605.mp4",
+      "scheduled_time": "2025-11-08T11:00:00",
+      "status": "completed",
+      "views": 636
+    },
+    {
+      "satellite": "satellite_04",
+      "name": "Latin Vibes",
+      "video_path": "data/generated_videos/text-to-video_20251103_215608.mp4",
+      "scheduled_time": "2025-11-08T11:00:00",
+      "status": "completed",
+      "views": 575
+    },
+    {
+      "satellite": "satellite_04",
+      "name": "Latin Vibes",
+      "video_path": "data/generated_videos/text-to-video_20251103_215611.mp4",
+      "scheduled_time": "2025-11-08T11:00:00",
+      "status": "completed",
+      "views": 154
+    },
+    {
+      "satellite": "satellite_05",
+      "name": "Street Sessions",
+      "video_path": "data/generated_videos/text-to-video_20251103_215614.mp4",
+      "scheduled_time": "2025-11-08T15:00:00",
+      "status": "completed",
+      "views": 115
+    },
+    {
+      "satellite": "satellite_05",
+      "name": "Street Sessions",
+      "video_path": "data/generated_videos/text-to-video_20251103_215617.mp4",
+      "scheduled_time": "2025-11-08T15:00:00",
+      "status": "completed",
+      "views": 364
+    },
+    {
+      "satellite": "satellite_01",
+      "name": "Trap Central",
+      "video_path": "data/generated_videos/text-to-video_20251103_215620.mp4",
+      "scheduled_time": "2025-11-09T12:00:00",
+      "status": "completed",
+      "views": 1127
+    },
+    {
+      "satellite": "satellite_01",
+      "name": "Trap Central",
+      "video_path": "data/generated_videos/text-to-video_20251103_215623.mp4",
+      "scheduled_time": "2025-11-09T12:00:00",
+      "status": "completed",
+      "views": 1054
+    },
+    {
+      "satellite": "satellite_01",
+      "name": "Trap Central",
+      "video_path": "data/generated_videos/text-to-video_20251103_215626.mp4",
+      "scheduled_time": "2025-11-09T12:00:00",
+      "status": "completed",
+      "views": 475
+    },
+    {
+      "satellite": "satellite_02",
+      "name": "Urban Beats",
+      "video_path": "data/generated_videos/text-to-video_20251103_215629.mp4",
+      "scheduled_time": "2025-11-09T14:00:00",
+      "status": "completed",
+      "views": 883
+    },
+    {
+      "satellite": "satellite_02",
+      "name": "Urban Beats",
+      "video_path": "data/generated_videos/text-to-video_20251103_215632.mp4",
+      "scheduled_time": "2025-11-09T14:00:00",
+      "status": "completed",
+      "views": 1088
+    },
+    {
+      "satellite": "satellite_03",
+      "name": "Rap Underground",
+      "video_path": "data/generated_videos/text-to-video_20251103_215635.mp4",
+      "scheduled_time": "2025-11-09T16:00:00",
+      "status": "completed",
+      "views": 1001
+    },
+    {
+      "satellite": "satellite_03",
+      "name": "Rap Underground",
+      "video_path": "data/generated_videos/text-to-video_20251103_215638.mp4",
+      "scheduled_time": "2025-11-09T16:00:00",
+      "status": "completed",
+      "views": 1059
+    },
+    {
+      "satellite": "satellite_04",
+      "name": "Latin Vibes",
+      "video_path": "data/generated_videos/text-to-video_20251103_215641.mp4",
+      "scheduled_time": "2025-11-09T11:00:00",
+      "status": "completed",
+      "views": 702
+    },
+    {
+      "satellite": "satellite_04",
+      "name": "Latin Vibes",
+      "video_path": "data/generated_videos/text-to-video_20251103_215644.mp4",
+      "scheduled_time": "2025-11-09T11:00:00",
+      "status": "completed",
+      "views": 1181
+    },
+    {
+      "satellite": "satellite_04",
+      "name": "Latin Vibes",
+      "video_path": "data/generated_videos/text-to-video_20251103_215647.mp4",
+      "scheduled_time": "2025-11-09T11:00:00",
+      "status": "completed",
+      "views": 433
+    },
+    {
+      "satellite": "satellite_05",
+      "name": "Street Sessions",
+      "video_path": "data/generated_videos/text-to-video_20251103_215650.mp4",
+      "scheduled_time": "2025-11-09T15:00:00",
+      "status": "completed",
+      "views": 248
+    },
+    {
+      "satellite": "satellite_05",
+      "name": "Street Sessions",
+      "video_path": "data/generated_videos/text-to-video_20251103_215653.mp4",
+      "scheduled_time": "2025-11-09T15:00:00",
+      "status": "completed",
+      "views": 147
+    },
+    {
+      "satellite": "satellite_01",
+      "name": "Trap Central",
+      "video_path": "data/generated_videos/text-to-video_20251103_215656.mp4",
+      "scheduled_time": "2025-11-10T12:00:00",
+      "status": "completed",
+      "views": 476
+    },
+    {
+      "satellite": "satellite_01",
+      "name": "Trap Central",
+      "video_path": "data/generated_videos/text-to-video_20251103_215659.mp4",
+      "scheduled_time": "2025-11-10T12:00:00",
+      "status": "completed",
+      "views": 447
+    },
+    {
+      "satellite": "satellite_01",
+      "name": "Trap Central",
+      "video_path": "data/generated_videos/text-to-video_20251103_215702.mp4",
+      "scheduled_time": "2025-11-10T12:00:00",
+      "status": "completed",
+      "views": 1268
+    },
+    {
+      "satellite": "satellite_02",
+      "name": "Urban Beats",
+      "video_path": "data/generated_videos/text-to-video_20251103_215705.mp4",
+      "scheduled_time": "2025-11-10T14:00:00",
+      "status": "completed",
+      "views": 1148
+    },
+    {
+      "satellite": "satellite_02",
+      "name": "Urban Beats",
+      "video_path": "data/generated_videos/text-to-video_20251103_215708.mp4",
+      "scheduled_time": "2025-11-10T14:00:00",
+      "status": "completed",
+      "views": 598
+    },
+    {
+      "satellite": "satellite_03",
+      "name": "Rap Underground",
+      "video_path": "data/generated_videos/text-to-video_20251103_215711.mp4",
+      "scheduled_time": "2025-11-10T16:00:00",
+      "status": "completed",
+      "views": 503
+    },
+    {
+      "satellite": "satellite_03",
+      "name": "Rap Underground",
+      "video_path": "data/generated_videos/text-to-video_20251103_215714.mp4",
+      "scheduled_time": "2025-11-10T16:00:00",
+      "status": "completed",
+      "views": 1258
+    },
+    {
+      "satellite": "satellite_04",
+      "name": "Latin Vibes",
+      "video_path": "data/generated_videos/text-to-video_20251103_215717.mp4",
+      "scheduled_time": "2025-11-10T11:00:00",
+      "status": "completed",
+      "views": 544
+    },
+    {
+      "satellite": "satellite_04",
+      "name": "Latin Vibes",
+      "video_path": "data/generated_videos/text-to-video_20251103_215720.mp4",
+      "scheduled_time": "2025-11-10T11:00:00",
+      "status": "completed",
+      "views": 1014
+    },
+    {
+      "satellite": "satellite_04",
+      "name": "Latin Vibes",
+      "video_path": "data/generated_videos/text-to-video_20251103_215723.mp4",
+      "scheduled_time": "2025-11-10T11:00:00",
+      "status": "completed",
+      "views": 711
+    },
+    {
+      "satellite": "satellite_05",
+      "name": "Street Sessions",
+      "video_path": "data/generated_videos/text-to-video_20251103_215726.mp4",
+      "scheduled_time": "2025-11-10T15:00:00",
+      "status": "completed",
+      "views": 788
+    },
+    {
+      "satellite": "satellite_05",
+      "name": "Street Sessions",
+      "video_path": "data/generated_videos/text-to-video_20251103_215729.mp4",
+      "scheduled_time": "2025-11-10T15:00:00",
+      "status": "completed",
+      "views": 241
+    }
+  ]
+}

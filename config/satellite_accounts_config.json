@@ -1,0 +1,160 @@
+{
+  "satellite_accounts": {
+    "enabled": true,
+    "hub_account": {
+      "channel_id": "UCgohgqLVu1QPdfa64Vkrgeg",
+      "name": "Cuenta Principal Hub",
+      "role": "analytics_and_management",
+      "auto_upload": false
+    },
+    "satellites": [
+      {
+        "id": "satellite_01",
+        "name": "Trap Central",
+        "channel_id": "PENDING_CREATION",
+        "niche": "trap_spanish_latino",
+        "upload_frequency": 3,
+        "upload_schedule": ["12:00", "18:00", "22:00"],
+        "timezone": "Europe/Madrid",
+        "youtube_credentials": {
+          "client_id": "524783623513-rksdl9ncl9c6un9omiqpk4rug8b2dcku.apps.googleusercontent.com",
+          "client_secret": "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",
+          "refresh_token": "PENDING_OAUTH"
+        },
+        "video_config": {
+          "resolution": "720p",
+          "duration": 10,
+          "prompt_template": "Urban artist in recording studio, purple neon lights, trap beat visualization, cinematic smoke effects, 4k quality"
+        },
+        "content_strategy": {
+          "new_content": 0.4,
+          "remixes": 0.3,
+          "trending": 0.2,
+          "experimental": 0.1
+        }
+      },
+      {
+        "id": "satellite_02",
+        "name": "Urban Beats",
+        "channel_id": "PENDING_CREATION",
+        "niche": "reggaeton_urban",
+        "upload_frequency": 2,
+        "upload_schedule": ["14:00", "20:00"],
+        "timezone": "Europe/Madrid",
+        "youtube_credentials": {
+          "client_id": "524783623513-rksdl9ncl9c6un9omiqpk4rug8b2dcku.apps.googleusercontent.com",
+          "client_secret": "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",
+          "refresh_token": "PENDING_OAUTH"
+        },
+        "video_config": {
+          "resolution": "720p",
+          "duration": 12,
+          "prompt_template": "Reggaeton dancer in miami beach club, tropical vibes, party atmosphere, colorful lighting, energetic mood"
+        },
+        "content_strategy": {
+          "new_content": 0.35,
+          "remixes": 0.35,
+          "trending": 0.25,
+          "experimental": 0.05
+        }
+      },
+      {
+        "id": "satellite_03",
+        "name": "Rap Underground",
+        "channel_id": "PENDING_CREATION",
+        "niche": "hiphop_drill",
+        "upload_frequency": 2,
+        "upload_schedule": ["16:00", "23:00"],
+        "timezone": "Europe/Madrid",
+        "youtube_credentials": {
+          "client_id": "524783623513-rksdl9ncl9c6un9omiqpk4rug8b2dcku.apps.googleusercontent.com",
+          "client_secret": "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",
+          "refresh_token": "PENDING_OAUTH"
+        },
+        "video_config": {
+          "resolution": "720p",
+          "duration": 15,
+          "prompt_template": "Hip-hop artist in underground graffiti tunnel, raw street style, dramatic shadows, authentic vibe"
+        },
+        "content_strategy": {
+          "new_content": 0.5,
+          "remixes": 0.2,
+          "trending": 0.2,
+          "experimental": 0.1
+        }
+      },
+      {
+        "id": "satellite_04",
+        "name": "Latin Vibes",
+        "channel_id": "PENDING_CREATION",
+        "niche": "pop_latino_urban",
+        "upload_frequency": 3,
+        "upload_schedule": ["11:00", "17:00", "21:00"],
+        "timezone": "Europe/Madrid",
+        "youtube_credentials": {
+          "client_id": "524783623513-rksdl9ncl9c6un9omiqpk4rug8b2dcku.apps.googleusercontent.com",
+          "client_secret": "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",
+          "refresh_token": "PENDING_OAUTH"
+        },
+        "video_config": {
+          "resolution": "720p",
+          "duration": 10,
+          "prompt_template": "Latin pop artist in rooftop sunset, romantic mood, urban skyline background, warm golden hour lighting"
+        },
+        "content_strategy": {
+          "new_content": 0.3,
+          "remixes": 0.4,
+          "trending": 0.25,
+          "experimental": 0.05
+        }
+      },
+      {
+        "id": "satellite_05",
+        "name": "Street Sessions",
+        "channel_id": "PENDING_CREATION",
+        "niche": "freestyle_sessions",
+        "upload_frequency": 2,
+        "upload_schedule": ["15:00", "19:00"],
+        "timezone": "Europe/Madrid",
+        "youtube_credentials": {
+          "client_id": "524783623513-rksdl9ncl9c6un9omiqpk4rug8b2dcku.apps.googleusercontent.com",
+          "client_secret": "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",
+          "refresh_token": "PENDING_OAUTH"
+        },
+        "video_config": {
+          "resolution": "720p",
+          "duration": 12,
+          "prompt_template": "Freestyle rapper in street cypher, crowd energy, handheld camera style, authentic raw footage feel"
+        },
+        "content_strategy": {
+          "new_content": 0.6,
+          "remixes": 0.15,
+          "trending": 0.15,
+          "experimental": 0.1
+        }
+      }
+    ]
+  },
+  "global_settings": {
+    "auto_distribution": true,
+    "load_balancing": true,
+    "viral_detection": true,
+    "cross_promotion": true,
+    "analytics_sync_interval": 3600,
+    "max_daily_uploads_per_satellite": 5,
+    "min_delay_between_uploads": 7200
+  },
+  "content_mixing": {
+    "audio_sources": [
+      "data/audio_library/trap/",
+      "data/audio_library/reggaeton/",
+      "data/audio_library/hiphop/",
+      "data/audio_library/latino/"
+    ],
+    "video_generation_engine": "longcat",
+    "audio_video_sync": true,
+    "auto_title_generation": true,
+    "auto_description_generation": true,
+    "hashtag_optimization": true
+  }
+}
