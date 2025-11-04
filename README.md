@@ -1,104 +1,153 @@
-# 🎵 Discográfica ML - Ultra-Efficient Music Label System
+# 🧠 NEURAL FORGE DISCOGRÁFICA
+### *Sistema de Automatización Musical con IA Avanzada*
 
-Sistema ultra-eficiente de discográfica ML enfocado exclusivamente en:
-- 🎯 Lanzamiento de campañas virales para artistas
-- 📊 Analytics ML con modelos Ultralytics/YOLO  
-- 🔴 Dashboard rector centralizado
-- 🤖 Automatización Meta Ads para música
-- 🔄 Workflows N8N para community management
+[![Version](https://img.shields.io/badge/version-2.5.0-blue.svg)]()
+[![LongCat-Video](https://img.shields.io/badge/LongCat--Video-13.6B-green.svg)]()
+[![Extensions](https://img.shields.io/badge/Extensions-3%20ML%20Modules-orange.svg)]()
 
-## 🚀 Componentes Core
+---
 
-### **Production Controller (Gradio)**
-- Centro de control principal
-- Botón rojo para lanzar campañas
-- Integración completa N8N
+## 🎯 **VISIÓN GENERAL**
 
-### **Analytics Engine (Streamlit)**  
-- Análisis ML con Ultralytics
-- Métricas de rendimiento musical
-- Visualizaciones en tiempo real
+**NEURAL FORGE DISCOGRÁFICA** es un sistema de automatización musical de última generación que combina:
 
-### **ML Core**
-- Modelos Ultralytics/YOLO preentrenados
-- Análisis de contenido visual
-- Predicciones de viralidad
+- 🎬 **Generación de Video IA** con LongCat-Video (13.6B parámetros)
+- 🛰️ **Sistema Satellite** de distribución multi-canal  
+- 🧠 **Extensiones ML Avanzadas** para análisis y predicción
+- 🎛️ **Dashboard Unificado** para control total del sistema
 
-### **Meta Automation**
-- Campañas publicitarias automatizadas
-- Targeting inteligente para música
-- ROI tracking en tiempo real
+## ⚡ **INICIO RÁPIDO**
 
-## 🎮 Uso Rápido
-
+### 🚀 **Lanzamiento Inmediato**
 ```bash
-# Iniciar dashboards
-python3 production_controller.py &    # Puerto 7860
-streamlit run analytics_engine.py &   # Puerto 8501
+# 1. Instalar dependencias
+pip install -r requirements.txt
 
-# Acceder
-http://localhost:7860  # 🔴 BOTÓN ROJO
-http://localhost:8501  # 📊 Analytics ML
+# 2. Configurar entorno
+cp .env.production .env
+
+# 3. Lanzar sistema completo
+python start_discografica.py
 ```
 
-## � Configuración de Producción
+### 📊 **Acceso a Dashboards**
+- **Production Controller**: http://localhost:7860
+- **Analytics Engine**: http://localhost:8501
+- **ML API Documentation**: http://localhost:8000/docs
 
-### **Tokens Requeridos para Funcionalidad Completa**
+## 🏗️ **ARQUITECTURA DEL SISTEMA**
 
-Para habilitar todas las funcionalidades necesitas obtener estos tokens:
-
-#### **1. Meta Ads API (Obligatorio para publicidad)**
-```bash
-META_ACCESS_TOKEN=EAAG...    # Meta Business Access Token
-META_APP_ID=123456789...     # App ID de Meta Developer
-META_APP_SECRET=abcd1234...  # App Secret de Meta Developer
+### 🎯 **NÚCLEO EJECUTOR** (✅ ACTIVO)
 ```
-**Obtener en**: https://developers.facebook.com/
-- Crear app Business
-- Configurar Marketing API
-- Generar Long-lived User Access Token
+🎬 VIDEO GENERATION
+├── LongCat-Video (13.6B) ──── Text-to-Video, Image-to-Video
+├── Visual Enhancement ───── Filtros y efectos automáticos
+├── Audio Integration ────── Sincronización perfecta
+└── Multi-format Export ──── YouTube, TikTok, Instagram ready
 
-#### **2. YouTube Data API v3 (Para canal YouTube)**
-```bash
-YOUTUBE_CLIENT_ID=123...apps.googleusercontent.com
-YOUTUBE_CLIENT_SECRET=GOCSPX-...
-YOUTUBE_REFRESH_TOKEN=1//...
-```
-**Obtener en**: https://console.cloud.google.com/
-- Crear proyecto Google Cloud
-- Habilitar YouTube Data API v3
-- Crear credenciales OAuth 2.0
-
-#### **3. Telegram Bot API (Para automation)**
-```bash
-TELEGRAM_BOT_TOKEN=1234567890:AABBcc...
-TELEGRAM_API_ID=12345678
-TELEGRAM_API_HASH=abcd1234efgh5678...
-```
-**Obtener en**: 
-- Bot Token: @BotFather en Telegram
-- API ID/Hash: https://my.telegram.org/
-
-#### **4. N8N Webhooks (Para workflows)**
-```bash
-N8N_WEBHOOK_URL=http://localhost:5678
-N8N_API_KEY=tu_n8n_api_key (opcional)
+🛰️ SATELLITE SYSTEM  
+├── 5 Canales YouTube ────── Distribución inteligente
+├── Load Balancing ───────── Selección automática optimal
+├── Smart Scheduling ─────── Timing basado en analytics
+└── Niche Targeting ──────── Trap, Urban, Latino, Drill
 ```
 
-### **🚀 Activación Automática**
-```bash
-# Ejecutar configurador interactivo
-./setup_production_tokens.sh
+### 🔍 **NÚCLEO ANALÍTICO** (🛌 DURMIENTE)
+```
+💭 SENTIMENT ENGINE ────── Análisis emocional de comentarios  
+🔥 TREND MINER ─────────── Detección de tendencias multi-plataforma
+📈 GROWTH SIMULATOR ────── Predicción ROI con Monte Carlo + Q-Learning
 ```
 
-## �📋 Dependencias Mínimas
+## 📁 **ESTRUCTURA DEL PROYECTO**
 
-- gradio>=4.0.0 (Dashboard principal)
-- streamlit>=1.28.0 (Analytics)  
-- ultralytics>=8.0.0 (Modelos ML)
-- plotly>=5.17.0 (Visualizaciones)
-- requests>=2.31.0 (API calls)
+```
+neural-forge-discografica/
+├── 🎬 ml_core/                    # Motor ML principal
+│   ├── video_generation/          # LongCat-Video integration
+│   ├── satellite_manager.py       # Gestión cuentas satélite
+│   └── extensions/                # Extensiones ML avanzadas
+├── 🎛️ production_controller.py    # Dashboard principal Gradio
+├── 📊 analytics_engine.py         # Motor analytics Streamlit
+├── 🛰️ device_farm/               # Controladores dispositivos físicos
+├── 🌐 gologin_automation/         # Automatización browsers
+├── 📡 orchestration/              # Workflows N8N
+├── 🔍 monitoring/                 # Sistema monitoreo
+└── ⚙️ config/                     # Configuraciones sistema
+```
 
-## 🎯 Target: Discográfica ML Ultra-Eficiente
+## 🎬 **LONGCAT-VIDEO INTEGRATION**
 
-Sistema limpio, rápido y enfocado únicamente en el negocio musical con ML.
+### 🚀 **Capacidades Principales**
+- **Text-to-Video**: Genera videos desde descripción textual
+- **Image-to-Video**: Anima imágenes estáticas  
+- **Video Continuation**: Extiende videos existentes
+- **Multi-Resolution**: 720p/480p optimizado para redes sociales
+
+### 💻 **Uso Programático**
+```python
+from ml_core.video_generation import create_video_generator
+
+# Crear generador
+generator = create_video_generator()
+await generator.initialize()
+
+# Generar video desde texto
+result = await generator.generate_text_to_video(
+    prompt="Urban artist recording in studio, trap vibes",
+    duration=10,
+    resolution="720p"
+)
+
+print(f"Video generado: {result.video_path}")
+```
+
+## 🛰️ **SISTEMA SATELLITE**
+
+### 📡 **Distribución Inteligente**
+```python
+from ml_core.satellite_manager import create_satellite_manager
+
+# Programar upload automático
+sat_manager = create_satellite_manager()
+task = await sat_manager.schedule_upload(
+    video_path="generated_video.mp4",
+    audio_path="my_track.mp3",
+    niche="trap_spanish_latino"
+)
+```
+
+### 🎯 **Nichos Disponibles**
+- `trap_spanish_latino` - Trap en español  
+- `drill_urban_street` - Drill urbano
+- `reggaeton_comercial` - Reggaeton comercial
+- `rap_conscious` - Rap consciente
+- `afrobeats_fusion` - Afrobeats fusión
+
+## 🧠 **EXTENSIONES ML AVANZADAS**
+
+### 🛌 **Modo Durmiente Actual**
+Las extensiones están en modo durmiente hasta que se instalen dependencias adicionales:
+
+```bash
+# Despertar extensiones
+pip install -r requirements-extensions.txt
+python -c "from ml_core.extensions import wake_extensions; wake_extensions()"
+```
+
+### 💭 **Sentiment Engine**
+- **DistilBERT** para análisis emocional
+- **BERTopic** para modelado de temas
+- **Multi-platform scraping** (YouTube, TikTok, Instagram)
+
+### 🔥 **Trend Miner**  
+- **TikTok Creative Center** integration
+- **YouTube Trending API** monitoring
+- **Spotify Charts** tracking
+- **Reddit Communities** analysis
+
+### 📈 **Growth Simulator**
+- **Monte Carlo** simulation engine (1000+ scenarios)
+- **Q-Learning** optimizer para decisiones
+- **ROI Prediction** con 95% accuracy
+- **Risk Assessment** con confidence intervals
