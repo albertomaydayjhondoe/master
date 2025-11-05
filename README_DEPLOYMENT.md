@@ -10,8 +10,16 @@ cd neural-forge
 
 ### 2. Configure environment:
 ```bash
+# Copy main configuration
 cp .env.production.template .env.production
 nano .env.production  # Edit with your values
+
+# Configure secrets (IMPORTANT)
+cp config/secrets/secrets.env.template config/secrets/secrets.env
+nano config/secrets/secrets.env  # Add your real API keys
+
+# Validate configuration
+python scripts/validate_satellite_config.py
 ```
 
 ### 3. Deploy to Hetzner VPS:
@@ -47,5 +55,8 @@ This deployment package includes:
 - 🔒 **SSL configuration** (Let's Encrypt automation)
 - 📊 **Monitoring stack** (Prometheus + Grafana)
 - 🔧 **Operations tools** (Management and health check scripts)
+- 🛰️ **Satellite distribution** (5 accounts for content upload)
+- 🔐 **Secure secrets management** (Separated API keys)
+- 📊 **Metrics-only main account** (No content upload)
 
 Version: Neural Forge v3.0 Production Ready
