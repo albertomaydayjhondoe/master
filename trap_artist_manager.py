@@ -34,9 +34,9 @@ class TrapArtistManager:
         self.genre = os.getenv('TRAP_ARTIST_GENRE', 'trap')
         self.style = os.getenv('TRAP_ARTIST_STYLE', 'dark_trap')
         
-        # Configuración de campaña
-        self.daily_budget = float(os.getenv('TRAP_CAMPAIGN_BUDGET_DAILY', 500))
-        self.total_budget = float(os.getenv('TRAP_CAMPAIGN_BUDGET_TOTAL', 5000))
+        # Configuración de campaña (PROYECTO PILOTO 500€)
+        self.daily_budget = float(os.getenv('TRAP_CAMPAIGN_BUDGET_DAILY', 35))
+        self.total_budget = float(os.getenv('TRAP_CAMPAIGN_BUDGET_TOTAL', 500))
         self.campaign_duration = int(os.getenv('TRAP_CAMPAIGN_DURATION_DAYS', 14))
         self.target_countries = os.getenv('TRAP_CAMPAIGN_TARGET_COUNTRIES', 'ES,MX,AR,CO,PE,CL').split(',')
         
@@ -64,9 +64,11 @@ class TrapArtistManager:
         """Inicializar sistema específico del artista"""
         try:
             print(f"🎵 Inicializando sistema para {self.artist_name}")
-            print(f"💰 Presupuesto total: ${self.total_budget}")
+            print(f"💰 Presupuesto PILOTO: €{self.total_budget} (€{self.daily_budget}/día)")
             print(f"📅 Duración campaña: {self.campaign_duration} días")
             print(f"🌍 Países objetivo: {', '.join(self.target_countries)}")
+            print(f"📺 YouTube Principal: INPUT ONLY (métricas)")
+            print(f"🛰️ 5 Satellites: OUTPUT (viral distribution)")
             
             # Verificar APIs
             apis_ready = self._check_apis()
@@ -311,10 +313,10 @@ class TrapArtistManager:
         
         # Configuración específica para audiencia trap
         campaign_config = {
-            "campaign_name": f"{self.artist_name} - {song_title} Viral",
+            "campaign_name": f"{self.artist_name} - {song_title} Viral (PILOTO €500)",
             "objective": "REACH",
-            "daily_budget": self.daily_budget,
-            "total_budget": self.total_budget,
+            "daily_budget": self.daily_budget,  # €35/día
+            "total_budget": self.total_budget,  # €500 total proyecto piloto
             "target_countries": self.target_countries,
             "target_age": "18-35",
             "interests": [

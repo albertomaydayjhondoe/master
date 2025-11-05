@@ -1,13 +1,21 @@
-# 🧠 NEURAL FORGE DISCOGRÁFICA
-### *Sistema de Automatización Musical con IA Avanzada*
+# 🚀 NEURAL FORGE - TRAPSTAR ML VIRAL SYSTEM
+### *Sistema Viral Completo para Artistas Trap*
 
-[![Version](https://img.shields.io/badge/version-2.5.0-blue.svg)]()
-[![LongCat-Video](https://img.shields.io/badge/LongCat--Video-13.6B-green.svg)]()
-[![Extensions](https://img.shields.io/badge/Extensions-3%20ML%20Modules-orange.svg)]()
+[![Version](https://img.shields.io/badge/version-4.0-blue.svg)]()
+[![Docker](https://img.shields.io/badge/Docker-v4.0-green.svg)]()
+[![TrapStar-ML](https://img.shields.io/badge/TrapStar--ML-PILOT-orange.svg)]()
+[![Budget](https://img.shields.io/badge/Budget-€500-red.svg)]()
 
 ---
 
-## 🎯 **VISIÓN GENERAL**
+## 🎵 **PROYECTO PILOTO - TRAPSTAR ML**
+- **💰 Presupuesto:** €500 por campaña (€35/día x 14 días)
+- **🎯 Targeting:** Hispano 18-35 años (ES, MX, AR, CO, PE, CL) 
+- **💵 Revenue:** 70% artista / 30% plataforma
+- **📺 Arquitectura:** YouTube Principal (INPUT) → 5 Satellites (OUTPUT) + Meta Ads
+- **🛰️ Satellites:** DarkBeats, UrbanTrap, NeonTrap, TrapML, Neural_TrapHouse
+
+## 🎯 **SISTEMA CONFIRMADO**
 
 **NEURAL FORGE DISCOGRÁFICA** es un sistema de automatización musical de última generación que combina:
 
