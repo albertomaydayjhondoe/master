@@ -1,0 +1,194 @@
+{
+  "campaign_info": {
+    "artist": "TrapStar ML",
+    "song": "Dark Code Beats",
+    "genre": "trap",
+    "budget": 5000.0,
+    "launch_time": "2025-11-05T15:57:31.352251"
+  },
+  "campaign_results": {
+    "artist": "TrapStar ML",
+    "song": "Dark Code Beats",
+    "budget_allocated": 5000.0,
+    "satellites_activated": 5,
+    "content_generated": {
+      "success": true,
+      "variations_created": 0,
+      "content_type": "trap_music_video",
+      "ai_enhanced": true
+    },
+    "distribution": {
+      "satellites_configured": 5,
+      "distribution_map": {
+        "1": {
+          "satellite_name": "DarkBeats_Official",
+          "theme": "Dark Trap Beats",
+          "content_style": "oscuro, misterioso, beats pesados",
+          "hashtags": [
+            "#darkbeats",
+            "#traposcuro",
+            "#beatsdark"
+          ],
+          "upload_scheduled": true,
+          "status": "✅ Programado"
+        },
+        "2": {
+          "satellite_name": "UrbanTrap_Studios",
+          "theme": "Urban Street Trap",
+          "content_style": "urbano, callejero, crudo",
+          "hashtags": [
+            "#urbantrap",
+            "#callejero",
+            "#streetbeats"
+          ],
+          "upload_scheduled": true,
+          "status": "✅ Programado"
+        },
+        "3": {
+          "satellite_name": "NeonTrap_Collective",
+          "theme": "Neon Futuristic Trap",
+          "content_style": "futurista, neón, cyberpunk",
+          "hashtags": [
+            "#neontrap",
+            "#futuristic",
+            "#cybertrap"
+          ],
+          "upload_scheduled": true,
+          "status": "✅ Programado"
+        },
+        "4": {
+          "satellite_name": "TrapML_Records",
+          "theme": "AI Generated Trap",
+          "content_style": "AI, experimental, innovador",
+          "hashtags": [
+            "#aitrap",
+            "#neuralbeats",
+            "#trapml"
+          ],
+          "upload_scheduled": true,
+          "status": "✅ Programado"
+        },
+        "5": {
+          "satellite_name": "Neural_TrapHouse",
+          "theme": "Experimental Trap House",
+          "content_style": "experimental, trap house, innovador",
+          "hashtags": [
+            "#experimentaltrap",
+            "#traphouse",
+            "#innovation"
+          ],
+          "upload_scheduled": true,
+          "status": "✅ Programado"
+        }
+      },
+      "coordination": "simultaneous_release"
+    },
+    "meta_ads": {
+      "campaign_configured": true,
+      "config": {
+        "campaign_name": "TrapStar ML - Dark Code Beats Viral",
+        "objective": "REACH",
+        "daily_budget": 500.0,
+        "total_budget": 5000.0,
+        "target_countries": [
+          "ES",
+          "MX",
+          "AR",
+          "CO",
+          "PE",
+          "CL"
+        ],
+        "target_age": "18-35",
+        "interests": [
+          "Trap music",
+          "Hip hop",
+          "Urban music",
+          "Reggaeton",
+          "Latin music",
+          "Rap music",
+          "Music production"
+        ],
+        "behaviors": [
+          "Music streaming",
+          "Concert attendance",
+          "Music purchasing"
+        ],
+        "placements": [
+          "facebook_feeds",
+          "instagram_feeds",
+          "instagram_stories"
+        ],
+        "ad_creative": {
+          "headline": "🔥 Nuevo tema de TrapStar ML",
+          "description": "Escucha 'Dark Code Beats' - El trap que está rompiendo las redes",
+          "call_to_action": "LISTEN_MUSIC"
+        }
+      },
+      "estimated_reach": "500K-1M usuarios",
+      "status": "✅ Lista para lanzar"
+    },
+    "youtube_coordination": {
+      "main_channel": {
+        "channel_id": "524783623513-rksdl9ncl9c6un9omiqpk4rug8b2dcku.apps.googleusercontent.com",
+        "role": "main_artist_channel",
+        "content_type": "official_music_video",
+        "release_priority": "primary"
+      },
+      "satellites": {
+        "1": {
+          "name": "DarkBeats_Official",
+          "release_delay": "2 horas",
+          "content_variation": "variation_1",
+          "cross_promotion": true
+        },
+        "2": {
+          "name": "UrbanTrap_Studios",
+          "release_delay": "4 horas",
+          "content_variation": "variation_2",
+          "cross_promotion": true
+        },
+        "3": {
+          "name": "NeonTrap_Collective",
+          "release_delay": "6 horas",
+          "content_variation": "variation_3",
+          "cross_promotion": true
+        },
+        "4": {
+          "name": "TrapML_Records",
+          "release_delay": "8 horas",
+          "content_variation": "variation_4",
+          "cross_promotion": true
+        },
+        "5": {
+          "name": "Neural_TrapHouse",
+          "release_delay": "10 horas",
+          "content_variation": "variation_5",
+          "cross_promotion": true
+        }
+      },
+      "coordination_strategy": "escalonado_viral",
+      "cross_promotion": true
+    },
+    "revenue_sharing": {
+      "artist_name": "TrapStar ML",
+      "artist_percentage": 70.0,
+      "platform_percentage": 30.0,
+      "payment_method": "crypto_wallet",
+      "payout_frequency": "weekly",
+      "revenue_sources": [
+        "youtube_ad_revenue",
+        "meta_campaign_profits",
+        "streaming_royalties",
+        "brand_partnerships"
+      ],
+      "tracking_enabled": true
+    },
+    "campaign_start": "2025-11-05T15:57:31.351646",
+    "expected_duration": "14 días"
+  },
+  "system_info": {
+    "launcher_version": "trap_artist_v1.0",
+    "neural_forge_version": "2.0",
+    "dummy_mode": "true"
+  }
+}

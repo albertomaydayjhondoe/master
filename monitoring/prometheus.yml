@@ -1,0 +1,59 @@
+# 🎵 Neural Forge - Prometheus Configuration
+# =========================================
+# Metrics collection for Meta Ads + YouTube + ML Performance
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  # - "first_rules.yml"
+  # - "second_rules.yml"
+
+scrape_configs:
+  # Neural Forge Production Controller
+  - job_name: 'production-controller'
+    static_configs:
+      - targets: ['production-controller:7860']
+    metrics_path: /metrics
+    scrape_interval: 30s
+
+  # ML Core API
+  - job_name: 'ml-core'
+    static_configs:
+      - targets: ['ml-core:8000']
+    metrics_path: /metrics
+    scrape_interval: 30s
+
+  # Meta Ads API
+  - job_name: 'meta-ads'
+    static_configs:
+      - targets: ['meta-ads:8002']
+    metrics_path: /metrics
+    scrape_interval: 30s
+
+  # Analytics Engine
+  - job_name: 'analytics'
+    static_configs:
+      - targets: ['analytics:8501']
+    metrics_path: /metrics
+    scrape_interval: 30s
+
+  # N8N Workflows
+  - job_name: 'n8n'
+    static_configs:
+      - targets: ['n8n:5678']
+    metrics_path: /metrics
+    scrape_interval: 60s
+
+  # PostgreSQL
+  - job_name: 'postgres'
+    static_configs:
+      - targets: ['postgres:5432']
+    metrics_path: /metrics
+    scrape_interval: 60s
+
+  # Prometheus itself
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']

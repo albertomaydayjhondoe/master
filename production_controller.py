@@ -606,14 +606,31 @@ class ProductionController:
         # Inicializar generador de video en thread separado
         def init_video_generator():
             try:
-                self.video_generator = create_video_generator({
-                    "output_dir": "data/generated_videos",
-                    "models_dir": "data/models/longcat"
-                })
-                asyncio.run(self.video_generator.initialize())
-                logger.info("✅ LongCat Video Generator initialized")
+                from social_extensions.longcat_production import get_production_video_generator
+                
+                async def init_async():
+                    self.video_generator = await get_production_video_generator()
+                    return self.video_generator
+                
+                # Run in event loop
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+                self.video_generator = loop.run_until_complete(init_async())
+                loop.close()
+                
+                logger.info("✅ LongCat Production Video Generator initialized")
             except Exception as e:
-                logger.error(f"❌ Video Generator initialization failed: {e}")
+                logger.error(f"❌ LongCat Video Generator initialization failed: {e}")
+                # Fallback to basic generator
+                try:
+                    self.video_generator = create_video_generator({
+                        "output_dir": "data/generated_videos",
+                        "models_dir": "data/models/longcat"
+                    })
+                    asyncio.run(self.video_generator.initialize())
+                    logger.info("✅ Basic Video Generator initialized as fallback")
+                except Exception as e2:
+                    logger.error(f"❌ Fallback Video Generator failed: {e2}")
         
         threading.Thread(target=init_video_generator, daemon=True).start()
 

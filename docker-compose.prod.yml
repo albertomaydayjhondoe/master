@@ -187,15 +187,76 @@ services:
     container_name: neural-forge-meta-ads
     ports:
       - "127.0.0.1:8002:8002"
+    environment:
+      - PYTHONPATH=/app
+      - DUMMY_MODE=false
     env_file:
       - .env.production
     volumes:
       - prod_data:/app/data
       - prod_config:/app/config
       - prod_logs:/app/logs
+      - ./social_extensions:/app/social_extensions
+      - ./ml_core/video_generation:/app/ml_core/video_generation
     depends_on:
       - postgres
       - redis
+      - ml-core
+    networks:
+      - neural-forge-prod
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"
+
+  # 📊 Grafana Dashboards
+  grafana:
+    image: grafana/grafana:latest
+    container_name: neural-forge-grafana
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=neuralforge
+      - GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=/var/lib/grafana/dashboards/meta_ads_dashboard.json
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/dashboards:/var/lib/grafana/dashboards:ro
+    networks:
+      - neural-forge-prod
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3000/api/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"
+
+  # 📈 Prometheus Metrics
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: neural-forge-prometheus
+    ports:
+      - "127.0.0.1:9090:9090"
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+      - '--web.enable-lifecycle'
+    volumes:
+      - prometheus_data:/prometheus
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
     networks:
       - neural-forge-prod
     deploy:
@@ -207,7 +268,7 @@ services:
           cpus: '0.25'
           memory: 256M
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:9090/"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -251,12 +312,7 @@ services:
         max-size: "50m"
         max-file: "3"
 
-  # 📈 Prometheus
-  prometheus:
-    image: prom/prometheus:latest
-    container_name: neural-forge-prometheus
-    ports:
-      - "127.0.0.1:9090:9090"
+  # �️ PostgreSQL Production
     volumes:
       - ./monitoring/prometheus:/etc/prometheus:ro
       - prometheus_data:/prometheus

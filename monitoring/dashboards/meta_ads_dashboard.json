@@ -1,0 +1,413 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "🎵 Neural Forge - Meta Ads Performance",
+    "tags": ["neural-forge", "meta-ads", "campaigns"],
+    "style": "dark",
+    "timezone": "browser",
+    "panels": [
+      {
+        "id": 1,
+        "title": "📊 Campaign Overview",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "meta_ads_active_campaigns",
+            "legendFormat": "Active Campaigns"
+          },
+          {
+            "expr": "meta_ads_total_spend_today",
+            "legendFormat": "Today's Spend ($)"
+          },
+          {
+            "expr": "meta_ads_total_impressions_today",
+            "legendFormat": "Today's Impressions"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "displayMode": "basic",
+              "orientation": "horizontal"
+            },
+            "mappings": [],
+            "thresholds": {
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "id": 2,
+        "title": "🎯 Campaign Performance (Last 24h)",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "rate(meta_ads_impressions_total[5m])",
+            "legendFormat": "Impressions/min"
+          },
+          {
+            "expr": "rate(meta_ads_video_views_total[5m])",
+            "legendFormat": "Video Views/min"
+          },
+          {
+            "expr": "rate(meta_ads_clicks_total[5m])",
+            "legendFormat": "Clicks/min"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 20,
+              "gradientMode": "opacity",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "vis": false
+              },
+              "lineInterpolation": "smooth",
+              "lineWidth": 2,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            }
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        }
+      },
+      {
+        "id": 3,
+        "title": "💰 Cost Efficiency Metrics",
+        "type": "table",
+        "targets": [
+          {
+            "expr": "meta_ads_cpm_by_campaign",
+            "legendFormat": "CPM ($)"
+          },
+          {
+            "expr": "meta_ads_ctr_by_campaign",
+            "legendFormat": "CTR (%)"
+          },
+          {
+            "expr": "meta_ads_video_view_rate_by_campaign",
+            "legendFormat": "Video View Rate (%)"
+          },
+          {
+            "expr": "meta_ads_cost_per_video_view_by_campaign",
+            "legendFormat": "Cost per Video View ($)"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "displayMode": "auto"
+            },
+            "mappings": [],
+            "thresholds": {
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 8
+        }
+      },
+      {
+        "id": 4,
+        "title": "🎵 Top Performing Songs",
+        "type": "bargauge",
+        "targets": [
+          {
+            "expr": "topk(5, meta_ads_video_views_by_song)",
+            "legendFormat": "{{song}} - {{artist}}"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-GrYlRd"
+            },
+            "custom": {
+              "displayMode": "gradient",
+              "orientation": "horizontal"
+            },
+            "mappings": [],
+            "thresholds": {
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 16
+        }
+      },
+      {
+        "id": 5,
+        "title": "🌍 Geographic Performance",
+        "type": "geomap",
+        "targets": [
+          {
+            "expr": "meta_ads_impressions_by_country",
+            "legendFormat": "{{country}}"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-GrYlRd"
+            },
+            "custom": {
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "vis": false
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 16
+        }
+      },
+      {
+        "id": 6,
+        "title": "⚡ Real-time Campaign Activity",
+        "type": "logs",
+        "targets": [
+          {
+            "expr": "{job=\"meta-ads\"} |~ \"campaign|ad|impression\"",
+            "legendFormat": ""
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 24
+        }
+      },
+      {
+        "id": 7,
+        "title": "🎯 Audience Insights",
+        "type": "piechart",
+        "targets": [
+          {
+            "expr": "meta_ads_impressions_by_age_group",
+            "legendFormat": "{{age_group}}"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "vis": false
+              }
+            },
+            "mappings": [],
+            "unit": "short"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 32
+        }
+      },
+      {
+        "id": 8,
+        "title": "📈 ROI Tracking",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "meta_ads_roi_percentage",
+            "legendFormat": "ROI %"
+          },
+          {
+            "expr": "meta_ads_roas",
+            "legendFormat": "ROAS"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "vis": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 2,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percent"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 32
+        }
+      }
+    ],
+    "time": {
+      "from": "now-24h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "templating": {
+      "list": [
+        {
+          "current": {
+            "selected": false,
+            "text": "All",
+            "value": "$__all"
+          },
+          "definition": "label_values(meta_ads_impressions_total, campaign)",
+          "hide": 0,
+          "includeAll": true,
+          "label": "Campaign",
+          "multi": true,
+          "name": "campaign",
+          "options": [],
+          "query": "label_values(meta_ads_impressions_total, campaign)",
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        }
+      ]
+    },
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": "-- Grafana --",
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "refresh": "30s",
+    "schemaVersion": 30,
+    "version": 0,
+    "links": []
+  }
+}

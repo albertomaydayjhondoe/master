@@ -1,0 +1,424 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "📺 Neural Forge - YouTube Analytics",
+    "tags": ["neural-forge", "youtube", "satellites"],
+    "style": "dark",
+    "timezone": "browser",
+    "panels": [
+      {
+        "id": 1,
+        "title": "🎯 Account Distribution",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "youtube_main_account_metrics_only",
+            "legendFormat": "Main Account (Metrics Only)"
+          },
+          {
+            "expr": "youtube_satellite_accounts_active",
+            "legendFormat": "Active Satellite Accounts"
+          },
+          {
+            "expr": "youtube_total_uploads_today",
+            "legendFormat": "Videos Uploaded Today"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "displayMode": "basic",
+              "orientation": "horizontal"
+            },
+            "mappings": [],
+            "thresholds": {
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "id": 2,
+        "title": "📊 Cross-Platform Performance",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "rate(youtube_views_total[5m])",
+            "legendFormat": "Views/min"
+          },
+          {
+            "expr": "rate(youtube_likes_total[5m])",
+            "legendFormat": "Likes/min"
+          },
+          {
+            "expr": "rate(youtube_comments_total[5m])",
+            "legendFormat": "Comments/min"
+          },
+          {
+            "expr": "rate(youtube_shares_total[5m])",
+            "legendFormat": "Shares/min"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 20,
+              "gradientMode": "opacity",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "vis": false
+              },
+              "lineInterpolation": "smooth",
+              "lineWidth": 2,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            }
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        }
+      },
+      {
+        "id": 3,
+        "title": "🛰️ Satellite Account Performance",
+        "type": "table",
+        "targets": [
+          {
+            "expr": "youtube_satellite_views_by_account",
+            "legendFormat": "Views"
+          },
+          {
+            "expr": "youtube_satellite_subscribers_by_account",
+            "legendFormat": "Subscribers"
+          },
+          {
+            "expr": "youtube_satellite_upload_success_rate_by_account",
+            "legendFormat": "Upload Success Rate (%)"
+          },
+          {
+            "expr": "youtube_satellite_engagement_rate_by_account",
+            "legendFormat": "Engagement Rate (%)"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "displayMode": "auto"
+            },
+            "mappings": [],
+            "thresholds": {
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 8
+        }
+      },
+      {
+        "id": 4,
+        "title": "🎵 Viral Video Tracking",
+        "type": "bargauge",
+        "targets": [
+          {
+            "expr": "topk(10, youtube_views_by_video)",
+            "legendFormat": "{{title}} - {{artist}}"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-GrYlRd"
+            },
+            "custom": {
+              "displayMode": "gradient",
+              "orientation": "horizontal"
+            },
+            "mappings": [],
+            "thresholds": {
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 16
+        }
+      },
+      {
+        "id": 5,
+        "title": "📈 Revenue & Monetization",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "youtube_estimated_revenue",
+            "legendFormat": "Estimated Revenue ($)"
+          },
+          {
+            "expr": "youtube_ad_revenue",
+            "legendFormat": "Ad Revenue ($)"
+          },
+          {
+            "expr": "youtube_rpm",
+            "legendFormat": "RPM ($)"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "vis": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 2,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "currencyUSD"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 16
+        }
+      },
+      {
+        "id": 6,
+        "title": "🎯 Main Account Security Monitor",
+        "type": "logs",
+        "targets": [
+          {
+            "expr": "{job=\"youtube-main\"} |~ \"upload.*blocked|metrics.*collected\"",
+            "legendFormat": ""
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            }
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 24
+        }
+      },
+      {
+        "id": 7,
+        "title": "🌐 Geographic Distribution",
+        "type": "worldmap",
+        "targets": [
+          {
+            "expr": "youtube_views_by_country",
+            "legendFormat": "{{country}}"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-GrYlRd"
+            },
+            "custom": {
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "vis": false
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 32
+        }
+      },
+      {
+        "id": 8,
+        "title": "⚡ Upload Distribution Efficiency",
+        "type": "piechart",
+        "targets": [
+          {
+            "expr": "youtube_uploads_by_satellite",
+            "legendFormat": "Satellite {{satellite_id}}"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "vis": false
+              }
+            },
+            "mappings": [],
+            "unit": "short"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 32
+        }
+      }
+    ],
+    "time": {
+      "from": "now-24h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "templating": {
+      "list": [
+        {
+          "current": {
+            "selected": false,
+            "text": "All",
+            "value": "$__all"
+          },
+          "definition": "label_values(youtube_views_total, satellite)",
+          "hide": 0,
+          "includeAll": true,
+          "label": "Satellite Account",
+          "multi": true,
+          "name": "satellite",
+          "options": [],
+          "query": "label_values(youtube_views_total, satellite)",
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        }
+      ]
+    },
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": "-- Grafana --",
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "refresh": "30s",
+    "schemaVersion": 30,
+    "version": 0,
+    "links": []
+  }
+}
