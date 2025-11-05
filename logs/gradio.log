@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/workspaces/master/production_controller.py", line 22, in <module>
+    from n8n_integration import get_dashboard_integration, DashboardN8NIntegration
+ModuleNotFoundError: No module named 'n8n_integration'

@@ -20,7 +20,7 @@ from .dormant_mode import (
     create_trend_miner, 
     create_growth_simulator,
     wake_extensions,
-    check_extension_requirements,
+    check_requirements,
     EXTENSIONS_DORMANT_MODE
 )
 

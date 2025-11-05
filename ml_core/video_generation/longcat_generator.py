@@ -343,8 +343,8 @@ class LongCatVideoGenerator:
             }
         )
     
-    async def get_capabilities(self) -> Dict[str, Any]:
-        """Obtener capacidades del generador"""
+    def get_capabilities(self) -> Dict[str, Any]:
+        """Obtener capacidades del generador (sync version)"""
         return {
             "supported_types": [
                 "text-to-video",
@@ -358,6 +358,10 @@ class LongCatVideoGenerator:
             "models_loaded": self.models_loaded,
             "dummy_mode": self.dummy_mode
         }
+    
+    async def get_capabilities_async(self) -> Dict[str, Any]:
+        """Obtener capacidades del generador (async version)"""
+        return self.get_capabilities()
     
     async def generate_text_to_video(self, prompt: str, duration: int = 10, 
                                    output_name: str = None) -> VideoGenerationResult:
@@ -403,7 +407,7 @@ class LongCatVideoGenerator:
                 "device": self.device,
                 "memory_usage": self._get_memory_usage(),
                 "disk_space": self._get_disk_space(),
-                "capabilities": await self.get_capabilities()
+                "capabilities": self.get_capabilities()
             }
         except Exception as e:
             return {

@@ -19,7 +19,6 @@ import sqlite3
 import requests
 import subprocess
 import aiohttp
-from n8n_integration import get_dashboard_integration, DashboardN8NIntegration
 import psutil
 import os
 import logging
@@ -28,6 +27,17 @@ from typing import Dict, List, Any, Optional, Tuple
 from pathlib import Path
 from dataclasses import dataclass, asdict
 from enum import Enum
+
+# Dummy N8N integration for clean operation
+class DashboardN8NIntegration:
+    def __init__(self):
+        self.enabled = False
+    
+    def trigger_workflow(self, workflow_id, data):
+        return {"status": "disabled", "message": "N8N integration disabled in clean mode"}
+
+def get_dashboard_integration():
+    return DashboardN8NIntegration()
 import threading
 import time
 

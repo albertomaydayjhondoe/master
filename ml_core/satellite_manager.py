@@ -343,6 +343,9 @@ class SatelliteAccountsManager:
             ]
         }
 
+# Alias para retrocompatibilidad
+SatelliteManager = SatelliteAccountsManager
+
 # Función de conveniencia para uso global
 def create_satellite_manager(config_path: str = None) -> SatelliteAccountsManager:
     """Crear instancia del gestor de satélites"""

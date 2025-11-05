@@ -1,0 +1,80 @@
+# 🧠 Neural Forge - ML Core Dockerfile
+FROM python:3.11-slim
+
+LABEL maintainer="Neural Forge Discográfica <info@neuralforge.com>"
+LABEL description="ML Core - FastAPI + LongCat Video Generation + Advanced AI"
+LABEL version="3.0"
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    wget \
+    git \
+    build-essential \
+    ffmpeg \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    libglib2.0-0 \
+    libglib2.0-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /app
+
+# Copy requirements first for better layer caching
+COPY requirements.txt .
+COPY requirements-dummy.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt && \
+    pip install --no-cache-dir -r requirements-dummy.txt
+
+# Install ML-specific dependencies
+RUN pip install --no-cache-dir \
+    opencv-python-headless \
+    scikit-learn \
+    scipy \
+    matplotlib \
+    seaborn \
+    uvicorn[standard] \
+    python-jose[cryptography] \
+    passlib[bcrypt]
+
+# Create necessary directories
+RUN mkdir -p /app/data/models/production \
+             /app/data/models/checkpoints \
+             /app/data/torch_cache \
+             /app/config \
+             /app/logs
+
+# Copy application files
+COPY ml_core/ ./ml_core/
+COPY config/ ./config/
+COPY database/ ./database/
+COPY social_extensions/ ./social_extensions/
+
+# Copy startup script
+COPY docker/scripts/start-ml-core.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/start-ml-core.sh
+
+# Create non-root user for security
+RUN useradd -m -u 1001 neuralforge && \
+    chown -R neuralforge:neuralforge /app
+USER neuralforge
+
+# Set environment variables
+ENV PYTHONPATH="/app"
+ENV TORCH_HOME="/app/data/torch_cache"
+ENV MODEL_PATH="/app/data/models"
+
+# Expose port
+EXPOSE 8000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1
+
+# Start application
+CMD ["/usr/local/bin/start-ml-core.sh"]

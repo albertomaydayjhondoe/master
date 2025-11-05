@@ -1,0 +1,41 @@
+# Development files (excluded from deployment)
+*.pyc
+__pycache__/
+.pytest_cache/
+.coverage
+htmlcov/
+.env.local
+.env.dev
+
+# IDE files
+.vscode/settings.json
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs (except structure)
+logs/*.log
+logs/*.json
+!logs/.gitkeep
+
+# Test files
+tests/fixtures/temp/
+tests/temp/
+
+# Development databases
+*.db
+*.sqlite3
+
+# Node modules (if any)
+node_modules/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Backup files
+*.bak
+*.backup

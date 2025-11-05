@@ -1,0 +1,99 @@
+version: '3.8'
+
+# 🛠️ Neural Forge - Development Environment
+# Quick setup for local development with hot reload
+
+services:
+  # 🎮 Production Controller - Development Mode
+  production-controller:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.production-controller
+    container_name: neural-forge-dev-production
+    ports:
+      - "7860:7860"
+    environment:
+      - PYTHONPATH=/app
+      - DUMMY_MODE=true
+      - ML_PRODUCTION_MODE=false
+      - DB_PATH=/app/data/production_control.db
+      - ML_API_URL=http://ml-core:8000
+      - N8N_URL=http://n8n:5678
+      - STREAMLIT_URL=http://analytics:8501
+    volumes:
+      - .:/app  # Mount entire codebase for hot reload
+      - dev_data:/app/data
+    networks:
+      - neural-forge-dev
+    restart: unless-stopped
+
+  # 📊 Analytics Engine - Development Mode
+  analytics:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.analytics
+    container_name: neural-forge-dev-analytics
+    ports:
+      - "8501:8501"
+    environment:
+      - PYTHONPATH=/app
+      - DB_PATH=/app/data/production_control.db
+      - ANALYTICS_DB_PATH=/app/data/analytics_engine.db
+      - ML_API_URL=http://ml-core:8000
+    volumes:
+      - .:/app  # Mount entire codebase for hot reload
+      - dev_data:/app/data
+    networks:
+      - neural-forge-dev
+    restart: unless-stopped
+
+  # 🧠 ML Core - Development Mode (Dummy)
+  ml-core:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.ml-core
+    container_name: neural-forge-dev-ml-core
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONPATH=/app
+      - DUMMY_MODE=true
+      - ML_PRODUCTION_MODE=false
+      - MODEL_PATH=/app/data/models
+      - TORCH_HOME=/app/data/torch_cache
+    volumes:
+      - .:/app  # Mount entire codebase for hot reload
+      - dev_data:/app/data
+    networks:
+      - neural-forge-dev
+    restart: unless-stopped
+
+  # 🔄 N8N - Lightweight for development
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: neural-forge-dev-n8n
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=false
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - WEBHOOK_URL=http://n8n:5678/
+      - GENERIC_TIMEZONE=Europe/Madrid
+    volumes:
+      - dev_n8n_data:/home/node/.n8n
+      - ./orchestration/n8n_workflows:/home/node/.n8n/workflows
+    networks:
+      - neural-forge-dev
+    restart: unless-stopped
+
+volumes:
+  dev_data:
+    driver: local
+  dev_n8n_data:
+    driver: local
+
+networks:
+  neural-forge-dev:
+    driver: bridge

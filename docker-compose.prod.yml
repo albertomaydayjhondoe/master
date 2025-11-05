@@ -1,0 +1,415 @@
+version: '3.8'
+
+# 🚀 Neural Forge - Production Environment
+# High-availability setup with monitoring, SSL, and resource limits
+
+services:
+  # 🎮 Production Controller
+  production-controller:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.production-controller
+    container_name: neural-forge-production-controller
+    ports:
+      - "127.0.0.1:7860:7860"  # Only bind to localhost, nginx handles public access
+    environment:
+      - PYTHONPATH=/app
+      - DUMMY_MODE=false
+      - ML_PRODUCTION_MODE=true
+      - DB_PATH=/app/data/production_control.db
+    env_file:
+      - .env.production
+    volumes:
+      - prod_data:/app/data
+      - prod_config:/app/config
+      - prod_logs:/app/logs
+    depends_on:
+      - postgres
+      - redis
+      - ml-core
+    networks:
+      - neural-forge-prod
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7860/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"
+
+  # 📊 Analytics Engine
+  analytics:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.analytics
+    container_name: neural-forge-analytics
+    ports:
+      - "127.0.0.1:8501:8501"
+    environment:
+      - PYTHONPATH=/app
+    env_file:
+      - .env.production
+    volumes:
+      - prod_data:/app/data
+      - prod_config:/app/config
+      - prod_logs:/app/logs
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - neural-forge-prod
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"
+
+  # 🧠 ML Core - Production with GPU support
+  ml-core:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.ml-core
+    container_name: neural-forge-ml-core
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      - PYTHONPATH=/app
+      - DUMMY_MODE=false
+      - ML_PRODUCTION_MODE=true
+      - MODEL_PATH=/app/data/models
+      - CUDA_VISIBLE_DEVICES=0
+    env_file:
+      - .env.production
+    volumes:
+      - prod_data:/app/data
+      - prod_config:/app/config
+      - prod_logs:/app/logs
+    # Uncomment for GPU support
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+    networks:
+      - neural-forge-prod
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 4G
+        reservations:
+          cpus: '1.0'
+          memory: 2G
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"
+
+  # 🔄 N8N Production
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: neural-forge-n8n
+    ports:
+      - "127.0.0.1:5678:5678"
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+    env_file:
+      - .env.production
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./orchestration/n8n_workflows:/home/node/.n8n/workflows:ro
+    depends_on:
+      - postgres
+    networks:
+      - neural-forge-prod
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:5678/healthz || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"
+
+  # 🛰️ Meta Ads
+  meta-ads:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.meta-ads
+    container_name: neural-forge-meta-ads
+    ports:
+      - "127.0.0.1:8002:8002"
+    env_file:
+      - .env.production
+    volumes:
+      - prod_data:/app/data
+      - prod_config:/app/config
+      - prod_logs:/app/logs
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - neural-forge-prod
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"
+
+  # 🗄️ PostgreSQL Production
+  postgres:
+    image: postgres:15-alpine
+    container_name: neural-forge-postgres
+    ports:
+      - "127.0.0.1:5432:5432"
+    env_file:
+      - .env.production
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init_scripts:/docker-entrypoint-initdb.d:ro
+    networks:
+      - neural-forge-prod
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U neural_forge -d neural_forge"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "3"
+
+  # 📈 Prometheus
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: neural-forge-prometheus
+    ports:
+      - "127.0.0.1:9090:9090"
+    volumes:
+      - ./monitoring/prometheus:/etc/prometheus:ro
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention.time=90d'
+      - '--web.enable-lifecycle'
+      - '--web.enable-admin-api'
+    networks:
+      - neural-forge-prod
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1G
+        reservations:
+          cpus: '0.25'
+          memory: 512M
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "3"
+
+  # 📊 Grafana
+  grafana:
+    image: grafana/grafana:latest
+    container_name: neural-forge-grafana
+    ports:
+      - "127.0.0.1:3000:3000"
+    env_file:
+      - .env.production
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources:ro
+    depends_on:
+      - prometheus
+    networks:
+      - neural-forge-prod
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "3"
+
+  # 🔄 Redis
+  redis:
+    image: redis:7-alpine
+    container_name: neural-forge-redis
+    ports:
+      - "127.0.0.1:6379:6379"
+    env_file:
+      - .env.production
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
+    networks:
+      - neural-forge-prod
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 256M
+        reservations:
+          cpus: '0.1'
+          memory: 128M
+    healthcheck:
+      test: ["CMD", "redis-cli", "--no-auth-warning", "-a", "${REDIS_PASSWORD}", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "3"
+
+  # 🌐 Nginx Production
+  nginx:
+    image: nginx:alpine
+    container_name: neural-forge-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.prod.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/sites-available:/etc/nginx/sites-available:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+      - nginx_logs:/var/log/nginx
+    depends_on:
+      - production-controller
+      - analytics
+      - ml-core
+      - n8n
+      - grafana
+    networks:
+      - neural-forge-prod
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 256M
+        reservations:
+          cpus: '0.1'
+          memory: 128M
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "5"
+
+volumes:
+  prod_data:
+    driver: local
+  prod_config:
+    driver: local
+  prod_logs:
+    driver: local
+  postgres_data:
+    driver: local
+  n8n_data:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
+  redis_data:
+    driver: local
+  nginx_logs:
+    driver: local
+
+networks:
+  neural-forge-prod:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.21.0.0/16

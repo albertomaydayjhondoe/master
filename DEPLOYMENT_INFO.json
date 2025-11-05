@@ -1,0 +1,41 @@
+{
+  "package_name": "Neural Forge Discográfica",
+  "version": "3.0.0",
+  "deployment_type": "production",
+  "target_platform": "hetzner_vps",
+  "build_info": {
+    "build_date": "2025-11-05T13:46:03+00:00",
+    "git_commit": "e5e73038d80a2d1a7d156db2f07ff306ae780732",
+    "source_branch": "advanced-extensions",
+    "deployment_branch": "deployment/hetzner-production"
+  },
+  "included_services": [
+    "production-controller",
+    "analytics-engine", 
+    "ml-core",
+    "n8n-workflows",
+    "postgres-database",
+    "redis-cache",
+    "prometheus-monitoring",
+    "grafana-dashboard",
+    "nginx-proxy"
+  ],
+  "deployment_scripts": [
+    "setup-vps.sh",
+    "install-docker.sh", 
+    "deploy-services.sh",
+    "ssl-setup.sh",
+    "monitoring-setup.sh"
+  ],
+  "quick_start": {
+    "one_command": "make deploy-production",
+    "documentation": "docs/QUICK_START_EXPRESS.md",
+    "estimated_time": "15 minutes"
+  },
+  "requirements": {
+    "vps_specs": "Hetzner CX33 (2 vCPU, 8GB RAM, 80GB SSD)",
+    "monthly_cost": "€5.49",
+    "domain_required": true,
+    "ssl_auto_generated": true
+  }
+}

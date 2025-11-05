@@ -1,0 +1,309 @@
+version: '3.8'
+
+services:
+  # 🎮 Production Controller - Dashboard Central Gradio
+  production-controller:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.production-controller
+    container_name: neural-forge-production-controller
+    ports:
+      - "7860:7860"
+    environment:
+      - PYTHONPATH=/app
+      - DUMMY_MODE=${DUMMY_MODE:-true}
+      - ML_PRODUCTION_MODE=${ML_PRODUCTION_MODE:-false}
+      - DB_PATH=/app/data/production_control.db
+      - ML_API_URL=http://ml-core:8000
+      - N8N_URL=http://n8n:5678
+      - STREAMLIT_URL=http://analytics:8501
+    volumes:
+      - ./data:/app/data
+      - ./config:/app/config
+      - ./logs:/app/logs
+    depends_on:
+      - postgres
+      - ml-core
+    networks:
+      - neural-forge-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7860/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # 📊 Analytics Engine - Streamlit Dashboard
+  analytics:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.analytics
+    container_name: neural-forge-analytics
+    ports:
+      - "8501:8501"
+    environment:
+      - PYTHONPATH=/app
+      - DB_PATH=/app/data/production_control.db
+      - ANALYTICS_DB_PATH=/app/data/analytics_engine.db
+      - ML_API_URL=http://ml-core:8000
+      - N8N_URL=http://n8n:5678
+    volumes:
+      - ./data:/app/data
+      - ./config:/app/config
+      - ./logs:/app/logs
+    depends_on:
+      - postgres
+      - ml-core
+    networks:
+      - neural-forge-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # 🧠 ML Core - FastAPI + LongCat Video Generation
+  ml-core:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.ml-core
+    container_name: neural-forge-ml-core
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONPATH=/app
+      - DUMMY_MODE=${DUMMY_MODE:-true}
+      - ML_PRODUCTION_MODE=${ML_PRODUCTION_MODE:-false}
+      - MODEL_PATH=/app/data/models
+      - CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-0}
+      - TORCH_HOME=/app/data/torch_cache
+    volumes:
+      - ./data:/app/data
+      - ./config:/app/config
+      - ./logs:/app/logs
+      # GPU access (if available)
+      # - /dev/nvidia0:/dev/nvidia0
+      # - /dev/nvidiactl:/dev/nvidiactl
+      # - /dev/nvidia-uvm:/dev/nvidia-uvm
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+    networks:
+      - neural-forge-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # 🔄 N8N Workflows - Orchestration
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: neural-forge-n8n
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=${N8N_USER:-admin}
+      - N8N_BASIC_AUTH_PASSWORD=${N8N_PASSWORD:-neuralforge2025}
+      - N8N_HOST=${N8N_HOST:-localhost}
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - WEBHOOK_URL=http://n8n:5678/
+      - GENERIC_TIMEZONE=Europe/Madrid
+      - DB_TYPE=postgresdb
+      - DB_POSTGRESDB_HOST=postgres
+      - DB_POSTGRESDB_PORT=5432
+      - DB_POSTGRESDB_DATABASE=${POSTGRES_DB:-neural_forge_n8n}
+      - DB_POSTGRESDB_USER=${POSTGRES_USER:-neural_forge}
+      - DB_POSTGRESDB_PASSWORD=${POSTGRES_PASSWORD:-neuralforge2025}
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./orchestration/n8n_workflows:/home/node/.n8n/workflows
+      - ./data:/app/data:ro
+    depends_on:
+      - postgres
+    networks:
+      - neural-forge-network
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:5678/healthz || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # 🛰️ Meta Ads Automation
+  meta-ads:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.meta-ads
+    container_name: neural-forge-meta-ads
+    ports:
+      - "8002:8002"
+    environment:
+      - PYTHONPATH=/app
+      - META_APP_ID=${META_APP_ID}
+      - META_APP_SECRET=${META_APP_SECRET}
+      - META_ACCESS_TOKEN=${META_ACCESS_TOKEN}
+      - META_AD_ACCOUNT_ID=${META_AD_ACCOUNT_ID}
+      - DB_PATH=/app/data/production_control.db
+    volumes:
+      - ./data:/app/data
+      - ./config:/app/config
+      - ./logs:/app/logs
+      - ./meta_automation:/app/meta_automation
+    depends_on:
+      - postgres
+    networks:
+      - neural-forge-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # 🗄️ PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: neural-forge-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB:-neural_forge}
+      - POSTGRES_USER=${POSTGRES_USER:-neural_forge}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-neuralforge2025}
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init_scripts:/docker-entrypoint-initdb.d
+    networks:
+      - neural-forge-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-neural_forge} -d ${POSTGRES_DB:-neural_forge}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # 📈 Prometheus Monitoring
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: neural-forge-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus:/etc/prometheus
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=90d'
+      - '--web.enable-lifecycle'
+    networks:
+      - neural-forge-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:9090/-/healthy"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # 📊 Grafana Dashboards
+  grafana:
+    image: grafana/grafana:latest
+    container_name: neural-forge-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GRAFANA_USER:-admin}
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-neuralforge2025}
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources
+    depends_on:
+      - prometheus
+    networks:
+      - neural-forge-network
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3000/api/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # 🔄 Redis Cache (for high-performance operations)
+  redis:
+    image: redis:7-alpine
+    container_name: neural-forge-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-neuralforge2025}
+    networks:
+      - neural-forge-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # 🌐 Nginx Reverse Proxy
+  nginx:
+    image: nginx:alpine
+    container_name: neural-forge-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/sites-available:/etc/nginx/sites-available
+      - ./nginx/ssl:/etc/nginx/ssl
+      - nginx_logs:/var/log/nginx
+    depends_on:
+      - production-controller
+      - analytics
+      - ml-core
+      - n8n
+      - grafana
+    networks:
+      - neural-forge-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+    driver: local
+  n8n_data:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
+  redis_data:
+    driver: local
+  nginx_logs:
+    driver: local
+
+networks:
+  neural-forge-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
